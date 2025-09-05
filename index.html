@@ -652,6 +652,1013 @@
     <div class="tab-container" id="mainApp" style="display: none;">
         <!-- Tab Navigation -->
         <nav class="tab-nav">
+            <div class="nav-logo">
+                <img src="icons/icon48.png" alt="Trakie">
+            </div>
+            <div class="tab-buttons">
+                <button class="tab-button active" onclick="switchTab('welcome')">Welcome</button>
+                <button class="tab-button" onclick="switchTab('camera')">Camera</button>
+                <button class="tab-button" onclick="switchTab('verify')">Verify</button>
+                <button class="tab-button" onclick="switchTab('pricing')">Pricing</button>
+            </div>
+        </nav>
+
+        <!-- Tab 1: Welcome -->
+        <div class="tab-content active" id="welcome-tab">
+            <div class="welcome-section">
+                <h1 class="hero-title">Cannabis Inventory Intelligence</h1>
+                <p class="hero-subtitle">Transform your dispensary operations with AI-powered inventory management</p>
+                
+                <div style="margin: 40px 0;">
+                    <button class="btn btn-large" onclick="switchTab('camera')">Start Scanning</button>
+                    <button class="btn btn-secondary btn-large" onclick="showDemo()" style="margin-left: 16px;">Watch Demo</button>
+                </div>
+
+                <div style="background: var(--surface-glass); border: 1px solid var(--surface-border); border-radius: var(--radius-lg); padding: 32px; margin-top: 40px;">
+                    <h3 style="margin-bottom: 16px;">How Trakie Works</h3>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 24px; text-align: left;">
+                        <div>
+                            <h4 style="color: var(--accent); margin-bottom: 8px;">1. Capture</h4>
+                            <p style="color: var(--text-secondary); font-size: 14px;">Take photos of cannabis product labels with your phone</p>
+                        </div>
+                        <div>
+                            <h4 style="color: var(--accent); margin-bottom: 8px;">2. Extract</h4>
+                            <p style="color: var(--text-secondary); font-size: 14px;">AI reads THC%, batch numbers, and product details automatically</p>
+                        </div>
+                        <div>
+                            <h4 style="color: var(--accent); margin-bottom: 8px;">3. Verify</h4>
+                            <p style="color: var(--text-secondary); font-size: 14px;">Review extracted data with one-click confirmation</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tab 2: Camera -->
+        <div class="tab-content" id="camera-tab">
+            <div class="camera-section">
+                <h2 style="text-align: center; margin-bottom: 32px;">Capture Product Labels</h2>
+                
+                <div class="camera-interface">
+                    <div class="camera-feed" id="cameraFeed">
+                        <div style="color: var(--text-muted); text-align: center;">
+                            Camera will appear here
+                        </div>
+                    </div>
+                    <div class="camera-controls">
+                        <button class="btn" id="startCameraBtn" onclick="startCamera()">Start Camera</button>
+                        <button class="btn" id="captureBtn" onclick="capturePhoto()" style="display: none;">Capture</button>
+                        <button class="btn btn-secondary" id="switchCameraBtn" onclick="switchCamera()" style="display: none;">Switch</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tab 3: Verification -->
+        <div class="tab-content" id="verify-tab">
+            <div class="verification-section">
+                <h2 style="text-align: center; margin-bottom: 32px;">Verify Extracted Data</h2>
+                
+                <div class="ocr-results" id="ocrResults" style="display: none;">
+                    <h3 style="margin-bottom: 20px;">Extracted Information</h3>
+                    <div class="field-group" id="extractedFields">
+                        <!-- OCR results will be populated here -->
+                    </div>
+                    <div style="text-align: center;">
+                        <button class="btn btn-large" onclick="confirmAllData()">Confirm All Data</button>
+                        <button class="btn btn-secondary btn-large" onclick="retakePhoto()" style="margin-left: 16px;">Retake Photo</button>
+                    </div>
+                </div>
+
+                <div style="text-align: center; color: var(--text-muted);" id="noDataMessage">
+                    No data to verify. Please capture a photo first.
+                </div>
+            </div>
+        </div>
+
+        <!-- Tab 4: Pricing -->
+        <div class="tab-content" id="pricing-tab">
+            <div style="max-width: 800px; margin: 0 auto; text-align: center;">
+                <h2 style="margin-bottom: 32px;">Choose Your Plan</h2>
+                <p style="color: var(--text-secondary); margin-bottom: 40px;">Coming soon - flexible pricing for dispensaries of all sizes</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Global state
+        let cameraStream = null;
+        let currentFacingMode = 'environment';
+        let currentTab = 'welcome';
+        let attempts = 0;
+        const maxAttempts = 3;
+        const correctPassword = "PasswordBoss123!";
+
+        // Authentication
+        function togglePassword() {
+            const input = document.getElementById('passwordInput');
+            const toggle = document.querySelector('.password-toggle');
+            
+            if (input.type === 'password') {
+                input.type = 'text';
+                toggle.textContent = '🙈';
+            } else {
+                input.type = 'password';
+                toggle.textContent = '👁️';
+            }
+        }
+
+        function authenticateUser() {
+            const password = document.getElementById('passwordInput').value;
+            const errorDiv = document.getElementById('authError');
+            const attemptsDiv = document.getElementById('attemptsDisplay');
+            
+            if (password === correctPassword) {
+                document.getElementById('authModal').style.display = 'none';
+                document.getElementById('mainApp').style.display = 'block';
+                showStatus('Welcome to Trakie!', 'success');
+                return;
+            }
+            
+            attempts++;
+            if (attempts >= maxAttempts) {
+                errorDiv.textContent = 'Maximum attempts exceeded. Access denied.';
+                document.querySelector('.password-input').disabled = true;
+                document.querySelector('.btn').disabled = true;
+                return;
+            }
+            
+            errorDiv.textContent = 'Incorrect password. Please try again.';
+            attemptsDiv.textContent = `${maxAttempts - attempts} attempts remaining`;
+            document.getElementById('passwordInput').value = '';
+            document.getElementById('passwordInput').focus();
+        }
+
+        // Allow Enter key to submit password
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('passwordInput').addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    authenticateUser();
+                }
+            });
+        });
+
+        // Tab Management
+        function switchTab(tabName) {
+            // Update tab buttons
+            document.querySelectorAll('.tab-button').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            // Update tab content
+            document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+            document.getElementById(`${tabName}-tab`).classList.add('active');
+            
+            currentTab = tabName;
+            
+            // Tab-specific actions
+            if (tabName === 'camera') {
+                // Auto-start camera on mobile
+                if (window.innerWidth <= 768) {
+                    setTimeout(startCamera, 500);
+                }
+            }
+        }
+
+        // Camera Functions
+        async function startCamera() {
+            try {
+                const cameraFeed = document.getElementById('cameraFeed');
+                cameraFeed.innerHTML = '<div style="color: var(--accent); text-align: center; padding: 40px;">Initializing camera...</div>';
+
+                const constraints = {
+                    video: {
+                        facingMode: currentFacingMode,
+                        width: { ideal: 1920, min: 1280 },
+                        height: { ideal: 1080, min: 720 },
+                        frameRate: { ideal: 30, min: 15 }
+                    }
+                };
+
+                cameraStream = await navigator.mediaDevices.getUserMedia(constraints);
+                
+                const video = document.createElement('video');
+                video.srcObject = cameraStream;
+                video.autoplay = true;
+                video.playsInline = true;
+                video.muted = true;
+                video.style.width = '100%';
+                video.style.borderRadius = '12px';
+                video.style.transform = currentFacingMode === 'user' ? 'scaleX(-1)' : 'none';
+                
+                video.onloadedmetadata = () => {
+                    showStatus(`Camera ready: ${video.videoWidth}x${video.videoHeight}`, 'success');
+                };
+                
+                cameraFeed.innerHTML = '';
+                cameraFeed.appendChild(video);
+                
+                // Update UI
+                document.getElementById('startCameraBtn').style.display = 'none';
+                document.getElementById('captureBtn').style.display = 'inline-block';
+                document.getElementById('switchCameraBtn').style.display = 'inline-block';
+                
+            } catch (error) {
+                console.error('Camera error:', error);
+                let errorMessage = 'Camera access required for Trakie to work.';
+                
+                if (error.name === 'NotAllowedError') {
+                    errorMessage = 'Camera permission denied. Please allow camera access and refresh.';
+                } else if (error.name === 'NotFoundError') {
+                    errorMessage = 'No camera found. Please check your device.';
+                } else if (error.name === 'NotReadableError') {
+                    errorMessage = 'Camera is being used by another application.';
+                }
+                
+                showStatus(errorMessage, 'error');
+                document.getElementById('cameraFeed').innerHTML = `<div style="color: var(--error); text-align: center; padding: 40px;">${errorMessage}</div>`;
+            }
+        }
+
+        function switchCamera() {
+            currentFacingMode = currentFacingMode === 'environment' ? 'user' : 'environment';
+            stopCamera();
+            startCamera();
+        }
+
+        function stopCamera() {
+            if (cameraStream) {
+                cameraStream.getTracks().forEach(track => track.stop());
+                cameraStream = null;
+            }
+        }
+
+        function capturePhoto() {
+            const video = document.querySelector('#cameraFeed video');
+            if (!video) {
+                showStatus('No camera feed available', 'error');
+                return;
+            }
+
+            // Visual feedback
+            const flash = document.createElement('div');
+            flash.style.cssText = `
+                position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+                background: white; opacity: 0.8; z-index: 9999; pointer-events: none;
+            `;
+            document.body.appendChild(flash);
+            setTimeout(() => flash.remove(), 150);
+
+            showStatus('Photo captured - Processing with OCR...', 'info');
+
+            const canvas = document.createElement('canvas');
+            canvas.width = video.videoWidth;
+            canvas.height = video.videoHeight;
+            
+            const ctx = canvas.getContext('2d');
+            if (currentFacingMode === 'user') {
+                ctx.scale(-1, 1);
+                ctx.drawImage(video, -canvas.width, 0);
+            } else {
+                ctx.drawImage(video, 0, 0);
+            }
+            
+            canvas.toBlob((blob) => {
+                processImageWithOCR(blob);
+            }, 'image/jpeg', 0.9);
+        }
+
+        // OCR Processing
+        async function processImageWithOCR(imageBlob) {
+            try {
+                showStatus('Processing image with OCR...', 'info');
+                
+                const { data: { text } } = await Tesseract.recognize(imageBlob, 'eng', {
+                    logger: m => {
+                        if (m.status === 'recognizing text') {
+                            showStatus(`OCR Progress: ${Math.round(m.progress * 100)}%`, 'info');
+                        }
+                    }
+                });
+
+                console.log('OCR Text extracted:', text);
+                
+                // Parse cannabis-specific data
+                const extractedData = parseCannabisData(text);
+                displayOCRResults(extractedData);
+                
+                // Switch to verification tab
+                switchTab('verify');
+                
+                showStatus('OCR processing complete!', 'success');
+                
+            } catch (error) {
+                console.error('OCR Error:', error);
+                showStatus('OCR processing failed. Please try again.', 'error');
+            }
+        }
+
+        function parseCannabisData(text) {
+            // Cannabis-specific parsing patterns
+            const data = {
+                brand: extractPattern(text, /(?:brand|company|mfg)[:\s]+([a-zA-Z\s&.]+)/i),
+                product: extractPattern(text, /(?:product|strain)[:\s]+([a-zA-Z\s]+)/i),
+                thc: extractPattern(text, /(?:thc|THC)[:\s]*([0-9.]+)(?:%|mg)?/i),
+                cbd: extractPattern(text, /(?:cbd|CBD)[:\s]*([0-9.]+)(?:%|mg)?/i),
+                batch: extractPattern(text, /(?:batch|lot)[:\s#]*([a-zA-Z0-9]+)/i),
+                weight: extractPattern(text, /([0-9.]+)\s*(?:g|gram|oz|ounce)/i),
+                expiry: extractPattern(text, /(?:exp|expires?)[:\s]*([0-9\/\-]+)/i)
+            };
+            
+            return data;
+        }
+
+        function extractPattern(text, pattern) {
+            const match = text.match(pattern);
+            return match ? match[1].trim() : '';
+        }
+
+        function displayOCRResults(data) {
+            const resultsDiv = document.getElementById('ocrResults');
+            const fieldsDiv = document.getElementById('extractedFields');
+            const noDataDiv = document.getElementById('noDataMessage');
+            
+            if (Object.values(data).some(value => value)) {
+                fieldsDiv.innerHTML = '';
+                
+                Object.entries(data).forEach(([key, value]) => {
+                    if (value) {
+                        const fieldDiv = document.createElement('div');
+                        fieldDiv.className = 'field-item';
+                        fieldDiv.innerHTML = `
+                            <div class="field-label">${key.toUpperCase()}</div>
+                            <div class="field-value">${value}</div>
+                        `;
+                        fieldsDiv.appendChild(fieldDiv);
+                    }
+                });
+                
+                resultsDiv.style.display = 'block';
+                noDataDiv.style.display = 'none';
+            } else {
+                resultsDiv.style.display = 'none';
+                noDataDiv.style.display = 'block';
+                noDataDiv.textContent = 'No cannabis product data detected. Please try again with a clearer image.';
+            }
+        }
+
+        function confirmAllData() {
+            showStatus('Data confirmed! Ready for next steps.', 'success');
+            // TODO: Implement data export/processing
+        }
+
+        function retakePhoto() {
+            switchTab('camera');
+            document.getElementById('ocrResults').style.display = 'none';
+            document.getElementById('noDataMessage').style.display = 'block';
+        }
+
+        function showDemo() {
+            showStatus('Demo video coming soon!', 'info');
+        }
+
+        // Utility Functions
+        function showStatus(message, type = 'info') {
+            // Remove existing status
+            const existing = document.querySelector('.status-indicator');
+            if (existing) existing.remove();
+            
+            const statusDiv = document.createElement('div');
+            statusDiv.className = `status-indicator status-${type}`;
+            statusDiv.textContent = message;
+            document.body.appendChild(statusDiv);
+            
+            if (type !== 'error') {
+                setTimeout(() => statusDiv.remove(), 4000);
+            }
+        }
+
+        // Cleanup
+        window.addEventListener('beforeunload', stopCamera);
+    </script>
+</body>
+</html>        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'SF Pro Display', system-ui, sans-serif;
+            background: 
+                radial-gradient(circle at 30% 20%, rgba(6, 182, 212, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(59, 130, 246, 0.04) 0%, transparent 50%),
+                linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
+            color: var(--text-primary);
+            -webkit-font-smoothing: antialiased;
+            text-rendering: optimizeLegibility;
+            overflow-x: hidden;
+        }
+
+        /* Authentication Modal */
+        .auth-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10000;
+            backdrop-filter: blur(20px);
+        }
+
+        .auth-container {
+            background: var(--surface-glass);
+            border: 1px solid var(--surface-border);
+            border-radius: var(--radius-lg);
+            padding: 40px;
+            max-width: 400px;
+            width: 90%;
+            text-align: center;
+            backdrop-filter: blur(20px);
+            box-shadow: var(--shadow-soft);
+        }
+
+        .auth-logo {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--accent) 0%, #0891B2 100%);
+            border-radius: var(--radius-lg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 24px;
+            color: white;
+            margin: 0 auto 24px;
+        }
+
+        .auth-title {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: var(--text-primary);
+        }
+
+        .auth-subtitle {
+            font-size: 14px;
+            color: var(--text-secondary);
+            margin-bottom: 32px;
+        }
+
+        .password-field {
+            position: relative;
+            margin-bottom: 24px;
+        }
+
+        .password-input {
+            width: 100%;
+            padding: 16px 50px 16px 16px;
+            border: 1px solid var(--surface-border);
+            border-radius: var(--radius-md);
+            background: var(--surface-glass);
+            color: var(--text-primary);
+            font-size: 16px;
+            outline: none;
+            transition: all 0.2s ease;
+        }
+
+        .password-input:focus {
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px var(--accent-soft);
+        }
+
+        .password-toggle {
+            position: absolute;
+            right: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            cursor: pointer;
+            font-size: 18px;
+            transition: color 0.2s ease;
+        }
+
+        .password-toggle:hover {
+            color: var(--accent);
+        }
+
+        .auth-attempts {
+            font-size: 12px;
+            color: var(--warning);
+            margin-bottom: 16px;
+        }
+
+        .auth-error {
+            font-size: 12px;
+            color: var(--error);
+            margin-bottom: 16px;
+        }
+
+        /* Tab Navigation */
+        .tab-container {
+            width: 100%;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .tab-nav {
+            display: flex;
+            background: var(--surface-glass);
+            border-bottom: 1px solid var(--surface-border);
+            padding: 0 20px;
+            backdrop-filter: blur(20px);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .tab-button {
+            padding: 16px 24px;
+            background: none;
+            border: none;
+            color: var(--text-secondary);
+            cursor: pointer;
+            font-weight: 500;
+            font-size: 14px;
+            transition: all 0.2s ease;
+            border-bottom: 2px solid transparent;
+        }
+
+        .tab-button:hover {
+            color: var(--text-primary);
+            background: var(--surface-glass);
+        }
+
+        .tab-button.active {
+            color: var(--accent);
+            border-bottom-color: var(--accent);
+        }
+
+        .tab-content {
+            flex: 1;
+            display: none;
+            padding: 40px 20px;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        /* Enhanced Welcome Tab Styles */
+        .welcome-section {
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .hero-container {
+            margin-bottom: 80px;
+        }
+
+        .hero-title {
+            font-size: 56px;
+            font-weight: 700;
+            margin-bottom: 24px;
+            background: linear-gradient(135deg, var(--accent) 0%, #0891B2 40%, #06B6D4 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1.1;
+        }
+
+        .hero-subtitle {
+            font-size: 24px;
+            color: var(--text-secondary);
+            margin-bottom: 48px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.4;
+        }
+
+        .cta-container {
+            display: flex;
+            gap: 24px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 60px;
+        }
+
+        .cta-primary {
+            background: linear-gradient(135deg, var(--accent) 0%, #0891B2 100%);
+            box-shadow: 0 8px 32px rgba(6, 182, 212, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-primary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .cta-primary:hover::before {
+            left: 100%;
+        }
+
+        .value-proposition {
+            margin-bottom: 80px;
+        }
+
+        .stat-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .stat-item {
+            background: var(--surface-glass);
+            border: 1px solid var(--surface-border);
+            border-radius: var(--radius-lg);
+            padding: 32px 24px;
+            backdrop-filter: blur(20px);
+            transition: all 0.3s ease;
+        }
+
+        .stat-item:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-glow);
+            border-color: var(--accent-soft);
+        }
+
+        .stat-number {
+            font-size: 48px;
+            font-weight: 700;
+            color: var(--accent);
+            margin-bottom: 8px;
+        }
+
+        .stat-label {
+            font-size: 16px;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        .workflow-section {
+            margin-bottom: 80px;
+        }
+
+        .section-title {
+            font-size: 32px;
+            font-weight: 600;
+            margin-bottom: 48px;
+            color: var(--text-primary);
+        }
+
+        .workflow-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .workflow-step {
+            background: var(--surface-glass);
+            border: 1px solid var(--surface-border);
+            border-radius: var(--radius-lg);
+            padding: 40px 32px;
+            backdrop-filter: blur(20px);
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .workflow-step:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-glow);
+            border-color: var(--accent-soft);
+        }
+
+        .step-icon {
+            font-size: 48px;
+            margin-bottom: 24px;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .step-title {
+            font-size: 24px;
+            font-weight: 600;
+            color: var(--accent);
+            margin-bottom: 16px;
+        }
+
+        .step-description {
+            font-size: 16px;
+            color: var(--text-secondary);
+            line-height: 1.5;
+        }
+
+        .testimonial-section {
+            margin-bottom: 80px;
+        }
+
+        .testimonial-card {
+            background: var(--surface-glass);
+            border: 1px solid var(--surface-border);
+            border-radius: var(--radius-lg);
+            padding: 48px 40px;
+            max-width: 600px;
+            margin: 0 auto;
+            backdrop-filter: blur(20px);
+            position: relative;
+        }
+
+        .testimonial-card::before {
+            content: '"';
+            position: absolute;
+            top: 16px;
+            left: 24px;
+            font-size: 64px;
+            color: var(--accent);
+            opacity: 0.3;
+            font-family: serif;
+        }
+
+        .testimonial-quote {
+            font-size: 20px;
+            color: var(--text-primary);
+            font-style: italic;
+            margin-bottom: 24px;
+            line-height: 1.4;
+        }
+
+        .testimonial-author {
+            font-size: 14px;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+
+        .integration-section {
+            margin-bottom: 40px;
+        }
+
+        .integration-logos {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 48px;
+            flex-wrap: wrap;
+            margin: 40px 0;
+        }
+
+        .integration-item {
+            padding: 16px 32px;
+            background: var(--surface-glass);
+            border: 1px solid var(--surface-border);
+            border-radius: var(--radius-md);
+            color: var(--text-secondary);
+            font-weight: 600;
+            font-size: 18px;
+            backdrop-filter: blur(12px);
+            transition: all 0.2s ease;
+        }
+
+        .integration-item:hover {
+            color: var(--accent);
+            border-color: var(--accent-soft);
+            transform: translateY(-2px);
+        }
+
+        .integration-note {
+            font-size: 16px;
+            color: var(--text-muted);
+            margin-top: 24px;
+        }
+
+        /* Camera Tab */
+        .camera-section {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .camera-interface {
+            background: var(--surface-glass);
+            border: 1px solid var(--surface-border);
+            border-radius: var(--radius-lg);
+            padding: 24px;
+            backdrop-filter: blur(20px);
+        }
+
+        .camera-feed {
+            width: 100%;
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            background: var(--bg-tertiary);
+            min-height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .camera-feed video {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .camera-controls {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        /* Verification Tab */
+        .verification-section {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .ocr-results {
+            background: var(--surface-glass);
+            border: 1px solid var(--surface-border);
+            border-radius: var(--radius-lg);
+            padding: 24px;
+            margin-bottom: 24px;
+        }
+
+        .field-group {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        .field-item {
+            background: var(--bg-tertiary);
+            border: 1px solid var(--surface-border);
+            border-radius: var(--radius-md);
+            padding: 16px;
+        }
+
+        .field-label {
+            font-size: 12px;
+            color: var(--text-muted);
+            margin-bottom: 4px;
+        }
+
+        .field-value {
+            font-size: 16px;
+            color: var(--text-primary);
+            font-weight: 500;
+        }
+
+        /* Buttons */
+        .btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: var(--radius-md);
+            font-weight: 500;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.15s ease;
+            background: var(--accent);
+            color: white;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(6, 182, 212, 0.3);
+        }
+
+        .btn:active {
+            transform: translateY(0);
+        }
+
+        .btn-secondary {
+            background: var(--surface-glass);
+            color: var(--text-primary);
+            border: 1px solid var(--surface-border);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.06);
+            border-color: var(--accent-soft);
+        }
+
+        .btn-large {
+            padding: 16px 32px;
+            font-size: 16px;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .tab-nav {
+                overflow-x: auto;
+                scrollbar-width: none;
+                -ms-overflow-style: none;
+            }
+
+            .tab-nav::-webkit-scrollbar {
+                display: none;
+            }
+
+            .tab-button {
+                white-space: nowrap;
+                padding: 12px 16px;
+            }
+
+            .hero-title {
+                font-size: 32px;
+            }
+
+            .hero-subtitle {
+                font-size: 16px;
+            }
+
+            .field-group {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Status Indicators */
+        .status-indicator {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 8px 16px;
+            border-radius: var(--radius-md);
+            font-size: 12px;
+            font-weight: 500;
+            z-index: 1000;
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--surface-border);
+        }
+
+        .status-success {
+            background: rgba(16, 185, 129, 0.1);
+            color: var(--success);
+            border-color: rgba(16, 185, 129, 0.2);
+        }
+
+        .status-error {
+            background: rgba(239, 68, 68, 0.1);
+            color: var(--error);
+            border-color: rgba(239, 68, 68, 0.2);
+        }
+
+        .status-info {
+            background: var(--surface-glass);
+            color: var(--text-secondary);
+        }
+    </style>
+</head>
+<body>
+    <!-- Authentication Modal -->
+    <div class="auth-modal" id="authModal">
+        <div class="auth-container">
+            <div class="auth-logo">
+                <div class="pyramid">
+                    <div class="pyramid-face front"></div>
+                    <div class="pyramid-face right"></div>
+                    <div class="pyramid-face left"></div>
+                    <div class="pyramid-base"></div>
+                </div>
+            </div>
+            <h2 class="auth-title">Members Only</h2>
+            <p class="auth-subtitle">Enter your credentials to access Trakie</p>
+            
+            <div class="password-field">
+                <input type="password" class="password-input" id="passwordInput" placeholder="Enter password">
+                <button class="password-toggle" onclick="togglePassword()">👁️</button>
+            </div>
+            
+            <div class="auth-attempts" id="attemptsDisplay"></div>
+            <div class="auth-error" id="authError"></div>
+            
+            <button class="btn btn-large" onclick="authenticateUser()" style="width: 100%;">Access Trakie</button>
+        </div>
+    </div>
+
+    <!-- Main Application -->
+    <div class="tab-container" id="mainApp" style="display: none;">
+        <!-- Tab Navigation -->
+        <nav class="tab-nav">
             <button class="tab-button active" onclick="switchTab('welcome')">Welcome</button>
             <button class="tab-button" onclick="switchTab('camera')">Camera</button>
             <button class="tab-button" onclick="switchTab('verify')">Verify</button>
