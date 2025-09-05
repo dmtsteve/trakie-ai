@@ -1,669 +1,773 @@
-{\rtf1\ansi\ansicpg1252\cocoartf2708
-\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
-{\colortbl;\red255\green255\blue255;}
-{\*\expandedcolortbl;;}
-\margl1440\margr1440\vieww11520\viewh8400\viewkind0
-\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trakie - Cannabis Inventory Intelligence</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            /* Core Design System */
+            --bg-primary: #0A0E13;
+            --bg-secondary: #0F1419;
+            --bg-tertiary: #1A1F29;
+            --surface-glass: rgba(255, 255, 255, 0.03);
+            --surface-border: rgba(255, 255, 255, 0.06);
+            --text-primary: #F8FAFC;
+            --text-secondary: #94A3B8;
+            --text-muted: #64748B;
+            --accent: #06B6D4;
+            --accent-soft: rgba(6, 182, 212, 0.12);
+            --accent-glow: rgba(6, 182, 212, 0.4);
+            --error: #EF4444;
+            --success: #10B981;
+            --warning: #F59E0B;
+            
+            /* Spatial System */
+            --radius-sm: 8px;
+            --radius-md: 12px;
+            --radius-lg: 16px;
+            --shadow-soft: 0 4px 24px rgba(0, 0, 0, 0.25);
+            --shadow-glow: 0 0 32px rgba(6, 182, 212, 0.15);
+            
+            /* Animation System */
+            --transition-fast: 120ms cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-smooth: 250ms cubic-bezier(0.4, 0, 0.2, 1);
+        }
 
-\f0\fs24 \cf0 <!DOCTYPE html>\
-<html lang="en">\
-<head>\
-    <meta charset="UTF-8">\
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">\
-    <title>trakie.ai - Effortless Inventory Intake</title>\
-    <style>\
-        :root \{\
-            --bg-primary: #0A0E13;\
-            --bg-secondary: #0F1419;\
-            --bg-tertiary: #1A1F29;\
-            --surface-glass: rgba(255, 255, 255, 0.03);\
-            --surface-border: rgba(255, 255, 255, 0.06);\
-            --text-primary: #F8FAFC;\
-            --text-secondary: #94A3B8;\
-            --text-muted: #64748B;\
-            --accent: #06B6D4;\
-            --accent-soft: rgba(6, 182, 212, 0.12);\
-            --accent-glow: rgba(6, 182, 212, 0.4);\
-            --success: #10B981;\
-            --radius-sm: 8px;\
-            --radius-md: 12px;\
-            --radius-lg: 16px;\
-            --shadow-soft: 0 4px 24px rgba(0, 0, 0, 0.25);\
-            --shadow-glow: 0 0 32px rgba(6, 182, 212, 0.15);\
-        \}\
-\
-        * \{\
-            box-sizing: border-box;\
-        \}\
-\
-        body \{\
-            margin: 0;\
-            padding: 0;\
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'SF Pro Display', system-ui, sans-serif;\
-            background: \
-                radial-gradient(circle at 30% 20%, rgba(6, 182, 212, 0.08) 0%, transparent 50%),\
-                radial-gradient(circle at 80% 80%, rgba(59, 130, 246, 0.04) 0%, transparent 50%),\
-                linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);\
-            color: var(--text-primary);\
-            min-height: 100vh;\
-            -webkit-font-smoothing: antialiased;\
-            text-rendering: optimizeLegibility;\
-        \}\
-\
-        /* Desktop Chrome Extension Interface (Screen 1) */\
-        .desktop-interface \{\
-            display: flex;\
-            justify-content: center;\
-            align-items: center;\
-            min-height: 100vh;\
-            padding: 20px;\
-        \}\
-\
-        .extension-popup \{\
-            width: 320px;\
-            height: 400px;\
-            background: \
-                radial-gradient(circle at 30% 20%, rgba(6, 182, 212, 0.08) 0%, transparent 50%),\
-                linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);\
-            border-radius: var(--radius-lg);\
-            box-shadow: var(--shadow-soft), 0 0 40px rgba(6, 182, 212, 0.1);\
-            border: 1px solid var(--surface-border);\
-            overflow: hidden;\
-            position: relative;\
-        \}\
-\
-        .popup-container \{\
-            padding: 20px;\
-            height: 100%;\
-            display: flex;\
-            flex-direction: column;\
-            align-items: center;\
-            justify-content: space-between;\
-        \}\
-\
-        .popup-header \{\
-            display: flex;\
-            flex-direction: column;\
-            align-items: center;\
-            text-align: center;\
-            margin-bottom: 8px;\
-        \}\
-\
-        .popup-logo \{\
-            width: 80px;\
-            height: 80px;\
-            margin-bottom: 16px;\
-            position: relative;\
-            transition: transform 0.2s ease;\
-            background: linear-gradient(135deg, var(--accent), var(--text-primary));\
-            border-radius: 50%;\
-            display: flex;\
-            align-items: center;\
-            justify-content: center;\
-            font-size: 32px;\
-            font-weight: bold;\
-            color: var(--bg-primary);\
-        \}\
-\
-        .popup-logo:hover \{\
-            transform: scale(1.02);\
-        \}\
-\
-        .popup-brand-text \{\
-            font-family: 'SF Pro Display', Inter, system-ui, sans-serif;\
-            font-size: 15px;\
-            font-weight: 600;\
-            color: var(--accent);\
-            letter-spacing: -0.01em;\
-            margin-bottom: 4px;\
-            text-decoration: none;\
-            position: relative;\
-        \}\
-\
-        .popup-brand-text::after \{\
-            content: '';\
-            position: absolute;\
-            bottom: -2px;\
-            left: 0;\
-            right: 0;\
-            height: 1px;\
-            background: linear-gradient(90deg, transparent, var(--accent), transparent);\
-            opacity: 0.6;\
-        \}\
-\
-        .popup-main-content \{\
-            flex: 1;\
-            display: flex;\
-            flex-direction: column;\
-            align-items: center;\
-            justify-content: center;\
-            width: 100%;\
-        \}\
-\
-        .popup-action-text \{\
-            font-family: 'SF Pro Display', system-ui, sans-serif;\
-            font-size: 18px;\
-            font-weight: 500;\
-            color: var(--text-primary);\
-            margin-bottom: 6px;\
-            letter-spacing: -0.02em;\
-        \}\
-\
-        .popup-subtitle-text \{\
-            font-size: 13px;\
-            color: var(--text-secondary);\
-            margin-bottom: 24px;\
-            font-weight: 400;\
-            letter-spacing: 0.01em;\
-        \}\
-\
-        .popup-qr-container \{\
-            position: relative;\
-            padding: 3px;\
-            border-radius: var(--radius-lg);\
-            background: linear-gradient(135deg, var(--surface-border), transparent);\
-            margin-bottom: 24px;\
-            transition: all 0.3s ease;\
-            cursor: pointer;\
-        \}\
-\
-        .popup-qr-container:hover \{\
-            background: linear-gradient(135deg, var(--accent-soft), rgba(255, 255, 255, 0.02));\
-            box-shadow: var(--shadow-glow);\
-        \}\
-\
-        .popup-qr-inner \{\
-            width: 140px;\
-            height: 140px;\
-            border-radius: calc(var(--radius-lg) - 3px);\
-            background: \
-                radial-gradient(circle at center, rgba(255, 255, 255, 0.95) 0%, rgba(248, 250, 252, 0.98) 100%);\
-            backdrop-filter: blur(20px);\
-            display: flex;\
-            align-items: center;\
-            justify-content: center;\
-            position: relative;\
-            overflow: hidden;\
-        \}\
-\
-        .popup-qr-inner::before \{\
-            content: '';\
-            position: absolute;\
-            inset: 0;\
-            background: linear-gradient(135deg, rgba(6, 182, 212, 0.05), transparent);\
-            border-radius: inherit;\
-        \}\
-\
-        .popup-qr-code \{\
-            width: 120px;\
-            height: 120px;\
-            display: flex;\
-            align-items: center;\
-            justify-content: center;\
-            font-size: 12px;\
-            color: var(--text-muted);\
-            font-weight: 500;\
-            position: relative;\
-            z-index: 1;\
-        \}\
-\
-        .popup-footer \{\
-            display: flex;\
-            flex-direction: column;\
-            align-items: center;\
-            gap: 12px;\
-            width: 100%;\
-        \}\
-\
-        .popup-session-info \{\
-            display: flex;\
-            align-items: center;\
-            gap: 8px;\
-            padding: 6px 12px;\
-            background: var(--surface-glass);\
-            border: 1px solid var(--surface-border);\
-            border-radius: var(--radius-md);\
-            backdrop-filter: blur(12px);\
-            font-family: 'SF Mono', Consolas, monospace;\
-            font-size: 10px;\
-            transition: all 0.2s ease;\
-        \}\
-\
-        .popup-session-info:hover \{\
-            background: rgba(255, 255, 255, 0.06);\
-            border-color: var(--accent-soft);\
-        \}\
-\
-        .popup-session-label \{\
-            color: var(--text-muted);\
-            font-weight: 600;\
-            letter-spacing: 0.05em;\
-        \}\
-\
-        .popup-session-id \{\
-            color: var(--accent);\
-            font-weight: 500;\
-        \}\
-\
-        .popup-manual-link \{\
-            color: var(--text-secondary);\
-            text-decoration: none;\
-            font-size: 11px;\
-            font-weight: 500;\
-            padding: 4px 8px;\
-            border-radius: var(--radius-sm);\
-            transition: all 0.15s ease;\
-            letter-spacing: 0.01em;\
-        \}\
-\
-        .popup-manual-link:hover \{\
-            color: var(--accent);\
-            background: var(--surface-glass);\
-            transform: translateY(-1px);\
-        \}\
-\
-        /* Mobile Interface (Screen 2) */\
-        .mobile-interface \{\
-            display: none;\
-            min-height: 100vh;\
-            padding: 20px;\
-            flex-direction: column;\
-        \}\
-\
-        .mobile-header \{\
-            display: flex;\
-            flex-direction: column;\
-            align-items: center;\
-            text-align: center;\
-            margin-bottom: 32px;\
-        \}\
-\
-        .mobile-logo \{\
-            width: 64px;\
-            height: 64px;\
-            margin-bottom: 16px;\
-            background: linear-gradient(135deg, var(--accent), var(--text-primary));\
-            border-radius: 50%;\
-            display: flex;\
-            align-items: center;\
-            justify-content: center;\
-            font-size: 24px;\
-            font-weight: bold;\
-            color: var(--bg-primary);\
-        \}\
-\
-        .mobile-title \{\
-            font-family: 'SF Pro Display', Inter, system-ui, sans-serif;\
-            font-size: 15px;\
-            font-weight: 600;\
-            color: var(--accent);\
-            letter-spacing: -0.01em;\
-            margin-bottom: 4px;\
-        \}\
-\
-        .camera-section \{\
-            flex: 1;\
-            display: flex;\
-            flex-direction: column;\
-            align-items: center;\
-            justify-content: center;\
-            max-width: 400px;\
-            margin: 0 auto;\
-            width: 100%;\
-        \}\
-\
-        .camera-interface \{\
-            background: var(--surface-glass);\
-            border: 2px solid var(--surface-border);\
-            border-radius: var(--radius-lg);\
-            padding: 40px 20px;\
-            text-align: center;\
-            margin-bottom: 32px;\
-            backdrop-filter: blur(20px);\
-            width: 100%;\
-        \}\
-\
-        .camera-icon \{\
-            width: 80px;\
-            height: 80px;\
-            background: var(--accent);\
-            border-radius: var(--radius-lg);\
-            display: flex;\
-            align-items: center;\
-            justify-content: center;\
-            margin: 0 auto 24px auto;\
-            box-shadow: 0 0 20px var(--accent-glow);\
-            position: relative;\
-        \}\
-\
-        .camera-icon::before \{\
-            content: "\uc0\u55357 \u56567 ";\
-            font-size: 32px;\
-        \}\
-\
-        .camera-title \{\
-            font-size: 24px;\
-            color: var(--text-primary);\
-            margin-bottom: 12px;\
-            font-weight: 500;\
-        \}\
-\
-        .camera-subtitle \{\
-            font-size: 16px;\
-            color: var(--text-secondary);\
-            margin-bottom: 32px;\
-            line-height: 1.5;\
-        \}\
-\
-        .camera-button \{\
-            background: var(--accent);\
-            color: var(--bg-primary);\
-            border: none;\
-            padding: 16px 32px;\
-            border-radius: var(--radius-md);\
-            font-size: 16px;\
-            font-weight: 600;\
-            cursor: pointer;\
-            transition: all 0.3s ease;\
-            box-shadow: 0 4px 15px var(--accent-glow);\
-        \}\
-\
-        .camera-button:hover \{\
-            background: #0891b2;\
-            transform: translateY(-2px);\
-            box-shadow: 0 6px 20px var(--accent-glow);\
-        \}\
-\
-        .mobile-footer \{\
-            text-align: center;\
-            padding: 20px 0;\
-        \}\
-\
-        .mobile-session-info \{\
-            font-family: 'SF Mono', monospace;\
-            font-size: 12px;\
-            color: var(--text-muted);\
-        \}\
-\
-        /* Phase 2 Dashboard (Hidden by default) */\
-        .dashboard-overlay \{\
-            display: none;\
-            position: fixed;\
-            top: 0;\
-            left: 0;\
-            right: 0;\
-            bottom: 0;\
-            background: var(--bg-primary);\
-            z-index: 1000;\
-            padding: 20px;\
-            overflow-y: auto;\
-        \}\
-\
-        .dashboard-active .dashboard-overlay \{\
-            display: block;\
-        \}\
-\
-        .dashboard-container \{\
-            max-width: 1200px;\
-            margin: 0 auto;\
-            display: grid;\
-            grid-template-columns: 1fr 1fr;\
-            gap: 24px;\
-            height: calc(100vh - 40px);\
-        \}\
-\
-        .dashboard-panel \{\
-            background: var(--surface-glass);\
-            border: 1px solid var(--surface-border);\
-            border-radius: var(--radius-lg);\
-            padding: 24px;\
-            backdrop-filter: blur(20px);\
-        \}\
-\
-        .panel-header \{\
-            display: flex;\
-            justify-content: space-between;\
-            align-items: center;\
-            margin-bottom: 24px;\
-        \}\
-\
-        .panel-title \{\
-            font-size: 20px;\
-            color: var(--text-primary);\
-            font-weight: 600;\
-        \}\
-\
-        .status-badge \{\
-            background: var(--success);\
-            color: var(--bg-primary);\
-            padding: 4px 12px;\
-            border-radius: var(--radius-sm);\
-            font-size: 12px;\
-            font-weight: 600;\
-        \}\
-\
-        /* Responsive Design */\
-        @media (max-width: 768px) \{\
-            .desktop-interface \{\
-                display: none;\
-            \}\
-            \
-            .mobile-interface \{\
-                display: flex;\
-            \}\
-            \
-            .dashboard-container \{\
-                grid-template-columns: 1fr;\
-            \}\
-        \}\
-\
-        .loading-dots \{\
-            display: inline-block;\
-            position: relative;\
-            width: 40px;\
-            height: 8px;\
-        \}\
-\
-        .loading-dots div \{\
-            position: absolute;\
-            width: 6px;\
-            height: 6px;\
-            border-radius: 50%;\
-            background: var(--accent);\
-            animation: loading 1.2s linear infinite;\
-        \}\
-\
-        .loading-dots div:nth-child(1) \{ left: 8px; animation-delay: 0s; \}\
-        .loading-dots div:nth-child(2) \{ left: 16px; animation-delay: -0.4s; \}\
-        .loading-dots div:nth-child(3) \{ left: 24px; animation-delay: -0.8s; \}\
-\
-        @keyframes loading \{\
-            0%, 80%, 100% \{ opacity: 0.3; transform: scale(0.8); \}\
-            40% \{ opacity: 1; transform: scale(1); \}\
-        \}\
-    </style>\
-</head>\
-<body>\
-    <!-- Desktop Interface (Screen 1) -->\
-    <div class="desktop-interface" id="desktop-interface">\
-        <div class="extension-popup">\
-            <div class="popup-container">\
-                <div class="popup-header">\
-                    <div class="popup-logo">T</div>\
-                    <div class="popup-brand-text">Effortless Inventory Intake</div>\
-                </div>\
-                \
-                <div class="popup-main-content">\
-                    <div class="popup-action-text">Scan to Start</div>\
-                    <div class="popup-subtitle-text">Watch the Magic Unfold</div>\
-                    \
-                    <div class="popup-qr-container" onclick="generateQR()">\
-                        <div class="popup-qr-inner">\
-                            <div class="popup-qr-code" id="qr-code">\
-                                <div class="loading-dots">\
-                                    <div></div>\
-                                    <div></div>\
-                                    <div></div>\
-                                </div>\
-                            </div>\
-                        </div>\
-                    </div>\
-                </div>\
-                \
-                <div class="popup-footer">\
-                    <div class="popup-session-info">\
-                        <span class="popup-session-label">SESSION</span>\
-                        <span class="popup-session-id" id="session-id">LOADING</span>\
-                    </div>\
-                    <a href="#" class="popup-manual-link" id="manual-link">Open Upload Page</a>\
-                </div>\
-            </div>\
-        </div>\
-    </div>\
-\
-    <!-- Mobile Interface (Screen 2) -->\
-    <div class="mobile-interface" id="mobile-interface">\
-        <div class="mobile-header">\
-            <div class="mobile-logo">T</div>\
-            <div class="mobile-title">Effortless Inventory Intake</div>\
-        </div>\
-        \
-        <div class="camera-section">\
-            <div class="camera-interface">\
-                <div class="camera-icon"></div>\
-                <div class="camera-title">Capture Product</div>\
-                <div class="camera-subtitle">\
-                    Position the cannabis product label clearly in your camera frame. \
-                    Trakie will automatically extract all relevant information.\
-                </div>\
-                <button class="camera-button" onclick="startCamera()">Start Camera</button>\
-            </div>\
-        </div>\
-        \
-        <div class="mobile-footer">\
-            <div class="mobile-session-info">\
-                Session: <span id="mobile-session-id">LOADING</span>\
-            </div>\
-        </div>\
-    </div>\
-\
-    <!-- Phase 2 Dashboard (Hidden) -->\
-    <div class="dashboard-overlay" id="dashboard-overlay">\
-        <div class="dashboard-container">\
-            <div class="dashboard-panel">\
-                <div class="panel-header">\
-                    <div class="panel-title">Live Transcription</div>\
-                    <div class="status-badge">Processing</div>\
-                </div>\
-                <div id="transcription-content">\
-                    <!-- OCR results will appear here -->\
-                </div>\
-            </div>\
-            \
-            <div class="dashboard-panel">\
-                <div class="panel-header">\
-                    <div class="panel-title">Photo Progress</div>\
-                    <div class="status-badge">Ready</div>\
-                </div>\
-                <div id="photo-progress">\
-                    <!-- Photo verification will appear here -->\
-                </div>\
-            </div>\
-        </div>\
-    </div>\
-\
-    <script>\
-        // Session management\
-        function generateSessionId() \{\
-            const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';\
-            let result = '';\
-            for (let i = 0; i < 12; i++) \{\
-                result += chars.charAt(Math.floor(Math.random() * chars.length));\
-            \}\
-            return result;\
-        \}\
-\
-        // Initialize session\
-        let currentSession = generateSessionId();\
-        document.getElementById('session-id').textContent = currentSession;\
-        document.getElementById('mobile-session-id').textContent = currentSession;\
-\
-        // QR Code generation\
-        function generateQR() \{\
-            const sessionUrl = `$\{window.location.origin\}/session/$\{currentSession\}`;\
-            const qrElement = document.getElementById('qr-code');\
-            \
-            // Simple QR placeholder - replace with actual QR library\
-            qrElement.innerHTML = `\
-                <div style="\
-                    width: 120px; \
-                    height: 120px; \
-                    background: linear-gradient(45deg, #000 25%, transparent 25%), \
-                                linear-gradient(-45deg, #000 25%, transparent 25%),\
-                                linear-gradient(45deg, transparent 75%, #000 75%), \
-                                linear-gradient(-45deg, transparent 75%, #000 75%);\
-                    background-size: 8px 8px;\
-                    background-position: 0 0, 0 4px, 4px -4px, -4px 0px;\
-                    border-radius: 8px;\
-                    display: flex;\
-                    align-items: center;\
-                    justify-content: center;\
-                    color: #000;\
-                    font-size: 8px;\
-                    font-weight: bold;\
-                ">\
-                    QR\
-                </div>\
-            `;\
-            \
-            // Update manual link\
-            document.getElementById('manual-link').href = sessionUrl;\
-            \
-            // Simulate QR scan after 3 seconds for demo\
-            setTimeout(() => \{\
-                if (window.innerWidth > 768) \{\
-                    activateDashboard();\
-                \}\
-            \}, 3000);\
-        \}\
-\
-        // Camera functionality\
-        function startCamera() \{\
-            alert('Camera integration would start here. This connects to getUserMedia API for actual implementation.');\
-            // Actual camera implementation would go here\
-        \}\
-\
-        // Dashboard activation (Phase 2)\
-        function activateDashboard() \{\
-            document.body.classList.add('dashboard-active');\
-        \}\
-\
-        // Responsive behavior\
-        function handleResize() \{\
-            if (window.innerWidth <= 768) \{\
-                document.getElementById('desktop-interface').style.display = 'none';\
-                document.getElementById('mobile-interface').style.display = 'flex';\
-            \} else \{\
-                document.getElementById('desktop-interface').style.display = 'flex';\
-                document.getElementById('mobile-interface').style.display = 'none';\
-            \}\
-        \}\
-\
-        // Initialize\
-        window.addEventListener('resize', handleResize);\
-        document.addEventListener('DOMContentLoaded', function() \{\
-            handleResize();\
-            generateQR();\
-        \});\
-\
-        // URL routing for sessions\
-        if (window.location.pathname.startsWith('/session/')) \{\
-            const sessionId = window.location.pathname.split('/')[2];\
-            document.getElementById('mobile-session-id').textContent = sessionId;\
-            // Force mobile view for session URLs\
-            document.getElementById('desktop-interface').style.display = 'none';\
-            document.getElementById('mobile-interface').style.display = 'flex';\
-        \}\
-    </script>\
-</body>\
-</html>}
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+            background: 
+                radial-gradient(circle at 30% 20%, rgba(6, 182, 212, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(59, 130, 246, 0.04) 0%, transparent 50%),
+                linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
+            color: var(--text-primary);
+            -webkit-font-smoothing: antialiased;
+            text-rendering: optimizeLegibility;
+            overflow-x: hidden;
+        }
+
+        /* Desktop Interface (Chrome Extension Style) */
+        .desktop-interface {
+            width: 320px;
+            height: 400px;
+            margin: 0 auto;
+            overflow: hidden;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        /* Mobile Interface (Full Screen) */
+        .mobile-interface {
+            display: none;
+            min-height: 100vh;
+            padding: 20px;
+            flex-direction: column;
+        }
+
+        .header {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            margin-bottom: 8px;
+        }
+
+        .logo {
+            width: 80px;
+            height: 80px;
+            margin-bottom: 16px;
+            background: linear-gradient(135deg, var(--accent) 0%, #0891B2 100%);
+            border-radius: var(--radius-lg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 24px;
+            color: white;
+            transition: transform var(--transition-fast);
+            cursor: pointer;
+            box-shadow: var(--shadow-soft);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .logo::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(45deg, transparent 30%, rgba(255, 255, 255, 0.1) 50%, transparent 70%);
+            transform: translateX(-100%);
+            transition: transform 0.6s ease;
+        }
+
+        .logo:hover {
+            transform: scale(1.02);
+        }
+
+        .logo:hover::before {
+            transform: translateX(100%);
+        }
+
+        .brand-text {
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--accent);
+            letter-spacing: -0.01em;
+            margin-bottom: 4px;
+            position: relative;
+        }
+
+        .brand-text::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--accent), transparent);
+            opacity: 0.6;
+        }
+
+        .main-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+        }
+
+        .action-text {
+            font-size: 18px;
+            font-weight: 500;
+            color: var(--text-primary);
+            margin-bottom: 6px;
+            letter-spacing: -0.02em;
+        }
+
+        .subtitle-text {
+            font-size: 13px;
+            color: var(--text-secondary);
+            margin-bottom: 24px;
+            font-weight: 400;
+            letter-spacing: 0.01em;
+        }
+
+        .qr-container {
+            position: relative;
+            padding: 3px;
+            border-radius: var(--radius-lg);
+            background: linear-gradient(135deg, var(--surface-border), transparent);
+            margin-bottom: 24px;
+            transition: all var(--transition-smooth);
+            cursor: pointer;
+        }
+
+        .qr-container:hover {
+            background: linear-gradient(135deg, var(--accent-soft), rgba(255, 255, 255, 0.02));
+            box-shadow: var(--shadow-glow);
+            transform: translateY(-2px);
+        }
+
+        .qr-inner {
+            width: 140px;
+            height: 140px;
+            border-radius: calc(var(--radius-lg) - 3px);
+            background: 
+                radial-gradient(circle at center, rgba(255, 255, 255, 0.95) 0%, rgba(248, 250, 252, 0.98) 100%);
+            backdrop-filter: blur(20px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .qr-inner::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(6, 182, 212, 0.05), transparent);
+            border-radius: inherit;
+        }
+
+        .qr-code {
+            width: 120px;
+            height: 120px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .qr-code img {
+            width: 120px;
+            height: 120px;
+            border-radius: var(--radius-sm);
+        }
+
+        /* Camera Interface */
+        .camera-interface {
+            width: 100%;
+            max-width: 400px;
+            border-radius: var(--radius-lg);
+            background: var(--surface-glass);
+            border: 1px solid var(--surface-border);
+            backdrop-filter: blur(20px);
+            padding: 16px;
+            margin: 20px 0;
+        }
+
+        .camera-feed {
+            width: 100%;
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            position: relative;
+            background: var(--bg-tertiary);
+        }
+
+        .camera-feed video {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .camera-controls {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            margin-top: 16px;
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: var(--radius-md);
+            font-weight: 500;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all var(--transition-fast);
+            background: var(--accent);
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(45deg, transparent 30%, rgba(255, 255, 255, 0.2) 50%, transparent 70%);
+            transform: translateX(-100%);
+            transition: transform 0.6s ease;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(6, 182, 212, 0.3);
+        }
+
+        .btn:hover::before {
+            transform: translateX(100%);
+        }
+
+        .btn:active {
+            transform: translateY(0);
+        }
+
+        .btn-secondary {
+            background: var(--surface-glass);
+            color: var(--text-primary);
+            border: 1px solid var(--surface-border);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.06);
+            border-color: var(--accent-soft);
+        }
+
+        .footer {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+            width: 100%;
+        }
+
+        .session-info {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 12px;
+            background: var(--surface-glass);
+            border: 1px solid var(--surface-border);
+            border-radius: var(--radius-md);
+            backdrop-filter: blur(12px);
+            font-family: 'SF Mono', Consolas, monospace;
+            font-size: 10px;
+            transition: all var(--transition-fast);
+        }
+
+        .session-info:hover {
+            background: rgba(255, 255, 255, 0.06);
+            border-color: var(--accent-soft);
+        }
+
+        .session-label {
+            color: var(--text-muted);
+            font-weight: 600;
+            letter-spacing: 0.05em;
+        }
+
+        .session-id {
+            color: var(--accent);
+            font-weight: 500;
+        }
+
+        .manual-link {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 11px;
+            font-weight: 500;
+            padding: 4px 8px;
+            border-radius: var(--radius-sm);
+            transition: all var(--transition-fast);
+            letter-spacing: 0.01em;
+        }
+
+        .manual-link:hover {
+            color: var(--accent);
+            background: var(--surface-glass);
+            transform: translateY(-1px);
+        }
+
+        /* Loading States */
+        .loading-dots {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .loading-dots div {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--accent);
+            animation: loading 1.2s ease-in-out infinite;
+        }
+
+        .loading-dots div:nth-child(2) { animation-delay: 0.2s; }
+        .loading-dots div:nth-child(3) { animation-delay: 0.4s; }
+
+        @keyframes loading {
+            0%, 80%, 100% { opacity: 0.3; transform: scale(0.8); }
+            40% { opacity: 1; transform: scale(1); }
+        }
+
+        /* Status Indicators */
+        .status-indicator {
+            padding: 8px 16px;
+            border-radius: var(--radius-md);
+            font-size: 12px;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin: 8px 0;
+        }
+
+        .status-success {
+            background: rgba(16, 185, 129, 0.1);
+            color: var(--success);
+            border: 1px solid rgba(16, 185, 129, 0.2);
+        }
+
+        .status-error {
+            background: rgba(239, 68, 68, 0.1);
+            color: var(--error);
+            border: 1px solid rgba(239, 68, 68, 0.2);
+        }
+
+        .status-warning {
+            background: rgba(245, 158, 11, 0.1);
+            color: var(--warning);
+            border: 1px solid rgba(245, 158, 11, 0.2);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .desktop-interface {
+                display: none;
+            }
+            
+            .mobile-interface {
+                display: flex;
+            }
+            
+            .header {
+                margin-bottom: 32px;
+            }
+            
+            .logo {
+                width: 100px;
+                height: 100px;
+                font-size: 28px;
+            }
+            
+            .action-text {
+                font-size: 24px;
+                margin-bottom: 8px;
+            }
+            
+            .subtitle-text {
+                font-size: 16px;
+                margin-bottom: 32px;
+            }
+        }
+
+        /* Accessibility */
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+
+        /* High contrast mode */
+        @media (prefers-contrast: high) {
+            :root {
+                --surface-border: rgba(255, 255, 255, 0.2);
+                --text-secondary: #E2E8F0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Desktop Interface -->
+    <div class="desktop-interface" id="desktopInterface">
+        <div class="header">
+            <div class="logo" onclick="showAbout()">T</div>
+            <div class="brand-text">Effortless Inventory Intake</div>
+        </div>
+        
+        <div class="main-content">
+            <div class="action-text">Scan to Start</div>
+            <div class="subtitle-text">then Watch the Magic Unfold</div>
+            
+            <div class="qr-container" onclick="openMobileInterface()">
+                <div class="qr-inner">
+                    <div class="qr-code" id="qrcode">
+                        <div class="loading-dots">
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <div class="session-info">
+                <span class="session-label">SESSION</span>
+                <span class="session-id" id="sessionId">LOADING</span>
+            </div>
+            <a href="#" class="manual-link" id="manualLink">Open Upload Page</a>
+        </div>
+    </div>
+
+    <!-- Mobile Interface -->
+    <div class="mobile-interface" id="mobileInterface">
+        <div class="header">
+            <div class="logo" onclick="showAbout()">T</div>
+            <div class="brand-text">Cannabis Inventory Intelligence</div>
+        </div>
+        
+        <div class="main-content">
+            <div class="action-text">Capture Product Label</div>
+            <div class="subtitle-text">Point camera at cannabis product packaging</div>
+            
+            <div class="camera-interface" id="cameraInterface">
+                <div class="camera-feed" id="cameraFeed">
+                    <div style="padding: 40px; text-align: center; color: var(--text-muted);">
+                        Camera will appear here
+                    </div>
+                </div>
+                <div class="camera-controls">
+                    <button class="btn" id="startCameraBtn" onclick="initializeCamera()">Start Camera</button>
+                    <button class="btn" id="captureBtn" onclick="capturePhoto()" style="display: none;">Capture</button>
+                    <button class="btn btn-secondary" id="switchCameraBtn" onclick="switchCamera()" style="display: none;">Switch</button>
+                </div>
+            </div>
+            
+            <div id="statusDisplay"></div>
+        </div>
+    </div>
+
+    <script>
+        // Application State
+        const APP_CONFIG = {
+            domain: 'https://trakie-ai.vercel.app',
+            password: 'trakie2025',
+            sessionLength: 12,
+            qrSize: 120
+        };
+
+        let currentSession = null;
+        let cameraStream = null;
+        let currentFacingMode = 'environment';
+
+        // Authentication
+        function authenticate() {
+            const userPassword = prompt('Enter password to access Trakie:');
+            if (userPassword !== APP_CONFIG.password) {
+                document.body.style.display = 'none';
+                alert('Access denied');
+                return false;
+            }
+            return true;
+        }
+
+        // Session Management
+        function generateSession() {
+            const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+            let token = '';
+            for (let i = 0; i < APP_CONFIG.sessionLength; i++) {
+                token += chars[Math.floor(Math.random() * chars.length)];
+            }
+            
+            currentSession = {
+                token: token.toLowerCase(),
+                url: `${APP_CONFIG.domain}/sessions/${token.toLowerCase()}`,
+                created: new Date().toISOString()
+            };
+            
+            return currentSession;
+        }
+
+        // QR Code Generation
+        function generateQRCode(text, container) {
+            // Primary: Google Charts API (most reliable)
+            const qrUrl = `https://chart.googleapis.com/chart?chs=${APP_CONFIG.qrSize}x${APP_CONFIG.qrSize}&cht=qr&chl=${encodeURIComponent(text)}`;
+            
+            const img = document.createElement('img');
+            img.src = qrUrl;
+            img.style.width = `${APP_CONFIG.qrSize}px`;
+            img.style.height = `${APP_CONFIG.qrSize}px`;
+            img.style.borderRadius = '8px';
+            img.style.cursor = 'pointer';
+            
+            img.onload = () => {
+                console.log('✓ QR Code generated successfully');
+                showStatus('QR Code ready', 'success');
+            };
+            
+            img.onerror = () => {
+                console.error('✗ QR Code generation failed');
+                container.innerHTML = `
+                    <div style="text-align: center; font-size: 10px; color: var(--text-muted); padding: 20px;">
+                        QR Generation Failed<br><br>
+                        <span style="color: var(--accent); cursor: pointer; font-size: 12px;" onclick="openMobileInterface()">
+                            Click to Continue
+                        </span>
+                    </div>
+                `;
+                showStatus('QR generation failed, click to continue', 'warning');
+            };
+            
+            img.onclick = () => openMobileInterface();
+            container.innerHTML = '';
+            container.appendChild(img);
+        }
+
+        // Camera Management
+        async function initializeCamera() {
+            try {
+                showStatus('Requesting camera access...', 'warning');
+                
+                const constraints = {
+                    video: {
+                        facingMode: currentFacingMode,
+                        width: { ideal: 1920 },
+                        height: { ideal: 1080 }
+                    }
+                };
+
+                cameraStream = await navigator.mediaDevices.getUserMedia(constraints);
+                
+                const video = document.createElement('video');
+                video.srcObject = cameraStream;
+                video.autoplay = true;
+                video.playsInline = true;
+                video.style.width = '100%';
+                video.style.height = 'auto';
+                
+                const cameraFeed = document.getElementById('cameraFeed');
+                cameraFeed.innerHTML = '';
+                cameraFeed.appendChild(video);
+                
+                // Update UI
+                document.getElementById('startCameraBtn').style.display = 'none';
+                document.getElementById('captureBtn').style.display = 'inline-block';
+                document.getElementById('switchCameraBtn').style.display = 'inline-block';
+                
+                showStatus('Camera ready - position over product label', 'success');
+                
+            } catch (error) {
+                console.error('Camera error:', error);
+                showStatus('Camera access denied. Please allow camera permissions.', 'error');
+            }
+        }
+
+        function switchCamera() {
+            currentFacingMode = currentFacingMode === 'environment' ? 'user' : 'environment';
+            stopCamera();
+            initializeCamera();
+        }
+
+        function stopCamera() {
+            if (cameraStream) {
+                cameraStream.getTracks().forEach(track => track.stop());
+                cameraStream = null;
+            }
+        }
+
+        function capturePhoto() {
+            const video = document.querySelector('#cameraFeed video');
+            if (!video) return;
+
+            const canvas = document.createElement('canvas');
+            canvas.width = video.videoWidth;
+            canvas.height = video.videoHeight;
+            
+            const ctx = canvas.getContext('2d');
+            ctx.drawImage(video, 0, 0);
+            
+            // Convert to blob for processing
+            canvas.toBlob((blob) => {
+                processImage(blob);
+            }, 'image/jpeg', 0.9);
+            
+            showStatus('Photo captured - processing...', 'success');
+        }
+
+        // Image Processing Placeholder
+        function processImage(imageBlob) {
+            // TODO: Implement OCR processing with Tesseract.js
+            console.log('Processing image:', imageBlob);
+            
+            setTimeout(() => {
+                showStatus('OCR processing would happen here', 'warning');
+            }, 1000);
+        }
+
+        // Interface Management
+        function openMobileInterface() {
+            if (window.innerWidth <= 768) {
+                // Already on mobile, just start camera
+                initializeCamera();
+            } else {
+                // Desktop: open new window or redirect
+                if (currentSession) {
+                    window.open(currentSession.url, '_blank');
+                }
+            }
+        }
+
+        function showStatus(message, type = 'info') {
+            const statusDisplay = document.getElementById('statusDisplay');
+            if (!statusDisplay) return;
+            
+            const statusClass = `status-${type}`;
+            statusDisplay.innerHTML = `
+                <div class="status-indicator ${statusClass}">
+                    ${message}
+                </div>
+            `;
+            
+            // Auto-hide after 5 seconds unless it's an error
+            if (type !== 'error') {
+                setTimeout(() => {
+                    statusDisplay.innerHTML = '';
+                }, 5000);
+            }
+        }
+
+        function showAbout() {
+            alert('Trakie AI - Cannabis Inventory Intelligence\n\nBuilt for dispensary professionals who demand efficiency.\n\nVersion 1.0.0');
+        }
+
+        // Route Handling
+        function handleRoute() {
+            const path = window.location.pathname;
+            const sessionMatch = path.match(/\/sessions\/([a-z0-9]+)/);
+            
+            if (sessionMatch) {
+                // Mobile session view
+                document.getElementById('desktopInterface').style.display = 'none';
+                document.getElementById('mobileInterface').style.display = 'flex';
+                
+                const sessionToken = sessionMatch[1];
+                console.log('Session loaded:', sessionToken);
+                showStatus(`Session ${sessionToken.toUpperCase()} loaded`, 'success');
+            } else {
+                // Desktop view
+                const isMobile = window.innerWidth <= 768;
+                document.getElementById('desktopInterface').style.display = isMobile ? 'none' : 'flex';
+                document.getElementById('mobileInterface').style.display = isMobile ? 'flex' : 'none';
+            }
+        }
+
+        // Application Initialization
+        function initializeApp() {
+            console.log('🚀 Trakie AI initializing...');
+            
+            // Handle routing
+            handleRoute();
+            
+            // Generate session
+            const session = generateSession();
+            console.log('Session created:', session.token);
+            
+            // Update UI elements
+            const sessionIdEl = document.getElementById('sessionId');
+            const manualLinkEl = document.getElementById('manualLink');
+            const qrcodeEl = document.getElementById('qrcode');
+            
+            if (sessionIdEl) sessionIdEl.textContent = session.token.toUpperCase();
+            if (manualLinkEl) manualLinkEl.href = session.url;
+            if (qrcodeEl) generateQRCode(session.url, qrcodeEl);
+            
+            console.log('✓ Trakie AI ready');
+        }
+
+        // Event Listeners
+        window.addEventListener('resize', handleRoute);
+        window.addEventListener('beforeunload', () => {
+            stopCamera();
+        });
+
+        // Application Start
+        document.addEventListener('DOMContentLoaded', () => {
+            if (authenticate()) {
+                setTimeout(initializeApp, 300);
+            }
+        });
+    </script>
+</body>
+</html>
