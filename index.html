@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Trakie - Cannabis Inventory Intelligence</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tesseract.js/4.1.1/tesseract.min.js"></script>
     <style>
         :root {
             --bg-primary: #0A0E13;
@@ -17,6 +18,9 @@
             --accent: #06B6D4;
             --accent-soft: rgba(6, 182, 212, 0.12);
             --accent-glow: rgba(6, 182, 212, 0.4);
+            --error: #EF4444;
+            --success: #10B981;
+            --warning: #F59E0B;
             --radius-sm: 8px;
             --radius-md: 12px;
             --radius-lg: 16px;
@@ -26,14 +30,11 @@
 
         * {
             box-sizing: border-box;
+            margin: 0;
+            padding: 0;
         }
 
         body {
-            margin: 0;
-            padding: 0;
-            width: 320px;
-            height: 400px;
-            overflow: hidden;
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'SF Pro Display', system-ui, sans-serif;
             background: 
                 radial-gradient(circle at 30% 20%, rgba(6, 182, 212, 0.08) 0%, transparent 50%),
@@ -42,239 +43,200 @@
             color: var(--text-primary);
             -webkit-font-smoothing: antialiased;
             text-rendering: optimizeLegibility;
+            overflow-x: hidden;
         }
 
-        .container {
-            padding: 20px;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        .header {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-            margin-bottom: 8px;
-        }
-
-        .logo {
-            width: 80px;
-            height: 80px;
-            margin-bottom: 16px;
-            position: relative;
-            transition: transform 0.2s ease;
-        }
-
-        .logo:hover {
-            transform: scale(1.02);
-        }
-
-        .logo img {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-            filter: drop-shadow(0 8px 16px rgba(6, 182, 212, 0.2));
-        }
-
-        .brand-text {
-            font-family: 'SF Pro Display', Inter, system-ui, sans-serif;
-            font-size: 15px;
-            font-weight: 600;
-            color: var(--accent);
-            letter-spacing: -0.01em;
-            margin-bottom: 4px;
-            text-decoration: none;
-            position: relative;
-        }
-
-        .brand-text::after {
-            content: '';
-            position: absolute;
-            bottom: -2px;
+        /* Authentication Modal */
+        .auth-modal {
+            position: fixed;
+            top: 0;
             left: 0;
-            right: 0;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, var(--accent), transparent);
-            opacity: 0.6;
-        }
-
-        .main-content {
-            flex: 1;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
             display: flex;
-            flex-direction: column;
             align-items: center;
             justify-content: center;
-            width: 100%;
-        }
-
-        .action-text {
-            font-family: 'SF Pro Display', system-ui, sans-serif;
-            font-size: 18px;
-            font-weight: 500;
-            color: var(--text-primary);
-            margin-bottom: 6px;
-            letter-spacing: -0.02em;
-        }
-
-        .subtitle-text {
-            font-size: 13px;
-            color: var(--text-secondary);
-            margin-bottom: 24px;
-            font-weight: 400;
-            letter-spacing: 0.01em;
-        }
-
-        .qr-container {
-            position: relative;
-            padding: 3px;
-            border-radius: var(--radius-lg);
-            background: linear-gradient(135deg, var(--surface-border), transparent);
-            margin-bottom: 24px;
-            transition: all 0.3s ease;
-        }
-
-        .qr-container:hover {
-            background: linear-gradient(135deg, var(--accent-soft), rgba(255, 255, 255, 0.02));
-            box-shadow: var(--shadow-glow);
-        }
-
-        .qr-inner {
-            width: 140px;
-            height: 140px;
-            border-radius: calc(var(--radius-lg) - 3px);
-            background: 
-                radial-gradient(circle at center, rgba(255, 255, 255, 0.95) 0%, rgba(248, 250, 252, 0.98) 100%);
+            z-index: 10000;
             backdrop-filter: blur(20px);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            overflow: hidden;
         }
 
-        .qr-inner::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(135deg, rgba(6, 182, 212, 0.05), transparent);
-            border-radius: inherit;
-        }
-
-        .qr-code {
-            width: 120px;
-            height: 120px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 12px;
-            color: var(--text-muted);
-            font-weight: 500;
-            position: relative;
-            z-index: 1;
-        }
-
-        .qr-code img {
-            width: 120px;
-            height: 120px;
-            border-radius: var(--radius-sm);
-        }
-
-        .footer {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 12px;
-            width: 100%;
-        }
-
-        .session-info {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            padding: 6px 12px;
+        .auth-container {
             background: var(--surface-glass);
             border: 1px solid var(--surface-border);
+            border-radius: var(--radius-lg);
+            padding: 40px;
+            max-width: 400px;
+            width: 90%;
+            text-align: center;
+            backdrop-filter: blur(20px);
+            box-shadow: var(--shadow-soft);
+        }
+
+        .auth-logo {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--accent) 0%, #0891B2 100%);
+            border-radius: var(--radius-lg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 24px;
+            color: white;
+            margin: 0 auto 24px;
+        }
+
+        .auth-title {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: var(--text-primary);
+        }
+
+        .auth-subtitle {
+            font-size: 14px;
+            color: var(--text-secondary);
+            margin-bottom: 32px;
+        }
+
+        .password-field {
+            position: relative;
+            margin-bottom: 24px;
+        }
+
+        .password-input {
+            width: 100%;
+            padding: 16px 50px 16px 16px;
+            border: 1px solid var(--surface-border);
             border-radius: var(--radius-md);
-            backdrop-filter: blur(12px);
-            font-family: 'SF Mono', Consolas, monospace;
-            font-size: 10px;
+            background: var(--surface-glass);
+            color: var(--text-primary);
+            font-size: 16px;
+            outline: none;
             transition: all 0.2s ease;
         }
 
-        .session-info:hover {
-            background: rgba(255, 255, 255, 0.06);
-            border-color: var(--accent-soft);
+        .password-input:focus {
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px var(--accent-soft);
         }
 
-        .session-label {
-            color: var(--text-muted);
-            font-weight: 600;
-            letter-spacing: 0.05em;
-        }
-
-        .session-id {
-            color: var(--accent);
-            font-weight: 500;
-        }
-
-        .manual-link {
-            color: var(--text-secondary);
-            text-decoration: none;
-            font-size: 11px;
-            font-weight: 500;
-            padding: 4px 8px;
-            border-radius: var(--radius-sm);
-            transition: all 0.15s ease;
-            letter-spacing: 0.01em;
-        }
-
-        .manual-link:hover {
-            color: var(--accent);
-            background: var(--surface-glass);
-            transform: translateY(-1px);
-        }
-
-        /* Loading Animation */
-        .loading-dots {
-            display: inline-block;
-            position: relative;
-            width: 40px;
-            height: 8px;
-        }
-
-        .loading-dots div {
+        .password-toggle {
             position: absolute;
-            width: 6px;
-            height: 6px;
-            border-radius: 50%;
-            background: var(--accent);
-            animation: loading 1.2s linear infinite;
+            right: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            cursor: pointer;
+            font-size: 18px;
+            transition: color 0.2s ease;
         }
 
-        .loading-dots div:nth-child(1) { left: 8px; animation-delay: 0s; }
-        .loading-dots div:nth-child(2) { left: 16px; animation-delay: -0.4s; }
-        .loading-dots div:nth-child(3) { left: 24px; animation-delay: -0.8s; }
-
-        @keyframes loading {
-            0%, 80%, 100% { opacity: 0.3; transform: scale(0.8); }
-            40% { opacity: 1; transform: scale(1); }
+        .password-toggle:hover {
+            color: var(--accent);
         }
 
-        /* Mobile Camera Interface */
-        .camera-interface {
-            display: none;
+        .auth-attempts {
+            font-size: 12px;
+            color: var(--warning);
+            margin-bottom: 16px;
+        }
+
+        .auth-error {
+            font-size: 12px;
+            color: var(--error);
+            margin-bottom: 16px;
+        }
+
+        /* Tab Navigation */
+        .tab-container {
             width: 100%;
-            max-width: 400px;
-            border-radius: var(--radius-lg);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .tab-nav {
+            display: flex;
+            background: var(--surface-glass);
+            border-bottom: 1px solid var(--surface-border);
+            padding: 0 20px;
+            backdrop-filter: blur(20px);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .tab-button {
+            padding: 16px 24px;
+            background: none;
+            border: none;
+            color: var(--text-secondary);
+            cursor: pointer;
+            font-weight: 500;
+            font-size: 14px;
+            transition: all 0.2s ease;
+            border-bottom: 2px solid transparent;
+        }
+
+        .tab-button:hover {
+            color: var(--text-primary);
+            background: var(--surface-glass);
+        }
+
+        .tab-button.active {
+            color: var(--accent);
+            border-bottom-color: var(--accent);
+        }
+
+        .tab-content {
+            flex: 1;
+            display: none;
+            padding: 40px 20px;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        /* Welcome Tab */
+        .welcome-section {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .hero-title {
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            background: linear-gradient(135deg, var(--accent) 0%, #0891B2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-subtitle {
+            font-size: 20px;
+            color: var(--text-secondary);
+            margin-bottom: 40px;
+        }
+
+        /* Camera Tab */
+        .camera-section {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .camera-interface {
             background: var(--surface-glass);
             border: 1px solid var(--surface-border);
+            border-radius: var(--radius-lg);
+            padding: 24px;
             backdrop-filter: blur(20px);
-            padding: 16px;
-            margin: 20px 0;
         }
 
         .camera-feed {
@@ -282,10 +244,11 @@
             border-radius: var(--radius-md);
             overflow: hidden;
             background: var(--bg-tertiary);
-            min-height: 200px;
+            min-height: 300px;
             display: flex;
             align-items: center;
             justify-content: center;
+            margin-bottom: 20px;
         }
 
         .camera-feed video {
@@ -298,24 +261,72 @@
             display: flex;
             justify-content: center;
             gap: 12px;
-            margin-top: 16px;
+            flex-wrap: wrap;
         }
 
+        /* Verification Tab */
+        .verification-section {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .ocr-results {
+            background: var(--surface-glass);
+            border: 1px solid var(--surface-border);
+            border-radius: var(--radius-lg);
+            padding: 24px;
+            margin-bottom: 24px;
+        }
+
+        .field-group {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        .field-item {
+            background: var(--bg-tertiary);
+            border: 1px solid var(--surface-border);
+            border-radius: var(--radius-md);
+            padding: 16px;
+        }
+
+        .field-label {
+            font-size: 12px;
+            color: var(--text-muted);
+            margin-bottom: 4px;
+        }
+
+        .field-value {
+            font-size: 16px;
+            color: var(--text-primary);
+            font-weight: 500;
+        }
+
+        /* Buttons */
         .btn {
-            padding: 8px 16px;
+            padding: 12px 24px;
             border: none;
             border-radius: var(--radius-md);
             font-weight: 500;
-            font-size: 12px;
+            font-size: 14px;
             cursor: pointer;
             transition: all 0.15s ease;
             background: var(--accent);
             color: white;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
         }
 
         .btn:hover {
-            transform: translateY(-1px);
-            box-shadow: 0 4px 12px rgba(6, 182, 212, 0.3);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(6, 182, 212, 0.3);
+        }
+
+        .btn:active {
+            transform: translateY(0);
         }
 
         .btn-secondary {
@@ -324,169 +335,282 @@
             border: 1px solid var(--surface-border);
         }
 
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.06);
+            border-color: var(--accent-soft);
+        }
+
+        .btn-large {
+            padding: 16px 32px;
+            font-size: 16px;
+        }
+
         /* Mobile Responsive */
         @media (max-width: 768px) {
-            body {
-                width: 100vw;
-                height: 100vh;
-                overflow: auto;
+            .tab-nav {
+                overflow-x: auto;
+                scrollbar-width: none;
+                -ms-overflow-style: none;
             }
 
-            .container {
-                height: auto;
-                min-height: 100vh;
-                padding: 40px 20px;
-            }
-
-            .header {
-                margin-bottom: 40px;
-            }
-
-            .logo {
-                width: 100px;
-                height: 100px;
-            }
-
-            .action-text {
-                font-size: 24px;
-            }
-
-            .subtitle-text {
-                font-size: 16px;
-                margin-bottom: 40px;
-            }
-
-            .qr-container {
+            .tab-nav::-webkit-scrollbar {
                 display: none;
             }
 
-            .camera-interface {
-                display: block;
+            .tab-button {
+                white-space: nowrap;
+                padding: 12px 16px;
+            }
+
+            .hero-title {
+                font-size: 32px;
+            }
+
+            .hero-subtitle {
+                font-size: 16px;
+            }
+
+            .field-group {
+                grid-template-columns: 1fr;
             }
         }
 
-        /* Clickable elements */
-        .clickable {
-            cursor: pointer;
-            transition: transform 0.15s ease;
+        /* Status Indicators */
+        .status-indicator {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 8px 16px;
+            border-radius: var(--radius-md);
+            font-size: 12px;
+            font-weight: 500;
+            z-index: 1000;
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--surface-border);
         }
 
-        .clickable:hover {
-            transform: translateY(-1px);
+        .status-success {
+            background: rgba(16, 185, 129, 0.1);
+            color: var(--success);
+            border-color: rgba(16, 185, 129, 0.2);
         }
 
-        .clickable:active {
-            transform: translateY(0);
+        .status-error {
+            background: rgba(239, 68, 68, 0.1);
+            color: var(--error);
+            border-color: rgba(239, 68, 68, 0.2);
+        }
+
+        .status-info {
+            background: var(--surface-glass);
+            color: var(--text-secondary);
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="header">
-            <div class="logo">
-                <img src="icons/icon48.png" alt="Trakie Logo">
-            </div>
-            <div class="brand-text">Effortless Inventory Intake</div>
-        </div>
-        
-        <div class="main-content">
-            <div class="action-text">Scan to Start</div>
-            <div class="subtitle-text">then Watch the Magic Unfold</div>
+    <!-- Authentication Modal -->
+    <div class="auth-modal" id="authModal">
+        <div class="auth-container">
+            <div class="auth-logo">T</div>
+            <h2 class="auth-title">Access Control</h2>
+            <p class="auth-subtitle">Enter your credentials to access Trakie</p>
             
-            <div class="qr-container clickable">
-                <div class="qr-inner">
-                    <div class="qr-code" id="qrcode">
-                        <div class="loading-dots">
-                            <div></div>
-                            <div></div>
-                            <div></div>
+            <div class="password-field">
+                <input type="password" class="password-input" id="passwordInput" placeholder="Enter password">
+                <button class="password-toggle" onclick="togglePassword()">👁️</button>
+            </div>
+            
+            <div class="auth-attempts" id="attemptsDisplay"></div>
+            <div class="auth-error" id="authError"></div>
+            
+            <button class="btn btn-large" onclick="authenticateUser()" style="width: 100%;">Access Trakie</button>
+        </div>
+    </div>
+
+    <!-- Main Application -->
+    <div class="tab-container" id="mainApp" style="display: none;">
+        <!-- Tab Navigation -->
+        <nav class="tab-nav">
+            <button class="tab-button active" onclick="switchTab('welcome')">Welcome</button>
+            <button class="tab-button" onclick="switchTab('camera')">Camera</button>
+            <button class="tab-button" onclick="switchTab('verify')">Verify</button>
+            <button class="tab-button" onclick="switchTab('pricing')">Pricing</button>
+        </nav>
+
+        <!-- Tab 1: Welcome -->
+        <div class="tab-content active" id="welcome-tab">
+            <div class="welcome-section">
+                <h1 class="hero-title">Cannabis Inventory Intelligence</h1>
+                <p class="hero-subtitle">Transform your dispensary operations with AI-powered inventory management</p>
+                
+                <div style="margin: 40px 0;">
+                    <button class="btn btn-large" onclick="switchTab('camera')">Start Scanning</button>
+                    <button class="btn btn-secondary btn-large" onclick="showDemo()" style="margin-left: 16px;">Watch Demo</button>
+                </div>
+
+                <div style="background: var(--surface-glass); border: 1px solid var(--surface-border); border-radius: var(--radius-lg); padding: 32px; margin-top: 40px;">
+                    <h3 style="margin-bottom: 16px;">How Trakie Works</h3>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 24px; text-align: left;">
+                        <div>
+                            <h4 style="color: var(--accent); margin-bottom: 8px;">1. Capture</h4>
+                            <p style="color: var(--text-secondary); font-size: 14px;">Take photos of cannabis product labels with your phone</p>
+                        </div>
+                        <div>
+                            <h4 style="color: var(--accent); margin-bottom: 8px;">2. Extract</h4>
+                            <p style="color: var(--text-secondary); font-size: 14px;">AI reads THC%, batch numbers, and product details automatically</p>
+                        </div>
+                        <div>
+                            <h4 style="color: var(--accent); margin-bottom: 8px;">3. Verify</h4>
+                            <p style="color: var(--text-secondary); font-size: 14px;">Review extracted data with one-click confirmation</p>
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
 
-            <!-- Mobile Camera Interface -->
-            <div class="camera-interface" id="cameraInterface">
-                <div class="camera-feed" id="cameraFeed">
-                    <div style="color: var(--text-muted); text-align: center;">
-                        Camera will appear here
+        <!-- Tab 2: Camera -->
+        <div class="tab-content" id="camera-tab">
+            <div class="camera-section">
+                <h2 style="text-align: center; margin-bottom: 32px;">Capture Product Labels</h2>
+                
+                <div class="camera-interface">
+                    <div class="camera-feed" id="cameraFeed">
+                        <div style="color: var(--text-muted); text-align: center;">
+                            Camera will appear here
+                        </div>
                     </div>
-                </div>
-                <div class="camera-controls">
-                    <button class="btn" id="startCameraBtn" onclick="startCamera()">Start Camera</button>
-                    <button class="btn" id="captureBtn" onclick="capturePhoto()" style="display: none;">Capture</button>
-                    <button class="btn btn-secondary" id="switchCameraBtn" onclick="switchCamera()" style="display: none;">Switch</button>
+                    <div class="camera-controls">
+                        <button class="btn" id="startCameraBtn" onclick="startCamera()">Start Camera</button>
+                        <button class="btn" id="captureBtn" onclick="capturePhoto()" style="display: none;">Capture</button>
+                        <button class="btn btn-secondary" id="switchCameraBtn" onclick="switchCamera()" style="display: none;">Switch</button>
+                    </div>
                 </div>
             </div>
         </div>
-        
-        <div class="footer">
-            <div class="session-info">
-                <span class="session-label">SESSION</span>
-                <span class="session-id" id="sessionId">LOADING</span>
+
+        <!-- Tab 3: Verification -->
+        <div class="tab-content" id="verify-tab">
+            <div class="verification-section">
+                <h2 style="text-align: center; margin-bottom: 32px;">Verify Extracted Data</h2>
+                
+                <div class="ocr-results" id="ocrResults" style="display: none;">
+                    <h3 style="margin-bottom: 20px;">Extracted Information</h3>
+                    <div class="field-group" id="extractedFields">
+                        <!-- OCR results will be populated here -->
+                    </div>
+                    <div style="text-align: center;">
+                        <button class="btn btn-large" onclick="confirmAllData()">Confirm All Data</button>
+                        <button class="btn btn-secondary btn-large" onclick="retakePhoto()" style="margin-left: 16px;">Retake Photo</button>
+                    </div>
+                </div>
+
+                <div style="text-align: center; color: var(--text-muted);" id="noDataMessage">
+                    No data to verify. Please capture a photo first.
+                </div>
             </div>
-            <a href="#" class="manual-link" id="manualLink">Open Upload Page</a>
+        </div>
+
+        <!-- Tab 4: Pricing -->
+        <div class="tab-content" id="pricing-tab">
+            <div style="max-width: 800px; margin: 0 auto; text-align: center;">
+                <h2 style="margin-bottom: 32px;">Choose Your Plan</h2>
+                <p style="color: var(--text-secondary); margin-bottom: 40px;">Coming soon - flexible pricing for dispensaries of all sizes</p>
+            </div>
         </div>
     </div>
 
     <script>
-        // Simple password protection
-        const correctPassword = "PasswordBoss123!";
-        const userPassword = prompt("Enter password to access Trakie:");
-        if (userPassword !== correctPassword) {
-            document.body.style.display = "none";
-            alert("Access denied");
-        }
-
-        const PROD = 'https://trakie-ai.vercel.app';
+        // Global state
         let cameraStream = null;
         let currentFacingMode = 'environment';
+        let currentTab = 'welcome';
+        let attempts = 0;
+        const maxAttempts = 3;
+        const correctPassword = "PasswordBoss123!";
 
-        function randomToken(len = 12) {
-            const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
-            let out = '';
-            for (let i = 0; i < len; i++) {
-                out += chars[Math.floor(Math.random() * chars.length)];
+        // Authentication
+        function togglePassword() {
+            const input = document.getElementById('passwordInput');
+            const toggle = document.querySelector('.password-toggle');
+            
+            if (input.type === 'password') {
+                input.type = 'text';
+                toggle.textContent = '🙈';
+            } else {
+                input.type = 'password';
+                toggle.textContent = '👁️';
             }
-            return out.toLowerCase();
         }
 
-        function generateQRFallback(text, container) {
-            const qrUrl = `https://chart.googleapis.com/chart?chs=120x120&cht=qr&chl=${encodeURIComponent(text)}`;
+        function authenticateUser() {
+            const password = document.getElementById('passwordInput').value;
+            const errorDiv = document.getElementById('authError');
+            const attemptsDiv = document.getElementById('attemptsDisplay');
             
-            const img = document.createElement('img');
-            img.src = qrUrl;
-            img.style.width = '120px';
-            img.style.height = '120px';
-            img.style.borderRadius = '8px';
-            img.style.cursor = 'pointer';
+            if (password === correctPassword) {
+                document.getElementById('authModal').style.display = 'none';
+                document.getElementById('mainApp').style.display = 'block';
+                showStatus('Welcome to Trakie!', 'success');
+                return;
+            }
             
-            img.onload = function() {
-                console.log('QR loaded via Google Charts');
-            };
+            attempts++;
+            if (attempts >= maxAttempts) {
+                errorDiv.textContent = 'Maximum attempts exceeded. Access denied.';
+                document.querySelector('.password-input').disabled = true;
+                document.querySelector('.btn').disabled = true;
+                return;
+            }
             
-            img.onerror = function() {
-                console.log('Google Charts failed, showing fallback');
-                container.innerHTML = `
-                    <div style="text-align: center; font-size: 10px; color: var(--text-muted); padding: 20px;">
-                        QR Generation Failed<br><br>
-                        <span style="color: var(--accent); cursor: pointer; font-size: 12px;" onclick="window.open('${text}', '_blank')">Click to Open Upload Page</span>
-                    </div>
-                `;
-            };
+            errorDiv.textContent = 'Incorrect password. Please try again.';
+            attemptsDiv.textContent = `${maxAttempts - attempts} attempts remaining`;
+            document.getElementById('passwordInput').value = '';
+            document.getElementById('passwordInput').focus();
+        }
+
+        // Allow Enter key to submit password
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('passwordInput').addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    authenticateUser();
+                }
+            });
+        });
+
+        // Tab Management
+        function switchTab(tabName) {
+            // Update tab buttons
+            document.querySelectorAll('.tab-button').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
             
-            img.onclick = () => window.open(text, '_blank');
-            container.appendChild(img);
+            // Update tab content
+            document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+            document.getElementById(`${tabName}-tab`).classList.add('active');
+            
+            currentTab = tabName;
+            
+            // Tab-specific actions
+            if (tabName === 'camera') {
+                // Auto-start camera on mobile
+                if (window.innerWidth <= 768) {
+                    setTimeout(startCamera, 500);
+                }
+            }
         }
 
         // Camera Functions
         async function startCamera() {
             try {
+                const cameraFeed = document.getElementById('cameraFeed');
+                cameraFeed.innerHTML = '<div style="color: var(--accent); text-align: center; padding: 40px;">Initializing camera...</div>';
+
                 const constraints = {
                     video: {
                         facingMode: currentFacingMode,
-                        width: { ideal: 1920 },
-                        height: { ideal: 1080 }
+                        width: { ideal: 1920, min: 1280 },
+                        height: { ideal: 1080, min: 720 },
+                        frameRate: { ideal: 30, min: 15 }
                     }
                 };
 
@@ -496,10 +620,15 @@
                 video.srcObject = cameraStream;
                 video.autoplay = true;
                 video.playsInline = true;
+                video.muted = true;
                 video.style.width = '100%';
                 video.style.borderRadius = '12px';
+                video.style.transform = currentFacingMode === 'user' ? 'scaleX(-1)' : 'none';
                 
-                const cameraFeed = document.getElementById('cameraFeed');
+                video.onloadedmetadata = () => {
+                    showStatus(`Camera ready: ${video.videoWidth}x${video.videoHeight}`, 'success');
+                };
+                
                 cameraFeed.innerHTML = '';
                 cameraFeed.appendChild(video);
                 
@@ -510,7 +639,18 @@
                 
             } catch (error) {
                 console.error('Camera error:', error);
-                alert('Camera access required for Trakie to work');
+                let errorMessage = 'Camera access required for Trakie to work.';
+                
+                if (error.name === 'NotAllowedError') {
+                    errorMessage = 'Camera permission denied. Please allow camera access and refresh.';
+                } else if (error.name === 'NotFoundError') {
+                    errorMessage = 'No camera found. Please check your device.';
+                } else if (error.name === 'NotReadableError') {
+                    errorMessage = 'Camera is being used by another application.';
+                }
+                
+                showStatus(errorMessage, 'error');
+                document.getElementById('cameraFeed').innerHTML = `<div style="color: var(--error); text-align: center; padding: 40px;">${errorMessage}</div>`;
             }
         }
 
@@ -529,82 +669,151 @@
 
         function capturePhoto() {
             const video = document.querySelector('#cameraFeed video');
-            if (!video) return;
+            if (!video) {
+                showStatus('No camera feed available', 'error');
+                return;
+            }
+
+            // Visual feedback
+            const flash = document.createElement('div');
+            flash.style.cssText = `
+                position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+                background: white; opacity: 0.8; z-index: 9999; pointer-events: none;
+            `;
+            document.body.appendChild(flash);
+            setTimeout(() => flash.remove(), 150);
+
+            showStatus('Photo captured - Processing with OCR...', 'info');
 
             const canvas = document.createElement('canvas');
             canvas.width = video.videoWidth;
             canvas.height = video.videoHeight;
             
             const ctx = canvas.getContext('2d');
-            ctx.drawImage(video, 0, 0);
+            if (currentFacingMode === 'user') {
+                ctx.scale(-1, 1);
+                ctx.drawImage(video, -canvas.width, 0);
+            } else {
+                ctx.drawImage(video, 0, 0);
+            }
             
-            // Convert to blob for processing
             canvas.toBlob((blob) => {
-                console.log('Photo captured:', blob);
-                alert('Photo captured - OCR processing would start here');
-                // TODO: Add OCR processing
+                processImageWithOCR(blob);
             }, 'image/jpeg', 0.9);
         }
 
-        // Initialize after DOM loads
-        setTimeout(() => {
-            const token = randomToken(12);
-            const uploadUrl = `${PROD}/sessions/${token}`;
-            
-            console.log('Generated:', token, uploadUrl);
-            
-            // Update session display
-            const sessionEl = document.getElementById('sessionId');
-            if (sessionEl) {
-                sessionEl.textContent = token.toUpperCase();
-            }
-            
-            // Try QR generation
-            const qrEl = document.getElementById('qrcode');
-            if (qrEl) {
-                qrEl.innerHTML = '';
+        // OCR Processing
+        async function processImageWithOCR(imageBlob) {
+            try {
+                showStatus('Processing image with OCR...', 'info');
                 
-                if (typeof QRCode !== 'undefined') {
-                    try {
-                        new QRCode(qrEl, {
-                            text: uploadUrl,
-                            width: 120,
-                            height: 120,
-                            colorDark: "#0A0E13",
-                            colorLight: "#FFFFFF",
-                            correctLevel: QRCode.CorrectLevel.M
-                        });
-                        
-                        setTimeout(() => {
-                            const img = qrEl.querySelector('img');
-                            if (img) {
-                                img.style.cursor = 'pointer';
-                                img.onclick = () => window.open(uploadUrl, '_blank');
-                            }
-                        }, 100);
-                        
-                        console.log('QR generated via qrcode.min.js');
-                        
-                    } catch (error) {
-                        console.error('Local QR failed:', error);
-                        generateQRFallback(uploadUrl, qrEl);
+                const { data: { text } } = await Tesseract.recognize(imageBlob, 'eng', {
+                    logger: m => {
+                        if (m.status === 'recognizing text') {
+                            showStatus(`OCR Progress: ${Math.round(m.progress * 100)}%`, 'info');
+                        }
                     }
-                } else {
-                    console.log('qrcode.min.js not found, using Google Charts');
-                    generateQRFallback(uploadUrl, qrEl);
-                }
-            }
-            
-            // Update manual link
-            const linkEl = document.getElementById('manualLink');
-            if (linkEl) {
-                linkEl.href = uploadUrl;
-            }
-            
-        }, 500);
+                });
 
-        // Clean up on page unload
+                console.log('OCR Text extracted:', text);
+                
+                // Parse cannabis-specific data
+                const extractedData = parseCannabisData(text);
+                displayOCRResults(extractedData);
+                
+                // Switch to verification tab
+                switchTab('verify');
+                
+                showStatus('OCR processing complete!', 'success');
+                
+            } catch (error) {
+                console.error('OCR Error:', error);
+                showStatus('OCR processing failed. Please try again.', 'error');
+            }
+        }
+
+        function parseCannabisData(text) {
+            // Cannabis-specific parsing patterns
+            const data = {
+                brand: extractPattern(text, /(?:brand|company|mfg)[:\s]+([a-zA-Z\s&.]+)/i),
+                product: extractPattern(text, /(?:product|strain)[:\s]+([a-zA-Z\s]+)/i),
+                thc: extractPattern(text, /(?:thc|THC)[:\s]*([0-9.]+)(?:%|mg)?/i),
+                cbd: extractPattern(text, /(?:cbd|CBD)[:\s]*([0-9.]+)(?:%|mg)?/i),
+                batch: extractPattern(text, /(?:batch|lot)[:\s#]*([a-zA-Z0-9]+)/i),
+                weight: extractPattern(text, /([0-9.]+)\s*(?:g|gram|oz|ounce)/i),
+                expiry: extractPattern(text, /(?:exp|expires?)[:\s]*([0-9\/\-]+)/i)
+            };
+            
+            return data;
+        }
+
+        function extractPattern(text, pattern) {
+            const match = text.match(pattern);
+            return match ? match[1].trim() : '';
+        }
+
+        function displayOCRResults(data) {
+            const resultsDiv = document.getElementById('ocrResults');
+            const fieldsDiv = document.getElementById('extractedFields');
+            const noDataDiv = document.getElementById('noDataMessage');
+            
+            if (Object.values(data).some(value => value)) {
+                fieldsDiv.innerHTML = '';
+                
+                Object.entries(data).forEach(([key, value]) => {
+                    if (value) {
+                        const fieldDiv = document.createElement('div');
+                        fieldDiv.className = 'field-item';
+                        fieldDiv.innerHTML = `
+                            <div class="field-label">${key.toUpperCase()}</div>
+                            <div class="field-value">${value}</div>
+                        `;
+                        fieldsDiv.appendChild(fieldDiv);
+                    }
+                });
+                
+                resultsDiv.style.display = 'block';
+                noDataDiv.style.display = 'none';
+            } else {
+                resultsDiv.style.display = 'none';
+                noDataDiv.style.display = 'block';
+                noDataDiv.textContent = 'No cannabis product data detected. Please try again with a clearer image.';
+            }
+        }
+
+        function confirmAllData() {
+            showStatus('Data confirmed! Ready for next steps.', 'success');
+            // TODO: Implement data export/processing
+        }
+
+        function retakePhoto() {
+            switchTab('camera');
+            document.getElementById('ocrResults').style.display = 'none';
+            document.getElementById('noDataMessage').style.display = 'block';
+        }
+
+        function showDemo() {
+            showStatus('Demo video coming soon!', 'info');
+        }
+
+        // Utility Functions
+        function showStatus(message, type = 'info') {
+            // Remove existing status
+            const existing = document.querySelector('.status-indicator');
+            if (existing) existing.remove();
+            
+            const statusDiv = document.createElement('div');
+            statusDiv.className = `status-indicator status-${type}`;
+            statusDiv.textContent = message;
+            document.body.appendChild(statusDiv);
+            
+            if (type !== 'error') {
+                setTimeout(() => statusDiv.remove(), 4000);
+            }
+        }
+
+        // Cleanup
         window.addEventListener('beforeunload', stopCamera);
     </script>
 </body>
-</html> 
+</html>
