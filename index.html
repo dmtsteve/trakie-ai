@@ -1,4 +1,43 @@
-<!DOCTYPE html>
+<!-- Tab 2: Scan (QR + Camera) -->
+        <div class="tab-content" id="scan-tab">
+            <div class="scan-section">
+                <h2 style="text-align: center; margin-bottom: 40px;">Generate QR & Scan Products</h2>
+                
+                <!-- QR Code Section -->
+                <div class="qr-section">
+                    <h3 style="color: var(--accent); margin-bottom: 24px; text-align: center;">Step 1: Scan QR Code</h3>
+                    <div class="qr-container" style="margin: 0 auto 40px;">
+                        <div class="qr-inner">
+                            <div class="qr-code" id="scanQrcode">
+                                <div class="loading-dots">
+                                    <div></div>
+                                    <div></div>
+                                    <div></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="text-align: center; margin-bottom: 40px;">
+                        <p style="color: var(--text-secondary); margin-bottom: 16px;">Scan with your phone to open camera interface</p>
+                        <div style="display: flex; gap: 16px; justify-content: center;">
+                            <button class="btn btn-secondary" onclick="copyQRLink()">Copy Link</button>
+                            <a href="#" class="btn btn-secondary" id="scanManualLink">Open Upload Page</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Camera Section for Desktop -->
+                <div class="camera-section" style="border-top: 1px solid var(--surface-border); padding-top: 40px;">
+                    <h3 style="color: var(--accent); margin-bottom: 24px; text-align: center;">Step 2: Capture Products</h3>
+                    <div class="camera-interface">
+                        <div class="camera-feed" id="scanCameraFeed">
+                            <div style="color: var(--text-muted); text-align: center;">
+                                Camera will appear here
+                            </div>
+                        </div>
+                        <div class="camera-controls">
+                            <button class="btn" id="scanStartCameraBtn" onclick="startScanCamera()">Start Camera</button>
+                            <button class="btn" id="scanCaptureBtn" onclick="captureScan<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -634,7 +673,7 @@
                 </div>
             </div>
             <h2 class="auth-title">Members Only</h2>
-            <p class="auth-subtitle">Enter toptop Secret Password to enter</p>
+            <p class="auth-subtitle">Enter your credentials to access Trakie</p>
             
             <div class="password-field">
                 <input type="password" class="password-input" id="passwordInput" placeholder="Enter password">
@@ -653,7 +692,7 @@
         <!-- Tab Navigation -->
         <nav class="tab-nav">
             <div class="nav-logo">
-                <img src="icons/icon48.png" alt="Trakie">
+                <img src="icon48.png" alt="Trakie">
             </div>
             <div class="tab-buttons">
                 <button class="tab-button active" onclick="switchTab('welcome')">Welcome</button>
@@ -816,12 +855,207 @@
             currentTab = tabName;
             
             // Tab-specific actions
-            if (tabName === 'camera') {
-                // Auto-start camera on mobile
-                if (window.innerWidth <= 768) {
-                    setTimeout(startCamera, 500);
+            if (tabName === 'scan') {
+                // Generate new QR code for scan tab
+                generateScanQR();
+            } else if (tabName === 'results') {
+                // Update session ID in results
+                const sessionEl = document.getElementById('resultsSessionId');
+                if (sessionEl && currentSession) {
+                    sessionEl.textContent = currentSession.token.toUpperCase();
                 }
             }
+        }
+
+        // QR Generation for Scan Tab
+        function generateScanQR() {
+            if (!currentSession) {
+                const session = generateSession();
+            }
+            
+            const qrEl = document.getElementById('scanQrcode');
+            const linkEl = document.getElementById('scanManualLink');
+            
+            if (qrEl && currentSession) {
+                qrEl.innerHTML = '';
+                
+                if (typeof QRCode !== 'undefined') {
+                    try {
+                        new QRCode(qrEl, {
+                            text: currentSession.url,
+                            width: 120,
+                            height: 120,
+                            colorDark: "#0A0E13",
+                            colorLight: "#FFFFFF",
+                            correctLevel: QRCode.CorrectLevel.M
+                        });
+                    } catch (error) {
+                        generateQRFallback(currentSession.url, qrEl);
+                    }
+                } else {
+                    generateQRFallback(currentSession.url, qrEl);
+                }
+            }
+            
+            if (linkEl && currentSession) {
+                linkEl.href = currentSession.url;
+            }
+        }
+
+        // Copy QR Link
+        function copyQRLink() {
+            if (currentSession) {
+                navigator.clipboard.writeText(currentSession.url).then(() => {
+                    showStatus('Link copied to clipboard!', 'success');
+                }).catch(() => {
+                    showStatus('Failed to copy link', 'error');
+                });
+            }
+        }
+
+        // Scan Camera Functions
+        async function startScanCamera() {
+            try {
+                const cameraFeed = document.getElementById('scanCameraFeed');
+                cameraFeed.innerHTML = '<div style="color: var(--accent); text-align: center; padding: 40px;">Initializing camera...</div>';
+
+                const constraints = {
+                    video: {
+                        facingMode: currentFacingMode,
+                        width: { ideal: 1920, min: 1280 },
+                        height: { ideal: 1080, min: 720 }
+                    }
+                };
+
+                cameraStream = await navigator.mediaDevices.getUserMedia(constraints);
+                
+                const video = document.createElement('video');
+                video.srcObject = cameraStream;
+                video.autoplay = true;
+                video.playsInline = true;
+                video.muted = true;
+                video.style.width = '100%';
+                video.style.borderRadius = '12px';
+                
+                cameraFeed.innerHTML = '';
+                cameraFeed.appendChild(video);
+                
+                document.getElementById('scanStartCameraBtn').style.display = 'none';
+                document.getElementById('scanCaptureBtn').style.display = 'inline-block';
+                document.getElementById('scanSwitchCameraBtn').style.display = 'inline-block';
+                
+                showStatus('Desktop camera ready', 'success');
+                
+            } catch (error) {
+                console.error('Camera error:', error);
+                showStatus('Camera access denied', 'error');
+            }
+        }
+
+        function captureScanPhoto() {
+            const video = document.querySelector('#scanCameraFeed video');
+            if (!video) return;
+
+            const canvas = document.createElement('canvas');
+            canvas.width = video.videoWidth;
+            canvas.height = video.videoHeight;
+            
+            const ctx = canvas.getContext('2d');
+            ctx.drawImage(video, 0, 0);
+            
+            canvas.toBlob((blob) => {
+                processImageWithOCRScan(blob);
+                switchTab('results'); // Auto-switch to results tab
+            }, 'image/jpeg', 0.9);
+            
+            showStatus('Photo captured - processing...', 'success');
+        }
+
+        function switchScanCamera() {
+            currentFacingMode = currentFacingMode === 'environment' ? 'user' : 'environment';
+            stopCamera();
+            startScanCamera();
+        }
+
+        // OCR Processing for Scan
+        async function processImageWithOCRScan(imageBlob) {
+            try {
+                updateLiveTranscription('Processing image with OCR...');
+                
+                const { data: { text } } = await Tesseract.recognize(imageBlob, 'eng', {
+                    logger: m => {
+                        if (m.status === 'recognizing text') {
+                            updateLiveTranscription(`OCR Progress: ${Math.round(m.progress * 100)}%`);
+                        }
+                    }
+                });
+
+                updateLiveTranscription(`Extracted text: ${text}`);
+                
+                const extractedData = parseCannabisData(text);
+                displayResultsData(extractedData);
+                
+                showStatus('OCR processing complete!', 'success');
+                
+            } catch (error) {
+                console.error('OCR Error:', error);
+                updateLiveTranscription('OCR processing failed. Please try again.');
+                showStatus('OCR processing failed', 'error');
+            }
+        }
+
+        // Results Display Functions
+        function updateLiveTranscription(text) {
+            const transcriptionEl = document.getElementById('liveTranscription');
+            if (transcriptionEl) {
+                const timestamp = new Date().toLocaleTimeString();
+                transcriptionEl.innerHTML += `<div style="margin-bottom: 8px;"><span style="color: var(--text-muted);">[${timestamp}]</span> ${text}</div>`;
+                transcriptionEl.scrollTop = transcriptionEl.scrollHeight;
+            }
+        }
+
+        function displayResultsData(data) {
+            const productEl = document.getElementById('productData');
+            const complianceEl = document.getElementById('complianceData');
+            const imageCountEl = document.getElementById('imageCount');
+            const fieldCountEl = document.getElementById('fieldCount');
+            const accuracyEl = document.getElementById('accuracy');
+            
+            if (productEl) {
+                productEl.innerHTML = `
+                    <div>Brand: ${data.brand || 'Not detected'}</div>
+                    <div>Product: ${data.product || 'Not detected'}</div>
+                    <div>Weight: ${data.weight || 'Not detected'}</div>
+                `;
+            }
+            
+            if (complianceEl) {
+                complianceEl.innerHTML = `
+                    <div>THC: ${data.thc || 'Not detected'}</div>
+                    <div>CBD: ${data.cbd || 'Not detected'}</div>
+                    <div>Batch: ${data.batch || 'Not detected'}</div>
+                `;
+            }
+            
+            // Update stats
+            const extractedFields = Object.values(data).filter(value => value && value.trim()).length;
+            if (imageCountEl) imageCountEl.textContent = '1';
+            if (fieldCountEl) fieldCountEl.textContent = extractedFields;
+            if (accuracyEl) accuracyEl.textContent = `${Math.round((extractedFields / 6) * 100)}%`;
+        }
+
+        function exportResults() {
+            showStatus('Export functionality coming soon!', 'info');
+        }
+
+        function clearResults() {
+            document.getElementById('liveTranscription').innerHTML = '<div style="color: var(--text-muted);">Waiting for image capture...</div>';
+            document.getElementById('productData').innerHTML = 'No data extracted yet';
+            document.getElementById('complianceData').innerHTML = 'No data extracted yet';
+            document.getElementById('imageCount').textContent = '0';
+            document.getElementById('fieldCount').textContent = '0';
+            document.getElementById('accuracy').textContent = '0%';
+            showStatus('Results cleared', 'success');
         }
 
         // Camera Functions
