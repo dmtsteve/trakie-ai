@@ -1191,20 +1191,17 @@
             }
         }
 
-        function parseCannabisData(text) {
-            // Cannabis-specific parsing patterns
-            const data = {
-                brand: extractPattern(text, /(?:brand|company|mfg)[:\s]+([a-zA-Z\s&.]+)/i),
-                product: extractPattern(text, /(?:product|strain)[:\s]+([a-zA-Z\s]+)/i),
-                thc: extractPattern(text, /(?:thc|THC)[:\s]*([0-9.]+)(?:%|mg)?/i),
-                cbd: extractPattern(text, /(?:cbd|CBD)[:\s]*([0-9.]+)(?:%|mg)?/i),
-                batch: extractPattern(text, /(?:batch|lot)[:\s#]*([a-zA-Z0-9]+)/i),
-                weight: extractPattern(text, /([0-9.]+)\s*(?:g|gram|oz|ounce)/i),
-                expiry: extractPattern(text, /(?:exp|expires?)[:\s]*([0-9\/\-]+)/i)
-            };
-            
-            return data;
-        }
+       // DUMMY VERSION - SAFE FOR GITHUB
+function parseCannabisData(text) {
+    return {
+        brand: "Demo Brand",
+        product: "Sample Product", 
+        thc: "20.5%",
+        cbd: "0.8%",
+        batch: "DEMO123",
+        weight: "3.5g"
+    };
+}
 
         function extractPattern(text, pattern) {
             const match = text.match(pattern);
