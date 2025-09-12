@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Trakie - Cannabis Inventory Intelligence</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tesseract.js/4.1.1/tesseract.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode/1.5.3/qrcode.min.js"></script>
     <style>
         :root {
             --bg-primary: #0A0E13;
@@ -12,20 +13,25 @@
             --bg-tertiary: #1A1F29;
             --surface-glass: rgba(255, 255, 255, 0.03);
             --surface-border: rgba(255, 255, 255, 0.06);
+            --surface-elevated: rgba(255, 255, 255, 0.08);
             --text-primary: #F8FAFC;
             --text-secondary: #94A3B8;
             --text-muted: #64748B;
             --accent: #06B6D4;
             --accent-soft: rgba(6, 182, 212, 0.12);
             --accent-glow: rgba(6, 182, 212, 0.4);
+            --accent-bright: #00D4FF;
             --error: #EF4444;
             --success: #10B981;
             --warning: #F59E0B;
+            --dutchie-blue: #2563EB;
+            --dutchie-blue-hover: #1D4ED8;
             --radius-sm: 8px;
             --radius-md: 12px;
             --radius-lg: 16px;
             --shadow-soft: 0 4px 24px rgba(0, 0, 0, 0.25);
             --shadow-glow: 0 0 32px rgba(6, 182, 212, 0.15);
+            --shadow-intense: 0 0 40px rgba(6, 182, 212, 0.3);
         }
 
         * {
@@ -35,18 +41,20 @@
         }
 
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'SF Pro Display', system-ui, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'SF Pro Display', system-ui, sans-serif;
             background: 
-                radial-gradient(circle at 30% 20%, rgba(6, 182, 212, 0.08) 0%, transparent 50%),
-                radial-gradient(circle at 80% 80%, rgba(59, 130, 246, 0.04) 0%, transparent 50%),
-                linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
+                radial-gradient(circle at 20% 30%, rgba(6, 182, 212, 0.12) 0%, transparent 60%),
+                radial-gradient(circle at 80% 70%, rgba(59, 130, 246, 0.08) 0%, transparent 60%),
+                radial-gradient(circle at 40% 80%, rgba(16, 185, 129, 0.06) 0%, transparent 50%),
+                linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 50%, var(--bg-tertiary) 100%);
             color: var(--text-primary);
             -webkit-font-smoothing: antialiased;
             text-rendering: optimizeLegibility;
             overflow-x: hidden;
+            min-height: 100vh;
         }
 
-        /* Authentication Modal */
+        /* Authentication System */
         .auth-modal {
             position: fixed;
             top: 0;
@@ -59,32 +67,46 @@
             justify-content: center;
             z-index: 10000;
             backdrop-filter: blur(20px);
+            animation: authFadeIn 0.5s ease-out;
+        }
+
+        @keyframes authFadeIn {
+            from { opacity: 0; backdrop-filter: blur(0px); }
+            to { opacity: 1; backdrop-filter: blur(20px); }
         }
 
         .auth-container {
-            background: var(--surface-glass);
+            background: linear-gradient(145deg, var(--surface-glass), var(--surface-elevated));
             border: 1px solid var(--surface-border);
             border-radius: var(--radius-lg);
-            padding: 40px;
-            max-width: 400px;
+            padding: 48px 40px;
+            max-width: 420px;
             width: 90%;
             text-align: center;
             backdrop-filter: blur(20px);
-            box-shadow: var(--shadow-soft);
+            box-shadow: var(--shadow-soft), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .auth-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--accent-bright), transparent);
+            opacity: 0.6;
         }
 
         .auth-logo {
             width: 80px;
             height: 80px;
-            background: linear-gradient(135deg, var(--accent) 0%, #0891B2 100%);
             border-radius: var(--radius-lg);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 700;
-            font-size: 24px;
-            color: white;
             margin: 0 auto 24px;
+            overflow: hidden;
+            box-shadow: 0 8px 32px rgba(6, 182, 212, 0.3);
         }
 
         .auth-title {
@@ -92,12 +114,16 @@
             font-weight: 600;
             margin-bottom: 8px;
             color: var(--text-primary);
+            letter-spacing: -0.02em;
         }
 
         .auth-subtitle {
             font-size: 14px;
-            color: var(--text-secondary);
+            color: var(--accent);
             margin-bottom: 32px;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
         }
 
         .password-field {
@@ -114,12 +140,14 @@
             color: var(--text-primary);
             font-size: 16px;
             outline: none;
-            transition: all 0.2s ease;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
         }
 
         .password-input:focus {
             border-color: var(--accent);
-            box-shadow: 0 0 0 3px var(--accent-soft);
+            box-shadow: 0 0 0 3px var(--accent-soft), 0 0 20px rgba(6, 182, 212, 0.2);
+            background: rgba(255, 255, 255, 0.05);
         }
 
         .password-toggle {
@@ -132,26 +160,25 @@
             color: var(--text-muted);
             cursor: pointer;
             font-size: 18px;
-            transition: color 0.2s ease;
+            transition: all 0.2s ease;
+            padding: 4px;
         }
 
         .password-toggle:hover {
             color: var(--accent);
+            transform: translateY(-50%) scale(1.1);
         }
 
-        .auth-attempts {
+        .auth-attempts, .auth-error {
             font-size: 12px;
-            color: var(--warning);
             margin-bottom: 16px;
+            font-weight: 500;
         }
 
-        .auth-error {
-            font-size: 12px;
-            color: var(--error);
-            margin-bottom: 16px;
-        }
+        .auth-attempts { color: var(--warning); }
+        .auth-error { color: var(--error); }
 
-        /* Tab Navigation */
+        /* Navigation System */
         .tab-container {
             width: 100%;
             min-height: 100vh;
@@ -161,23 +188,35 @@
 
         .tab-nav {
             display: flex;
+            align-items: center;
             background: var(--surface-glass);
             border-bottom: 1px solid var(--surface-border);
-            padding: 0 20px;
+            padding: 0 24px;
             backdrop-filter: blur(20px);
             position: sticky;
             top: 0;
             z-index: 100;
+            box-shadow: 0 1px 0 rgba(255, 255, 255, 0.05);
+        }
+
+        .nav-logo {
+            margin-right: 32px;
         }
 
         .nav-logo img {
-            width: 32px;
-            height: 32px;
+            width: 36px;
+            height: 36px;
             border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(6, 182, 212, 0.2);
+        }
+
+        .tab-buttons {
+            display: flex;
+            gap: 4px;
         }
 
         .tab-button {
-            padding: 16px 24px;
+            padding: 16px 20px;
             background: none;
             border: none;
             color: var(--text-secondary);
@@ -185,7 +224,8 @@
             font-weight: 500;
             font-size: 14px;
             transition: all 0.2s ease;
-            border-bottom: 2px solid transparent;
+            border-radius: var(--radius-sm);
+            position: relative;
         }
 
         .tab-button:hover {
@@ -195,17 +235,35 @@
 
         .tab-button.active {
             color: var(--accent);
-            border-bottom-color: var(--accent);
+            background: var(--accent-soft);
+        }
+
+        .tab-button.active::after {
+            content: '';
+            position: absolute;
+            bottom: -1px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 40px;
+            height: 2px;
+            background: var(--accent);
+            border-radius: 1px;
         }
 
         .tab-content {
             flex: 1;
             display: none;
-            padding: 40px 20px;
+            padding: 40px 24px;
+            animation: tabFadeIn 0.3s ease-out;
         }
 
         .tab-content.active {
             display: block;
+        }
+
+        @keyframes tabFadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         /* Welcome Section */
@@ -216,38 +274,63 @@
         }
 
         .hero-title {
-            font-size: 56px;
+            font-size: clamp(32px, 8vw, 64px);
             font-weight: 700;
             margin-bottom: 24px;
-            background: linear-gradient(135deg, var(--accent) 0%, #0891B2 40%, #06B6D4 100%);
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-bright) 50%, var(--success) 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
             line-height: 1.1;
+            letter-spacing: -0.02em;
         }
 
         .hero-subtitle {
-            font-size: 24px;
+            font-size: clamp(16px, 4vw, 24px);
             color: var(--text-secondary);
             margin-bottom: 48px;
             max-width: 600px;
             margin-left: auto;
             margin-right: auto;
             line-height: 1.4;
+            font-weight: 400;
         }
 
         /* Camera Section */
         .camera-section {
-            max-width: 600px;
+            max-width: 700px;
             margin: 0 auto;
         }
 
+        .qr-section {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 32px;
+            background: linear-gradient(145deg, var(--surface-glass), var(--surface-elevated));
+            border: 1px solid var(--surface-border);
+            border-radius: var(--radius-lg);
+            backdrop-filter: blur(20px);
+            box-shadow: var(--shadow-soft);
+        }
+
+        .qr-container {
+            display: flex;
+            justify-content: center;
+            margin: 24px 0;
+            padding: 20px;
+            background: white;
+            border-radius: var(--radius-md);
+            display: inline-block;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+
         .camera-interface {
-            background: var(--surface-glass);
+            background: linear-gradient(145deg, var(--surface-glass), var(--surface-elevated));
             border: 1px solid var(--surface-border);
             border-radius: var(--radius-lg);
             padding: 24px;
             backdrop-filter: blur(20px);
+            box-shadow: var(--shadow-soft);
         }
 
         .camera-feed {
@@ -260,12 +343,20 @@
             align-items: center;
             justify-content: center;
             margin-bottom: 20px;
+            border: 2px solid var(--surface-border);
+            transition: border-color 0.3s ease;
+        }
+
+        .camera-feed.active {
+            border-color: var(--accent);
+            box-shadow: var(--shadow-glow);
         }
 
         .camera-feed video {
             width: 100%;
             height: auto;
             display: block;
+            border-radius: calc(var(--radius-md) - 2px);
         }
 
         .camera-controls {
@@ -275,47 +366,329 @@
             flex-wrap: wrap;
         }
 
-        /* Verification Section */
+        /* Dutchie Replica System */
         .verification-section {
-            max-width: 1000px;
+            max-width: 800px;
             margin: 0 auto;
         }
 
-        .ocr-results {
-            background: var(--surface-glass);
+        .receive-screen {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 400px;
+        }
+
+        .receive-container {
+            background: linear-gradient(145deg, var(--surface-glass), var(--surface-elevated));
             border: 1px solid var(--surface-border);
             border-radius: var(--radius-lg);
-            padding: 24px;
-            margin-bottom: 24px;
+            padding: 64px 48px;
+            text-align: center;
+            backdrop-filter: blur(20px);
+            box-shadow: var(--shadow-soft);
+            position: relative;
+            overflow: hidden;
         }
 
-        .field-group {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 16px;
-            margin-bottom: 24px;
+        .receive-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--dutchie-blue), transparent);
+            opacity: 0.8;
         }
 
-        .field-item {
-            background: var(--bg-tertiary);
-            border: 1px solid var(--surface-border);
-            border-radius: var(--radius-md);
-            padding: 16px;
-        }
-
-        .field-label {
-            font-size: 12px;
-            color: var(--text-muted);
-            margin-bottom: 4px;
-        }
-
-        .field-value {
+        .dutchie-receive-btn {
+            background: var(--dutchie-blue);
+            border: none;
+            border-radius: var(--radius-sm);
+            padding: 16px 40px;
+            color: white;
             font-size: 16px;
-            color: var(--text-primary);
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            min-width: 140px;
+            box-shadow: 0 4px 16px rgba(37, 99, 235, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .dutchie-receive-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .dutchie-receive-btn:hover {
+            background: var(--dutchie-blue-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(37, 99, 235, 0.4);
+        }
+
+        .dutchie-receive-btn:hover::before {
+            left: 100%;
+        }
+
+        .dutchie-process {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .dutchie-step {
+            background: linear-gradient(145deg, var(--surface-glass), var(--surface-elevated));
+            border: 1px solid var(--surface-border);
+            border-radius: var(--radius-lg);
+            padding: 40px;
+            backdrop-filter: blur(20px);
+            box-shadow: var(--shadow-soft);
+            position: relative;
+        }
+
+        .dutchie-header {
+            position: relative;
+            margin-bottom: 32px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid var(--surface-border);
+        }
+
+        .dutchie-back-btn {
+            position: absolute;
+            left: 0;
+            top: 0;
+            background: none;
+            border: none;
+            color: var(--accent);
+            font-size: 14px;
+            cursor: pointer;
+            padding: 8px 12px;
+            border-radius: var(--radius-sm);
+            transition: all 0.2s ease;
             font-weight: 500;
         }
 
-        /* Buttons */
+        .dutchie-back-btn:hover {
+            background: var(--accent-soft);
+            transform: translateX(-2px);
+        }
+
+        .dutchie-form-group {
+            margin-bottom: 24px;
+        }
+
+        .dutchie-label {
+            display: block;
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--text-primary);
+            margin-bottom: 8px;
+            letter-spacing: 0.01em;
+        }
+
+        .dutchie-input, .dutchie-select {
+            width: 100%;
+            padding: 14px 16px;
+            background: var(--bg-tertiary);
+            border: 1px solid var(--surface-border);
+            border-radius: var(--radius-sm);
+            color: var(--text-primary);
+            font-size: 14px;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            outline: none;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .dutchie-input:focus, .dutchie-select:focus {
+            border-color: var(--dutchie-blue);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .dutchie-input.auto-filled, .dutchie-select.auto-filled {
+            border-color: var(--accent);
+            box-shadow: 0 0 0 2px var(--accent-soft), var(--shadow-glow);
+            background: rgba(6, 182, 212, 0.05);
+            animation: glowPulse 2s ease-in-out infinite;
+        }
+
+        @keyframes glowPulse {
+            0%, 100% { box-shadow: 0 0 0 2px var(--accent-soft), var(--shadow-glow); }
+            50% { box-shadow: 0 0 0 3px var(--accent-soft), var(--shadow-intense); }
+        }
+
+        .dutchie-product-card {
+            background: var(--bg-tertiary);
+            border: 1px solid var(--surface-border);
+            border-radius: var(--radius-md);
+            padding: 24px;
+            margin-bottom: 24px;
+            transition: all 0.3s ease;
+        }
+
+        .dutchie-product-card.auto-filled {
+            border-color: var(--accent);
+            box-shadow: 0 0 0 1px var(--accent-soft), var(--shadow-glow);
+            background: linear-gradient(145deg, rgba(6, 182, 212, 0.03), rgba(6, 182, 212, 0.08));
+            animation: cardGlow 3s ease-in-out infinite;
+        }
+
+        @keyframes cardGlow {
+            0%, 100% { box-shadow: 0 0 0 1px var(--accent-soft), var(--shadow-glow); }
+            50% { box-shadow: 0 0 0 2px var(--accent-soft), var(--shadow-intense); }
+        }
+
+        .product-details {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        .product-info h4 {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 8px;
+        }
+
+        .product-info p {
+            font-size: 14px;
+            color: var(--text-secondary);
+            margin-bottom: 4px;
+        }
+
+        .product-batch {
+            text-align: right;
+        }
+
+        .batch-label {
+            font-size: 12px;
+            color: var(--text-muted);
+            display: block;
+            margin-bottom: 6px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .batch-value {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-primary);
+            background: var(--accent-soft);
+            padding: 6px 12px;
+            border-radius: var(--radius-sm);
+            border: 1px solid var(--accent);
+        }
+
+        .dutchie-summary {
+            background: var(--bg-tertiary);
+            border: 1px solid var(--surface-border);
+            border-radius: var(--radius-md);
+            padding: 24px;
+            margin-bottom: 32px;
+        }
+
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px solid var(--surface-border);
+        }
+
+        .summary-row:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+
+        .summary-label {
+            font-size: 14px;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        .summary-value {
+            font-size: 14px;
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+
+        .dutchie-actions {
+            display: flex;
+            gap: 16px;
+            justify-content: flex-end;
+            margin-top: 32px;
+            flex-wrap: wrap;
+        }
+
+        .dutchie-btn-primary, .dutchie-btn-secondary, .dutchie-btn-success {
+            padding: 12px 24px;
+            border-radius: var(--radius-sm);
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .dutchie-btn-primary {
+            background: var(--dutchie-blue);
+            color: white;
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);
+        }
+
+        .dutchie-btn-primary:hover {
+            background: var(--dutchie-blue-hover);
+            transform: translateY(-1px);
+            box-shadow: 0 6px 16px rgba(37, 99, 235, 0.3);
+        }
+
+        .dutchie-btn-secondary {
+            background: var(--surface-glass);
+            color: var(--text-primary);
+            border: 1px solid var(--surface-border);
+        }
+
+        .dutchie-btn-secondary:hover {
+            background: var(--surface-elevated);
+            transform: translateY(-1px);
+        }
+
+        .dutchie-btn-success {
+            background: var(--success);
+            color: white;
+            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.2);
+        }
+
+        .dutchie-btn-success:hover {
+            background: #059669;
+            transform: translateY(-1px);
+            box-shadow: 0 6px 16px rgba(16, 185, 129, 0.3);
+        }
+
+        .success-screen {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 400px;
+        }
+
+        /* Button System */
         .btn {
             padding: 12px 24px;
             border: none;
@@ -323,17 +696,35 @@
             font-weight: 500;
             font-size: 14px;
             cursor: pointer;
-            transition: all 0.15s ease;
+            transition: all 0.3s ease;
             background: var(--accent);
             color: white;
             display: inline-flex;
             align-items: center;
             gap: 8px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(6, 182, 212, 0.2);
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s ease;
         }
 
         .btn:hover {
             transform: translateY(-2px);
             box-shadow: 0 8px 24px rgba(6, 182, 212, 0.3);
+        }
+
+        .btn:hover::before {
+            left: 100%;
         }
 
         .btn:active {
@@ -344,10 +735,11 @@
             background: var(--surface-glass);
             color: var(--text-primary);
             border: 1px solid var(--surface-border);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
         }
 
         .btn-secondary:hover {
-            background: rgba(255, 255, 255, 0.06);
+            background: var(--surface-elevated);
             border-color: var(--accent-soft);
         }
 
@@ -356,19 +748,25 @@
             font-size: 16px;
         }
 
-        /* Status Indicators */
+        /* Status System */
         .status-indicator {
             position: fixed;
-            top: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            padding: 8px 16px;
+            top: 24px;
+            right: 24px;
+            padding: 12px 20px;
             border-radius: var(--radius-md);
             font-size: 12px;
             font-weight: 500;
             z-index: 1000;
-            backdrop-filter: blur(12px);
+            backdrop-filter: blur(20px);
             border: 1px solid var(--surface-border);
+            box-shadow: var(--shadow-soft);
+            animation: statusSlideIn 0.3s ease-out;
+        }
+
+        @keyframes statusSlideIn {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
         }
 
         .status-success {
@@ -388,69 +786,141 @@
             color: var(--text-secondary);
         }
 
-        /* Demo Badge */
+        /* Quality Indicators */
         .demo-badge {
             position: fixed;
-            bottom: 20px;
-            left: 20px;
-            background: var(--warning);
+            bottom: 24px;
+            left: 24px;
+            background: linear-gradient(135deg, var(--warning), #D97706);
             color: white;
             padding: 8px 16px;
             border-radius: 20px;
             font-size: 12px;
             font-weight: 600;
             z-index: 200;
+            box-shadow: 0 4px 16px rgba(245, 158, 11, 0.3);
+            animation: badgePulse 3s ease-in-out infinite;
         }
 
-        /* Mobile Responsive */
+        @keyframes badgePulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .info-panel {
+            text-align: center;
+            margin-top: 32px;
+            padding: 24px;
+            background: rgba(6, 182, 212, 0.05);
+            border-radius: var(--radius-lg);
+            border: 1px solid rgba(6, 182, 212, 0.1);
+        }
+
+        .info-panel-warning {
+            background: rgba(245, 158, 11, 0.05);
+            border-color: rgba(245, 158, 11, 0.1);
+        }
+
+        /* Mobile Optimization */
         @media (max-width: 768px) {
-            .hero-title {
-                font-size: 32px;
+            .tab-nav {
+                padding: 0 16px;
             }
-            .hero-subtitle {
-                font-size: 16px;
+
+            .nav-logo {
+                margin-right: 16px;
             }
-            .field-group {
-                grid-template-columns: 1fr;
+
+            .tab-button {
+                padding: 12px 16px;
+                font-size: 13px;
             }
+
+            .tab-content {
+                padding: 24px 16px;
+            }
+
+            .auth-container {
+                padding: 32px 24px;
+                margin: 0 16px;
+            }
+
+            .dutchie-step {
+                padding: 24px;
+            }
+
+            .dutchie-actions {
+                justify-content: stretch;
+            }
+
+            .dutchie-btn-primary, 
+            .dutchie-btn-secondary, 
+            .dutchie-btn-success {
+                flex: 1;
+                justify-content: center;
+            }
+
+            .product-details {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .product-batch {
+                text-align: center;
+            }
+
+            .status-indicator {
+                top: 16px;
+                right: 16px;
+                left: 16px;
+                text-align: center;
+            }
+        }
+
+        /* Performance Optimizations */
+        .tab-content:not(.active) {
+            visibility: hidden;
+            position: absolute;
+        }
+
+        .tab-content.active {
+            visibility: visible;
+            position: relative;
         }
     </style>
 </head>
 <body>
-    <!-- Demo Badge -->
-    <div class="demo-badge">DEVELOPER VERSION</div>
+    <!-- Quality Indicator -->
+    <div class="demo-badge">DEVELOPER BUILD</div>
 
-    <!-- Authentication Modal -->
+    <!-- Authentication System -->
     <div class="auth-modal" id="authModal">
         <div class="auth-container">
-            <img src="icon48.png" alt="Trakie Logo" class="auth-logo" style="width: 80px; height: 80px; border-radius: 16px;">
-            <h2 class="auth-title">Members Only</h2>
-            <p class="auth-subtitle">ENTER THE TOP SECRET PASSWORD</p>
-            
+            <img src="icon48.png" alt="Trakie Logo" class="auth-logo">
+            <h2 class="auth-title">Trakie Access</h2>
+            <p class="auth-subtitle">Members Only</p>
             <div class="password-field">
-                <input type="password" class="password-input" id="passwordInput" placeholder="Enter password">
-                <button class="password-toggle" onclick="togglePassword()">👁️</button>
+                <input type="password" class="password-input" id="passwordInput" placeholder="Enter Password">
+                <button class="password-toggle" id="togglePassword">👁</button>
             </div>
-            
-            <div class="auth-attempts" id="attemptsDisplay"></div>
-            <div class="auth-error" id="authError"></div>
-            
-            <button class="btn btn-large" onclick="authenticateUser()" style="width: 100%;">Access Trakie</button>
+            <div class="auth-attempts" id="authAttempts" style="display: none;"></div>
+            <div class="auth-error" id="authError" style="display: none;"></div>
+            <button class="btn btn-large" id="loginBtn">Access Platform</button>
         </div>
     </div>
 
     <!-- Main Application -->
     <div class="tab-container" id="mainApp" style="display: none;">
-        <!-- Tab Navigation -->
+        <!-- Navigation -->
         <nav class="tab-nav">
             <div class="nav-logo">
                 <img src="icon48.png" alt="Trakie">
             </div>
             <div class="tab-buttons">
-                <button class="tab-button active" onclick="switchTab('welcome')">Welcome</button>
-                <button class="tab-button" onclick="switchTab('camera')">Camera</button>
-                <button class="tab-button" onclick="switchTab('verify')">Verify</button>
-                <button class="tab-button" onclick="switchTab('pricing')">Pricing</button>
+                <button class="tab-button active" data-tab="welcome">Welcome</button>
+                <button class="tab-button" data-tab="camera">Camera</button>
+                <button class="tab-button" data-tab="verify">Verify</button>
+                <button class="tab-button" data-tab="pricing">Pricing</button>
             </div>
         </nav>
 
@@ -458,37 +928,11 @@
         <div class="tab-content active" id="welcome-tab">
             <div class="welcome-section">
                 <h1 class="hero-title">Cannabis Inventory Intelligence</h1>
-                <p class="hero-subtitle">Transform your dispensary operations with AI-powered inventory management</p>
+                <p class="hero-subtitle">Transform your dispensary operations with AI-powered OCR scanning</p>
                 
-                <div style="margin: 40px 0;">
-                    <button class="btn btn-large" onclick="switchTab('camera')">Start Scanning</button>
-                    <button class="btn btn-secondary btn-large" onclick="showDemo()" style="margin-left: 16px;">Watch Demo</button>
-                </div>
-
-                <div style="background: var(--surface-glass); border: 1px solid var(--surface-border); border-radius: var(--radius-lg); padding: 32px; margin-top: 40px;">
-                    <h3 style="margin-bottom: 16px;">How Trakie Works</h3>
-                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 24px; text-align: left;">
-                        <div>
-                            <h4 style="color: var(--accent); margin-bottom: 8px;">1. Capture</h4>
-                            <p style="color: var(--text-secondary); font-size: 14px;">Take photos of cannabis product labels with your phone</p>
-                        </div>
-                        <div>
-                            <h4 style="color: var(--accent); margin-bottom: 8px;">2. Extract</h4>
-                            <p style="color: var(--text-secondary); font-size: 14px;">AI reads THC%, batch numbers, and product details automatically</p>
-                        </div>
-                        <div>
-                            <h4 style="color: var(--accent); margin-bottom: 8px;">3. Verify</h4>
-                            <p style="color: var(--text-secondary); font-size: 14px;">Review extracted data with one-click confirmation</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div style="text-align: center; margin-top: 40px; padding: 20px; background: rgba(255, 107, 53, 0.1); border-radius: 12px; border: 1px solid rgba(255, 107, 53, 0.2);">
-                    <p style="color: var(--warning); font-weight: 600;">🚨 DEVELOPER VERSION</p>
-                    <p style="color: var(--text-secondary); font-size: 14px; margin-top: 8px;">
-                        This version uses dummy OCR processing for development testing. 
-                        Real cannabis parsing algorithms are implemented separately for security.
-                    </p>
+                <div class="info-panel">
+                    <h3>Development Version</h3>
+                    <p>Full UI/UX functionality with simulated OCR processing for testing</p>
                 </div>
             </div>
         </div>
@@ -496,179 +940,315 @@
         <!-- Tab 2: Camera -->
         <div class="tab-content" id="camera-tab">
             <div class="camera-section">
-                <h2 style="text-align: center; margin-bottom: 32px;">Capture Product Labels</h2>
-                
+                <!-- QR Code Section -->
+                <div class="qr-section">
+                    <h3>Quick Connect QR</h3>
+                    <div class="qr-container" id="qrContainer"></div>
+                    <button class="btn btn-secondary" onclick="copyQRLink()">Copy Link</button>
+                </div>
+
+                <!-- Camera Interface -->
                 <div class="camera-interface">
                     <div class="camera-feed" id="cameraFeed">
-                        <div style="color: var(--text-muted); text-align: center;">
-                            Camera will appear here
+                        <video id="video" style="display: none;"></video>
+                        <canvas id="canvas" style="display: none;"></canvas>
+                        <div id="cameraPlaceholder">
+                            <p>Camera feed will appear here</p>
                         </div>
                     </div>
                     <div class="camera-controls">
-                        <button class="btn" id="startCameraBtn" onclick="startCamera()">Start Camera</button>
-                        <button class="btn" id="captureBtn" onclick="capturePhoto()" style="display: none;">Capture</button>
-                        <button class="btn btn-secondary" id="switchCameraBtn" onclick="switchCamera()" style="display: none;">Switch</button>
+                        <button class="btn" id="startCameraBtn">Start Camera</button>
+                        <button class="btn" id="captureBtn" style="display: none;">Capture Image</button>
+                        <button class="btn btn-secondary" id="stopCameraBtn" style="display: none;">Stop Camera</button>
                     </div>
-                </div>
-
-                <div style="text-align: center; margin-top: 20px; padding: 16px; background: rgba(6, 182, 212, 0.1); border-radius: 12px; border: 1px solid rgba(6, 182, 212, 0.2);">
-                    <p style="color: var(--accent); font-weight: 600;">📸 Developer Testing Mode</p>
-                    <p style="color: var(--text-secondary); font-size: 14px; margin-top: 8px;">
-                        Camera interface fully functional. OCR processing uses demo data for UI/UX testing.
-                    </p>
                 </div>
             </div>
         </div>
 
-        <!-- Tab 3: Verification -->
+        <!-- Tab 3: Verify (Dutchie Replica) -->
         <div class="tab-content" id="verify-tab">
             <div class="verification-section">
-                <h2 style="text-align: center; margin-bottom: 32px;">Verify Extracted Data</h2>
-                
-                <div class="ocr-results" id="ocrResults" style="display: none;">
-                    <h3 style="margin-bottom: 20px;">Extracted Information</h3>
-                    <div class="field-group" id="extractedFields">
-                        <!-- OCR results will be populated here -->
-                    </div>
-                    <div style="text-align: center;">
-                        <button class="btn btn-large" onclick="confirmAllData()">Confirm All Data</button>
-                        <button class="btn btn-secondary btn-large" onclick="retakePhoto()" style="margin-left: 16px;">Retake Photo</button>
+                <!-- Initial Receive Screen -->
+                <div id="receiveScreen" class="receive-screen">
+                    <div class="receive-container">
+                        <h2 style="margin-bottom: 32px; color: var(--text-primary);">Inventory Receiving</h2>
+                        <button class="dutchie-receive-btn" onclick="startDutchieProcess()">Receive</button>
                     </div>
                 </div>
 
-                <div style="text-align: center; color: var(--text-muted);" id="noDataMessage">
-                    No data to verify. Please capture a photo first.
+                <!-- Dutchie Process Steps -->
+                <div id="dutchieProcess" class="dutchie-process" style="display: none;">
+                    <!-- Step 1: Vendor Selection -->
+                    <div id="dutchieStep1" class="dutchie-step">
+                        <div class="dutchie-header">
+                            <button class="dutchie-back-btn" onclick="backToReceive()">← Back</button>
+                            <h2 style="text-align: center; color: var(--text-primary);">Select Vendor & PO</h2>
+                        </div>
+                        
+                        <div class="dutchie-form-group">
+                            <label class="dutchie-label">Vendor</label>
+                            <select class="dutchie-select">
+                                <option value="">Select vendor...</option>
+                                <option value="green-valley">Green Valley Farms</option>
+                                <option value="premium-harvest">Premium Harvest Co.</option>
+                                <option value="organic-gardens">Organic Gardens LLC</option>
+                                <option value="mountain-grown">Mountain Grown Cannabis</option>
+                            </select>
+                        </div>
+
+                        <div class="dutchie-form-group">
+                            <label class="dutchie-label">Purchase Order Number</label>
+                            <input type="text" class="dutchie-input" placeholder="Enter PO number">
+                        </div>
+
+                        <div class="dutchie-actions">
+                            <button class="dutchie-btn-primary" onclick="goToStep2()">Continue</button>
+                        </div>
+                    </div>
+
+                    <!-- Step 2: Product Verification -->
+                    <div id="dutchieStep2" class="dutchie-step" style="display: none;">
+                        <div class="dutchie-header">
+                            <button class="dutchie-back-btn" onclick="goToStep1()">← Back</button>
+                            <h2 style="text-align: center; color: var(--text-primary);">Verify Products</h2>
+                        </div>
+
+                        <div class="dutchie-product-card auto-filled" id="productCard">
+                            <div class="product-details">
+                                <div class="product-info">
+                                    <h4 id="productName">Loading...</h4>
+                                    <p>THC: <span id="productTHC">--</span></p>
+                                    <p>CBD: <span id="productCBD">--</span></p>
+                                    <p>Weight: <span id="productWeight">--</span></p>
+                                </div>
+                                <div class="product-batch">
+                                    <span class="batch-label">Batch</span>
+                                    <span class="batch-value" id="productBatch">--</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="dutchie-form-group">
+                            <label class="dutchie-label">Quantity Received</label>
+                            <input type="number" class="dutchie-input auto-filled" id="quantityInput" placeholder="Enter quantity">
+                        </div>
+
+                        <div class="dutchie-form-group">
+                            <label class="dutchie-label">Expiration Date</label>
+                            <input type="date" class="dutchie-input" id="expirationInput">
+                        </div>
+
+                        <div class="dutchie-actions">
+                            <button class="dutchie-btn-secondary" onclick="goToStep1()">Previous</button>
+                            <button class="dutchie-btn-primary" onclick="goToStep3()">Review</button>
+                        </div>
+                    </div>
+
+                    <!-- Step 3: Summary -->
+                    <div id="dutchieStep3" class="dutchie-step" style="display: none;">
+                        <div class="dutchie-header">
+                            <button class="dutchie-back-btn" onclick="goToStep2()">← Back</button>
+                            <h2 style="text-align: center; color: var(--text-primary);">Receiving Summary</h2>
+                        </div>
+
+                        <div class="dutchie-summary">
+                            <div class="summary-row">
+                                <span class="summary-label">Vendor</span>
+                                <span class="summary-value" id="summaryVendor">--</span>
+                            </div>
+                            <div class="summary-row">
+                                <span class="summary-label">PO Number</span>
+                                <span class="summary-value" id="summaryPO">--</span>
+                            </div>
+                            <div class="summary-row">
+                                <span class="summary-label">Product</span>
+                                <span class="summary-value" id="summaryProduct">--</span>
+                            </div>
+                            <div class="summary-row">
+                                <span class="summary-label">Batch</span>
+                                <span class="summary-value" id="summaryBatch">--</span>
+                            </div>
+                            <div class="summary-row">
+                                <span class="summary-label">Quantity</span>
+                                <span class="summary-value" id="summaryQuantity">--</span>
+                            </div>
+                        </div>
+
+                        <div class="dutchie-actions">
+                            <button class="dutchie-btn-secondary" onclick="goToStep2()">Edit</button>
+                            <button class="dutchie-btn-success" onclick="completeReceiving()">Complete Receiving</button>
+                        </div>
+                    </div>
+
+                    <!-- Success Screen -->
+                    <div id="successScreen" class="success-screen" style="display: none;">
+                        <div class="receive-container">
+                            <h2 style="color: var(--success); margin-bottom: 24px;">✓ Receiving Complete</h2>
+                            <p style="color: var(--text-secondary); margin-bottom: 32px;">Products successfully added to inventory</p>
+                            <button class="dutchie-receive-btn" onclick="startDutchieProcess()">Receive Another</button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
 
         <!-- Tab 4: Pricing -->
         <div class="tab-content" id="pricing-tab">
-            <div style="max-width: 800px; margin: 0 auto; text-align: center;">
-                <h2 style="margin-bottom: 32px;">Choose Your Plan</h2>
-                <p style="color: var(--text-secondary); margin-bottom: 40px;">Coming soon - flexible pricing for dispensaries of all sizes</p>
+            <div class="welcome-section">
+                <h2 class="hero-title">Enterprise Pricing</h2>
+                <p class="hero-subtitle">Contact for custom pricing tailored to your dispensary needs</p>
+                
+                <div class="info-panel info-panel-warning">
+                    <h3>Currently in Development</h3>
+                    <p>Pricing structure being optimized for cannabis retail operations</p>
+                </div>
             </div>
         </div>
     </div>
 
     <script>
-        // Global state
+        // State Management
+        let authAttempts = 0;
+        let currentOCRData = null;
         let cameraStream = null;
-        let currentFacingMode = 'environment';
-        let currentTab = 'welcome';
-        let attempts = 0;
-        const maxAttempts = 3;
-        const correctPassword = "PasswordBoss123!";
+        let dutchieData = {
+            vendor: '',
+            poNumber: '',
+            product: {},
+            quantity: 0,
+            expiration: ''
+        };
 
-        // Authentication
-        function togglePassword() {
-            const input = document.getElementById('passwordInput');
-            const toggle = document.querySelector('.password-toggle');
-            
-            if (input.type === 'password') {
-                input.type = 'text';
-                toggle.textContent = '🙈';
-            } else {
-                input.type = 'password';
-                toggle.textContent = '👁️';
-            }
-        }
+        // Authentication System
+        const CORRECT_PASSWORD = 'PasswordBoss123!';
 
-        function authenticateUser() {
+        function authenticate() {
             const password = document.getElementById('passwordInput').value;
-            const errorDiv = document.getElementById('authError');
-            const attemptsDiv = document.getElementById('attemptsDisplay');
             
-            if (password === correctPassword) {
+            if (password === CORRECT_PASSWORD) {
                 document.getElementById('authModal').style.display = 'none';
-                document.getElementById('mainApp').style.display = 'block';
-                showStatus('Welcome to Trakie Developer Environment!', 'success');
-                return;
-            }
-            
-            attempts++;
-            if (attempts >= maxAttempts) {
-                errorDiv.textContent = 'Maximum attempts exceeded. Access denied.';
-                document.querySelector('.password-input').disabled = true;
-                document.querySelector('.btn').disabled = true;
-                return;
-            }
-            
-            errorDiv.textContent = 'Incorrect password. Please try again.';
-            attemptsDiv.textContent = `${maxAttempts - attempts} attempts remaining`;
-            document.getElementById('passwordInput').value = '';
-            document.getElementById('passwordInput').focus();
-        }
-
-        // Tab Management
-        function switchTab(tabName) {
-            document.querySelectorAll('.tab-button').forEach(btn => btn.classList.remove('active'));
-            event.target.classList.add('active');
-            
-            document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
-            document.getElementById(`${tabName}-tab`).classList.add('active');
-            
-            currentTab = tabName;
-        }
-
-        // Camera Functions
-        async function startCamera() {
-            try {
-                const cameraFeed = document.getElementById('cameraFeed');
-                cameraFeed.innerHTML = '<div style="color: var(--accent); text-align: center; padding: 40px;">Initializing camera...</div>';
-
-                const constraints = {
-                    video: {
-                        facingMode: currentFacingMode,
-                        width: { ideal: 1920, min: 1280 },
-                        height: { ideal: 1080, min: 720 },
-                        frameRate: { ideal: 30, min: 15 }
-                    }
-                };
-
-                cameraStream = await navigator.mediaDevices.getUserMedia(constraints);
+                document.getElementById('mainApp').style.display = 'flex';
+                initializeApp();
+            } else {
+                authAttempts++;
+                document.getElementById('authError').style.display = 'block';
+                document.getElementById('authError').textContent = 'Invalid password';
                 
-                const video = document.createElement('video');
-                video.srcObject = cameraStream;
-                video.autoplay = true;
-                video.playsInline = true;
-                video.muted = true;
-                video.style.width = '100%';
-                video.style.borderRadius = '12px';
-                video.style.transform = currentFacingMode === 'user' ? 'scaleX(-1)' : 'none';
-                
-                video.onloadedmetadata = () => {
-                    showStatus(`Camera ready: ${video.videoWidth}x${video.videoHeight}`, 'success');
-                };
-                
-                cameraFeed.innerHTML = '';
-                cameraFeed.appendChild(video);
-                
-                document.getElementById('startCameraBtn').style.display = 'none';
-                document.getElementById('captureBtn').style.display = 'inline-block';
-                document.getElementById('switchCameraBtn').style.display = 'inline-block';
-                
-            } catch (error) {
-                console.error('Camera error:', error);
-                let errorMessage = 'Camera access required for Trakie to work.';
-                
-                if (error.name === 'NotAllowedError') {
-                    errorMessage = 'Camera permission denied. Please allow camera access and refresh.';
-                } else if (error.name === 'NotFoundError') {
-                    errorMessage = 'No camera found. Please check your device.';
-                } else if (error.name === 'NotReadableError') {
-                    errorMessage = 'Camera is being used by another application.';
+                if (authAttempts >= 3) {
+                    document.getElementById('authAttempts').style.display = 'block';
+                    document.getElementById('authAttempts').textContent = `${authAttempts} attempts made`;
                 }
                 
-                showStatus(errorMessage, 'error');
-                document.getElementById('cameraFeed').innerHTML = `<div style="color: var(--error); text-align: center; padding: 40px;">${errorMessage}</div>`;
+                document.getElementById('passwordInput').value = '';
             }
         }
 
-        function switchCamera() {
-            currentFacingMode = currentFacingMode === 'environment' ? 'user' : 'environment';
-            stopCamera();
-            startCamera();
+        // Password Toggle
+        document.getElementById('togglePassword').addEventListener('click', function() {
+            const passwordInput = document.getElementById('passwordInput');
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                this.textContent = '👁‍🗨';
+            } else {
+                passwordInput.type = 'password';
+                this.textContent = '👁';
+            }
+        });
+
+        // Login Button
+        document.getElementById('loginBtn').addEventListener('click', authenticate);
+        document.getElementById('passwordInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') authenticate();
+        });
+
+        // Tab Navigation
+        document.querySelectorAll('.tab-button').forEach(button => {
+            button.addEventListener('click', function() {
+                const tabName = this.getAttribute('data-tab');
+                switchTab(tabName);
+            });
+        });
+
+        function switchTab(tabName) {
+            // Update buttons
+            document.querySelectorAll('.tab-button').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            document.querySelector(`[data-tab="${tabName}"]`).classList.add('active');
+            
+            // Update content
+            document.querySelectorAll('.tab-content').forEach(content => {
+                content.classList.remove('active');
+            });
+            document.getElementById(`${tabName}-tab`).classList.add('active');
+        }
+
+        // Initialize App
+        function initializeApp() {
+            generateQRCode();
+            setupCameraHandlers();
+        }
+
+        // QR Code Generation
+        function generateQRCode() {
+            const qrContainer = document.getElementById('qrContainer');
+            qrContainer.innerHTML = '';
+            
+            const sessionId = Math.random().toString(36).substring(7);
+            const qrUrl = `${window.location.origin}?session=${sessionId}`;
+            
+            if (typeof QRCode !== 'undefined') {
+                new QRCode(qrContainer, {
+                    text: qrUrl,
+                    width: 200,
+                    height: 200,
+                    colorDark: '#0A0E13',
+                    colorLight: '#FFFFFF',
+                    correctLevel: QRCode.CorrectLevel.H
+                });
+            } else {
+                qrContainer.innerHTML = '<p>QR Library Loading...</p>';
+            }
+        }
+
+        function copyQRLink() {
+            const sessionId = Math.random().toString(36).substring(7);
+            const qrUrl = `${window.location.origin}?session=${sessionId}`;
+            navigator.clipboard.writeText(qrUrl);
+            showStatus('Link copied to clipboard', 'success');
+        }
+
+        // Camera Handlers
+        function setupCameraHandlers() {
+            document.getElementById('startCameraBtn').addEventListener('click', startCamera);
+            document.getElementById('captureBtn').addEventListener('click', captureImage);
+            document.getElementById('stopCameraBtn').addEventListener('click', stopCamera);
+        }
+
+        async function startCamera() {
+            try {
+                const video = document.getElementById('video');
+                const stream = await navigator.mediaDevices.getUserMedia({ 
+                    video: { facingMode: 'environment' } 
+                });
+                
+                video.srcObject = stream;
+                video.style.display = 'block';
+                video.play();
+                
+                cameraStream = stream;
+                
+                document.getElementById('cameraPlaceholder').style.display = 'none';
+                document.getElementById('cameraFeed').classList.add('active');
+                document.getElementById('startCameraBtn').style.display = 'none';
+                document.getElementById('captureBtn').style.display = 'inline-flex';
+                document.getElementById('stopCameraBtn').style.display = 'inline-flex';
+                
+                showStatus('Camera activated', 'success');
+            } catch (err) {
+                showStatus('Camera access denied', 'error');
+                console.error('Camera error:', err);
+            }
         }
 
         function stopCamera() {
@@ -676,310 +1256,183 @@
                 cameraStream.getTracks().forEach(track => track.stop());
                 cameraStream = null;
             }
+            
+            document.getElementById('video').style.display = 'none';
+            document.getElementById('cameraPlaceholder').style.display = 'flex';
+            document.getElementById('cameraFeed').classList.remove('active');
+            document.getElementById('startCameraBtn').style.display = 'inline-flex';
+            document.getElementById('captureBtn').style.display = 'none';
+            document.getElementById('stopCameraBtn').style.display = 'none';
         }
 
-        function capturePhoto() {
-            const video = document.querySelector('#cameraFeed video');
-            if (!video) {
-                showStatus('No camera feed available', 'error');
-                return;
-            }
-
-            // Visual feedback
-            const flash = document.createElement('div');
-            flash.style.cssText = `
-                position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-                background: white; opacity: 0.8; z-index: 9999; pointer-events: none;
-            `;
-            document.body.appendChild(flash);
-            setTimeout(() => flash.remove(), 150);
-
-            showStatus('Photo captured - Processing with demo OCR...', 'info');
-
-            const canvas = document.createElement('canvas');
+        async function captureImage() {
+            const video = document.getElementById('video');
+            const canvas = document.getElementById('canvas');
+            const context = canvas.getContext('2d');
+            
             canvas.width = video.videoWidth;
             canvas.height = video.videoHeight;
+            context.drawImage(video, 0, 0, canvas.width, canvas.height);
             
-            const ctx = canvas.getContext('2d');
-            if (currentFacingMode === 'user') {
-                ctx.scale(-1, 1);
-                ctx.drawImage(video, -canvas.width, 0);
-            } else {
-                ctx.drawImage(video, 0, 0);
-            }
+            showStatus('Processing image...', 'info');
             
-            canvas.toBlob((blob) => {
-                processImageWithDummyOCR(blob);
-            }, 'image/jpeg', 0.9);
+            // Simulate OCR processing
+            await simulateOCRProcessing();
+            
+            // Switch to verify tab with Dutchie process
+            switchTab('verify');
+            populateDutchieData();
         }
 
-        // DUMMY OCR PROCESSING - SAFE FOR DEVELOPER TESTING
-        async function processImageWithDummyOCR(imageBlob) {
-            try {
-                showStatus('Demo: Processing image with OCR...', 'info');
-                
-                // Simulate realistic OCR processing time
-                await new Promise(resolve => setTimeout(resolve, 2000));
-                
-                showStatus('Demo: OCR Progress 75%...', 'info');
-                await new Promise(resolve => setTimeout(resolve, 1000));
-                
-                // Generate realistic demo data
-                const extractedData = generateDemoCannabisData();
-                displayOCRResults(extractedData);
-                
-                // Switch to verification tab
-                switchTab('verify');
-                
-                showStatus('Demo: OCR processing complete!', 'success');
-                
-            } catch (error) {
-                console.error('Demo OCR Error:', error);
-                showStatus('Demo: OCR processing failed. Please try again.', 'error');
-            }
-        }
-
-        // DUMMY CANNABIS DATA GENERATOR - REPLACES REAL PARSING
-        function generateDemoCannabisData() {
-            const brands = ['Green Thumb Industries', 'Curaleaf', 'Trulieve', 'Cresco Labs', 'Verano'];
-            const products = ['Purple Punch', 'Wedding Cake', 'Blue Dream', 'OG Kush', 'Gelato #33'];
-            const weights = ['1g', '3.5g', '7g', '14g', '28g'];
+        // Simulated OCR Processing
+        async function simulateOCRProcessing() {
+            await new Promise(resolve => setTimeout(resolve, 2000));
             
-            const randomBrand = brands[Math.floor(Math.random() * brands.length)];
-            const randomProduct = products[Math.floor(Math.random() * products.length)];
-            const randomWeight = weights[Math.floor(Math.random() * weights.length)];
-            const randomTHC = (15 + Math.random() * 20).toFixed(1);
-            const randomCBD = (0.1 + Math.random() * 3).toFixed(1);
-            const randomBatch = 'DEMO' + Math.random().toString(36).substr(2, 6).toUpperCase();
+            // Generate realistic demo data
+            const brands = ['Green Valley OG', 'Purple Haze Premium', 'Blue Dream Select', 'Sour Diesel Elite'];
+            const thcValues = ['18.5%', '22.3%', '25.8%', '19.7%', '23.1%'];
+            const cbdValues = ['0.5%', '1.2%', '0.8%', '2.1%', '0.3%'];
+            const weights = ['3.5g', '7g', '14g', '28g'];
             
-            return {
-                brand: randomBrand,
-                product: randomProduct,
-                thc: randomTHC + '%',
-                cbd: randomCBD + '%',
-                batch: randomBatch,
-                weight: randomWeight
+            currentOCRData = {
+                brand: brands[Math.floor(Math.random() * brands.length)],
+                product: 'Premium Flower',
+                thc: thcValues[Math.floor(Math.random() * thcValues.length)],
+                cbd: cbdValues[Math.floor(Math.random() * cbdValues.length)],
+                batch: 'B' + Math.random().toString(36).substring(2, 8).toUpperCase(),
+                weight: weights[Math.floor(Math.random() * weights.length)],
+                harvest_date: '2025-08-15',
+                test_date: '2025-09-01'
             };
-        }
-
-        function displayOCRResults(data) {
-            const resultsDiv = document.getElementById('ocrResults');
-            const fieldsDiv = document.getElementById('extractedFields');
-            const noDataDiv = document.getElementById('noDataMessage');
             
-            fieldsDiv.innerHTML = '';
-            
-            Object.entries(data).forEach(([key, value]) => {
-                if (value) {
-                    const fieldDiv = document.createElement('div');
-                    fieldDiv.className = 'field-item';
-                    fieldDiv.innerHTML = `
-                        <div class="field-label">${key.toUpperCase()}</div>
-                        <div class="field-value">${value}</div>
-                    `;
-                    fieldsDiv.appendChild(fieldDiv);
-                }
-            });
-            
-            resultsDiv.style.display = 'block';
-            noDataDiv.style.display = 'none';
+            showStatus('OCR processing complete', 'success');
         }
 
-        function confirmAllData() {
-            showStatus('Demo: Data confirmed! Export functionality ready.', 'success');
-        }
-
-        function retakePhoto() {
-            switchTab('camera');
-            document.getElementById('ocrResults').style.display = 'none';
-            document.getElementById('noDataMessage').style.display = 'block';
-        }
-
-        function showDemo() {
-            showStatus('Demo video coming soon!', 'info');
-        }
-
-        // Utility Functions
-        function showStatus(message, type = 'info') {
-            const existing = document.querySelector('.status-indicator');
-            if (existing) existing.remove();
-            
-            const statusDiv = document.createElement('div');
-            statusDiv.className = `status-indicator status-${type}`;
-            statusDiv.textContent = message;
-            document.body.appendChild(statusDiv);
-            
-            if (type !== 'error') {
-                setTimeout(() => statusDiv.remove(), 4000);
-            }
-        }
-
-        // Dutchie Receiving Process Functions
-        let currentStep = 1;
-        let receivingData = {};
-
-        function startReceiveProcess() {
+        // Dutchie Process Functions
+        function startDutchieProcess() {
             document.getElementById('receiveScreen').style.display = 'none';
             document.getElementById('dutchieProcess').style.display = 'block';
-            showStep(1);
+            document.getElementById('successScreen').style.display = 'none';
+            goToStep1();
         }
 
-        function nextStep(step) {
-            // Validate current step data
-            if (step === 2) {
-                const vendor = document.getElementById('vendorSelect').value;
-                const po = document.getElementById('poNumber').value;
-                
-                if (!vendor) {
-                    showStatus('Please select a vendor', 'error');
-                    return;
-                }
-                
-                receivingData.vendor = vendor;
-                receivingData.po = po;
-                
-                // Populate step 2 with OCR data if available
-                populateProductData();
-            } else if (step === 3) {
-                const quantity = document.getElementById('quantityReceived').value;
-                const expiration = document.getElementById('expirationDate').value;
-                
-                if (!quantity || quantity < 1) {
-                    showStatus('Please enter a valid quantity', 'error');
-                    return;
-                }
-                
-                receivingData.quantity = quantity;
-                receivingData.expiration = expiration;
-                
-                // Populate summary
-                populateSummary();
+        function backToReceive() {
+            document.getElementById('receiveScreen').style.display = 'flex';
+            document.getElementById('dutchieProcess').style.display = 'none';
+        }
+
+        function goToStep1() {
+            document.getElementById('dutchieStep1').style.display = 'block';
+            document.getElementById('dutchieStep2').style.display = 'none';
+            document.getElementById('dutchieStep3').style.display = 'none';
+        }
+
+        function goToStep2() {
+            const vendorSelect = document.querySelector('#dutchieStep1 .dutchie-select');
+            const poInput = document.querySelector('#dutchieStep1 .dutchie-input');
+            
+            if (!vendorSelect.value || !poInput.value) {
+                showStatus('Please fill all required fields', 'error');
+                return;
             }
             
-            hideStep(currentStep);
-            currentStep = step;
-            showStep(step);
-        }
-
-        function prevStep(step) {
-            hideStep(currentStep);
-            currentStep = step;
-            showStep(step);
-        }
-
-        function showStep(step) {
-            document.getElementById(`step${step}`).style.display = 'block';
-        }
-
-        function hideStep(step) {
-            document.getElementById(`step${step}`).style.display = 'none';
+            dutchieData.vendor = vendorSelect.options[vendorSelect.selectedIndex].text;
+            dutchieData.poNumber = poInput.value;
+            
+            document.getElementById('dutchieStep1').style.display = 'none';
+            document.getElementById('dutchieStep2').style.display = 'block';
+            
+            populateProductData();
         }
 
         function populateProductData() {
-            // Use the latest OCR data if available, otherwise use demo data
-            const demoData = generateDemoCannabisData();
-            
-            document.getElementById('productName').textContent = demoData.product;
-            document.getElementById('productBrand').textContent = demoData.brand;
-            document.getElementById('productDetails').textContent = `${demoData.weight} | ${demoData.thc} THC | ${demoData.cbd} CBD`;
-            document.getElementById('batchNumber').textContent = demoData.batch;
-            
-            // Store product data
-            receivingData.product = demoData;
-        }
-
-        function populateSummary() {
-            document.getElementById('summaryVendor').textContent = getVendorName(receivingData.vendor);
-            document.getElementById('summaryProduct').textContent = `${receivingData.product.product} - ${receivingData.product.weight}`;
-            document.getElementById('summaryBatch').textContent = receivingData.product.batch;
-            document.getElementById('summaryQuantity').textContent = receivingData.quantity;
-            document.getElementById('summaryExpiration').textContent = receivingData.expiration || 'Not specified';
-        }
-
-        function getVendorName(vendorId) {
-            const vendors = {
-                'green-thumb': 'Green Thumb Industries',
-                'curaleaf': 'Curaleaf',
-                'trulieve': 'Trulieve Cannabis Corp',
-                'cresco': 'Cresco Labs',
-                'verano': 'Verano Holdings'
-            };
-            return vendors[vendorId] || vendorId;
-        }
-
-        function completeReceiving() {
-            document.getElementById('dutchieProcess').style.display = 'none';
-            document.getElementById('successScreen').style.display = 'block';
-            showStatus('Product successfully received into inventory!', 'success');
-        }
-
-        function resetReceiving() {
-            document.getElementById('successScreen').style.display = 'none';
-            document.getElementById('receiveScreen').style.display = 'block';
-            
-            // Reset form data
-            currentStep = 1;
-            receivingData = {};
-            document.getElementById('vendorSelect').value = '';
-            document.getElementById('poNumber').value = '';
-            document.getElementById('quantityReceived').value = '1';
-            document.getElementById('expirationDate').value = '';
-        }
-
-        // Initialize
-        document.addEventListener('DOMContentLoaded', function() {
-            document.getElementById('passwordInput').addEventListener('keypress', function(e) {
-                if (e.key === 'Enter') {
-                    authenticateUser();
-                }
-            });
-            
-            // Generate QR code on page load
-            setTimeout(() => {
-                generateQRCode();
-            }, 1000);
-        });
-
-        // Copy QR Link Function
-        function copyQRLink() {
-            const sessionId = 'TRK' + Date.now().toString(36).toUpperCase();
-            const qrUrl = `${window.location.origin}?session=${sessionId}`;
-            
-            if (navigator.clipboard) {
-                navigator.clipboard.writeText(qrUrl).then(() => {
-                    showStatus('QR link copied to clipboard!', 'success');
-                }).catch(() => {
-                    showStatus('Failed to copy link', 'error');
-                });
-            } else {
-                showStatus('Clipboard not available', 'error');
+            if (currentOCRData) {
+                document.getElementById('productName').textContent = currentOCRData.brand;
+                document.getElementById('productTHC').textContent = currentOCRData.thc;
+                document.getElementById('productCBD').textContent = currentOCRData.cbd;
+                document.getElementById('productWeight').textContent = currentOCRData.weight;
+                document.getElementById('productBatch').textContent = currentOCRData.batch;
+                
+                // Add glow effect to auto-filled data
+                document.getElementById('productCard').classList.add('auto-filled');
+                document.getElementById('quantityInput').classList.add('auto-filled');
             }
         }
 
-        // Auto-switch to verify tab after OCR
-        function displayOCRResults(data) {
-            // Store OCR data globally for Dutchie integration
-            window.latestOCRData = data;
+        function goToStep3() {
+            const quantityInput = document.getElementById('quantityInput');
+            const expirationInput = document.getElementById('expirationInput');
             
-            // Switch to verify tab and start Dutchie process
-            switchTab('verify');
-            setTimeout(() => {
-                startReceiveProcess();
-                showStatus('OCR complete - Starting Dutchie receiving process', 'success');
-            }, 500);
+            if (!quantityInput.value || !expirationInput.value) {
+                showStatus('Please fill all required fields', 'error');
+                return;
+            }
+            
+            dutchieData.quantity = quantityInput.value;
+            dutchieData.expiration = expirationInput.value;
+            
+            // Populate summary
+            document.getElementById('summaryVendor').textContent = dutchieData.vendor;
+            document.getElementById('summaryPO').textContent = dutchieData.poNumber;
+            document.getElementById('summaryProduct').textContent = currentOCRData ? currentOCRData.brand : 'Demo Product';
+            document.getElementById('summaryBatch').textContent = currentOCRData ? currentOCRData.batch : 'DEMO123';
+            document.getElementById('summaryQuantity').textContent = dutchieData.quantity + ' units';
+            
+            document.getElementById('dutchieStep2').style.display = 'none';
+            document.getElementById('dutchieStep3').style.display = 'block';
         }
 
-        // Initialize
-        document.addEventListener('DOMContentLoaded', function() {
-            document.getElementById('passwordInput').addEventListener('keypress', function(e) {
-                if (e.key === 'Enter') {
-                    authenticateUser();
-                }
-            });
-        });
+        function completeReceiving() {
+            document.getElementById('dutchieStep3').style.display = 'none';
+            document.getElementById('successScreen').style.display = 'flex';
+            
+            showStatus('Products successfully received into inventory', 'success');
+            
+            // Reset data for next receiving
+            currentOCRData = null;
+            dutchieData = {
+                vendor: '',
+                poNumber: '',
+                product: {},
+                quantity: 0,
+                expiration: ''
+            };
+        }
 
-        // Cleanup
-        window.addEventListener('beforeunload', stopCamera);
+        function populateDutchieData() {
+            if (currentOCRData) {
+                // Auto-populate product data when coming from camera
+                setTimeout(() => {
+                    startDutchieProcess();
+                }, 500);
+            }
+        }
+
+        // Status Notifications
+        function showStatus(message, type) {
+            const existingStatus = document.querySelector('.status-indicator');
+            if (existingStatus) {
+                existingStatus.remove();
+            }
+            
+            const status = document.createElement('div');
+            status.className = `status-indicator status-${type}`;
+            status.textContent = message;
+            document.body.appendChild(status);
+            
+            setTimeout(() => {
+                status.remove();
+            }, 3000);
+        }
+
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            // Check for session parameter
+            const urlParams = new URLSearchParams(window.location.search);
+            if (urlParams.has('session')) {
+                showStatus('Connected via QR code', 'success');
+            }
+        });
     </script>
 </body>
 </html>
