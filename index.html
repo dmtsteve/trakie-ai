@@ -814,6 +814,128 @@
             }
         }
 
+        // Dutchie Receiving Process Functions
+        let currentStep = 1;
+        let receivingData = {};
+
+        function startReceiveProcess() {
+            document.getElementById('receiveScreen').style.display = 'none';
+            document.getElementById('dutchieProcess').style.display = 'block';
+            showStep(1);
+        }
+
+        function nextStep(step) {
+            // Validate current step data
+            if (step === 2) {
+                const vendor = document.getElementById('vendorSelect').value;
+                const po = document.getElementById('poNumber').value;
+                
+                if (!vendor) {
+                    showStatus('Please select a vendor', 'error');
+                    return;
+                }
+                
+                receivingData.vendor = vendor;
+                receivingData.po = po;
+                
+                // Populate step 2 with OCR data if available
+                populateProductData();
+            } else if (step === 3) {
+                const quantity = document.getElementById('quantityReceived').value;
+                const expiration = document.getElementById('expirationDate').value;
+                
+                if (!quantity || quantity < 1) {
+                    showStatus('Please enter a valid quantity', 'error');
+                    return;
+                }
+                
+                receivingData.quantity = quantity;
+                receivingData.expiration = expiration;
+                
+                // Populate summary
+                populateSummary();
+            }
+            
+            hideStep(currentStep);
+            currentStep = step;
+            showStep(step);
+        }
+
+        function prevStep(step) {
+            hideStep(currentStep);
+            currentStep = step;
+            showStep(step);
+        }
+
+        function showStep(step) {
+            document.getElementById(`step${step}`).style.display = 'block';
+        }
+
+        function hideStep(step) {
+            document.getElementById(`step${step}`).style.display = 'none';
+        }
+
+        function populateProductData() {
+            // Use the latest OCR data if available, otherwise use demo data
+            const demoData = generateDemoCannabisData();
+            
+            document.getElementById('productName').textContent = demoData.product;
+            document.getElementById('productBrand').textContent = demoData.brand;
+            document.getElementById('productDetails').textContent = `${demoData.weight} | ${demoData.thc} THC | ${demoData.cbd} CBD`;
+            document.getElementById('batchNumber').textContent = demoData.batch;
+            
+            // Store product data
+            receivingData.product = demoData;
+        }
+
+        function populateSummary() {
+            document.getElementById('summaryVendor').textContent = getVendorName(receivingData.vendor);
+            document.getElementById('summaryProduct').textContent = `${receivingData.product.product} - ${receivingData.product.weight}`;
+            document.getElementById('summaryBatch').textContent = receivingData.product.batch;
+            document.getElementById('summaryQuantity').textContent = receivingData.quantity;
+            document.getElementById('summaryExpiration').textContent = receivingData.expiration || 'Not specified';
+        }
+
+        function getVendorName(vendorId) {
+            const vendors = {
+                'green-thumb': 'Green Thumb Industries',
+                'curaleaf': 'Curaleaf',
+                'trulieve': 'Trulieve Cannabis Corp',
+                'cresco': 'Cresco Labs',
+                'verano': 'Verano Holdings'
+            };
+            return vendors[vendorId] || vendorId;
+        }
+
+        function completeReceiving() {
+            document.getElementById('dutchieProcess').style.display = 'none';
+            document.getElementById('successScreen').style.display = 'block';
+            showStatus('Product successfully received into inventory!', 'success');
+        }
+
+        function resetReceiving() {
+            document.getElementById('successScreen').style.display = 'none';
+            document.getElementById('receiveScreen').style.display = 'block';
+            
+            // Reset form data
+            currentStep = 1;
+            receivingData = {};
+            document.getElementById('vendorSelect').value = '';
+            document.getElementById('poNumber').value = '';
+            document.getElementById('quantityReceived').value = '1';
+            document.getElementById('expirationDate').value = '';
+        }
+
+        // Update the OCR processing to integrate with Dutchie flow
+        function displayOCRResults(data) {
+            // Store OCR data globally for Dutchie integration
+            window.latestOCRData = data;
+            
+            // Auto-start Dutchie receiving process when OCR completes
+            startReceiveProcess();
+            showStatus('OCR complete - Starting receiving process', 'success');
+        }
+
         // Initialize
         document.addEventListener('DOMContentLoaded', function() {
             document.getElementById('passwordInput').addEventListener('keypress', function(e) {
