@@ -926,14 +926,47 @@
             document.getElementById('expirationDate').value = '';
         }
 
-        // Update the OCR processing to integrate with Dutchie flow
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('passwordInput').addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    authenticateUser();
+                }
+            });
+            
+            // Generate QR code on page load
+            setTimeout(() => {
+                generateQRCode();
+            }, 1000);
+        });
+
+        // Copy QR Link Function
+        function copyQRLink() {
+            const sessionId = 'TRK' + Date.now().toString(36).toUpperCase();
+            const qrUrl = `${window.location.origin}?session=${sessionId}`;
+            
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(qrUrl).then(() => {
+                    showStatus('QR link copied to clipboard!', 'success');
+                }).catch(() => {
+                    showStatus('Failed to copy link', 'error');
+                });
+            } else {
+                showStatus('Clipboard not available', 'error');
+            }
+        }
+
+        // Auto-switch to verify tab after OCR
         function displayOCRResults(data) {
             // Store OCR data globally for Dutchie integration
             window.latestOCRData = data;
             
-            // Auto-start Dutchie receiving process when OCR completes
-            startReceiveProcess();
-            showStatus('OCR complete - Starting receiving process', 'success');
+            // Switch to verify tab and start Dutchie process
+            switchTab('verify');
+            setTimeout(() => {
+                startReceiveProcess();
+                showStatus('OCR complete - Starting Dutchie receiving process', 'success');
+            }, 500);
         }
 
         // Initialize
