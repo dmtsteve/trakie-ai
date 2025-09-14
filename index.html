@@ -3,42 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Trakie - Cannabis Inventory Intelligence</title>
+    <title>Trakie - Give Your Dutchie Superpowers</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tesseract.js/4.1.1/tesseract.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode/1.5.3/qrcode.min.js"></script>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+        
         :root {
-            --bg-primary: #0A0E13;
-            --bg-secondary: #0F1419;
-            --bg-tertiary: #1A1F29;
-            --surface-glass: rgba(255, 255, 255, 0.03);
-            --surface-border: rgba(255, 255, 255, 0.06);
-            --surface-elevated: rgba(255, 255, 255, 0.08);
-            --text-primary: #F8FAFC;
-            --text-secondary: #94A3B8;
-            --text-muted: #64748B;
-            --accent: #06B6D4;
-            --accent-soft: rgba(6, 182, 212, 0.12);
-            --accent-glow: rgba(6, 182, 212, 0.4);
-            --accent-bright: #00D4FF;
-            --error: #EF4444;
+            --bg-primary: #000000;
+            --bg-secondary: #0A0A0A;
+            --bg-card: #111111;
+            --surface-border: rgba(255, 255, 255, 0.08);
+            --text-primary: #FFFFFF;
+            --text-secondary: #9CA3AF;
+            --text-muted: #6B7280;
+            --accent: #3B82F6;
+            --accent-bright: #60A5FA;
             --success: #10B981;
-            --warning: #F59E0B;
             --dutchie-blue: #2563EB;
-            --dutchie-blue-hover: #1D4ED8;
         }
 
         * {
-            box-sizing: border-box;
             margin: 0;
             padding: 0;
+            box-sizing: border-box;
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'SF Pro Display', system-ui, sans-serif;
-            background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 50%, var(--bg-tertiary) 100%);
+            font-family: 'Inter', -apple-system, system-ui, sans-serif;
+            background: var(--bg-primary);
             color: var(--text-primary);
-            min-height: 100vh;
+            line-height: 1.6;
             -webkit-font-smoothing: antialiased;
         }
 
@@ -49,79 +44,107 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.95);
+            background: rgba(0, 0, 0, 0.98);
             display: flex;
             align-items: center;
             justify-content: center;
             z-index: 10000;
-            backdrop-filter: blur(20px);
         }
 
         .auth-container {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 16px;
-            padding: 48px;
             text-align: center;
-            backdrop-filter: blur(20px);
-            max-width: 420px;
+            max-width: 440px;
             width: 90%;
         }
 
         .auth-logo {
             width: 80px;
             height: 80px;
-            margin: 0 auto 24px;
-            border-radius: 16px;
+            margin: 0 auto 32px;
+            border-radius: 20px;
         }
 
         .auth-title {
-            font-size: 24px;
-            font-weight: 600;
-            margin-bottom: 8px;
+            font-size: 36px;
+            font-weight: 800;
+            margin-bottom: 16px;
+            letter-spacing: -0.02em;
         }
 
         .auth-subtitle {
-            color: var(--accent);
-            margin-bottom: 32px;
+            font-size: 18px;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+        }
+
+        .auth-tagline {
             font-size: 14px;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
+            color: var(--text-muted);
+            font-style: italic;
+            margin-bottom: 40px;
         }
 
         .password-input {
             width: 100%;
-            padding: 16px;
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 8px;
+            padding: 18px 20px;
+            background: var(--bg-card);
+            border: 1px solid var(--surface-border);
+            border-radius: 12px;
             color: white;
             font-size: 16px;
-            margin-bottom: 24px;
-            transition: all 0.3s;
+            margin-bottom: 20px;
+            transition: all 0.2s;
         }
 
         .password-input:focus {
             outline: none;
             border-color: var(--accent);
-            box-shadow: 0 0 0 3px rgba(6, 182, 212, 0.1);
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        }
+
+        .auth-btn {
+            width: 100%;
+            padding: 18px;
+            background: var(--accent);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .auth-btn:hover {
+            background: var(--accent-bright);
+            transform: translateY(-2px);
         }
 
         /* Navigation */
-        .tab-nav {
-            display: flex;
-            align-items: center;
-            background: rgba(255, 255, 255, 0.03);
-            backdrop-filter: blur(20px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-            padding: 0 24px;
-            position: sticky;
+        .nav-header {
+            position: fixed;
             top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--surface-border);
             z-index: 100;
+            padding: 20px 40px;
+        }
+
+        .nav-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
         .nav-logo {
-            margin-right: 32px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
         }
 
         .nav-logo img {
@@ -130,345 +153,215 @@
             border-radius: 8px;
         }
 
-        .tab-buttons {
+        .nav-logo span {
+            font-size: 20px;
+            font-weight: 700;
+        }
+
+        .nav-menu {
             display: flex;
-            gap: 4px;
+            gap: 32px;
         }
 
-        .tab-button {
-            padding: 16px 20px;
-            background: none;
-            border: none;
+        .nav-link {
             color: var(--text-secondary);
-            cursor: pointer;
+            text-decoration: none;
+            font-size: 15px;
             font-weight: 500;
-            font-size: 14px;
-            transition: all 0.2s;
-            position: relative;
+            transition: color 0.2s;
         }
 
-        .tab-button:hover {
+        .nav-link:hover {
             color: var(--text-primary);
         }
 
-        .tab-button.active {
-            color: var(--accent);
-        }
-
-        .tab-button.active::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 40px;
-            height: 2px;
+        .nav-cta {
+            padding: 10px 20px;
             background: var(--accent);
-        }
-
-        .tab-content {
-            display: none;
-            padding: 40px 24px;
-            max-width: 1200px;
-            margin: 0 auto;
-            animation: fadeIn 0.3s;
-        }
-
-        .tab-content.active {
-            display: block;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* Welcome Section */
-        .hero-title {
-            font-size: clamp(32px, 8vw, 64px);
-            font-weight: 700;
-            margin-bottom: 24px;
-            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-bright) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            text-align: center;
-        }
-
-        .hero-subtitle {
-            font-size: clamp(16px, 4vw, 24px);
-            color: var(--text-secondary);
-            text-align: center;
-            margin-bottom: 48px;
-        }
-
-        /* Camera Section */
-        .camera-section {
-            max-width: 700px;
-            margin: 0 auto;
-        }
-
-        .qr-section {
-            text-align: center;
-            margin-bottom: 40px;
-            padding: 32px;
-            background: rgba(255, 255, 255, 0.03);
-            border-radius: 16px;
-            border: 1px solid rgba(255, 255, 255, 0.06);
-        }
-
-        .qr-container {
-            display: inline-block;
-            padding: 20px;
-            background: white;
-            border-radius: 12px;
-            margin: 24px 0;
-        }
-
-        .qr-link-display {
-            background: rgba(6, 182, 212, 0.1);
-            border: 1px solid var(--accent);
+            color: white;
             border-radius: 8px;
-            padding: 12px;
-            margin-top: 16px;
-            font-family: monospace;
-            font-size: 14px;
-            color: var(--accent);
-            word-break: break-all;
-        }
-
-        .camera-interface {
-            background: rgba(255, 255, 255, 0.03);
-            border-radius: 16px;
-            padding: 24px;
-            border: 1px solid rgba(255, 255, 255, 0.06);
-        }
-
-        .camera-feed {
-            width: 100%;
-            aspect-ratio: 4/3;
-            background: var(--bg-tertiary);
-            border-radius: 12px;
-            overflow: hidden;
-            margin-bottom: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            border: 2px solid rgba(255, 255, 255, 0.06);
-        }
-
-        .camera-feed.active {
-            border-color: var(--accent);
-            box-shadow: 0 0 30px rgba(6, 182, 212, 0.2);
-        }
-
-        .camera-feed video {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .capture-flash {
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: white;
-            opacity: 0;
-            pointer-events: none;
-        }
-
-        .capture-flash.active {
-            animation: flash 0.3s ease-out;
-        }
-
-        @keyframes flash {
-            0% { opacity: 0; }
-            50% { opacity: 0.8; }
-            100% { opacity: 0; }
-        }
-
-        .camera-controls {
-            display: flex;
-            justify-content: center;
-            gap: 12px;
-        }
-
-        /* OCR Progress */
-        .ocr-progress {
-            display: none;
-            text-align: center;
-            padding: 24px;
-            background: rgba(6, 182, 212, 0.1);
-            border-radius: 12px;
-            margin: 20px 0;
-        }
-
-        .ocr-progress.active {
-            display: block;
-        }
-
-        .progress-bar {
-            width: 100%;
-            height: 4px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 2px;
-            overflow: hidden;
-            margin-top: 12px;
-        }
-
-        .progress-fill {
-            height: 100%;
-            background: var(--accent);
-            transition: width 0.3s;
-            border-radius: 2px;
-        }
-
-        /* Verification Section - Dutchie Exact Replica */
-        .verification-section {
-            max-width: 900px;
-            margin: 0 auto;
-        }
-
-        /* Photo Gallery */
-        .scanned-items-gallery {
-            margin-bottom: 32px;
-            padding: 24px;
-            background: rgba(255, 255, 255, 0.03);
-            border-radius: 16px;
-            border: 1px solid rgba(255, 255, 255, 0.06);
-        }
-
-        .gallery-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-        }
-
-        .gallery-title {
-            font-size: 18px;
+            text-decoration: none;
             font-weight: 600;
-        }
-
-        .item-count {
-            background: var(--accent);
-            color: white;
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-size: 14px;
-            font-weight: 600;
-        }
-
-        .photo-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-            gap: 16px;
-        }
-
-        .photo-item {
-            position: relative;
-            aspect-ratio: 1;
-            background: var(--bg-tertiary);
-            border-radius: 12px;
-            overflow: hidden;
-            border: 2px solid transparent;
-            transition: all 0.3s;
-            cursor: pointer;
-        }
-
-        .photo-item:hover {
-            border-color: var(--accent);
-            transform: scale(1.05);
-        }
-
-        .photo-item.selected {
-            border-color: var(--accent);
-            box-shadow: 0 0 20px rgba(6, 182, 212, 0.3);
-        }
-
-        .photo-item img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .photo-item-overlay {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
-            padding: 8px;
-            color: white;
-            font-size: 11px;
-        }
-
-        /* Dutchie Receiving Form */
-        .receive-container {
-            background: rgba(255, 255, 255, 0.03);
-            border-radius: 16px;
-            padding: 48px;
-            text-align: center;
-            border: 1px solid rgba(255, 255, 255, 0.06);
-        }
-
-        .dutchie-btn {
-            background: var(--dutchie-blue);
-            color: white;
-            border: none;
-            padding: 14px 32px;
-            border-radius: 8px;
-            font-size: 16px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s;
-            min-width: 140px;
-        }
-
-        .dutchie-btn:hover {
-            background: var(--dutchie-blue-hover);
-            transform: translateY(-2px);
-            box-shadow: 0 8px 24px rgba(37, 99, 235, 0.3);
-        }
-
-        .dutchie-form {
-            background: rgba(255, 255, 255, 0.03);
-            border-radius: 16px;
-            padding: 32px;
-            border: 1px solid rgba(255, 255, 255, 0.06);
-        }
-
-        .form-header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: 32px;
-            padding-bottom: 16px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-        }
-
-        .back-btn {
-            background: none;
-            border: none;
-            color: var(--accent);
-            cursor: pointer;
-            font-size: 14px;
-            padding: 8px 12px;
-            border-radius: 6px;
+            font-size: 15px;
             transition: all 0.2s;
         }
 
-        .back-btn:hover {
-            background: rgba(6, 182, 212, 0.1);
+        .nav-cta:hover {
+            background: var(--accent-bright);
+            transform: translateY(-1px);
         }
 
+        /* Hero Section */
+        .hero-section {
+            padding: 160px 40px 100px;
+            text-align: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .hero-title {
+            font-size: clamp(48px, 8vw, 96px);
+            font-weight: 900;
+            line-height: 1;
+            letter-spacing: -0.03em;
+            margin-bottom: 24px;
+            background: linear-gradient(135deg, #FFFFFF 0%, #94A3B8 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-subtitle {
+            font-size: clamp(20px, 3vw, 32px);
+            color: var(--text-secondary);
+            font-weight: 500;
+            margin-bottom: 16px;
+        }
+
+        .hero-tagline {
+            font-size: 18px;
+            color: var(--accent-bright);
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        .hero-description {
+            font-size: 20px;
+            color: var(--text-muted);
+            margin-bottom: 48px;
+        }
+
+        /* QR Section */
+        .qr-section {
+            display: inline-block;
+            background: var(--bg-card);
+            border: 1px solid var(--surface-border);
+            border-radius: 20px;
+            padding: 32px;
+            margin-bottom: 60px;
+        }
+
+        .qr-title {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .qr-container {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+        }
+
+        .try-it-btn {
+            padding: 16px 48px;
+            background: var(--accent);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 18px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .try-it-btn:hover {
+            background: var(--accent-bright);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(59, 130, 246, 0.3);
+        }
+
+        /* Process Steps */
+        .process-section {
+            text-align: center;
+            padding: 0 40px;
+            margin-bottom: 100px;
+        }
+
+        .process-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--text-secondary);
+            letter-spacing: 0.1em;
+        }
+
+        /* Receiving Modal */
+        .receiving-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 1000;
+            overflow-y: auto;
+        }
+
+        .receiving-modal.active {
+            display: block;
+        }
+
+        .receiving-container {
+            max-width: 1200px;
+            margin: 40px auto;
+            background: var(--bg-card);
+            border-radius: 20px;
+            padding: 40px;
+        }
+
+        .receiving-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--surface-border);
+        }
+
+        .receiving-title {
+            font-size: 28px;
+            font-weight: 700;
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            color: var(--text-secondary);
+            font-size: 28px;
+            cursor: pointer;
+        }
+
+        /* Split Screen Products */
+        .products-split {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 32px;
+            margin-bottom: 32px;
+        }
+
+        .product-section {
+            background: var(--bg-secondary);
+            border: 1px solid var(--surface-border);
+            border-radius: 16px;
+            padding: 24px;
+        }
+
+        .product-section-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: var(--accent-bright);
+        }
+
+        /* Form Grid */
         .form-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 24px;
-            margin-bottom: 32px;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            margin-bottom: 24px;
         }
 
         .form-group {
@@ -476,124 +369,80 @@
             flex-direction: column;
         }
 
+        .form-group.full-width {
+            grid-column: span 3;
+        }
+
         .form-label {
-            font-size: 14px;
+            font-size: 13px;
+            color: var(--text-secondary);
+            margin-bottom: 6px;
             font-weight: 500;
-            margin-bottom: 8px;
-            color: var(--text-primary);
+        }
+
+        .form-label .required {
+            color: var(--accent);
         }
 
         .form-input, .form-select {
-            padding: 12px;
-            background: var(--bg-tertiary);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 12px 14px;
+            background: var(--bg-primary);
+            border: 1px solid var(--surface-border);
             border-radius: 8px;
             color: var(--text-primary);
             font-size: 14px;
-            transition: all 0.3s;
+            transition: all 0.2s;
         }
 
         .form-input:focus, .form-select:focus {
             outline: none;
-            border-color: var(--dutchie-blue);
-            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
-        }
-
-        .form-input.auto-filled {
             border-color: var(--accent);
-            background: rgba(6, 182, 212, 0.05);
-            box-shadow: 0 0 20px rgba(6, 182, 212, 0.2);
-            animation: glow 2s ease-in-out infinite;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
         }
 
-        @keyframes glow {
-            0%, 100% { box-shadow: 0 0 20px rgba(6, 182, 212, 0.2); }
-            50% { box-shadow: 0 0 30px rgba(6, 182, 212, 0.4); }
+        .form-select {
+            cursor: pointer;
         }
 
-        /* Product Cards */
-        .products-list {
-            margin-bottom: 32px;
-        }
-
-        .product-card {
-            background: var(--bg-tertiary);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 12px;
-            padding: 20px;
-            margin-bottom: 16px;
-            transition: all 0.3s;
-        }
-
-        .product-card.auto-filled {
-            border-color: var(--accent);
-            background: linear-gradient(145deg, rgba(6, 182, 212, 0.02), rgba(6, 182, 212, 0.05));
-            box-shadow: 0 0 30px rgba(6, 182, 212, 0.15);
-        }
-
-        .product-header {
+        /* Action Buttons */
+        .receiving-actions {
             display: flex;
             justify-content: space-between;
-            align-items: flex-start;
-            margin-bottom: 16px;
-        }
-
-        .product-name {
-            font-size: 18px;
-            font-weight: 600;
-            color: var(--text-primary);
-        }
-
-        .batch-badge {
-            background: var(--accent);
-            color: white;
-            padding: 4px 12px;
-            border-radius: 6px;
-            font-size: 12px;
-            font-weight: 600;
-        }
-
-        .product-details {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 12px;
-            margin-bottom: 16px;
-        }
-
-        .detail-item {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .detail-label {
-            font-size: 12px;
-            color: var(--text-muted);
-            margin-bottom: 4px;
-        }
-
-        .detail-value {
-            font-size: 14px;
-            color: var(--text-primary);
-            font-weight: 500;
-        }
-
-        /* Actions */
-        .form-actions {
-            display: flex;
-            justify-content: flex-end;
-            gap: 16px;
+            align-items: center;
             padding-top: 24px;
-            border-top: 1px solid rgba(255, 255, 255, 0.06);
+            border-top: 1px solid var(--surface-border);
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 12px;
         }
 
         .btn {
             padding: 12px 24px;
             border-radius: 8px;
-            font-size: 14px;
-            font-weight: 500;
+            font-weight: 600;
             cursor: pointer;
-            transition: all 0.3s;
+            transition: all 0.2s;
             border: none;
+            font-size: 15px;
+        }
+
+        .btn-remove {
+            background: none;
+            color: #EF4444;
+            text-decoration: underline;
+            padding: 0;
+        }
+
+        .btn-secondary {
+            background: transparent;
+            border: 1px solid var(--surface-border);
+            color: var(--text-primary);
+        }
+
+        .btn-secondary:hover {
+            background: var(--bg-secondary);
         }
 
         .btn-primary {
@@ -602,86 +451,202 @@
         }
 
         .btn-primary:hover {
-            background: var(--dutchie-blue-hover);
+            background: #1D4ED8;
             transform: translateY(-1px);
         }
 
-        .btn-secondary {
-            background: transparent;
+        /* Pricing Section */
+        .pricing-section {
+            padding: 100px 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .pricing-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .pricing-title {
+            font-size: 48px;
+            font-weight: 800;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 16px;
+        }
+
+        .pricing-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--accent);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+        }
+
+        .pricing-subtitle {
+            font-size: 20px;
+            color: var(--text-secondary);
+        }
+
+        .pricing-toggle {
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+            margin-bottom: 48px;
+        }
+
+        .toggle-option {
+            font-size: 16px;
+            color: var(--text-secondary);
+            cursor: pointer;
+            position: relative;
+        }
+
+        .toggle-option.active {
             color: var(--text-primary);
-            border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
-        .btn-secondary:hover {
-            background: rgba(255, 255, 255, 0.05);
+        .toggle-option.active::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: var(--accent);
         }
 
-        .btn-success {
-            background: var(--success);
+        .pricing-cards {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 32px;
+        }
+
+        .pricing-card {
+            background: var(--bg-card);
+            border: 1px solid var(--surface-border);
+            border-radius: 20px;
+            padding: 40px 32px;
+            position: relative;
+            transition: all 0.3s;
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--accent);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .pricing-tier {
+            font-size: 14px;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 16px;
+        }
+
+        .pricing-price {
+            font-size: 48px;
+            font-weight: 800;
+            margin-bottom: 8px;
+        }
+
+        .pricing-price span {
+            font-size: 18px;
+            color: var(--text-secondary);
+            font-weight: 400;
+        }
+
+        .pricing-description {
+            color: var(--text-secondary);
+            margin-bottom: 32px;
+            font-size: 15px;
+        }
+
+        .pricing-btn {
+            width: 100%;
+            padding: 14px;
+            border-radius: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: none;
+            font-size: 15px;
+            margin-bottom: 32px;
+        }
+
+        .pricing-btn.btn-dark {
+            background: #1F2937;
             color: white;
         }
 
-        .btn-success:hover {
-            background: #059669;
-            transform: translateY(-1px);
+        .pricing-btn.btn-blue {
+            background: var(--accent);
+            color: white;
         }
 
-        /* Status Messages */
-        .status-message {
-            position: fixed;
-            top: 80px;
-            right: 24px;
-            padding: 12px 20px;
-            border-radius: 8px;
+        .pricing-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .pricing-features {
+            list-style: none;
+        }
+
+        .pricing-features li {
+            padding: 12px 0;
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
             font-size: 14px;
-            font-weight: 500;
-            animation: slideIn 0.3s;
-            z-index: 1000;
+            color: var(--text-secondary);
         }
 
-        @keyframes slideIn {
-            from { transform: translateX(100%); opacity: 0; }
-            to { transform: translateX(0); opacity: 1; }
-        }
-
-        .status-success {
-            background: rgba(16, 185, 129, 0.1);
+        .pricing-features li::before {
+            content: '✓';
             color: var(--success);
-            border: 1px solid rgba(16, 185, 129, 0.2);
-        }
-
-        .status-error {
-            background: rgba(239, 68, 68, 0.1);
-            color: var(--error);
-            border: 1px solid rgba(239, 68, 68, 0.2);
-        }
-
-        .status-info {
-            background: rgba(6, 182, 212, 0.1);
-            color: var(--accent);
-            border: 1px solid rgba(6, 182, 212, 0.2);
+            font-weight: bold;
+            margin-top: 2px;
         }
 
         /* Mobile Responsive */
         @media (max-width: 768px) {
+            .nav-header {
+                padding: 16px 20px;
+            }
+
+            .nav-menu {
+                display: none;
+            }
+
+            .hero-section {
+                padding: 120px 20px 60px;
+            }
+
+            .products-split {
+                grid-template-columns: 1fr;
+            }
+
             .form-grid {
                 grid-template-columns: 1fr;
             }
 
-            .product-details {
+            .form-group.full-width {
+                grid-column: span 1;
+            }
+
+            .pricing-cards {
                 grid-template-columns: 1fr;
             }
 
-            .form-actions {
-                flex-direction: column;
-            }
-
-            .btn {
-                width: 100%;
-            }
-
-            .photo-grid {
-                grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+            .receiving-container {
+                margin: 20px;
+                padding: 24px;
             }
         }
     </style>
@@ -691,180 +656,355 @@
     <div class="auth-modal" id="authModal">
         <div class="auth-container">
             <img src="icon48.png" alt="Trakie" class="auth-logo">
-            <h2 class="auth-title">Trakie Access</h2>
-            <p class="auth-subtitle">Members Only</p>
+            <h1 class="auth-title">Cannabis Inventory A.I.</h1>
+            <p class="auth-subtitle">Members Only Access</p>
+            <p class="auth-tagline">The shortcut to Dutchie they don't want you to have</p>
             <input type="password" class="password-input" id="passwordInput" placeholder="Enter Password">
-            <button class="dutchie-btn" onclick="authenticate()">Access Platform</button>
+            <button class="auth-btn" onclick="authenticate()">Access Platform</button>
         </div>
     </div>
 
-    <!-- Main Application -->
+    <!-- Main App -->
     <div id="mainApp" style="display: none;">
         <!-- Navigation -->
-        <nav class="tab-nav">
-            <div class="nav-logo">
-                <img src="icon48.png" alt="Trakie">
-            </div>
-            <div class="tab-buttons">
-                <button class="tab-button active" data-tab="welcome">Welcome</button>
-                <button class="tab-button" data-tab="camera">Camera</button>
-                <button class="tab-button" data-tab="verify">Verify</button>
-                <button class="tab-button" data-tab="pricing">Pricing</button>
+        <nav class="nav-header">
+            <div class="nav-content">
+                <div class="nav-logo">
+                    <img src="icon48.png" alt="Trakie">
+                    <span>Trakie.ai</span>
+                </div>
+                <div class="nav-menu">
+                    <a href="#scan" class="nav-link">Scan</a>
+                    <a href="#verify" class="nav-link">Verify</a>
+                    <a href="#receive" class="nav-link">Receive</a>
+                    <a href="#pricing" class="nav-link">Pricing</a>
+                </div>
+                <a href="#" class="nav-cta">Get Started Free</a>
             </div>
         </nav>
 
-        <!-- Tab 1: Welcome -->
-        <div class="tab-content active" id="welcome-tab">
-            <h1 class="hero-title">Cannabis Inventory Intelligence</h1>
-            <p class="hero-subtitle">Scan. Verify. Receive. Streamline your dispensary operations.</p>
-        </div>
-
-        <!-- Tab 2: Camera -->
-        <div class="tab-content" id="camera-tab">
-            <div class="camera-section">
-                <!-- QR Section -->
-                <div class="qr-section">
-                    <h3>Mobile Quick Connect</h3>
-                    <p style="color: var(--text-secondary); margin-bottom: 20px;">Scan with mobile device to capture photos</p>
-                    <div class="qr-container" id="qrContainer"></div>
-                    <div class="qr-link-display" id="qrLink"></div>
-                    <button class="btn btn-secondary" onclick="copyQRLink()">Copy Link</button>
-                </div>
-
-                <!-- Camera Interface -->
-                <div class="camera-interface">
-                    <div class="camera-feed" id="cameraFeed">
-                        <video id="video" style="display: none;"></video>
-                        <canvas id="canvas" style="display: none;"></canvas>
-                        <div class="capture-flash" id="captureFlash"></div>
-                        <div id="cameraPlaceholder">
-                            <p>Camera will appear here</p>
-                        </div>
-                    </div>
-                    
-                    <!-- OCR Progress -->
-                    <div class="ocr-progress" id="ocrProgress">
-                        <p>Processing image...</p>
-                        <div class="progress-bar">
-                            <div class="progress-fill" id="progressFill" style="width: 0%"></div>
-                        </div>
-                    </div>
-
-                    <div class="camera-controls">
-                        <button class="btn btn-primary" id="startBtn" onclick="startCamera()">Start Camera</button>
-                        <button class="btn btn-primary" id="captureBtn" onclick="captureImage()" style="display: none;">Capture Photo</button>
-                        <button class="btn btn-secondary" id="stopBtn" onclick="stopCamera()" style="display: none;">Stop</button>
-                    </div>
-                </div>
+        <!-- Hero Section -->
+        <section class="hero-section">
+            <h1 class="hero-title">Give Your Dutchie Superpowers</h1>
+            <p class="hero-subtitle">Smarter, Faster, Stronger Inventory Intake</p>
+            <p class="hero-tagline">Dutchie's Cheat Code</p>
+            <p class="hero-description">10x faster than manual entry</p>
+            
+            <!-- QR Code Section -->
+            <div class="qr-section">
+                <h3 class="qr-title">Try It Now</h3>
+                <div class="qr-container" id="qrContainer"></div>
+                <button class="try-it-btn" onclick="startDemo()">Try It</button>
             </div>
-        </div>
 
-        <!-- Tab 3: Verify -->
-        <div class="tab-content" id="verify-tab">
-            <div class="verification-section">
-                <!-- Initial Receive Button -->
-                <div id="receiveScreen" class="receive-container">
-                    <h2 style="margin-bottom: 32px;">Inventory Receiving</h2>
-                    <button class="dutchie-btn" onclick="startReceiving()">Receive</button>
+            <!-- Process -->
+            <div class="process-section">
+                <p class="process-title">SCAN &nbsp;•&nbsp; VERIFY &nbsp;•&nbsp; RECEIVE</p>
+            </div>
+        </section>
+
+        <!-- Receiving Modal (Dutchie Style) -->
+        <div class="receiving-modal" id="receivingModal">
+            <div class="receiving-container">
+                <div class="receiving-header">
+                    <h2 class="receiving-title">Receive Package</h2>
+                    <button class="close-btn" onclick="closeReceiving()">&times;</button>
                 </div>
 
-                <!-- Receiving Form (Hidden Initially) -->
-                <div id="receivingForm" style="display: none;">
-                    <!-- Photo Gallery -->
-                    <div class="scanned-items-gallery" id="photoGallery" style="display: none;">
-                        <div class="gallery-header">
-                            <h3 class="gallery-title">Scanned Items</h3>
-                            <span class="item-count" id="itemCount">0 items</span>
-                        </div>
-                        <div class="photo-grid" id="photoGrid"></div>
-                    </div>
-
-                    <!-- Step 1: Vendor Selection -->
-                    <div id="step1" class="dutchie-form">
-                        <div class="form-header">
-                            <button class="back-btn" onclick="backToReceive()">← Back</button>
-                            <h2>Select Vendor & PO</h2>
-                            <div></div>
-                        </div>
-
+                <!-- Split Screen for Multiple Products -->
+                <div class="products-split">
+                    <!-- New Product -->
+                    <div class="product-section">
+                        <h3 class="product-section-title">New Product</h3>
+                        
                         <div class="form-grid">
                             <div class="form-group">
-                                <label class="form-label">Vendor *</label>
-                                <select class="form-select" id="vendorSelect">
-                                    <option value="">Select vendor...</option>
-                                    <option value="green-valley">Green Valley Farms</option>
-                                    <option value="premium">Premium Harvest Co.</option>
-                                    <option value="organic">Organic Gardens LLC</option>
-                                    <option value="mountain">Mountain Grown Cannabis</option>
+                                <label class="form-label">Tags</label>
+                                <select class="form-select">
+                                    <option>Select tags</option>
+                                    <option>Flower</option>
+                                    <option>Edibles</option>
+                                    <option>Concentrates</option>
                                 </select>
                             </div>
+                            
                             <div class="form-group">
-                                <label class="form-label">Purchase Order *</label>
-                                <input type="text" class="form-input" id="poNumber" placeholder="PO-2025-">
+                                <label class="form-label">Type</label>
+                                <input type="text" class="form-input" placeholder="Product type">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="form-label">Quantity <span class="required">*</span></label>
+                                <input type="number" class="form-input" placeholder="0">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="form-label">Vendor <span class="required">*</span></label>
+                                <select class="form-select">
+                                    <option>Select a vendor</option>
+                                    <option>Green Valley Farms</option>
+                                    <option>Premium Harvest</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="form-label">Room <span class="required">*</span></label>
+                                <select class="form-select">
+                                    <option>Select room</option>
+                                    <option>Storage A</option>
+                                    <option>Storage B</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="form-label">Building</label>
+                                <input type="text" class="form-input" placeholder="Building">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="form-label">Subroom</label>
+                                <select class="form-select">
+                                    <option>Select subroom</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="form-label">Flower equivalent</label>
+                                <input type="text" class="form-input" placeholder="0">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="form-label">Expiration date</label>
+                                <input type="date" class="form-input">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="form-label">Inventory status</label>
+                                <select class="form-select">
+                                    <option>Select an option</option>
+                                    <option>Active</option>
+                                    <option>Quarantine</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="form-label">Package ID <span class="required">*</span></label>
+                                <input type="text" class="form-input" value="Generated" readonly style="background: var(--accent); color: white;">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="form-label">Packaging date</label>
+                                <input type="date" class="form-input">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="form-label">External package ID</label>
+                                <input type="text" class="form-input" placeholder="Same as package ID if empty">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="form-label">Lot name/batch ID</label>
+                                <input type="text" class="form-input" placeholder="Batch ID">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="form-label">Strain</label>
+                                <select class="form-select">
+                                    <option>Select a strain</option>
+                                    <option>Blue Dream</option>
+                                    <option>OG Kush</option>
+                                </select>
                             </div>
                         </div>
-
-                        <div class="form-actions">
-                            <button class="btn btn-primary" onclick="goToStep2()">Continue</button>
-                        </div>
                     </div>
 
-                    <!-- Step 2: Product Verification -->
-                    <div id="step2" class="dutchie-form" style="display: none;">
-                        <div class="form-header">
-                            <button class="back-btn" onclick="goToStep1()">← Back</button>
-                            <h2>Verify Products</h2>
-                            <div></div>
-                        </div>
-
-                        <div class="products-list" id="productsList"></div>
-
-                        <div class="form-actions">
-                            <button class="btn btn-secondary" onclick="goToStep1()">Previous</button>
-                            <button class="btn btn-primary" onclick="goToStep3()">Review Summary</button>
+                    <!-- Existing Product -->
+                    <div class="product-section">
+                        <h3 class="product-section-title">Existing Product</h3>
+                        
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label class="form-label">Tags</label>
+                                <select class="form-select">
+                                    <option>Select tags</option>
+                                    <option>Flower</option>
+                                    <option>Edibles</option>
+                                    <option>Concentrates</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="form-label">Type</label>
+                                <input type="text" class="form-input" placeholder="Product type">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="form-label">Quantity <span class="required">*</span></label>
+                                <input type="number" class="form-input" placeholder="0">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="form-label">Vendor <span class="required">*</span></label>
+                                <select class="form-select">
+                                    <option>Select a vendor</option>
+                                    <option>Green Valley Farms</option>
+                                    <option>Premium Harvest</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="form-label">Room <span class="required">*</span></label>
+                                <select class="form-select">
+                                    <option>Select room</option>
+                                    <option>Storage A</option>
+                                    <option>Storage B</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="form-label">Building</label>
+                                <input type="text" class="form-input" placeholder="Building">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="form-label">Subroom</label>
+                                <select class="form-select">
+                                    <option>Select subroom</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="form-label">Flower equivalent</label>
+                                <input type="text" class="form-input" placeholder="0">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="form-label">Expiration date</label>
+                                <input type="date" class="form-input">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="form-label">Inventory status</label>
+                                <select class="form-select">
+                                    <option>Select an option</option>
+                                    <option>Active</option>
+                                    <option>Quarantine</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="form-label">Package ID <span class="required">*</span></label>
+                                <input type="text" class="form-input" value="Generated" readonly style="background: var(--accent); color: white;">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="form-label">Packaging date</label>
+                                <input type="date" class="form-input">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="form-label">External package ID</label>
+                                <input type="text" class="form-input" placeholder="Same as package ID if empty">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="form-label">Lot name/batch ID</label>
+                                <input type="text" class="form-input" placeholder="Batch ID">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="form-label">Strain</label>
+                                <select class="form-select">
+                                    <option>Select a strain</option>
+                                    <option>Blue Dream</option>
+                                    <option>OG Kush</option>
+                                </select>
+                            </div>
                         </div>
                     </div>
+                </div>
 
-                    <!-- Step 3: Summary -->
-                    <div id="step3" class="dutchie-form" style="display: none;">
-                        <div class="form-header">
-                            <button class="back-btn" onclick="goToStep2()">← Back</button>
-                            <h2>Receiving Summary</h2>
-                            <div></div>
-                        </div>
-
-                        <div id="summaryContent"></div>
-
-                        <div class="form-actions">
-                            <button class="btn btn-secondary" onclick="goToStep2()">Edit</button>
-                            <button class="btn btn-success" onclick="completeReceiving()">Complete Receiving</button>
-                        </div>
-                    </div>
-
-                    <!-- Success Screen -->
-                    <div id="successScreen" class="receive-container" style="display: none;">
-                        <h2 style="color: var(--success); margin-bottom: 24px;">✓ Receiving Complete</h2>
-                        <p style="color: var(--text-secondary); margin-bottom: 32px;">Products successfully added to inventory</p>
-                        <button class="dutchie-btn" onclick="startReceiving()">Receive Another</button>
+                <!-- Actions -->
+                <div class="receiving-actions">
+                    <button class="btn btn-remove">Remove package</button>
+                    <div class="btn-group">
+                        <button class="btn btn-secondary">Clear all</button>
+                        <button class="btn btn-primary">Save package</button>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- Tab 4: Pricing -->
-        <div class="tab-content" id="pricing-tab">
-            <h1 class="hero-title">Enterprise Pricing</h1>
-            <p class="hero-subtitle">Contact for custom pricing</p>
-        </div>
+        <!-- Pricing Section -->
+        <section class="pricing-section" id="pricing">
+            <div class="pricing-header">
+                <div class="pricing-title">
+                    <span>Start</span>
+                    <div class="pricing-icon">⚡</div>
+                    <span>for free.</span>
+                </div>
+                <p class="pricing-subtitle">Whether you're testing Trakie or ready to scale,<br>we have the right plan for your dispensary.</p>
+            </div>
+
+            <div class="pricing-toggle">
+                <span class="toggle-option active">Monthly</span>
+                <span class="toggle-option">Annually</span>
+            </div>
+
+            <div class="pricing-cards">
+                <!-- Starter -->
+                <div class="pricing-card">
+                    <div class="pricing-tier">Starter</div>
+                    <div class="pricing-price">Free</div>
+                    <div class="pricing-description">7-day trial with full features</div>
+                    <button class="pricing-btn btn-dark">Get Started</button>
+                    <ul class="pricing-features">
+                        <li>Unlimited OCR scans</li>
+                        <li>Real-time Dutchie integration</li>
+                        <li>Basic analytics dashboard</li>
+                        <li>Single user access</li>
+                        <li>Email support</li>
+                    </ul>
+                </div>
+
+                <!-- Pro -->
+                <div class="pricing-card">
+                    <div class="pricing-tier">Pro</div>
+                    <div class="pricing-price">$99<span>/location</span></div>
+                    <div class="pricing-description">Perfect for single dispensaries</div>
+                    <button class="pricing-btn btn-blue">Subscribe</button>
+                    <ul class="pricing-features">
+                        <li>Everything in Starter, plus...</li>
+                        <li>Unlimited users per location</li>
+                        <li>Batch processing (50+ items)</li>
+                        <li>Priority OCR processing</li>
+                        <li>METRC compliance fields</li>
+                        <li>24/7 chat support</li>
+                        <li>Custom training for your team</li>
+                    </ul>
+                </div>
+
+                <!-- Enterprise -->
+                <div class="pricing-card">
+                    <div class="pricing-tier">Enterprise</div>
+                    <div class="pricing-price">$999<span>/unlimited</span></div>
+                    <div class="pricing-description">For growing chains</div>
+                    <button class="pricing-btn btn-blue">Talk to Sales</button>
+                    <ul class="pricing-features">
+                        <li>Everything in Pro, plus...</li>
+                        <li>Unlimited locations</li>
+                        <li>API access for custom integrations</li>
+                        <li>White-label options</li>
+                        <li>Dedicated account manager</li>
+                        <li>Custom OCR training for your products</li>
+                        <li>SLA guarantees</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
     </div>
 
     <script>
-        // Global State
-        let cameraStream = null;
-        let capturedPhotos = [];
-        let scannedProducts = [];
-        let currentStep = 1;
-
         // Authentication
         function authenticate() {
             const password = document.getElementById('passwordInput').value;
@@ -872,408 +1012,89 @@
                 document.getElementById('authModal').style.display = 'none';
                 document.getElementById('mainApp').style.display = 'block';
                 initializeApp();
-            } else {
-                showStatus('Invalid password', 'error');
             }
         }
 
-        // Password enter key
-        document.getElementById('passwordInput').addEventListener('keypress', function(e) {
+        // Enter key for password
+        document.getElementById('passwordInput')?.addEventListener('keypress', function(e) {
             if (e.key === 'Enter') authenticate();
-        });
-
-        // Tab Navigation
-        document.querySelectorAll('.tab-button').forEach(button => {
-            button.addEventListener('click', function() {
-                const tabName = this.getAttribute('data-tab');
-                
-                // Update buttons
-                document.querySelectorAll('.tab-button').forEach(btn => {
-                    btn.classList.remove('active');
-                });
-                this.classList.add('active');
-                
-                // Update content
-                document.querySelectorAll('.tab-content').forEach(content => {
-                    content.classList.remove('active');
-                });
-                document.getElementById(`${tabName}-tab`).classList.add('active');
-            });
         });
 
         // Initialize App
         function initializeApp() {
             generateQRCode();
-            checkMobileAccess();
         }
 
-        // QR Code Generation for Mobile Link
+        // Generate QR Code
         function generateQRCode() {
             const qrContainer = document.getElementById('qrContainer');
-            const mobileUrl = `${window.location.origin}#camera-capture`;
+            if (!qrContainer) return;
             
             qrContainer.innerHTML = '';
+            const mobileUrl = `${window.location.origin}#camera-capture`;
+            
             new QRCode(qrContainer, {
                 text: mobileUrl,
                 width: 200,
                 height: 200,
-                colorDark: '#0A0E13',
-                colorLight: '#FFFFFF'
+                colorDark: '#000000',
+                colorLight: '#FFFFFF',
+                correctLevel: QRCode.CorrectLevel.H
             });
-            
-            document.getElementById('qrLink').textContent = mobileUrl;
         }
 
-        // Check if accessed via mobile QR scan
-        function checkMobileAccess() {
-            if (window.location.hash === '#camera-capture' && /mobile/i.test(navigator.userAgent)) {
-                setTimeout(() => {
-                    // Switch to camera tab
-                    document.querySelector('[data-tab="camera"]').click();
-                    // Auto-start camera
-                    startCamera();
-                }, 1000);
+        // Start Demo
+        function startDemo() {
+            // Check if mobile
+            if (/mobile/i.test(navigator.userAgent)) {
+                // Mobile: Open camera
+                startCamera();
+            } else {
+                // Desktop: Show receiving modal
+                document.getElementById('receivingModal').classList.add('active');
             }
-        }
-
-        // Copy QR Link
-        function copyQRLink() {
-            const link = document.getElementById('qrLink').textContent;
-            navigator.clipboard.writeText(link);
-            showStatus('Link copied to clipboard', 'success');
         }
 
         // Camera Functions
         async function startCamera() {
             try {
-                const video = document.getElementById('video');
-                const constraints = {
-                    video: {
-                        facingMode: 'environment',
-                        width: { ideal: 1920 },
-                        height: { ideal: 1080 }
-                    }
-                };
-                
-                cameraStream = await navigator.mediaDevices.getUserMedia(constraints);
-                video.srcObject = cameraStream;
-                video.style.display = 'block';
-                video.play();
-                
-                document.getElementById('cameraPlaceholder').style.display = 'none';
-                document.getElementById('cameraFeed').classList.add('active');
-                document.getElementById('startBtn').style.display = 'none';
-                document.getElementById('captureBtn').style.display = 'inline-block';
-                document.getElementById('stopBtn').style.display = 'inline-block';
-                
-                showStatus('Camera ready', 'success');
+                const stream = await navigator.mediaDevices.getUserMedia({ 
+                    video: { facingMode: 'environment' } 
+                });
+                // Camera logic here
+                console.log('Camera started');
             } catch (err) {
-                showStatus('Camera access denied', 'error');
                 console.error('Camera error:', err);
             }
         }
 
-        function stopCamera() {
-            if (cameraStream) {
-                cameraStream.getTracks().forEach(track => track.stop());
-                cameraStream = null;
-            }
-            
-            document.getElementById('video').style.display = 'none';
-            document.getElementById('cameraPlaceholder').style.display = 'flex';
-            document.getElementById('cameraFeed').classList.remove('active');
-            document.getElementById('startBtn').style.display = 'inline-block';
-            document.getElementById('captureBtn').style.display = 'none';
-            document.getElementById('stopBtn').style.display = 'none';
+        // Close Receiving Modal
+        function closeReceiving() {
+            document.getElementById('receivingModal').classList.remove('active');
         }
 
-        async function captureImage() {
-            const video = document.getElementById('video');
-            const canvas = document.getElementById('canvas');
-            const context = canvas.getContext('2d');
-            
-            // Flash effect
-            const flash = document.getElementById('captureFlash');
-            flash.classList.add('active');
-            setTimeout(() => flash.classList.remove('active'), 300);
-            
-            // Capture image
-            canvas.width = video.videoWidth;
-            canvas.height = video.videoHeight;
-            context.drawImage(video, 0, 0, canvas.width, canvas.height);
-            
-            const imageData = canvas.toDataURL('image/jpeg');
-            capturedPhotos.push(imageData);
-            
-            // Show OCR progress
-            document.getElementById('ocrProgress').classList.add('active');
-            
-            // Process with real Tesseract
-            await processWithOCR(imageData);
-            
-            // Hide progress
-            document.getElementById('ocrProgress').classList.remove('active');
-            
-            // Switch to verify tab
-            document.querySelector('[data-tab="verify"]').click();
-            
-            showStatus(`Photo ${capturedPhotos.length} captured`, 'success');
-        }
-
-        // Real OCR Processing
-        async function processWithOCR(imageData) {
-            try {
-                const result = await Tesseract.recognize(imageData, 'eng', {
-                    logger: m => {
-                        if (m.status === 'recognizing text') {
-                            const progress = Math.round(m.progress * 100);
-                            document.getElementById('progressFill').style.width = progress + '%';
-                        }
-                    }
-                });
-                
-                // Extract cannabis data from real text
-                const extractedData = extractCannabisData(result.data.text);
-                scannedProducts.push({
-                    id: Date.now(),
-                    image: imageData,
-                    ...extractedData
-                });
-                
-                updatePhotoGallery();
-                
-            } catch (err) {
-                console.error('OCR Error:', err);
-                // Fallback to demo data
-                scannedProducts.push({
-                    id: Date.now(),
-                    image: imageData,
-                    ...generateDemoData()
-                });
-                updatePhotoGallery();
-            }
-        }
-
-        // Extract Cannabis Data from OCR Text
-        function extractCannabisData(text) {
-            const data = {
-                brand: extractPattern(text, /(?:brand|company|mfg)[:\s]*([a-zA-Z\s&.]+)/i) || 'Unknown Brand',
-                product: extractPattern(text, /(?:product|strain)[:\s]*([a-zA-Z\s]+)/i) || 'Cannabis Product',
-                thc: extractPattern(text, /(?:thc|THC)[:\s]*([0-9.]+)(?:%|mg)?/i) || '20%',
-                cbd: extractPattern(text, /(?:cbd|CBD)[:\s]*([0-9.]+)(?:%|mg)?/i) || '0.5%',
-                batch: extractPattern(text, /(?:batch|lot)[:\s#]*([a-zA-Z0-9]+)/i) || generateBatchNumber(),
-                weight: extractPattern(text, /([0-9.]+)\s*(?:g|gram|oz|ounce)/i) || '3.5g',
-                testDate: extractPattern(text, /(?:test|tested)[:\s]*([0-9\/\-]+)/i) || '2025-09-01'
-            };
-            return data;
-        }
-
-        function extractPattern(text, pattern) {
-            const match = text.match(pattern);
-            return match ? match[1].trim() : null;
-        }
-
-        function generateBatchNumber() {
-            return 'B' + Math.random().toString(36).substring(2, 8).toUpperCase();
-        }
-
-        // Generate Demo Data (Fallback)
-        function generateDemoData() {
-            const brands = ['Green Valley OG', 'Purple Haze Premium', 'Blue Dream Select'];
-            const thc = ['18.5%', '22.3%', '25.8%'];
-            const cbd = ['0.5%', '1.2%', '0.8%'];
-            
-            return {
-                brand: brands[Math.floor(Math.random() * brands.length)],
-                product: 'Premium Flower',
-                thc: thc[Math.floor(Math.random() * thc.length)],
-                cbd: cbd[Math.floor(Math.random() * cbd.length)],
-                batch: generateBatchNumber(),
-                weight: '3.5g',
-                testDate: '2025-09-01'
-            };
-        }
-
-        // Update Photo Gallery
-        function updatePhotoGallery() {
-            const gallery = document.getElementById('photoGallery');
-            const grid = document.getElementById('photoGrid');
-            const count = document.getElementById('itemCount');
-            
-            if (capturedPhotos.length > 0) {
-                gallery.style.display = 'block';
-                count.textContent = `${capturedPhotos.length} items`;
-                
-                grid.innerHTML = '';
-                capturedPhotos.forEach((photo, index) => {
-                    const item = document.createElement('div');
-                    item.className = 'photo-item';
-                    item.innerHTML = `
-                        <img src="${photo}" alt="Scan ${index + 1}">
-                        <div class="photo-item-overlay">
-                            ${scannedProducts[index]?.brand || 'Processing...'}
-                        </div>
-                    `;
-                    item.onclick = () => selectPhoto(index);
-                    grid.appendChild(item);
-                });
-            }
-        }
-
-        function selectPhoto(index) {
-            document.querySelectorAll('.photo-item').forEach((item, i) => {
-                item.classList.toggle('selected', i === index);
+        // Smooth scroll for navigation
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = this.getAttribute('href');
+                if (target === '#receive') {
+                    document.getElementById('receivingModal').classList.add('active');
+                } else if (target === '#pricing') {
+                    document.getElementById('pricing').scrollIntoView({ behavior: 'smooth' });
+                }
             });
-        }
+        });
 
-        // Dutchie Receiving Process
-        function startReceiving() {
-            document.getElementById('receiveScreen').style.display = 'none';
-            document.getElementById('receivingForm').style.display = 'block';
-            document.getElementById('step1').style.display = 'block';
-            document.getElementById('step2').style.display = 'none';
-            document.getElementById('step3').style.display = 'none';
-            currentStep = 1;
-        }
-
-        function backToReceive() {
-            document.getElementById('receiveScreen').style.display = 'block';
-            document.getElementById('receivingForm').style.display = 'none';
-        }
-
-        function goToStep1() {
-            document.getElementById('step1').style.display = 'block';
-            document.getElementById('step2').style.display = 'none';
-            document.getElementById('step3').style.display = 'none';
-            currentStep = 1;
-        }
-
-        function goToStep2() {
-            const vendor = document.getElementById('vendorSelect').value;
-            const po = document.getElementById('poNumber').value;
-            
-            if (!vendor || !po) {
-                showStatus('Please fill all required fields', 'error');
-                return;
-            }
-            
-            // Generate product cards for verification
-            const productsList = document.getElementById('productsList');
-            productsList.innerHTML = '';
-            
-            if (scannedProducts.length === 0) {
-                // Add demo product if no scans
-                scannedProducts.push(generateDemoData());
-            }
-            
-            scannedProducts.forEach((product, index) => {
-                const card = document.createElement('div');
-                card.className = 'product-card auto-filled';
-                card.innerHTML = `
-                    <div class="product-header">
-                        <div class="product-name">${product.brand}</div>
-                        <div class="batch-badge">${product.batch}</div>
-                    </div>
-                    <div class="product-details">
-                        <div class="detail-item">
-                            <span class="detail-label">THC</span>
-                            <span class="detail-value">${product.thc}</span>
-                        </div>
-                        <div class="detail-item">
-                            <span class="detail-label">CBD</span>
-                            <span class="detail-value">${product.cbd}</span>
-                        </div>
-                        <div class="detail-item">
-                            <span class="detail-label">Weight</span>
-                            <span class="detail-value">${product.weight}</span>
-                        </div>
-                        <div class="detail-item">
-                            <span class="detail-label">Test Date</span>
-                            <span class="detail-value">${product.testDate}</span>
-                        </div>
-                    </div>
-                    <div class="form-grid">
-                        <div class="form-group">
-                            <label class="form-label">Quantity</label>
-                            <input type="number" class="form-input auto-filled" value="10" id="qty_${index}">
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label">Expiration</label>
-                            <input type="date" class="form-input" value="2026-09-01" id="exp_${index}">
-                        </div>
-                    </div>
-                `;
-                productsList.appendChild(card);
-            });
-            
-            document.getElementById('step1').style.display = 'none';
-            document.getElementById('step2').style.display = 'block';
-            currentStep = 2;
-        }
-
-        function goToStep3() {
-            // Build summary
-            const vendor = document.getElementById('vendorSelect').options[document.getElementById('vendorSelect').selectedIndex].text;
-            const po = document.getElementById('poNumber').value;
-            
-            const summaryContent = document.getElementById('summaryContent');
-            summaryContent.innerHTML = `
-                <div class="product-card">
-                    <div class="product-details">
-                        <div class="detail-item">
-                            <span class="detail-label">Vendor</span>
-                            <span class="detail-value">${vendor}</span>
-                        </div>
-                        <div class="detail-item">
-                            <span class="detail-label">PO Number</span>
-                            <span class="detail-value">${po}</span>
-                        </div>
-                        <div class="detail-item">
-                            <span class="detail-label">Total Items</span>
-                            <span class="detail-value">${scannedProducts.length}</span>
-                        </div>
-                        <div class="detail-item">
-                            <span class="detail-label">Date</span>
-                            <span class="detail-value">${new Date().toLocaleDateString()}</span>
-                        </div>
-                    </div>
-                </div>
-                <h3 style="margin: 24px 0 16px;">Products</h3>
-                ${scannedProducts.map(product => `
-                    <div class="product-card">
-                        <strong>${product.brand}</strong> - ${product.batch}<br>
-                        THC: ${product.thc} | CBD: ${product.cbd} | Weight: ${product.weight}
-                    </div>
-                `).join('')}
-            `;
-            
-            document.getElementById('step2').style.display = 'none';
-            document.getElementById('step3').style.display = 'block';
-            currentStep = 3;
-        }
-
-        function completeReceiving() {
-            document.getElementById('step3').style.display = 'none';
-            document.getElementById('successScreen').style.display = 'block';
-            
-            showStatus('Products successfully received into inventory', 'success');
-            
-            // Reset for next receiving
+        // Check for mobile QR scan
+        if (window.location.hash === '#camera-capture' && /mobile/i.test(navigator.userAgent)) {
+            // Auto-authenticate for mobile users coming from QR
             setTimeout(() => {
-                capturedPhotos = [];
-                scannedProducts = [];
-                updatePhotoGallery();
-            }, 3000);
-        }
-
-        // Status Messages
-        function showStatus(message, type) {
-            const status = document.createElement('div');
-            status.className = `status-message status-${type}`;
-            status.textContent = message;
-            document.body.appendChild(status);
-            
-            setTimeout(() => status.remove(), 3000);
+                document.getElementById('authModal').style.display = 'none';
+                document.getElementById('mainApp').style.display = 'block';
+                initializeApp();
+                startCamera();
+            }, 500);
         }
     </script>
 </body>
