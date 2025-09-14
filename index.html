@@ -298,18 +298,23 @@
             background: rgba(0, 0, 0, 0.9);
             z-index: 1000;
             overflow-y: auto;
+            padding: 40px 20px;
         }
 
         .receiving-modal.active {
-            display: block;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .receiving-container {
             max-width: 1200px;
-            margin: 40px auto;
+            width: 100%;
             background: var(--bg-card);
             border-radius: 20px;
             padding: 40px;
+            max-height: 90vh;
+            overflow-y: auto;
         }
 
         .receiving-header {
@@ -656,9 +661,9 @@
     <div class="auth-modal" id="authModal">
         <div class="auth-container">
             <img src="icon48.png" alt="Trakie" class="auth-logo">
-            <h1 class="auth-title">Cannabis Inventory A.I.</h1>
-            <p class="auth-subtitle">Members Only Access</p>
-            <p class="auth-tagline">The shortcut to Dutchie they don't want you to have</p>
+            <h1 class="auth-title">Cannabis Inventory a.i.</h1>
+            <p class="auth-subtitle">The shortcut to Dutchie they don't want you to have</p>
+            <p class="auth-tagline">Members Only Access</p>
             <input type="password" class="password-input" id="passwordInput" placeholder="Enter Password">
             <button class="auth-btn" onclick="authenticate()">Access Platform</button>
         </div>
