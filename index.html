@@ -1091,6 +1091,25 @@
             });
         });
 
+        // Toggle Pricing
+        function togglePricing(type) {
+            const monthlyCards = document.getElementById('monthlyPricing');
+            const yearlyCards = document.getElementById('yearlyPricing');
+            const toggleOptions = document.querySelectorAll('.toggle-option');
+            
+            toggleOptions.forEach(option => option.classList.remove('active'));
+            
+            if (type === 'yearly') {
+                monthlyCards.style.display = 'none';
+                yearlyCards.style.display = 'grid';
+                toggleOptions[1].classList.add('active');
+            } else {
+                monthlyCards.style.display = 'grid';
+                yearlyCards.style.display = 'none';
+                toggleOptions[0].classList.add('active');
+            }
+        }
+
         // Check for mobile QR scan
         if (window.location.hash === '#camera-capture' && /mobile/i.test(navigator.userAgent)) {
             // Auto-authenticate for mobile users coming from QR
