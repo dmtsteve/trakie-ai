@@ -1,4 +1,30 @@
-<!DOCTYPE html>
+// Close Receiving Modal
+        function closeReceiving() {
+            document.getElementById('receivingModal').classList.remove('active');
+        }
+
+        // Smooth scroll for navigation
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = this.getAttribute('href');
+                if (target === '#receive') {
+                    document.getElementById('receivingModal').classList.add('active');
+                } else if (target === '#pricing') {
+                    document.getElementById('pricing').scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+
+        // Check for mobile QR scan
+        if (window.location.hash === '#camera-capture' && /mobile/i.test(navigator.userAgent)) {
+            // Auto-authenticate for mobile users coming from QR
+            setTimeout(() => {
+                document.getElementById('authModal').style.display = 'none';
+                document.getElementById('mainApp').style.display = 'block';
+                initializeApp();
+            }, 500);
+        }<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -662,7 +688,7 @@
         <div class="auth-container">
             <img src="icon48.png" alt="Trakie" class="auth-logo">
             <h1 class="auth-title">Cannabis Inventory ai</h1>
-            <p class="auth-subtitle">The ai shortcut to Dutchie they don't want you to have.</p>
+            <p class="auth-subtitle">The shortcut to Dutchie they don't want you to have.</p>
             <p class="auth-tagline">Members Only Access</p>
             <input type="password" class="password-input" id="passwordInput" placeholder="Enter Password">
             <button class="auth-btn" onclick="authenticate()">Access Platform</button>
@@ -690,9 +716,9 @@
 
         <!-- Hero Section -->
         <section class="hero-section">
-            <h1 class="hero-title">Give Your Dutchie Superpowers</h1>
-            <p class="hero-subtitle">Smarter, Faster, Stronger Inventory Intake</p>
-            <p class="hero-tagline">Dutchie's Cheat Code</p>
+            <h1 class="hero-title">Give Your Dutchie Superpowers Today</h1>
+            <p class="hero-subtitle">Smarter, Faster, and Reliable Inventory Intake</p>
+            <p class="hero-tagline">Dutchie's Cheat Code.</p>
             <p class="hero-description">10x faster than manual entry</p>
             
             <!-- QR Code Section -->
@@ -746,9 +772,9 @@
                             <div class="form-group">
                                 <label class="form-label">Vendor <span class="required">*</span></label>
                                 <select class="form-select">
-                                    <option>Select a vendor</option>
-                                    <option>Akron Bloom</option>
-                                    <option>Electraleaf</option>
+                                    <option>Gen W Labs</option>
+                                    <option>Glen Who Farms</option>
+                                    <option>Jenny's Stoned LLC</option>
                                 </select>
                             </div>
                             
@@ -756,8 +782,8 @@
                                 <label class="form-label">Room <span class="required">*</span></label>
                                 <select class="form-select">
                                     <option>Select room</option>
-                                    <option>Storage A</option>
-                                    <option>Storage B</option>
+                                    <option>Vault</option>
+                                    <option>Sales Floor</option>
                                 </select>
                             </div>
                             
@@ -787,8 +813,7 @@
                                 <label class="form-label">Inventory status</label>
                                 <select class="form-select">
                                     <option>Select an option</option>
-                                    <option>Active</option>
-                                    <option>Quarantine</option>
+                                    <option>Ready</option>
                                 </select>
                             </div>
                             
@@ -816,8 +841,9 @@
                                 <label class="form-label">Strain</label>
                                 <select class="form-select">
                                     <option>Select a strain</option>
-                                    <option>Blue Dream</option>
-                                    <option>OG Kush</option>
+                                    <option>Indica</option>
+                                    <option>Hybrid</option>
+                                    <option>Sativa</option>
                                 </select>
                             </div>
                         </div>
@@ -852,8 +878,8 @@
                                 <label class="form-label">Vendor <span class="required">*</span></label>
                                 <select class="form-select">
                                     <option>Select a vendor</option>
-                                    <option>Green Valley Farms</option>
-                                    <option>Premium Harvest</option>
+                                    <option>Jenny's Baked Inc.</option>
+                                    <option>Nantitoke LLC</option>
                                 </select>
                             </div>
                             
@@ -861,8 +887,8 @@
                                 <label class="form-label">Room <span class="required">*</span></label>
                                 <select class="form-select">
                                     <option>Select room</option>
-                                    <option>Storage A</option>
-                                    <option>Storage B</option>
+                                    <option>Vault</option>
+                                    <option>Sales Floor</option>
                                 </select>
                             </div>
                             
@@ -892,8 +918,7 @@
                                 <label class="form-label">Inventory status</label>
                                 <select class="form-select">
                                     <option>Select an option</option>
-                                    <option>Active</option>
-                                    <option>Quarantine</option>
+                                    <option>Ready</option>
                                 </select>
                             </div>
                             
@@ -921,8 +946,9 @@
                                 <label class="form-label">Strain</label>
                                 <select class="form-select">
                                     <option>Select a strain</option>
-                                    <option>Blue Dream</option>
-                                    <option>OG Kush</option>
+                                    <option>Indica</option>
+                                    <option>Hybrid</option>
+                                     <option>Sativa</option>
                                 </select>
                             </div>
                         </div>
