@@ -21,7 +21,7 @@
             --accent-bright: #60A5FA;
             --success: #10B981;
             --error: #EF4444;
-            --dutchie-blue: #2563EB;
+            --warning: #F59E0B;
         }
 
         * {
@@ -64,16 +64,25 @@
             margin: 0 auto 32px;
             border-radius: 20px;
             position: relative;
-            background: linear-gradient(45deg, #06B6D4, #3B82F6, #06B6D4);
-            background-size: 200% 200%;
-            animation: holographic 3s ease infinite;
-            box-shadow: 0 0 40px rgba(6, 182, 212, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(45deg, rgba(6, 182, 212, 0.2), rgba(59, 130, 246, 0.2));
+            border: 2px solid var(--surface-border);
+            font-size: 48px;
+            color: var(--accent);
+            animation: shimmer 3s ease infinite;
         }
 
-        @keyframes holographic {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
+        @keyframes shimmer {
+            0%, 100% { 
+                box-shadow: 0 0 20px rgba(59, 130, 246, 0.3);
+                transform: scale(1);
+            }
+            50% { 
+                box-shadow: 0 0 40px rgba(6, 182, 212, 0.5);
+                transform: scale(1.02);
+            }
         }
 
         .auth-title {
@@ -159,10 +168,16 @@
             gap: 12px;
         }
 
-        .nav-logo img {
+        .nav-logo-icon {
             width: 36px;
             height: 36px;
             border-radius: 8px;
+            background: linear-gradient(45deg, rgba(6, 182, 212, 0.2), rgba(59, 130, 246, 0.2));
+            border: 1px solid var(--surface-border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
         }
 
         .nav-logo span {
@@ -270,6 +285,36 @@
             border-radius: 12px;
         }
 
+        /* Example Products */
+        .example-products {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin: 20px 0;
+        }
+
+        .example-product {
+            background: var(--bg-secondary);
+            border: 1px solid var(--surface-border);
+            border-radius: 12px;
+            padding: 16px;
+            text-align: center;
+        }
+
+        .example-product img {
+            width: 100%;
+            height: 120px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 8px;
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .example-product p {
+            font-size: 12px;
+            color: var(--text-muted);
+        }
+
         .try-it-btn {
             padding: 16px 48px;
             background: var(--accent);
@@ -330,6 +375,43 @@
             font-variant-numeric: tabular-nums;
         }
 
+        .timer-controls {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            margin-bottom: 40px;
+        }
+
+        .timer-btn {
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: none;
+            font-size: 16px;
+        }
+
+        .timer-btn.start {
+            background: var(--success);
+            color: white;
+        }
+
+        .timer-btn.pause {
+            background: var(--warning);
+            color: white;
+        }
+
+        .timer-btn.reset {
+            background: var(--error);
+            color: white;
+        }
+
+        .timer-btn:hover {
+            transform: translateY(-2px);
+            opacity: 0.9;
+        }
+
         .comparison-split {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -342,6 +424,7 @@
             border: 1px solid var(--surface-border);
             border-radius: 20px;
             padding: 32px;
+            position: relative;
         }
 
         .comparison-side h3 {
@@ -353,8 +436,38 @@
             border-color: var(--error);
         }
 
+        .manual-side h3 {
+            color: var(--error);
+        }
+
         .trakie-side {
             border-color: var(--success);
+        }
+
+        .trakie-side h3 {
+            color: var(--success);
+        }
+
+        .time-badge {
+            position: absolute;
+            top: -20px;
+            right: 20px;
+            background: var(--bg-primary);
+            padding: 8px 16px;
+            border-radius: 20px;
+            border: 2px solid;
+            font-weight: 700;
+            font-size: 20px;
+        }
+
+        .manual-side .time-badge {
+            border-color: var(--error);
+            color: var(--error);
+        }
+
+        .trakie-side .time-badge {
+            border-color: var(--success);
+            color: var(--success);
         }
 
         .photo-preview {
@@ -369,41 +482,24 @@
             background: var(--bg-secondary);
             border-radius: 12px;
             display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
             border: 2px dashed var(--surface-border);
-            font-size: 14px;
+            padding: 16px;
+        }
+
+        .photo-box img {
+            width: 100%;
+            height: 80%;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 8px;
+        }
+
+        .photo-box p {
+            font-size: 12px;
             color: var(--text-muted);
-        }
-
-        /* Receiving Modal */
-        .receiving-modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.9);
-            z-index: 1000;
-            overflow-y: auto;
-            padding: 40px 20px;
-        }
-
-        .receiving-modal.active {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .receiving-container {
-            max-width: 1200px;
-            width: 100%;
-            background: var(--bg-card);
-            border-radius: 20px;
-            padding: 40px;
-            max-height: 90vh;
-            overflow-y: auto;
         }
 
         /* Pricing Section */
@@ -495,64 +591,66 @@
             background: white;
         }
 
-        /* Pricing Cards */
+        /* Pricing Cards - Smaller like Cluely */
         .pricing-cards {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 24px;
+            gap: 20px;
         }
 
         .pricing-card {
             background: var(--bg-card);
             border: 1px solid var(--surface-border);
-            border-radius: 16px;
-            padding: 32px 24px;
+            border-radius: 12px;
+            padding: 24px 20px;
             position: relative;
             transition: all 0.3s;
         }
 
         .pricing-card:hover {
-            transform: translateY(-8px);
+            transform: translateY(-4px);
             border-color: var(--accent);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
         }
 
         .pricing-tier {
-            font-size: 12px;
+            font-size: 11px;
             color: var(--text-secondary);
             text-transform: uppercase;
             letter-spacing: 0.1em;
-            margin-bottom: 12px;
+            margin-bottom: 8px;
+            font-weight: 600;
         }
 
         .pricing-price {
-            font-size: 36px;
+            font-size: 28px;
             font-weight: 800;
             margin-bottom: 4px;
         }
 
         .pricing-price span {
-            font-size: 14px;
+            font-size: 12px;
             color: var(--text-secondary);
             font-weight: 400;
         }
 
         .pricing-description {
             color: var(--text-secondary);
-            margin-bottom: 24px;
-            font-size: 13px;
+            margin-bottom: 20px;
+            font-size: 12px;
+            min-height: 32px;
         }
 
         .pricing-btn {
             width: 100%;
-            padding: 12px;
-            border-radius: 8px;
+            padding: 10px;
+            border-radius: 6px;
             font-weight: 600;
             cursor: pointer;
             transition: all 0.2s;
             border: none;
-            font-size: 14px;
-            margin-bottom: 24px;
+            font-size: 13px;
+            margin-bottom: 20px;
         }
 
         .pricing-btn.btn-dark {
@@ -566,7 +664,7 @@
         }
 
         .pricing-btn:hover {
-            transform: translateY(-2px);
+            transform: translateY(-1px);
         }
 
         .pricing-features {
@@ -574,19 +672,67 @@
         }
 
         .pricing-features li {
-            padding: 8px 0;
+            padding: 6px 0;
             display: flex;
             align-items: flex-start;
-            gap: 8px;
-            font-size: 12px;
+            gap: 6px;
+            font-size: 11px;
             color: var(--text-secondary);
+            line-height: 1.4;
         }
 
         .pricing-features li::before {
             content: '✓';
             color: var(--success);
             font-weight: bold;
-            margin-top: 2px;
+            margin-top: 1px;
+            font-size: 10px;
+        }
+
+        /* Pricing Table */
+        .pricing-table {
+            margin-top: 60px;
+            background: var(--bg-card);
+            border-radius: 16px;
+            padding: 32px;
+            border: 1px solid var(--surface-border);
+        }
+
+        .pricing-table h3 {
+            font-size: 20px;
+            margin-bottom: 24px;
+        }
+
+        .table-section {
+            margin-bottom: 32px;
+        }
+
+        .table-section h4 {
+            font-size: 14px;
+            color: var(--text-secondary);
+            margin-bottom: 16px;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .table-row {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr 1fr;
+            padding: 12px 0;
+            border-bottom: 1px solid var(--surface-border);
+            font-size: 13px;
+        }
+
+        .table-row:last-child {
+            border-bottom: none;
+        }
+
+        .table-check {
+            color: var(--success);
+        }
+
+        .table-x {
+            color: var(--text-muted);
         }
 
         /* Mobile Responsive */
@@ -604,6 +750,10 @@
             .comparison-split {
                 grid-template-columns: 1fr;
             }
+
+            .table-row {
+                grid-template-columns: 2fr 1fr 1fr;
+            }
         }
     </style>
 </head>
@@ -611,7 +761,7 @@
     <!-- Authentication Modal -->
     <div class="auth-modal" id="authModal">
         <div class="auth-container">
-            <img src="icon48.png" alt="Trakie" class="auth-logo">
+            <div class="auth-logo">⚡</div>
             <h1 class="auth-title">Cannabis Inventory ai</h1>
             <p class="auth-subtitle">The shortcut to Dutchie they don't want you to have</p>
             <p class="auth-tagline">Members Only Access</p>
@@ -626,7 +776,7 @@
         <nav class="nav-header">
             <div class="nav-content">
                 <div class="nav-logo">
-                    <img src="icon48.png" alt="Trakie">
+                    <div class="nav-logo-icon">⚡</div>
                     <span>Trakie.ai</span>
                 </div>
                 <div class="nav-menu">
@@ -651,6 +801,19 @@
             <div class="qr-section">
                 <h3 class="qr-title">Try It Now</h3>
                 <div class="qr-container" id="qrContainer"></div>
+                
+                <!-- Example Products -->
+                <div class="example-products">
+                    <div class="example-product">
+                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 120'%3E%3Crect fill='%23333' width='200' height='120'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' dy='.3em' fill='%23666' font-family='sans-serif' font-size='14'%3EProduct Front%3C/text%3E%3C/svg%3E" alt="Product Front">
+                        <p>Blue Dream 3.5g</p>
+                    </div>
+                    <div class="example-product">
+                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 120'%3E%3Crect fill='%23333' width='200' height='120'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' dy='.3em' fill='%23666' font-family='sans-serif' font-size='14'%3EProduct Back%3C/text%3E%3C/svg%3E" alt="Product Back">
+                        <p>THC: 22% | Batch: B2024</p>
+                    </div>
+                </div>
+                
                 <button class="try-it-btn" onclick="startDemo()">Try It</button>
             </div>
 
@@ -666,34 +829,55 @@
                 <h2 class="comparison-title">Test Your Speed</h2>
                 <p style="font-size: 20px; color: var(--text-secondary);">See how long it takes to enter one product manually</p>
                 <div class="timer-display" id="timer">00:00</div>
-                <button class="try-it-btn" onclick="startTimer()">Start Manual Entry</button>
+                <div class="timer-controls">
+                    <button class="timer-btn start" onclick="startTimer()">Start</button>
+                    <button class="timer-btn pause" onclick="pauseTimer()">Pause</button>
+                    <button class="timer-btn reset" onclick="resetTimer()">Reset</button>
+                </div>
             </div>
 
             <div class="comparison-split">
                 <!-- Manual Side -->
                 <div class="comparison-side manual-side">
-                    <h3 style="color: var(--error);">Manual Entry</h3>
+                    <div class="time-badge" id="manualTime" style="display: none;">00:00</div>
+                    <h3>Manual Entry</h3>
                     <div class="photo-preview">
-                        <div class="photo-box">Product Photo</div>
-                        <div class="photo-box">Invoice</div>
+                        <div class="photo-box">
+                            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 150'%3E%3Crect fill='%23222' width='200' height='150'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' dy='.3em' fill='%23555' font-family='sans-serif' font-size='12'%3EInvoice%3C/text%3E%3C/svg%3E" alt="Invoice">
+                            <p>Invoice</p>
+                        </div>
+                        <div class="photo-box">
+                            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 150'%3E%3Crect fill='%23222' width='200' height='150'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' dy='.3em' fill='%23555' font-family='sans-serif' font-size='12'%3EProduct%3C/text%3E%3C/svg%3E" alt="Product">
+                            <p>Product Photo</p>
+                        </div>
                     </div>
                     <p>Type each field manually...</p>
                 </div>
 
                 <!-- Trakie Side -->
                 <div class="comparison-side trakie-side">
-                    <h3 style="color: var(--success);">With Trakie</h3>
+                    <div class="time-badge" id="trakieTime" style="display: none;">00:03</div>
+                    <h3>With Trakie</h3>
                     <div class="photo-preview">
-                        <div class="photo-box">Auto-Capture</div>
-                        <div class="photo-box">Auto-Focus</div>
+                        <div class="photo-box">
+                            <p style="font-size: 24px; margin-bottom: 8px;">📸</p>
+                            <p>Auto-Capture</p>
+                        </div>
+                        <div class="photo-box">
+                            <p style="font-size: 24px; margin-bottom: 8px;">🎯</p>
+                            <p>Auto-Focus</p>
+                        </div>
                     </div>
                     <p>Everything fills instantly!</p>
                 </div>
             </div>
 
-            <div style="text-align: center;">
+            <div style="text-align: center; margin-top: 60px;">
                 <h3 style="font-size: 32px; margin-bottom: 20px;">Now Try With Trakie</h3>
-                <button class="try-it-btn" onclick="showQRDemo()">Scan QR Code</button>
+                <div class="qr-section" style="display: inline-block;">
+                    <div class="qr-container" id="qrContainer2"></div>
+                    <button class="try-it-btn" onclick="simulateTrakieFill()">Scan QR Code</button>
+                </div>
             </div>
         </section>
 
@@ -720,243 +904,6 @@
             <div class="pricing-cards" id="monthlyPricing">
                 <!-- Free Trial -->
                 <div class="pricing-card">
-                    <div class="pricing-tier">Free Trial</div>
-                    <div class="pricing-price">$0</div>
-                    <div class="pricing-description">7 days full access</div>
-                    <button class="pricing-btn btn-dark">Start Free</button>
-                    <ul class="pricing-features">
-                        <li>Snap photo → Info appears</li>
-                        <li>1 user account</li>
-                        <li>Test with your products</li>
-                        <li>Email support</li>
-                    </ul>
-                </div>
-
-                <!-- Single Store -->
-                <div class="pricing-card">
-                    <div class="pricing-tier">Single Store</div>
-                    <div class="pricing-price">$99<span>/mo</span></div>
-                    <div class="pricing-description">1 location, 1 user</div>
-                    <button class="pricing-btn btn-blue">Subscribe</button>
-                    <ul class="pricing-features">
-                        <li>Scan 50 products in 5 min</li>
-                        <li>Reads labels in 1 second</li>
-                        <li>State compliance ready</li>
-                        <li>Live chat support</li>
-                    </ul>
-                </div>
-
-                <!-- Multi-Store -->
-                <div class="pricing-card">
-                    <div class="pricing-tier">Multi-Store</div>
-                    <div class="pricing-price">$333<span>/mo</span></div>
-                    <div class="pricing-description">Up to 4 locations</div>
-                    <button class="pricing-btn btn-blue">Subscribe</button>
-                    <ul class="pricing-features">
-                        <li>Everything in Single</li>
-                        <li>4 stores, unlimited users</li>
-                        <li>Priority processing</li>
-                        <li>Dutchie integration</li>
-                        <li>Phone support</li>
-                    </ul>
-                </div>
-
-                <!-- Enterprise -->
-                <div class="pricing-card">
-                    <div class="pricing-tier">Enterprise</div>
-                    <div class="pricing-price">$999<span>/mo</span></div>
-                    <div class="pricing-description">5+ locations</div>
-                    <button class="pricing-btn btn-blue">Talk to Sales</button>
-                    <ul class="pricing-features">
-                        <li>Unlimited locations</li>
-                        <li>White glove setup</li>
-                        <li>Dedicated manager</li>
-                        <li>Custom features</li>
-                        <li>99.9% uptime</li>
-                    </ul>
-                </div>
-            </div>
-
-            <!-- Yearly Pricing -->
-            <div class="pricing-cards" id="yearlyPricing" style="display: none;">
-                <!-- Free Trial -->
-                <div class="pricing-card">
-                    <div class="pricing-tier">Free Trial</div>
-                    <div class="pricing-price">$0</div>
-                    <div class="pricing-description">72 hours full access</div>
-                    <button class="pricing-btn btn-dark">Start Free</button>
-                    <ul class="pricing-features">
-                        <li>Snap photo → Info appears</li>
-                        <li>1 user account</li>
-                        <li>Test with your products</li>
-                        <li>Email support</li>
-                    </ul>
-                </div>
-
-                <!-- Single Store -->
-                <div class="pricing-card">
-                    <div class="pricing-tier">Single Store</div>
-                    <div class="pricing-price">$999<span>/yr</span></div>
-                    <div class="pricing-description">Save $189</div>
-                    <button class="pricing-btn btn-blue">Subscribe</button>
-                    <ul class="pricing-features">
-                        <li>Scan 50 products in 5 min</li>
-                        <li>Reads labels in 1 second</li>
-                        <li>State compliance ready</li>
-                        <li>Live chat support</li>
-                    </ul>
-                </div>
-
-                <!-- Multi-Store -->
-                <div class="pricing-card">
-                    <div class="pricing-tier">Multi-Store</div>
-                    <div class="pricing-price">$3,399<span>/yr</span></div>
-                    <div class="pricing-description">Save $597</div>
-                    <button class="pricing-btn btn-blue">Subscribe</button>
-                    <ul class="pricing-features">
-                        <li>Everything in Single</li>
-                        <li>4 stores, unlimited users</li>
-                        <li>Priority processing</li>
-                        <li>Dutchie integration</li>
-                        <li>Phone support</li>
-                    </ul>
-                </div>
-
-                <!-- Enterprise -->
-                <div class="pricing-card">
-                    <div class="pricing-tier">Enterprise</div>
-                    <div class="pricing-price">$9,999<span>/yr</span></div>
-                    <div class="pricing-description">Save $1,989</div>
-                    <button class="pricing-btn btn-blue">Talk to Sales</button>
-                    <ul class="pricing-features">
-                        <li>Unlimited locations</li>
-                        <li>White glove setup</li>
-                        <li>Dedicated manager</li>
-                        <li>Custom features</li>
-                        <li>99.9% uptime</li>
-                    </ul>
-                </div>
-            </div>
-        </section>
-    </div>
-
-    <script>
-        // Timer variables
-        let timerInterval;
-        let seconds = 0;
-
-        // Authentication
-        function authenticate() {
-            const password = document.getElementById('passwordInput').value;
-            if (password === 'PasswordBoss123!') {
-                document.getElementById('authModal').style.display = 'none';
-                document.getElementById('mainApp').style.display = 'block';
-                initializeApp();
-            }
-        }
-
-        // Enter key for password
-        document.getElementById('passwordInput')?.addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') authenticate();
-        });
-
-        // Initialize App
-        function initializeApp() {
-            setTimeout(generateQRCode, 100);
-        }
-
-        // Generate QR Code
-        function generateQRCode() {
-            const qrContainer = document.getElementById('qrContainer');
-            if (!qrContainer || typeof QRCode === 'undefined') return;
-            
-            qrContainer.innerHTML = '';
-            const mobileUrl = `${window.location.origin}#camera-capture`;
-            
-            new QRCode(qrContainer, {
-                text: mobileUrl,
-                width: 200,
-                height: 200,
-                colorDark: '#000000',
-                colorLight: '#FFFFFF',
-                correctLevel: QRCode.CorrectLevel.H
-            });
-        }
-
-        // Start Demo
-        function startDemo() {
-            alert('Mobile camera interface would open here');
-        }
-
-        // Timer Functions
-        function startTimer() {
-            seconds = 0;
-            updateTimerDisplay();
-            
-            if (timerInterval) clearInterval(timerInterval);
-            
-            timerInterval = setInterval(() => {
-                seconds++;
-                updateTimerDisplay();
-            }, 1000);
-        }
-
-        function updateTimerDisplay() {
-            const minutes = Math.floor(seconds / 60);
-            const secs = seconds % 60;
-            document.getElementById('timer').textContent = 
-                `${minutes.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
-        }
-
-        function showQRDemo() {
-            if (timerInterval) clearInterval(timerInterval);
-            alert('QR code scanner would open - Everything auto-fills in 3 seconds!');
-        }
-
-        // Toggle Pricing
-        function togglePricing() {
-            const toggle = document.getElementById('toggleSwitch');
-            const monthlyCards = document.getElementById('monthlyPricing');
-            const yearlyCards = document.getElementById('yearlyPricing');
-            const monthlyLabel = document.getElementById('monthlyLabel');
-            const yearlyLabel = document.getElementById('yearlyLabel');
-            
-            toggle.classList.toggle('active');
-            
-            if (toggle.classList.contains('active')) {
-                monthlyCards.style.display = 'none';
-                yearlyCards.style.display = 'grid';
-                monthlyLabel.classList.remove('active');
-                yearlyLabel.classList.add('active');
-            } else {
-                monthlyCards.style.display = 'grid';
-                yearlyCards.style.display = 'none';
-                monthlyLabel.classList.add('active');
-                yearlyLabel.classList.remove('active');
-            }
-        }
-
-        // Smooth scroll for navigation
-        document.querySelectorAll('.nav-link').forEach(link => {
-            link.addEventListener('click', function(e) {
-                e.preventDefault();
-                const target = this.getAttribute('href');
-                if (target === '#receive') {
-                    document.getElementById('receive').scrollIntoView({ behavior: 'smooth' });
-                } else if (target === '#pricing') {
-                    document.getElementById('pricing').scrollIntoView({ behavior: 'smooth' });
-                }
-            });
-        });
-
-        // Check for mobile QR scan
-        if (window.location.hash === '#camera-capture' && /mobile/i.test(navigator.userAgent)) {
-            setTimeout(() => {
-                document.getElementById('authModal').style.display = 'none';
-                document.getElementById('mainApp').style.display = 'block';
-                initializeApp();
-            }, 500);
-        }
-    </script>
-</body>
-</html>
+                    <div class="pricing-tier">Starter</div>
+                    <div class="pricing-price">Free</div>
+                    <div class="
