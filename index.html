@@ -3,94 +3,930 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Trakie - Test Auth</title>
+    <title>Trakie - #1 Cannabis Inventory AI</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tesseract.js/4.1.1/tesseract.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode/1.5.3/qrcode.min.js"></script>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+        
+        :root {
+            --bg-primary: #000000;
+            --bg-secondary: #0A0A0A;
+            --bg-card: #111111;
+            --surface-border: rgba(255, 255, 255, 0.08);
+            --text-primary: #FFFFFF;
+            --text-secondary: #9CA3AF;
+            --text-muted: #6B7280;
+            --accent: #3B82F6;
+            --accent-bright: #60A5FA;
+            --success: #10B981;
+            --error: #EF4444;
+            --warning: #F59E0B;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
-            background: #000;
-            color: #fff;
-            font-family: sans-serif;
+            font-family: 'Inter', -apple-system, system-ui, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Authentication Modal */
+        .auth-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.98);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10000;
+        }
+
+        .auth-container {
+            text-align: center;
+            max-width: 440px;
+            width: 90%;
+        }
+
+        .auth-logo {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 32px;
+            border-radius: 20px;
+            position: relative;
+            display: block;
+            animation: shimmer 3s ease infinite;
+            box-shadow: 0 0 30px rgba(59, 130, 246, 0.3);
+        }
+
+        .auth-logo-fallback {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 32px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 60px;
+            font-weight: 900;
+            background: linear-gradient(45deg, #06B6D4, #3B82F6);
+            color: white;
+            animation: shimmer 3s ease infinite;
+            box-shadow: 0 0 30px rgba(59, 130, 246, 0.3);
+        }
+
+        @keyframes shimmer {
+            0%, 100% { 
+                box-shadow: 0 0 20px rgba(59, 130, 246, 0.3);
+                transform: scale(1);
+            }
+            50% { 
+                box-shadow: 0 0 40px rgba(6, 182, 212, 0.5);
+                transform: scale(1.02);
+            }
+        }
+
+        .auth-title {
+            font-size: 36px;
+            font-weight: 800;
+            margin-bottom: 16px;
+            letter-spacing: -0.02em;
+        }
+
+        .auth-subtitle {
+            font-size: 18px;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+        }
+
+        .auth-tagline {
+            font-size: 14px;
+            color: var(--text-muted);
+            font-style: italic;
+            margin-bottom: 40px;
+        }
+
+        .password-input {
+            width: 100%;
+            padding: 18px 20px;
+            background: var(--bg-card);
+            border: 1px solid var(--surface-border);
+            border-radius: 12px;
+            color: white;
+            font-size: 16px;
+            margin-bottom: 20px;
+            transition: all 0.2s;
+        }
+
+        .password-input:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        }
+
+        .auth-btn {
+            width: 100%;
+            padding: 18px;
+            background: var(--accent);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .auth-btn:hover {
+            background: var(--accent-bright);
+            transform: translateY(-2px);
+        }
+
+        /* Navigation */
+        .nav-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--surface-border);
+            z-index: 100;
+            padding: 20px 40px;
+        }
+
+        .nav-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .nav-logo img {
+            width: 36px;
+            height: 36px;
+            border-radius: 8px;
+        }
+
+        .nav-logo span {
+            font-size: 20px;
+            font-weight: 700;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 32px;
+        }
+
+        .nav-link {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 15px;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .nav-link:hover {
+            color: var(--text-primary);
+        }
+
+        .nav-cta {
+            padding: 10px 20px;
+            background: var(--accent);
+            color: white;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 15px;
+            transition: all 0.2s;
+        }
+
+        .nav-cta:hover {
+            background: var(--accent-bright);
+            transform: translateY(-1px);
+        }
+
+        /* Hero Section */
+        .hero-section {
+            padding: 160px 40px 100px;
+            text-align: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .hero-title {
+            font-size: clamp(48px, 8vw, 96px);
+            font-weight: 900;
+            line-height: 1;
+            letter-spacing: -0.03em;
+            margin-bottom: 24px;
+            background: linear-gradient(135deg, #FFFFFF 0%, #94A3B8 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-subtitle {
+            font-size: clamp(20px, 3vw, 32px);
+            color: var(--text-secondary);
+            font-weight: 500;
+            margin-bottom: 16px;
+        }
+
+        .hero-tagline {
+            font-size: 18px;
+            color: var(--accent-bright);
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        .hero-description {
+            font-size: 20px;
+            color: var(--text-muted);
+            margin-bottom: 48px;
+        }
+
+        /* QR Section */
+        .qr-section {
+            display: inline-block;
+            background: var(--bg-card);
+            border: 1px solid var(--surface-border);
+            border-radius: 20px;
+            padding: 32px;
+            margin-bottom: 60px;
+        }
+
+        .qr-title {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .qr-container {
+            margin-bottom: 20px;
+            min-height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .qr-container canvas {
+            border-radius: 12px;
+        }
+
+        /* Example Products */
+        .example-products {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin: 20px 0;
+        }
+
+        .example-product {
+            background: var(--bg-secondary);
+            border: 1px solid var(--surface-border);
+            border-radius: 12px;
+            padding: 16px;
+            text-align: center;
+        }
+
+        .example-product img {
+            width: 100%;
+            height: 120px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 8px;
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .example-product p {
+            font-size: 12px;
+            color: var(--text-muted);
+        }
+
+        .try-it-btn {
+            padding: 16px 48px;
+            background: var(--accent);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 18px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .try-it-btn:hover {
+            background: var(--accent-bright);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(59, 130, 246, 0.3);
+        }
+
+        /* Process Steps */
+        .process-section {
+            text-align: center;
+            padding: 0 40px;
+            margin-bottom: 100px;
+        }
+
+        .process-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--text-secondary);
+            letter-spacing: 0.1em;
+        }
+
+        /* Timer Comparison Section */
+        .timer-comparison {
+            max-width: 1200px;
+            margin: 100px auto;
+            padding: 40px;
+        }
+
+        .comparison-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .comparison-title {
+            font-size: 48px;
+            font-weight: 800;
+            margin-bottom: 20px;
+        }
+
+        .timer-display {
+            font-size: 72px;
+            font-weight: 900;
+            color: var(--accent);
+            margin: 40px 0;
+            font-variant-numeric: tabular-nums;
+        }
+
+        .timer-controls {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            margin-bottom: 40px;
+        }
+
+        .timer-btn {
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: none;
+            font-size: 16px;
+        }
+
+        .timer-btn.start {
+            background: var(--success);
+            color: white;
+        }
+
+        .timer-btn.pause {
+            background: var(--warning);
+            color: white;
+        }
+
+        .timer-btn.reset {
+            background: var(--error);
+            color: white;
+        }
+
+        .timer-btn:hover {
+            transform: translateY(-2px);
+            opacity: 0.9;
+        }
+
+        .comparison-split {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 60px;
+        }
+
+        .comparison-side {
+            background: var(--bg-card);
+            border: 1px solid var(--surface-border);
+            border-radius: 20px;
+            padding: 32px;
+            position: relative;
+        }
+
+        .comparison-side h3 {
+            font-size: 24px;
+            margin-bottom: 24px;
+        }
+
+        .manual-side {
+            border-color: var(--error);
+        }
+
+        .manual-side h3 {
+            color: var(--error);
+        }
+
+        .trakie-side {
+            border-color: var(--success);
+        }
+
+        .trakie-side h3 {
+            color: var(--success);
+        }
+
+        .time-badge {
+            position: absolute;
+            top: -20px;
+            right: 20px;
+            background: var(--bg-primary);
+            padding: 8px 16px;
+            border-radius: 20px;
+            border: 2px solid;
+            font-weight: 700;
+            font-size: 20px;
+        }
+
+        .manual-side .time-badge {
+            border-color: var(--error);
+            color: var(--error);
+        }
+
+        .trakie-side .time-badge {
+            border-color: var(--success);
+            color: var(--success);
+        }
+
+        .photo-preview {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        .photo-box {
+            aspect-ratio: 1;
+            background: var(--bg-secondary);
+            border-radius: 12px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            border: 2px dashed var(--surface-border);
+            padding: 16px;
+        }
+
+        .photo-box img {
+            width: 100%;
+            height: 80%;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 8px;
+        }
+
+        .photo-box p {
+            font-size: 12px;
+            color: var(--text-muted);
+        }
+
+        /* Pricing Section */
+        .pricing-section {
+            padding: 100px 40px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .pricing-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .pricing-title {
+            font-size: 48px;
+            font-weight: 800;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 16px;
+        }
+
+        .pricing-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--accent);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+        }
+
+        .pricing-subtitle {
+            font-size: 20px;
+            color: var(--text-secondary);
+        }
+
+        /* Toggle Switch */
+        .pricing-toggle {
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
-            margin: 0;
+            gap: 20px;
+            margin-bottom: 48px;
         }
-        .auth-box {
-            text-align: center;
-            padding: 40px;
-            background: #111;
-            border-radius: 20px;
-            border: 1px solid #333;
-        }
-        input {
-            padding: 15px;
+
+        .toggle-label {
             font-size: 16px;
-            width: 250px;
-            margin: 20px 0;
-            background: #222;
-            border: 1px solid #444;
-            color: white;
-            border-radius: 8px;
+            color: var(--text-secondary);
+            transition: color 0.3s;
         }
-        button {
-            padding: 15px 30px;
-            background: #3B82F6;
-            color: white;
-            border: none;
-            border-radius: 8px;
-            font-size: 16px;
+
+        .toggle-label.active {
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+
+        .toggle-switch {
+            position: relative;
+            width: 60px;
+            height: 32px;
+            background: var(--bg-secondary);
+            border: 1px solid var(--surface-border);
+            border-radius: 100px;
             cursor: pointer;
+            transition: all 0.3s;
         }
-        button:hover {
-            background: #60A5FA;
+
+        .toggle-slider {
+            position: absolute;
+            top: 3px;
+            left: 4px;
+            width: 24px;
+            height: 24px;
+            background: var(--text-secondary);
+            border-radius: 50%;
+            transition: all 0.3s;
         }
-        #result {
-            margin-top: 20px;
-            color: #10B981;
+
+        .toggle-switch.active {
+            background: var(--accent);
+        }
+
+        .toggle-switch.active .toggle-slider {
+            left: 30px;
+            background: white;
+        }
+
+        /* Pricing Cards - Smaller like Cluely */
+        .pricing-cards {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+
+        .pricing-card {
+            background: var(--bg-card);
+            border: 1px solid var(--surface-border);
+            border-radius: 12px;
+            padding: 24px 20px;
+            position: relative;
+            transition: all 0.3s;
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--accent);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .pricing-tier {
+            font-size: 11px;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .pricing-price {
+            font-size: 28px;
+            font-weight: 800;
+            margin-bottom: 4px;
+        }
+
+        .pricing-price span {
+            font-size: 12px;
+            color: var(--text-secondary);
+            font-weight: 400;
+        }
+
+        .pricing-description {
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+            font-size: 12px;
+            min-height: 32px;
+        }
+
+        .pricing-btn {
+            width: 100%;
+            padding: 10px;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: none;
+            font-size: 13px;
+            margin-bottom: 20px;
+        }
+
+        .pricing-btn.btn-dark {
+            background: #1F2937;
+            color: white;
+        }
+
+        .pricing-btn.btn-blue {
+            background: var(--accent);
+            color: white;
+        }
+
+        .pricing-btn:hover {
+            transform: translateY(-1px);
+        }
+
+        .pricing-features {
+            list-style: none;
+        }
+
+        .pricing-features li {
+            padding: 6px 0;
+            display: flex;
+            align-items: flex-start;
+            gap: 6px;
+            font-size: 11px;
+            color: var(--text-secondary);
+            line-height: 1.4;
+        }
+
+        .pricing-features li::before {
+            content: '✓';
+            color: var(--success);
+            font-weight: bold;
+            margin-top: 1px;
+            font-size: 10px;
+        }
+
+        /* Pricing Table */
+        .pricing-table {
+            margin-top: 60px;
+            background: var(--bg-card);
+            border-radius: 16px;
+            padding: 32px;
+            border: 1px solid var(--surface-border);
+        }
+
+        .pricing-table h3 {
+            font-size: 20px;
+            margin-bottom: 24px;
+        }
+
+        .table-section {
+            margin-bottom: 32px;
+        }
+
+        .table-section h4 {
+            font-size: 14px;
+            color: var(--text-secondary);
+            margin-bottom: 16px;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .table-row {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr 1fr;
+            padding: 12px 0;
+            border-bottom: 1px solid var(--surface-border);
+            font-size: 13px;
+        }
+
+        .table-row:last-child {
+            border-bottom: none;
+        }
+
+        .table-check {
+            color: var(--success);
+        }
+
+        .table-x {
+            color: var(--text-muted);
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 1200px) {
+            .pricing-cards {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .pricing-cards {
+                grid-template-columns: 1fr;
+            }
+
+            .comparison-split {
+                grid-template-columns: 1fr;
+            }
+
+            .table-row {
+                grid-template-columns: 2fr 1fr 1fr;
+            }
         }
     </style>
-</head>
-<body>
-    <div class="auth-box">
-        <h1>Cannabis Inventory AI</h1>
-        <p>Password Test</p>
-        <input type="text" id="pwd" placeholder="Type password here">
-        <br>
-        <button onclick="testAuth()">Test Password</button>
-        <div id="result"></div>
-        <p style="color: #666; margin-top: 30px;">
-            Expected password: PasswordBoss123!<br>
-            Type it exactly as shown
-        </p>
-    </div>
-
     <script>
-        function testAuth() {
-            var input = document.getElementById('pwd').value;
-            var result = document.getElementById('result');
-            
-            console.log('You typed:', input);
-            console.log('Expected:', 'PasswordBoss123!');
-            console.log('Match:', input === 'PasswordBoss123!');
-            
-            if (input === 'PasswordBoss123!') {
-                result.innerHTML = '✓ SUCCESS! Password is correct!';
-                result.style.color = '#10B981';
+        // Simple password check
+        function checkPassword() {
+            var pwd = document.getElementById('passwordInput').value;
+            if (pwd === 'PasswordBoss123!') {
+                document.getElementById('authModal').style.display = 'none';
+                document.getElementById('mainApp').style.display = 'block';
                 setTimeout(function() {
-                    alert('Password works! Redirecting to main app...');
-                    // Here we would show the main app
-                }, 1000);
+                    if (typeof QRCode !== 'undefined') {
+                        generateQRCode();
+                        generateQRCode2();
+                    }
+                }, 100);
             } else {
-                result.innerHTML = '✗ Wrong. You typed: "' + input + '"<br>Expected: "PasswordBoss123!"';
-                result.style.color = '#EF4444';
+                alert('Wrong password');
             }
         }
-        
-        document.getElementById('pwd').addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') {
-                testAuth();
-            }
-        });
     </script>
-</body>
-</html>
+</head>
+<body>
+    <!-- Authentication Modal -->
+    <div class="auth-modal" id="authModal">
+        <div class="auth-container">
+            <div style="width: 120px; height: 120px; margin: 0 auto 32px; border-radius: 20px; background: linear-gradient(45deg, #06B6D4, #3B82F6); display: flex; align-items: center; justify-content: center; font-size: 48px; font-weight: 900; color: white; animation: shimmer 3s ease infinite; box-shadow: 0 0 30px rgba(59, 130, 246, 0.3);">T</div>
+            <h1 class="auth-title">Cannabis Inventory AI</h1>
+            <p class="auth-subtitle">The shortcut to Dutchie they don't want you to have</p>
+            <p class="auth-tagline">Members Only Access</p>
+            <input type="password" class="password-input" id="passwordInput" placeholder="Enter Password" autocomplete="new-password" onkeypress="if(event.key==='Enter') checkPassword()">
+            <button class="auth-btn" onclick="checkPassword()">Access Platform</button>
+        </div>
+    </div>
+
+    <!-- Main App -->
+    <div id="mainApp" style="display: none;">
+        <!-- Navigation -->
+        <nav class="nav-header">
+            <div class="nav-content">
+                <div class="nav-logo">
+                    <img src="icon48.png" alt="Trakie">
+                    <span>Trakie.ai</span>
+                </div>
+                <div class="nav-menu">
+                    <a href="#scan" class="nav-link">Scan</a>
+                    <a href="#verify" class="nav-link">Verify</a>
+                    <a href="#receive" class="nav-link">Receive</a>
+                    <a href="#pricing" class="nav-link">Pricing</a>
+                </div>
+                <a href="#" class="nav-cta">Get Started Free</a>
+            </div>
+        </nav>
+
+        <!-- Hero Section -->
+        <section class="hero-section">
+            <h1 class="hero-title">#1 Cannabis Inventory AI</h1>
+            <p class="hero-subtitle">Your competition manually enters. You use Trakie.</p>
+            <p class="hero-tagline">No More Headaches.</p>
+            <p class="hero-description">10x faster than manual entry</p>
+            <p class="hero-description" style="font-style: italic; color: var(--accent-bright);">The AI shortcut to Dutchie they don't want you to have</p>
+            
+            <!-- QR Code Section -->
+            <div class="qr-section">
+                <h3 class="qr-title">Try It Now</h3>
+                <div class="qr-container" id="qrContainer"></div>
+                
+                <!-- Example Products -->
+                <div class="example-products">
+                    <div class="example-product">
+                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 120'%3E%3Crect fill='%23333' width='200' height='120'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' dy='.3em' fill='%23666' font-family='sans-serif' font-size='14'%3EProduct Front%3C/text%3E%3C/svg%3E" alt="Product Front">
+                        <p>Blue Dream 3.5g</p>
+                    </div>
+                    <div class="example-product">
+                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 120'%3E%3Crect fill='%23333' width='200' height='120'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' dy='.3em' fill='%23666' font-family='sans-serif' font-size='14'%3EProduct Back%3C/text%3E%3C/svg%3E" alt="Product Back">
+                        <p>THC: 22% | Batch: B2024</p>
+                    </div>
+                </div>
+                
+                <button class="try-it-btn" onclick="startDemo()">Try It</button>
+            </div>
+
+            <!-- Process -->
+            <div class="process-section">
+                <p class="process-title">SCAN &nbsp;•&nbsp; VERIFY &nbsp;•&nbsp; RECEIVE</p>
+            </div>
+        </section>
+
+        <!-- Timer Comparison Section -->
+        <section class="timer-comparison" id="receive">
+            <div class="comparison-header">
+                <h2 class="comparison-title">Test Your Speed</h2>
+                <p style="font-size: 20px; color: var(--text-secondary);">See how long it takes to enter one product manually</p>
+                <div class="timer-display" id="timer">00:00</div>
+                <div class="timer-controls">
+                    <button class="timer-btn start" onclick="startTimer()">Start</button>
+                    <button class="timer-btn pause" onclick="pauseTimer()">Pause</button>
+                    <button class="timer-btn reset" onclick="resetTimer()">Reset</button>
+                </div>
+            </div>
+
+            <div class="comparison-split">
+                <!-- Manual Side -->
+                <div class="comparison-side manual-side">
+                    <div class="time-badge" id="manualTime" style="display: none;">00:00</div>
+                    <h3>Manual Entry</h3>
+                    <div class="photo-preview">
+                        <div class="photo-box">
+                            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 150'%3E%3Crect fill='%23222' width='200' height='150'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' dy='.3em' fill='%23555' font-family='sans-serif' font-size='12'%3EInvoice%3C/text%3E%3C/svg%3E" alt="Invoice">
+                            <p>Invoice</p>
+                        </div>
+                        <div class="photo-box">
+                            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 150'%3E%3Crect fill='%23222' width='200' height='150'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' dy='.3em' fill='%23555' font-family='sans-serif' font-size='12'%3EProduct%3C/text%3E%3C/svg%3E" alt="Product">
+                            <p>Product Photo</p>
+                        </div>
+                    </div>
+                    <p>Type each field manually...</p>
+                </div>
+
+                <!-- Trakie Side -->
+                <div class="comparison-side trakie-side">
+                    <div class="time-badge" id="trakieTime" style="display: none;">00:03</div>
+                    <h3>With Trakie</h3>
+                    <div class="photo-preview">
+                        <div class="photo-box">
+                            <p style="font-size: 24px; margin-bottom: 8px;">📸</p>
+                            <p>Auto-Capture</p>
+                        </div>
+                        <div class="photo-box">
+                            <p style="font-size: 24px; margin-bottom: 8px;">🎯</p>
+                            <p>Auto-Focus</p>
+                        </div>
+                    </div>
+                    <p>Everything fills instantly!</p>
+                </div>
+            </div>
+
+            <div style="text-align: center; margin-top: 60px;">
+                <h3 style="font-size: 32px; margin-bottom: 20px;">Now Try With Trakie</h3>
+                <div class="qr-section" style="display: inline-block;">
+                    <div class="qr-container" id="qrContainer2"></div>
+                    <button class="try-it-btn" onclick="simulateTrakieFill()">Scan QR Code</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Pricing Section -->
+        <section class="pricing-section" id="pricing">
+            <div class="pricing-header">
+                <div class="pricing-title">
+                    <span>Start</span>
+                    <div class="pricing-icon">⚡</div>
+                    <span>for free.</span>
+                </div>
+                <p class="pricing-subtitle">Whether you're testing Trakie or ready to scale,<br>we have the right plan for your dispensary.</p>
+            </div>
+
+            <div class="pricing-toggle">
+                <span class="toggle-label active" id="monthlyLabel">Monthly</span>
+                <div class="toggle-switch" id="toggleSwitch" onclick="togglePricing()">
+                    <div class="toggle-slider"></div>
+                </div>
+                <span class="toggle-label" id="yearlyLabel">Annually</span>
+            </div>
+
+            <!-- Monthly Pricing -->
+            <div class="pricing-cards" id="monthlyPricing">
+                <!-- Free Trial -->
+                <div class="pricing-card">
+                    <div class="pricing-tier">Starter</div>
+                    <div class="pricing-price">Free</div>
+                    <div class="
