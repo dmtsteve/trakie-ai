@@ -4,8 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Trakie - #1 Cannabis Inventory AI</title>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
+    <link rel="stylesheet" href="/styles/globals.css">
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+        
         :root {
             --bg-primary: #000000;
             --bg-secondary: #0A0A0A;
@@ -36,6 +38,7 @@
             -webkit-font-smoothing: antialiased;
         }
 
+        /* Authentication Modal */
         .auth-modal {
             position: fixed;
             top: 0;
@@ -46,7 +49,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            z-index: 1000;
+            z-index: 10000;
         }
 
         .auth-container {
@@ -292,4 +295,4 @@
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 16px;
-            margin: 20px 0;
+           
