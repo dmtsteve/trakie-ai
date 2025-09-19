@@ -1,7 +1,4 @@
-<div class="nav-logo">
-                    <img src="icon48.png" alt="Trakie.ai Logo" style="width: 32px; height: 32px;">
-                    <span>Trakie.ai</span>
-                </div><!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -56,12 +53,6 @@
             width: 80px;
             height: 80px;
             margin-bottom: 12px;
-            object-fit: contain;
-        }
-
-        .nav-logo img {
-            width: 32px;
-            height: 32px;
             object-fit: contain;
         }
 
@@ -204,6 +195,12 @@
             color: white;
         }
 
+        .nav-logo img {
+            width: 32px;
+            height: 32px;
+            object-fit: contain;
+        }
+
         .nav-logo span {
             font-size: 20px;
             font-weight: 700;
@@ -287,7 +284,251 @@
             margin-bottom: 80px;
         }
 
-        /* Demo Section */
+        /* Problem/Solution Section */
+        .problem-solution-section {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 80px 40px;
+        }
+
+        .problem-container {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .problem-title {
+            font-size: clamp(36px, 8vw, 64px);
+            font-weight: 900;
+            color: #ef4444;
+            margin-bottom: 20px;
+            letter-spacing: -0.02em;
+        }
+
+        .problem-subtitle {
+            font-size: 24px;
+            color: #888888;
+            margin-bottom: 60px;
+        }
+
+        .problem-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .problem-card {
+            background: rgba(239, 68, 68, 0.1);
+            border: 1px solid rgba(239, 68, 68, 0.3);
+            border-radius: 16px;
+            padding: 30px 20px;
+            text-align: center;
+            transition: all 0.3s;
+        }
+
+        .problem-card:hover {
+            transform: translateY(-5px);
+            background: rgba(239, 68, 68, 0.15);
+        }
+
+        .problem-icon {
+            font-size: 48px;
+            margin-bottom: 15px;
+        }
+
+        .problem-card h3 {
+            font-size: 20px;
+            font-weight: 700;
+            color: #ef4444;
+            margin-bottom: 10px;
+        }
+
+        .problem-card p {
+            color: #cccccc;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        .solution-arrow {
+            text-align: center;
+            margin: 60px 0;
+        }
+
+        .arrow-line {
+            width: 100px;
+            height: 2px;
+            background: linear-gradient(90deg, #ef4444, #60A5FA);
+            margin: 0 auto 10px;
+        }
+
+        .arrow-text {
+            font-size: 18px;
+            color: #888888;
+            margin-bottom: 10px;
+            font-style: italic;
+        }
+
+        .arrow-point {
+            font-size: 36px;
+            color: #60A5FA;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-10px); }
+            60% { transform: translateY(-5px); }
+        }
+
+        .solution-container {
+            text-align: center;
+        }
+
+        .solution-title {
+            font-size: clamp(36px, 8vw, 64px);
+            font-weight: 900;
+            color: #10b981;
+            margin-bottom: 20px;
+            letter-spacing: -0.02em;
+        }
+
+        .solution-subtitle {
+            font-size: 24px;
+            color: #888888;
+            margin-bottom: 60px;
+        }
+
+        .magic-demo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 40px;
+            margin-bottom: 60px;
+            flex-wrap: wrap;
+        }
+
+        .photo-step, .autofill-step {
+            flex: 1;
+            min-width: 300px;
+            max-width: 400px;
+        }
+
+        .step-number {
+            width: 40px;
+            height: 40px;
+            background: #60A5FA;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            margin: 0 auto 20px;
+        }
+
+        .step-content h3 {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: #ffffff;
+        }
+
+        .photo-placeholder {
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px dashed rgba(96, 165, 250, 0.4);
+            border-radius: 16px;
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        .camera-icon {
+            font-size: 48px;
+            margin-bottom: 15px;
+        }
+
+        .magic-arrow {
+            font-size: 36px;
+            color: #10b981;
+            font-weight: bold;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.7; transform: scale(1.1); }
+        }
+
+        .autofill-demo {
+            background: rgba(16, 185, 129, 0.1);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            border-radius: 16px;
+            padding: 30px;
+            position: relative;
+        }
+
+        .form-preview {
+            text-align: left;
+            space-y: 10px;
+        }
+
+        .filling-field {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 14px;
+        }
+
+        .field-label {
+            color: #888888;
+            font-weight: 500;
+        }
+
+        .typing-text {
+            color: #10b981;
+            font-weight: 600;
+            min-width: 120px;
+            text-align: right;
+        }
+
+        .magic-sparkles {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            font-size: 24px;
+            animation: sparkle 1.5s infinite;
+        }
+
+        @keyframes sparkle {
+            0%, 100% { opacity: 1; transform: rotate(0deg); }
+            50% { opacity: 0.5; transform: rotate(180deg); }
+        }
+
+        .result-metrics {
+            display: flex;
+            justify-content: center;
+            gap: 60px;
+            margin-top: 40px;
+            flex-wrap: wrap;
+        }
+
+        .metric {
+            text-align: center;
+        }
+
+        .metric-number {
+            font-size: 48px;
+            font-weight: 900;
+            color: #10b981;
+            line-height: 1;
+        }
+
+        .metric-label {
+            font-size: 16px;
+            color: #888888;
+            font-weight: 600;
+            margin-top: 5px;
+        }
         .demo-section {
             max-width: 1200px;
             margin: 0 auto;
@@ -885,108 +1126,6 @@
         <header class="nav-header">
             <div class="nav-content">
                 <div class="nav-logo">
-                    <img src="icons/icon16.png" alt="Trakie.ai Logo" style="width: 32px; height: 32px;">
-                    <span>Trakie.ai</span>
-                </div>
-                <nav class="nav-menu">
-                    <a href="#scan" class="nav-link">Scan</a>
-                    <a href="#verify" class="nav-link">Verify</a>
-                    <a href="#receive" class="nav-link">Receive</a>
-                    <a href="#pricing" class="nav-link">Pricing</a>
-                </nav>
-                <a href="#pricing" class="nav-cta">Get Started Free</a>
-            </div>
-        </header>
-
-        <!-- Hero Section -->
-        <section class="hero-section" id="hero">
-            <h1 class="hero-main-title">#1 Cannabis Inventory AI</h1>
-            <p class="hero-subtitle">Your competition manually enters. You use Trakie.</p>
-            <p class="hero-blue-tagline">No More Headaches.</p>
-            <p class="hero-speed">10x faster than manual entry</p>
-            <p class="hero-final-tagline">The AI shortcut to Dutchie they don't want you to have</p>
-        </section>
-
-        <!-- Demo Section -->
-        <section class="demo-section" id="scan">
-            <h2 class="demo-title">Now Try With Trakie</h2>
-            <div class="demo-interface">
-                <div class="qr-scanner">
-                    <div class="qr-code">
-                        <canvas id="qrCanvas" width="180" height="180"></canvas>
-                    </div>
-                </div>
-                <button class="scan-btn">Scan QR Code</button>
-            </div>
-        </section>
-
-        <!-- Manual vs AI Comparison -->
-        <section class="comparison-section">
-            <h2 class="comparison-title">Manual Entry vs Trakie AI</h2>
-            <div class="comparison-container">
-                <div class="comparison-card manual-card">
-                    <h3>Manual Entry</h3>
-                    <div class="product-inputs">
-                        <div class="input-placeholder">Invoice</div>
-                        <div class="input-placeholder">Product</div>
-                    </div>
-                    <div class="comparison-tagline">Type each field manually...</div>
-                </div>
-                
-                <div class="comparison-card ai-card">
-                    <h3>With Trakie</h3>
-                    <div class="product-inputs">
-                        <div class="input-placeholder ai-input-placeholder">
-                            Auto-Capture
-                            <div class="auto-fill-icon">✓</div>
-                        </div>
-                        <div class="input-placeholder ai-input-placeholder">
-                            Auto-Focus
-                            <div class="auto-fill-icon">✓</div>
-                        </div>
-                    </div>
-                    <div class="comparison-tagline">Everything fills instantly!</div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Pricing Section -->
-        <section class="pricing-section" id="pricing">
-            <h2 class="pricing-title">Simple Pricing</h2>
-            <p class="pricing-subtitle">Start free, scale as you grow</p>
-            
-            <div class="pricing-toggle">
-                <div class="toggle-container">
-                    <button class="toggle-btn active" id="monthlyBtn" onclick="switchToPricing('monthly')">Monthly</button>
-                    <button class="toggle-btn" id="yearlyBtn" onclick="switchToPricing('yearly')">Yearly</button>
-                </div>
-            </div>
-            
-            <div class="pricing-grid" id="pricingGrid">
-                <div class="pricing-card">
-                    <h3 class="pricing-plan">Starter</h3>
-                    <div class="pricing-price" id="starterPrice">Free</div>
-                    <p class="pricing-period" id="starterPeriod">7 day trial</p>
-                    <ul class="pricing-features">
-                        <li>Up to 50 products</li>
-                        <li>Basic AI recognition</li>
-                        <li>Email support</li>
-                        <li>Single location</li>
-                    </ul>
-                    <button class="pricing-btn secondary">Start Free Trial</button>
-                </div>
-
-                <div class="pricing-card featured">
-                    <div class="pricing-badge">Most Popular</div>
-                    <h3 class="pricing-plan">Professional</h3>
-                    <div class="pricing-price" id="proPrice">$99</div>
-                    <p class="pricing-period" id="proPeriod">per location/month</p>
-                    <ul class="pricing-features">
-                        <li>Unlimited products</li>
-                        <li>Advanced AI recognition</li>
-                        <li>Dutchie integration</li>
-                        <li>Priority support</li>
-                        <li>Single location</li>
                     </ul>
                     <button class="pricing-btn">Choose Professional</button>
                 </div>
@@ -1223,6 +1362,7 @@
         </div>
     </div>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrious/4.0.2/qrious.min.js"></script>
     <script>
         let currentPricing = 'monthly';
         
@@ -1322,8 +1462,47 @@
             }
         });
 
+        // Auto-fill typing animation
+        function startAutoFillDemo() {
+            const fields = [
+                { id: 'productName', text: 'Blue Dream 3.5g', delay: 500 },
+                { id: 'thcPercent', text: '22%', delay: 1000 },
+                { id: 'strainName', text: 'Blue Dream', delay: 1500 },
+                { id: 'vendorName', text: 'Premium Gardens', delay: 2000 },
+                { id: 'batchId', text: 'B2024-089', delay: 2500 }
+            ];
+            
+            fields.forEach(field => {
+                setTimeout(() => {
+                    typeText(field.id, field.text);
+                }, field.delay);
+            });
+            
+            // Restart the demo every 6 seconds
+            setTimeout(startAutoFillDemo, 6000);
+        }
+        
+        function typeText(elementId, text) {
+            const element = document.getElementById(elementId);
+            if (!element) return;
+            
+            element.textContent = '';
+            let i = 0;
+            
+            const typeInterval = setInterval(() => {
+                if (i < text.length) {
+                    element.textContent += text.charAt(i);
+                    i++;
+                } else {
+                    clearInterval(typeInterval);
+                }
+            }, 100);
+        }
+        
+        // Start the demo when the page loads
         window.addEventListener('load', function() {
             document.getElementById('welcomePasswordInput').focus();
+            setTimeout(startAutoFillDemo, 2000); // Start after 2 seconds
         });
         
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -1347,4 +1526,207 @@
         });
     </script>
 </body>
-</html>
+</html><img src="icon48.png" alt="Trakie.ai Logo" style="width: 32px; height: 32px;">
+                    <span>Trakie.ai</span>
+                </div>
+                <nav class="nav-menu">
+                    <a href="#scan" class="nav-link">Scan</a>
+                    <a href="#verify" class="nav-link">Verify</a>
+                    <a href="#receive" class="nav-link">Receive</a>
+                    <a href="#pricing" class="nav-link">Pricing</a>
+                </nav>
+                <a href="#pricing" class="nav-cta">Get Started Free</a>
+            </div>
+        </header>
+
+        <!-- Hero Section -->
+        <section class="hero-section" id="hero">
+            <h1 class="hero-main-title">#1 Cannabis Inventory AI</h1>
+            <p class="hero-subtitle">Your competition manually enters. You use Trakie.</p>
+            <p class="hero-blue-tagline">No More Headaches.</p>
+            <p class="hero-speed">10x faster than manual entry</p>
+            <p class="hero-final-tagline">The AI shortcut to Dutchie they don't want you to have</p>
+        </section>
+
+        <!-- Problem/Solution Section -->
+        <section class="problem-solution-section">
+            <div class="problem-container">
+                <h2 class="problem-title">The Manual Entry Nightmare</h2>
+                <p class="problem-subtitle">Your team is drowning in tedious, soul-sucking data entry</p>
+                
+                <div class="problem-grid">
+                    <div class="problem-card">
+                        <div class="problem-icon">💰</div>
+                        <h3>Expensive</h3>
+                        <p>$25-40/hour staff doing mindless data entry instead of growing your business</p>
+                    </div>
+                    <div class="problem-card">
+                        <div class="problem-icon">🐌</div>
+                        <h3>Painfully Slow</h3>
+                        <p>Each product takes 3-5 minutes to enter manually. 100 products = 8+ hours of work</p>
+                    </div>
+                    <div class="problem-card">
+                        <div class="problem-icon">❌</div>
+                        <h3>Error-Prone</h3>
+                        <p>Human mistakes lead to compliance issues, inventory discrepancies, and lost revenue</p>
+                    </div>
+                    <div class="problem-card">
+                        <div class="problem-icon">😩</div>
+                        <h3>Soul-Crushing</h3>
+                        <p>Repetitive, detail-oriented work that burns out your best employees</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="solution-arrow">
+                <div class="arrow-line"></div>
+                <div class="arrow-text">But what if...</div>
+                <div class="arrow-point">↓</div>
+            </div>
+
+            <div class="solution-container">
+                <h2 class="solution-title">The Trakie Magic</h2>
+                <p class="solution-subtitle">Take a few photos. Watch everything auto-fill instantly.</p>
+                
+                <div class="magic-demo">
+                    <div class="photo-step">
+                        <div class="step-number">1</div>
+                        <div class="step-content">
+                            <h3>Snap Photos</h3>
+                            <div class="photo-placeholder">
+                                <div class="camera-icon">📸</div>
+                                <p>Front + Back of product</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="magic-arrow">→</div>
+                    
+                    <div class="autofill-step">
+                        <div class="step-number">2</div>
+                        <div class="step-content">
+                            <h3>AI Magic Happens</h3>
+                            <div class="autofill-demo">
+                                <div class="form-preview">
+                                    <div class="filling-field">
+                                        <span class="field-label">Product Name:</span>
+                                        <span class="typing-text" id="productName"></span>
+                                    </div>
+                                    <div class="filling-field">
+                                        <span class="field-label">THC:</span>
+                                        <span class="typing-text" id="thcPercent"></span>
+                                    </div>
+                                    <div class="filling-field">
+                                        <span class="field-label">Strain:</span>
+                                        <span class="typing-text" id="strainName"></span>
+                                    </div>
+                                    <div class="filling-field">
+                                        <span class="field-label">Vendor:</span>
+                                        <span class="typing-text" id="vendorName"></span>
+                                    </div>
+                                    <div class="filling-field">
+                                        <span class="field-label">Batch ID:</span>
+                                        <span class="typing-text" id="batchId"></span>
+                                    </div>
+                                </div>
+                                <div class="magic-sparkles">✨</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="result-metrics">
+                    <div class="metric">
+                        <div class="metric-number">10x</div>
+                        <div class="metric-label">Faster</div>
+                    </div>
+                    <div class="metric">
+                        <div class="metric-number">99%</div>
+                        <div class="metric-label">Accurate</div>
+                    </div>
+                    <div class="metric">
+                        <div class="metric-number">$0</div>
+                        <div class="metric-label">Headaches</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="demo-section" id="scan">
+            <h2 class="demo-title">Now Try With Trakie</h2>
+            <div class="demo-interface">
+                <div class="qr-scanner">
+                    <div class="qr-code">
+                        <canvas id="qrCanvas" width="180" height="180"></canvas>
+                    </div>
+                </div>
+                <button class="scan-btn">Scan QR Code</button>
+            </div>
+        </section>
+
+        <!-- Manual vs AI Comparison -->
+        <section class="comparison-section">
+            <h2 class="comparison-title">Manual Entry vs Trakie AI</h2>
+            <div class="comparison-container">
+                <div class="comparison-card manual-card">
+                    <h3>Manual Entry</h3>
+                    <div class="product-inputs">
+                        <div class="input-placeholder">Invoice</div>
+                        <div class="input-placeholder">Product</div>
+                    </div>
+                    <div class="comparison-tagline">Type each field manually...</div>
+                </div>
+                
+                <div class="comparison-card ai-card">
+                    <h3>With Trakie</h3>
+                    <div class="product-inputs">
+                        <div class="input-placeholder ai-input-placeholder">
+                            Auto-Capture
+                            <div class="auto-fill-icon">✓</div>
+                        </div>
+                        <div class="input-placeholder ai-input-placeholder">
+                            Auto-Focus
+                            <div class="auto-fill-icon">✓</div>
+                        </div>
+                    </div>
+                    <div class="comparison-tagline">Everything fills instantly!</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Pricing Section -->
+        <section class="pricing-section" id="pricing">
+            <h2 class="pricing-title">Simple Pricing</h2>
+            <p class="pricing-subtitle">Start free, scale as you grow</p>
+            
+            <div class="pricing-toggle">
+                <div class="toggle-container">
+                    <button class="toggle-btn active" id="monthlyBtn" onclick="switchToPricing('monthly')">Monthly</button>
+                    <button class="toggle-btn" id="yearlyBtn" onclick="switchToPricing('yearly')">Yearly</button>
+                </div>
+            </div>
+            
+            <div class="pricing-grid" id="pricingGrid">
+                <div class="pricing-card">
+                    <h3 class="pricing-plan">Starter</h3>
+                    <div class="pricing-price" id="starterPrice">Free</div>
+                    <p class="pricing-period" id="starterPeriod">7 day trial</p>
+                    <ul class="pricing-features">
+                        <li>Up to 50 products</li>
+                        <li>Basic AI recognition</li>
+                        <li>Email support</li>
+                        <li>Single location</li>
+                    </ul>
+                    <button class="pricing-btn secondary">Start Free Trial</button>
+                </div>
+
+                <div class="pricing-card featured">
+                    <div class="pricing-badge">Most Popular</div>
+                    <h3 class="pricing-plan">Professional</h3>
+                    <div class="pricing-price" id="proPrice">$99</div>
+                    <p class="pricing-period" id="proPeriod">per location/month</p>
+                    <ul class="pricing-features">
+                        <li>Unlimited products</li>
+                        <li>Advanced AI recognition</li>
+                        <li>Dutchie integration</li>
+                        <li>Priority support</li>
+                        <li>Single location</li>
