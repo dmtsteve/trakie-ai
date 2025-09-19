@@ -527,7 +527,7 @@
                 </div>
                 <div class="nav-links">
                     <a href="#scan">Scan</a>
-                    <a href="#receive">Receive</a>
+                   <a href="#receive" onclick="showReceive()">Receive</a>
                     <a href="#pricing">Pricing</a>
                 </div>
                 <a href="#pricing" class="nav-cta">Get Started Free</a>
@@ -751,6 +751,17 @@
         window.onload = function() {
             document.getElementById('passwordInput').focus();
         };
-    </script>
+    </<script>
+        function login() {
+            const password = document.getElementById('passwordInput').value;
+            const error = document.getElementById('errorMsg');
+            
+            if (password === 'PasswordBoss123!') {
+                // existing code...
+            }
+        }
+
+        // other existing functions...
+</script>>
 </body>
 </html>
