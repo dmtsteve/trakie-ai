@@ -37,10 +37,6 @@
             text-align: center;
         }
 
-        .welcome-modal.hidden {
-            display: none !important;
-        }
-
         .welcome-logo {
             width: 120px;
             height: 120px;
@@ -288,162 +284,7 @@
             margin-bottom: 80px;
         }
 
-        /* Problem/Solution Section - Simplified */
-        .problem-solution-section {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 80px 40px;
-        }
-
-        .solution-container {
-            text-align: center;
-        }
-
-        .solution-title {
-            font-size: clamp(36px, 8vw, 64px);
-            font-weight: 900;
-            color: #10b981;
-            margin-bottom: 20px;
-            letter-spacing: -0.02em;
-        }
-
-        .solution-subtitle {
-            font-size: 24px;
-            color: #888888;
-            margin-bottom: 60px;
-        }
-
-        .magic-demo {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 40px;
-            margin-bottom: 60px;
-            flex-wrap: wrap;
-        }
-
-        .photo-step, .autofill-step {
-            flex: 1;
-            min-width: 300px;
-            max-width: 400px;
-        }
-
-        .step-number {
-            width: 40px;
-            height: 40px;
-            background: #60A5FA;
-            color: white;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 700;
-            margin: 0 auto 20px;
-        }
-
-        .step-content h3 {
-            font-size: 24px;
-            font-weight: 700;
-            margin-bottom: 20px;
-            color: #ffffff;
-        }
-
-        .photo-placeholder {
-            background: rgba(255, 255, 255, 0.05);
-            border: 2px dashed rgba(96, 165, 250, 0.4);
-            border-radius: 16px;
-            padding: 40px 20px;
-            text-align: center;
-        }
-
-        .camera-icon {
-            font-size: 48px;
-            margin-bottom: 15px;
-        }
-
-        .magic-arrow {
-            font-size: 36px;
-            color: #10b981;
-            font-weight: bold;
-            animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% { opacity: 1; transform: scale(1); }
-            50% { opacity: 0.7; transform: scale(1.1); }
-        }
-
-        .autofill-demo {
-            background: rgba(16, 185, 129, 0.1);
-            border: 1px solid rgba(16, 185, 129, 0.3);
-            border-radius: 16px;
-            padding: 30px;
-            position: relative;
-        }
-
-        .form-preview {
-            text-align: left;
-            space-y: 10px;
-        }
-
-        .filling-field {
-            display: flex;
-            justify-content: space-between;
-            padding: 8px 0;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            font-size: 14px;
-        }
-
-        .field-label {
-            color: #888888;
-            font-weight: 500;
-        }
-
-        .typing-text {
-            color: #10b981;
-            font-weight: 600;
-            min-width: 120px;
-            text-align: right;
-        }
-
-        .magic-sparkles {
-            position: absolute;
-            top: -10px;
-            right: -10px;
-            font-size: 24px;
-            animation: sparkle 1.5s infinite;
-        }
-
-        @keyframes sparkle {
-            0%, 100% { opacity: 1; transform: rotate(0deg); }
-            50% { opacity: 0.5; transform: rotate(180deg); }
-        }
-
-        .result-metrics {
-            display: flex;
-            justify-content: center;
-            gap: 60px;
-            margin-top: 40px;
-            flex-wrap: wrap;
-        }
-
-        .metric {
-            text-align: center;
-        }
-
-        .metric-number {
-            font-size: 48px;
-            font-weight: 900;
-            color: #10b981;
-            line-height: 1;
-        }
-
-        .metric-label {
-            font-size: 16px;
-            color: #888888;
-            font-weight: 600;
-            margin-top: 5px;
-        }
+        /* Demo Section */
         .demo-section {
             max-width: 1200px;
             margin: 0 auto;
@@ -480,46 +321,15 @@
             position: relative;
         }
 
-        /* QR Modal */
-        .qr-modal {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.8);
-            display: none;
+        .qr-code {
+            width: 200px;
+            height: 200px;
+            background: white;
+            border-radius: 12px;
+            display: flex;
             align-items: center;
             justify-content: center;
-            z-index: 1000;
-        }
-
-        .qr-modal.show {
-            display: flex;
-        }
-
-        .qr-modal-content {
-            background: #1a1a1a;
-            border-radius: 16px;
-            padding: 40px;
-            text-align: center;
-            position: relative;
-            max-width: 400px;
-            width: 90%;
-        }
-
-        .qr-modal-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 30px;
-        }
-
-        .qr-modal-header h3 {
-            font-size: 24px;
-            font-weight: 700;
-            color: #ffffff;
-            margin: 0;
+            box-shadow: 0 0 20px rgba(96, 165, 250, 0.3);
         }
 
         .qr-placeholder {
@@ -805,12 +615,11 @@
             background: #3B82F6;
         }
 
-        /* Pricing Section - Make sure it stays at bottom */
+        /* Pricing Section */
         .pricing-section {
             padding: 80px 40px;
             max-width: 1200px;
             margin: 0 auto;
-            order: 999; /* Force to bottom */
         }
 
         .pricing-title {
@@ -1047,89 +856,6 @@
             <img src="icon48.png" alt="Trakie.ai Logo" style="width: 80px; height: 80px; margin-bottom: 12px;">
             <div class="logo-text">trakie.ai</div>
         </div>
-
-    <!-- QR Code Modal -->
-    <div class="qr-modal" id="qrModal">
-        <div class="qr-modal-content">
-            <div class="qr-modal-header">
-                <h3>Scan with Your Phone</h3>
-                <button class="close-btn" onclick="closeQRModal()">&times;</button>
-            </div>
-            <canvas id="modalQRCanvas" width="300" height="300"></canvas>
-            <p>Point your phone camera at this QR code to access Trakie on mobile</p>
-        </div>
-    </div>
-
-    <!-- Pricing Section - AT THE BOTTOM -->
-    <section class="pricing-section" id="pricing">
-        <h2 class="pricing-title">Simple Pricing</h2>
-        <p class="pricing-subtitle">Start free, scale as you grow</p>
-        
-        <div class="pricing-toggle">
-            <div class="toggle-container">
-                <button class="toggle-btn active" id="monthlyBtn" onclick="switchToPricing('monthly')">Monthly</button>
-                <button class="toggle-btn" id="yearlyBtn" onclick="switchToPricing('yearly')">Yearly</button>
-            </div>
-        </div>
-        
-        <div class="pricing-grid" id="pricingGrid">
-            <div class="pricing-card">
-                <h3 class="pricing-plan">Starter</h3>
-                <div class="pricing-price" id="starterPrice">Free</div>
-                <p class="pricing-period" id="starterPeriod">7 day trial</p>
-                <ul class="pricing-features">
-                    <li>Up to 50 products</li>
-                    <li>Basic AI recognition</li>
-                    <li>Email support</li>
-                    <li>Single location</li>
-                </ul>
-                <button class="pricing-btn secondary">Start Free Trial</button>
-            </div>
-
-            <div class="pricing-card featured">
-                <div class="pricing-badge">Most Popular</div>
-                <h3 class="pricing-plan">Professional</h3>
-                <div class="pricing-price" id="proPrice">$99</div>
-                <p class="pricing-period" id="proPeriod">per location/month</p>
-                <ul class="pricing-features">
-                    <li>Unlimited products</li>
-                    <li>Advanced AI recognition</li>
-                    <li>Dutchie integration</li>
-                    <li>Priority support</li>
-                    <li>Single location</li>
-                </ul>
-                <button class="pricing-btn">Choose Professional</button>
-            </div>
-
-            <div class="pricing-card">
-                <h3 class="pricing-plan">Multi-Location</h3>
-                <div class="pricing-price" id="multiPrice">$333</div>
-                <p class="pricing-period" id="multiPeriod">per month (4 locations)</p>
-                <ul class="pricing-features">
-                    <li>Everything in Professional</li>
-                    <li>Up to 4 locations</li>
-                    <li>Multi-store management</li>
-                    <li>Advanced analytics</li>
-                    <li>Dedicated support</li>
-                </ul>
-                <button class="pricing-btn">Choose Multi-Location</button>
-            </div>
-
-            <div class="pricing-card">
-                <h3 class="pricing-plan">Enterprise</h3>
-                <div class="pricing-price" id="enterprisePrice">$499</div>
-                <p class="pricing-period" id="enterprisePeriod">per month (unlimited)</p>
-                <ul class="pricing-features">
-                    <li>Unlimited locations</li>
-                    <li>Custom AI training</li>
-                    <li>White-label options</li>
-                    <li>24/7 phone support</li>
-                    <li>Custom integrations</li>
-                </ul>
-                <button class="pricing-btn">Contact Sales</button>
-            </div>
-        </div>
-    </section>
         
         <h1 class="cannabis-title">Cannabis Inventory ai</h1>
         <p class="tagline">The ai shortcut to Dutchie they don't want you to have.</p>
@@ -1434,7 +1160,7 @@
                         // Generate QR code after content is visible
                         setTimeout(() => {
                             if (typeof QRious !== 'undefined') {
-                                const mainQR = new QRious({
+                                const qr = new QRious({
                                     element: document.getElementById('qrCanvas'),
                                     value: window.location.href + '?mobile=1',
                                     size: 180,
@@ -1478,30 +1204,8 @@
             });
         }
         
-        function openQRModal() {
-            document.getElementById('qrModal').classList.add('show');
-            // Generate QR code in modal
-            setTimeout(() => {
-                if (typeof QRious !== 'undefined') {
-                    const qr = new QRious({
-                        element: document.getElementById('modalQRCanvas'),
-                        value: window.location.href + '?mobile=1',
-                        size: 300,
-                        background: '#ffffff',
-                        foreground: '#1a1a1a',
-                        level: 'M',
-                        padding: 20
-                    });
-                }
-            }, 100);
-        }
-        
-        function closeQRModal() {
-            document.getElementById('qrModal').classList.remove('show');
-        }
-        
-        function scrollToTop() {
-            window.scrollTo({ top: 0, behavior: 'smooth' });
+        function openReceiveModal() {
+            document.getElementById('receiveModal').classList.add('show');
         }
         
         function closeReceiveModal() {
@@ -1514,47 +1218,8 @@
             }
         });
 
-        // Auto-fill typing animation
-        function startAutoFillDemo() {
-            const fields = [
-                { id: 'productName', text: 'Blue Dream 3.5g', delay: 500 },
-                { id: 'thcPercent', text: '22%', delay: 1000 },
-                { id: 'strainName', text: 'Blue Dream', delay: 1500 },
-                { id: 'vendorName', text: 'Premium Gardens', delay: 2000 },
-                { id: 'batchId', text: 'B2024-089', delay: 2500 }
-            ];
-            
-            fields.forEach(field => {
-                setTimeout(() => {
-                    typeText(field.id, field.text);
-                }, field.delay);
-            });
-            
-            // Restart the demo every 6 seconds
-            setTimeout(startAutoFillDemo, 6000);
-        }
-        
-        function typeText(elementId, text) {
-            const element = document.getElementById(elementId);
-            if (!element) return;
-            
-            element.textContent = '';
-            let i = 0;
-            
-            const typeInterval = setInterval(() => {
-                if (i < text.length) {
-                    element.textContent += text.charAt(i);
-                    i++;
-                } else {
-                    clearInterval(typeInterval);
-                }
-            }, 100);
-        }
-        
-        // Start the demo when the page loads
         window.addEventListener('load', function() {
             document.getElementById('welcomePasswordInput').focus();
-            setTimeout(startAutoFillDemo, 2000); // Start after 2 seconds
         });
         
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -1583,6 +1248,7 @@
                 </div>
                 <nav class="nav-menu">
                     <a href="#scan" class="nav-link">Scan</a>
+                    <a href="#verify" class="nav-link">Verify</a>
                     <a href="#receive" class="nav-link">Receive</a>
                     <a href="#pricing" class="nav-link">Pricing</a>
                 </nav>
@@ -1599,75 +1265,7 @@
             <p class="hero-final-tagline">The AI shortcut to Dutchie they don't want you to have</p>
         </section>
 
-        <!-- Problem/Solution Section -->
-        <section class="problem-solution-section">
-            <div class="solution-container">
-                <h2 class="solution-title">The Trakie Magic</h2>
-                <p class="solution-subtitle">Take a few photos. Watch everything auto-fill instantly.</p>
-                
-                <div class="magic-demo">
-                    <div class="photo-step">
-                        <div class="step-number">1</div>
-                        <div class="step-content">
-                            <h3>Snap Photos</h3>
-                            <div class="photo-placeholder">
-                                <div class="camera-icon">📸</div>
-                                <p>Front + Back of product</p>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="magic-arrow">→</div>
-                    
-                    <div class="autofill-step">
-                        <div class="step-number">2</div>
-                        <div class="step-content">
-                            <h3>AI Magic Happens</h3>
-                            <div class="autofill-demo">
-                                <div class="form-preview">
-                                    <div class="filling-field">
-                                        <span class="field-label">Product Name:</span>
-                                        <span class="typing-text" id="productName"></span>
-                                    </div>
-                                    <div class="filling-field">
-                                        <span class="field-label">THC:</span>
-                                        <span class="typing-text" id="thcPercent"></span>
-                                    </div>
-                                    <div class="filling-field">
-                                        <span class="field-label">Strain:</span>
-                                        <span class="typing-text" id="strainName"></span>
-                                    </div>
-                                    <div class="filling-field">
-                                        <span class="field-label">Vendor:</span>
-                                        <span class="typing-text" id="vendorName"></span>
-                                    </div>
-                                    <div class="filling-field">
-                                        <span class="field-label">Batch ID:</span>
-                                        <span class="typing-text" id="batchId"></span>
-                                    </div>
-                                </div>
-                                <div class="magic-sparkles">✨</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="result-metrics">
-                    <div class="metric">
-                        <div class="metric-number">10x</div>
-                        <div class="metric-label">Faster</div>
-                    </div>
-                    <div class="metric">
-                        <div class="metric-number">99%</div>
-                        <div class="metric-label">Accurate</div>
-                    </div>
-                    <div class="metric">
-                        <div class="metric-number">$0</div>
-                        <div class="metric-label">Headaches</div>
-                    </div>
-                </div>
-            </div>
-        </section>
+        <!-- Demo Section -->
         <section class="demo-section" id="scan">
             <h2 class="demo-title">Now Try With Trakie</h2>
             <div class="demo-interface">
