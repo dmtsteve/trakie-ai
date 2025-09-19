@@ -1248,11 +1248,37 @@
             // Clear any previous error messages
             errorMessage.textContent = '';
             
+            console.log('Entered password:', password);
             const correctPassword = 'PasswordBoss123!';
+            console.log('Expected password:', correctPassword);
             
             if (password === correctPassword) {
-                showMainContent();
+                console.log('Password correct, accessing platform');
+                // Hide welcome modal and show main content
+                document.getElementById('welcomeModal').style.opacity = '0';
+                setTimeout(() => {
+                    document.getElementById('welcomeModal').classList.add('hidden');
+                    document.getElementById('mainContent').classList.remove('hidden');
+                    setTimeout(() => {
+                        document.getElementById('mainContent').classList.add('show');
+                        // Generate QR code after content is visible
+                        setTimeout(() => {
+                            if (typeof QRious !== 'undefined') {
+                                const qr = new QRious({
+                                    element: document.getElementById('qrCanvas'),
+                                    value: window.location.href + '?mobile=1',
+                                    size: 180,
+                                    background: '#ffffff',
+                                    foreground: '#1a1a1a',
+                                    level: 'M',
+                                    padding: 10
+                                });
+                            }
+                        }, 500);
+                    }, 100);
+                }, 500);
             } else {
+                console.log('Password incorrect');
                 errorMessage.textContent = 'Access denied. Invalid password.';
                 document.getElementById('welcomePasswordInput').value = '';
                 document.getElementById('welcomePasswordInput').focus();
