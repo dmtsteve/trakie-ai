@@ -1042,6 +1042,89 @@
             <img src="icon48.png" alt="Trakie.ai Logo" style="width: 80px; height: 80px; margin-bottom: 12px;">
             <div class="logo-text">trakie.ai</div>
         </div>
+
+    <!-- QR Code Modal -->
+    <div class="qr-modal" id="qrModal">
+        <div class="qr-modal-content">
+            <div class="qr-modal-header">
+                <h3>Scan with Your Phone</h3>
+                <button class="close-btn" onclick="closeQRModal()">&times;</button>
+            </div>
+            <canvas id="modalQRCanvas" width="300" height="300"></canvas>
+            <p>Point your phone camera at this QR code to access Trakie on mobile</p>
+        </div>
+    </div>
+
+    <!-- Pricing Section - AT THE BOTTOM -->
+    <section class="pricing-section" id="pricing">
+        <h2 class="pricing-title">Simple Pricing</h2>
+        <p class="pricing-subtitle">Start free, scale as you grow</p>
+        
+        <div class="pricing-toggle">
+            <div class="toggle-container">
+                <button class="toggle-btn active" id="monthlyBtn" onclick="switchToPricing('monthly')">Monthly</button>
+                <button class="toggle-btn" id="yearlyBtn" onclick="switchToPricing('yearly')">Yearly</button>
+            </div>
+        </div>
+        
+        <div class="pricing-grid" id="pricingGrid">
+            <div class="pricing-card">
+                <h3 class="pricing-plan">Starter</h3>
+                <div class="pricing-price" id="starterPrice">Free</div>
+                <p class="pricing-period" id="starterPeriod">7 day trial</p>
+                <ul class="pricing-features">
+                    <li>Up to 50 products</li>
+                    <li>Basic AI recognition</li>
+                    <li>Email support</li>
+                    <li>Single location</li>
+                </ul>
+                <button class="pricing-btn secondary">Start Free Trial</button>
+            </div>
+
+            <div class="pricing-card featured">
+                <div class="pricing-badge">Most Popular</div>
+                <h3 class="pricing-plan">Professional</h3>
+                <div class="pricing-price" id="proPrice">$99</div>
+                <p class="pricing-period" id="proPeriod">per location/month</p>
+                <ul class="pricing-features">
+                    <li>Unlimited products</li>
+                    <li>Advanced AI recognition</li>
+                    <li>Dutchie integration</li>
+                    <li>Priority support</li>
+                    <li>Single location</li>
+                </ul>
+                <button class="pricing-btn">Choose Professional</button>
+            </div>
+
+            <div class="pricing-card">
+                <h3 class="pricing-plan">Multi-Location</h3>
+                <div class="pricing-price" id="multiPrice">$333</div>
+                <p class="pricing-period" id="multiPeriod">per month (4 locations)</p>
+                <ul class="pricing-features">
+                    <li>Everything in Professional</li>
+                    <li>Up to 4 locations</li>
+                    <li>Multi-store management</li>
+                    <li>Advanced analytics</li>
+                    <li>Dedicated support</li>
+                </ul>
+                <button class="pricing-btn">Choose Multi-Location</button>
+            </div>
+
+            <div class="pricing-card">
+                <h3 class="pricing-plan">Enterprise</h3>
+                <div class="pricing-price" id="enterprisePrice">$499</div>
+                <p class="pricing-period" id="enterprisePeriod">per month (unlimited)</p>
+                <ul class="pricing-features">
+                    <li>Unlimited locations</li>
+                    <li>Custom AI training</li>
+                    <li>White-label options</li>
+                    <li>24/7 phone support</li>
+                    <li>Custom integrations</li>
+                </ul>
+                <button class="pricing-btn">Contact Sales</button>
+            </div>
+        </div>
+    </section>
         
         <h1 class="cannabis-title">Cannabis Inventory ai</h1>
         <p class="tagline">The ai shortcut to Dutchie they don't want you to have.</p>
