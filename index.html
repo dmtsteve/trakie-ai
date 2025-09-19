@@ -565,15 +565,46 @@
             position: relative;
         }
 
-        .qr-code {
-            width: 200px;
-            height: 200px;
-            background: white;
-            border-radius: 12px;
-            display: flex;
+        /* QR Modal */
+        .qr-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: none;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 0 20px rgba(96, 165, 250, 0.3);
+            z-index: 1000;
+        }
+
+        .qr-modal.show {
+            display: flex;
+        }
+
+        .qr-modal-content {
+            background: #1a1a1a;
+            border-radius: 16px;
+            padding: 40px;
+            text-align: center;
+            position: relative;
+            max-width: 400px;
+            width: 90%;
+        }
+
+        .qr-modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .qr-modal-header h3 {
+            font-size: 24px;
+            font-weight: 700;
+            color: #ffffff;
+            margin: 0;
         }
 
         .qr-placeholder {
@@ -1404,7 +1435,7 @@
                         // Generate QR code after content is visible
                         setTimeout(() => {
                             if (typeof QRious !== 'undefined') {
-                                const qr = new QRious({
+                                const mainQR = new QRious({
                                     element: document.getElementById('qrCanvas'),
                                     value: window.location.href + '?mobile=1',
                                     size: 180,
@@ -1448,8 +1479,30 @@
             });
         }
         
-        function openReceiveModal() {
-            document.getElementById('receiveModal').classList.add('show');
+        function openQRModal() {
+            document.getElementById('qrModal').classList.add('show');
+            // Generate QR code in modal
+            setTimeout(() => {
+                if (typeof QRious !== 'undefined') {
+                    const qr = new QRious({
+                        element: document.getElementById('modalQRCanvas'),
+                        value: window.location.href + '?mobile=1',
+                        size: 300,
+                        background: '#ffffff',
+                        foreground: '#1a1a1a',
+                        level: 'M',
+                        padding: 20
+                    });
+                }
+            }, 100);
+        }
+        
+        function closeQRModal() {
+            document.getElementById('qrModal').classList.remove('show');
+        }
+        
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
         
         function closeReceiveModal() {
@@ -1531,7 +1584,6 @@
                 </div>
                 <nav class="nav-menu">
                     <a href="#scan" class="nav-link">Scan</a>
-                    <a href="#verify" class="nav-link">Verify</a>
                     <a href="#receive" class="nav-link">Receive</a>
                     <a href="#pricing" class="nav-link">Pricing</a>
                 </nav>
