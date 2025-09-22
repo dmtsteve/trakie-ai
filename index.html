@@ -664,6 +664,23 @@
             background: #000000;
         }
 
+        .back-btn-mobile {
+            background: none;
+            border: none;
+            color: #60A5FA;
+            font-size: 16px;
+            cursor: pointer;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 0;
+        }
+
+        .back-btn-mobile:hover {
+            text-decoration: underline;
+        }
+
         .mobile-header {
             text-align: center;
             margin-bottom: 30px;
@@ -1082,6 +1099,8 @@
 
     <!-- Mobile Receive Section -->
     <div class="mobile-receive-section" id="mobileReceiveSection">
+        <button class="back-btn-mobile" onclick="goBackToMain()">← Back to Main</button>
+        
         <div class="mobile-header">
             <h1 class="mobile-title">Receive Package</h1>
             <p class="mobile-subtitle">Scan or upload product images to auto-fill inventory data</p>
@@ -1177,6 +1196,11 @@
             document.getElementById('mainSite').style.display = 'none';
             document.getElementById('qrModal').classList.remove('show');
             document.getElementById('mobileReceiveSection').style.display = 'block';
+        }
+
+        function goBackToMain() {
+            document.getElementById('mobileReceiveSection').style.display = 'none';
+            document.getElementById('mainSite').style.display = 'block';
         }
 
         function generateQR() {
