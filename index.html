@@ -323,7 +323,15 @@
             font-size: 20px;
             color: #888;
             text-align: center;
+            margin-bottom: 10px;
+        }
+
+        .magic-subtitle-indent {
+            font-size: 18px;
+            color: #999;
+            text-align: center;
             margin-bottom: 60px;
+            margin-left: 40px;
         }
 
         .demo-container {
@@ -670,40 +678,114 @@
         .mobile-subtitle {
             color: #888;
             font-size: 16px;
+            margin-bottom: 15px;
         }
 
-        .camera-container {
-            background: rgba(255, 255, 255, 0.05);
-            border: 2px dashed rgba(96, 165, 250, 0.4);
-            border-radius: 16px;
-            padding: 40px 20px;
+        .trust-message {
+            background: rgba(16, 185, 129, 0.1);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            border-radius: 12px;
+            padding: 15px;
+            color: #10b981;
+            font-size: 14px;
+            font-weight: 500;
             text-align: center;
             margin-bottom: 30px;
-            min-height: 300px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
         }
 
-        .camera-controls {
-            display: flex;
-            gap: 15px;
+        .step-header {
+            background: rgba(96, 165, 250, 0.1);
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
             margin-bottom: 30px;
         }
 
-        .camera-btn {
+        .step-number-large {
+            background: #60A5FA;
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 24px;
+            margin: 0 auto 15px;
+        }
+
+        .step-title {
+            font-size: 22px;
+            font-weight: 700;
+            color: #60A5FA;
+        }
+
+        .tab-container {
+            display: flex;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            margin-bottom: 30px;
+            overflow: hidden;
+        }
+
+        .tab-button {
             flex: 1;
             padding: 15px;
+            background: transparent;
             border: none;
-            border-radius: 12px;
+            color: #888;
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s;
         }
 
+        .tab-button.active {
+            background: #60A5FA;
+            color: white;
+        }
+
+        .tab-content {
+            display: none;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            padding: 30px;
+            margin-bottom: 30px;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .action-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .action-btn {
+            padding: 18px;
+            border: none;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
         .take-photo-btn {
             background: linear-gradient(135deg, #10b981 0%, #059669 100%);
             color: white;
+        }
+
+        .take-photo-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
         }
 
         .upload-photo-btn {
@@ -712,56 +794,59 @@
             border: 2px solid #60A5FA;
         }
 
-        .photo-sections {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-            margin-bottom: 30px;
+        .upload-photo-btn:hover {
+            background: rgba(96, 165, 250, 0.2);
+            transform: translateY(-2px);
         }
 
-        .photo-section {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 12px;
-            padding: 20px;
-            text-align: center;
-        }
-
-        .photo-section h4 {
-            font-size: 16px;
-            margin-bottom: 15px;
-            color: #10b981;
-        }
-
-        .photo-upload-zone {
+        .upload-area {
             border: 2px dashed rgba(96, 165, 250, 0.4);
-            border-radius: 8px;
-            padding: 20px;
-            min-height: 120px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            cursor: pointer;
+            border-radius: 12px;
+            padding: 40px 20px;
+            text-align: center;
             transition: all 0.3s;
+            cursor: pointer;
         }
 
-        .photo-upload-zone:hover {
+        .upload-area:hover {
             border-color: #60A5FA;
             background: rgba(96, 165, 250, 0.05);
         }
 
-        .save-btn {
+        .upload-icon {
+            font-size: 40px;
+            margin-bottom: 15px;
+            opacity: 0.6;
+        }
+
+        .upload-text {
+            color: #888;
+            font-size: 16px;
+            margin-bottom: 8px;
+        }
+
+        .upload-subtext {
+            color: #666;
+            font-size: 14px;
+        }
+
+        .process-btn {
             background: linear-gradient(135deg, #60A5FA 0%, #3B82F6 100%);
             color: white;
             border: none;
-            padding: 15px 40px;
+            padding: 18px 40px;
             border-radius: 12px;
-            font-size: 16px;
-            font-weight: 600;
+            font-size: 18px;
+            font-weight: 700;
             cursor: pointer;
             width: 100%;
             margin-top: 20px;
+            transition: all 0.3s;
+        }
+
+        .process-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(96, 165, 250, 0.4);
         }
 
         @keyframes fadeIn {
@@ -823,14 +908,7 @@
         <nav class="nav">
             <div class="nav-content">
                 <div class="nav-logo" onclick="scrollToTop()">
-                    <svg class="cannabis-phone-icon" viewBox="0 0 48 48" fill="none">
-                        <rect x="12" y="4" width="24" height="40" rx="4" stroke="#10b981" stroke-width="2" fill="rgba(16, 185, 129, 0.1)"/>
-                        <circle cx="24" cy="38" r="2" fill="#10b981"/>
-                        <path d="M24 12L26 10L28 12L26 14L24 16L22 14L20 12L22 10L24 12Z" fill="#10b981"/>
-                        <path d="M24 18C22 18 20 20 20 22C20 24 22 26 24 26C26 26 28 24 28 22C28 20 26 18 24 18Z" fill="#10b981"/>
-                        <path d="M18 14L20 12L22 14L20 16L18 18L16 16L14 14L16 12L18 14Z" fill="#10b981" opacity="0.6"/>
-                        <path d="M30 14L32 12L34 14L32 16L30 18L28 16L26 14L28 12L30 14Z" fill="#10b981" opacity="0.6"/>
-                    </svg>
+                    <img src="icon48.png" alt="Trakie.ai" width="32" height="32">
                     <span>Trakie.ai</span>
                 </div>
                 <div class="nav-links">
@@ -854,21 +932,15 @@
         <!-- Magic Demo -->
         <section class="magic-section">
             <h2 class="magic-title">The Trakie AI Magic</h2>
-            <p class="magic-subtitle">Snap a photo. Watch everything auto-fill instantly.</p>
+            <p class="magic-subtitle">Snap a few photos.</p>
+            <p class="magic-subtitle-indent">Watch everything auto-fill instantly.</p>
             
             <div class="demo-container">
                 <div class="step">
                     <div class="step-number">1</div>
-                    <h3>Snap Photo</h3>
+                    <h3>Snap a few photos</h3>
                     <div class="photo-box">
-                        <svg class="cannabis-phone-icon" viewBox="0 0 48 48" fill="none">
-                            <rect x="12" y="4" width="24" height="40" rx="4" stroke="#60A5FA" stroke-width="2" fill="rgba(96, 165, 250, 0.1)"/>
-                            <circle cx="24" cy="38" r="2" fill="#60A5FA"/>
-                            <path d="M24 12L26 10L28 12L26 14L24 16L22 14L20 12L22 10L24 12Z" fill="#60A5FA"/>
-                            <path d="M24 18C22 18 20 20 20 22C20 24 22 26 24 26C26 26 28 24 28 22C28 20 26 18 24 18Z" fill="#60A5FA"/>
-                            <path d="M18 14L20 12L22 14L20 16L18 18L16 16L14 14L16 12L18 14Z" fill="#60A5FA" opacity="0.6"/>
-                            <path d="M30 14L32 12L34 14L32 16L30 18L28 16L26 14L28 12L30 14Z" fill="#60A5FA" opacity="0.6"/>
-                        </svg>
+                        <img src="icon48.png" alt="Trakie.ai" style="width: 40px; height: 40px; margin-bottom: 12px; opacity: 0.8;">
                         <p>Front + Back of product</p>
                     </div>
                 </div>
@@ -1013,51 +1085,57 @@
         <div class="mobile-header">
             <h1 class="mobile-title">Receive Package</h1>
             <p class="mobile-subtitle">Scan or upload product images to auto-fill inventory data</p>
-        </div>
-
-        <div class="camera-container">
-            <svg class="cannabis-phone-icon" viewBox="0 0 48 48" fill="none" style="margin-bottom: 20px;">
-                <rect x="12" y="4" width="24" height="40" rx="4" stroke="#60A5FA" stroke-width="2" fill="rgba(96, 165, 250, 0.1)"/>
-                <circle cx="24" cy="38" r="2" fill="#60A5FA"/>
-                <path d="M24 12L26 10L28 12L26 14L24 16L22 14L20 12L22 10L24 12Z" fill="#60A5FA"/>
-                <path d="M24 18C22 18 20 20 20 22C20 24 22 26 24 26C26 26 28 24 28 22C28 20 26 18 24 18Z" fill="#60A5FA"/>
-            </svg>
-            <p style="color: #888; margin-bottom: 20px;">Position product in frame</p>
-            <p style="color: #666; font-size: 14px;">AI will auto-capture when stable and clear</p>
-        </div>
-
-        <div class="camera-controls">
-            <button class="camera-btn take-photo-btn">Take Photo</button>
-            <button class="camera-btn upload-photo-btn">Upload Photos</button>
-        </div>
-
-        <div class="photo-sections">
-            <div class="photo-section">
-                <h4>Front Photo</h4>
-                <div class="photo-upload-zone">
-                    <div style="font-size: 24px; margin-bottom: 8px; color: #60A5FA;">📷</div>
-                    <p style="font-size: 12px; color: #888;">Tap to capture front</p>
-                </div>
-            </div>
-
-            <div class="photo-section">
-                <h4>Back Photo</h4>
-                <div class="photo-upload-zone">
-                    <div style="font-size: 24px; margin-bottom: 8px; color: #60A5FA;">📷</div>
-                    <p style="font-size: 12px; color: #888;">Tap to capture back</p>
-                </div>
+            
+            <div class="trust-message">
+                Don't worry, no data is saved. We are not them.
             </div>
         </div>
 
-        <div class="photo-section" style="margin-bottom: 30px;">
-            <h4>Barcode (if visible)</h4>
-            <div class="photo-upload-zone">
-                <div style="font-size: 24px; margin-bottom: 8px; color: #10b981;">📊</div>
-                <p style="font-size: 12px; color: #888;">Scan barcode for instant lookup</p>
+        <div class="step-header">
+            <div class="step-number-large">1</div>
+            <div class="step-title">Take photos of invoice</div>
+        </div>
+
+        <div class="tab-container">
+            <button class="tab-button active" onclick="switchTab('invoice')">Invoice</button>
+            <button class="tab-button" onclick="switchTab('products')">Product Photos</button>
+        </div>
+
+        <div class="tab-content active" id="invoiceTab">
+            <div class="action-buttons">
+                <button class="action-btn take-photo-btn">
+                    📸 Take Photo
+                </button>
+                <button class="action-btn upload-photo-btn">
+                    📁 Upload Photo
+                </button>
+            </div>
+            
+            <div class="upload-area">
+                <div class="upload-icon">📄</div>
+                <div class="upload-text">Invoice Document</div>
+                <div class="upload-subtext">Capture or upload your invoice</div>
             </div>
         </div>
 
-        <button class="save-btn">Process & Save</button>
+        <div class="tab-content" id="productsTab">
+            <div class="action-buttons">
+                <button class="action-btn take-photo-btn">
+                    📸 Take Photo
+                </button>
+                <button class="action-btn upload-photo-btn">
+                    📁 Upload Photo
+                </button>
+            </div>
+            
+            <div class="upload-area">
+                <div class="upload-icon">📦</div>
+                <div class="upload-text">Product Photos</div>
+                <div class="upload-subtext">Front, back, and label photos</div>
+            </div>
+        </div>
+
+        <button class="process-btn">Process & Save Package</button>
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrious/4.0.2/qrious.min.js"></script>
@@ -1192,6 +1270,16 @@
 
         function scrollToTop() {
             window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function switchTab(tabName) {
+            // Remove active class from all tabs and buttons
+            document.querySelectorAll('.tab-button').forEach(btn => btn.classList.remove('active'));
+            document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+            
+            // Add active class to clicked button and corresponding content
+            event.target.classList.add('active');
+            document.getElementById(tabName + 'Tab').classList.add('active');
         }
 
         document.getElementById('passwordInput').addEventListener('keypress', function(e) {
