@@ -264,16 +264,16 @@
 
         .demo-container {
             display: flex;
-            align-items: center;
+            align-items: flex-start;
             justify-content: center;
-            gap: 40px;
+            gap: 60px;
             margin-bottom: 60px;
             flex-wrap: wrap;
         }
 
         .step {
             text-align: center;
-            max-width: 300px;
+            max-width: 320px;
         }
 
         .step-number {
@@ -292,6 +292,7 @@
         .step h3 {
             font-size: 20px;
             margin-bottom: 20px;
+            line-height: 1.3;
         }
 
         .photo-box {
@@ -300,6 +301,11 @@
             border-radius: 12px;
             padding: 30px;
             text-align: center;
+            height: 120px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
         }
 
         .autofill-box {
@@ -308,28 +314,36 @@
             border-radius: 12px;
             padding: 20px;
             position: relative;
+            height: 200px;
+            overflow: hidden;
         }
 
         .form-field {
             display: flex;
             justify-content: space-between;
-            padding: 5px 0;
+            padding: 6px 0;
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
             font-size: 14px;
+            align-items: center;
         }
 
         .field-label {
             color: #888;
+            min-width: 80px;
         }
 
         .field-value {
             color: #10b981;
             font-weight: 600;
+            text-align: right;
+            flex: 1;
         }
 
         .arrow {
             font-size: 30px;
             color: #10b981;
+            align-self: center;
+            margin-top: 40px;
         }
 
         .metrics {
@@ -490,12 +504,12 @@
             color: #60A5FA;
         }
 
-        /* Receive Section */
+        /* Receive Section - Enhanced */
         .receive-section {
             display: none;
             min-height: 100vh;
             padding: 100px 40px 40px;
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
         }
 
@@ -515,33 +529,116 @@
             text-decoration: underline;
         }
 
-        .receive-form {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 16px;
-            padding: 40px;
-            max-width: 800px;
+        .receive-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            max-width: 1200px;
             margin: 0 auto;
         }
 
-        .receive-title {
-            font-size: 36px;
-            font-weight: 800;
-            margin-bottom: 10px;
+        .scan-upload-section {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 30px;
+        }
+
+        .section-title {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 20px;
             text-align: center;
         }
 
-        .receive-subtitle {
-            color: #888;
+        .scan-options {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .scan-btn {
+            padding: 15px 20px;
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .scan-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .upload-btn {
+            padding: 15px 20px;
+            background: rgba(96, 165, 250, 0.1);
+            color: #60A5FA;
+            border: 2px dashed #60A5FA;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .upload-btn:hover {
+            background: rgba(96, 165, 250, 0.2);
+        }
+
+        .product-details-section {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 30px;
+        }
+
+        .quantity-input {
+            margin-bottom: 30px;
+        }
+
+        .quantity-input label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: #ccc;
+        }
+
+        .quantity-input input {
+            width: 100%;
+            padding: 12px 16px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            color: white;
+            font-size: 18px;
+            font-family: 'Inter', sans-serif;
             text-align: center;
-            margin-bottom: 40px;
+        }
+
+        .photo-upload-area {
+            border: 2px dashed rgba(96, 165, 250, 0.4);
+            border-radius: 12px;
+            padding: 30px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .photo-instructions {
+            color: #888;
+            font-size: 14px;
+            margin-bottom: 15px;
         }
 
         .form-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 20px;
-            margin-bottom: 30px;
+            margin-top: 30px;
         }
 
         .form-group {
@@ -586,7 +683,8 @@
             font-weight: 600;
             cursor: pointer;
             display: block;
-            margin: 0 auto;
+            margin: 30px auto 0;
+            width: 200px;
         }
 
         .save-btn:hover {
@@ -599,10 +697,21 @@
         }
 
         @media (max-width: 768px) {
-            .demo-container { flex-direction: column; gap: 20px; }
+            .demo-container { 
+                flex-direction: column; 
+                gap: 20px; 
+                align-items: center;
+            }
+            .arrow { 
+                transform: rotate(90deg); 
+                margin: 20px 0;
+            }
             .metrics { gap: 30px; }
             .nav-links { display: none; }
-            .form-grid { grid-template-columns: 1fr; }
+            .receive-container {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
         }
     </style>
 </head>
@@ -651,14 +760,14 @@
         <!-- Magic Demo -->
         <section class="magic-section">
             <h2 class="magic-title">The Trakie AI Magic</h2>
-            <p class="magic-subtitle">Take a few photos. Watch everything auto-fill instantly.</p>
+            <p class="magic-subtitle">Snap a photo. Watch everything auto-fill instantly.</p>
             
             <div class="demo-container">
                 <div class="step">
                     <div class="step-number">1</div>
-                    <h3>Snap Photos</h3>
+                    <h3>Snap Photo</h3>
                     <div class="photo-box">
-                        <div style="font-size: 40px; margin-bottom: 10px;">📸</div>
+                        <div style="font-size: 32px; margin-bottom: 8px; color: #60A5FA;">📱</div>
                         <p>Front + Back of product</p>
                     </div>
                 </div>
@@ -670,7 +779,7 @@
                     <h3>AI Magic Happens</h3>
                     <div class="autofill-box">
                         <div class="form-field">
-                            <span class="field-label">Product Name:</span>
+                            <span class="field-label">Product:</span>
                             <span class="field-value" id="productName"></span>
                         </div>
                         <div class="form-field">
@@ -686,7 +795,7 @@
                             <span class="field-value" id="vendorName"></span>
                         </div>
                         <div class="form-field">
-                            <span class="field-label">Batch ID:</span>
+                            <span class="field-label">Batch:</span>
                             <span class="field-value" id="batchId"></span>
                         </div>
                         <div style="position: absolute; top: 10px; right: 10px; font-size: 20px;">✨</div>
@@ -785,73 +894,102 @@
         </section>
     </div>
 
-    <!-- Receive Section -->
+    <!-- Enhanced Receive Section -->
     <div class="receive-section" id="receiveSection">
         <button class="back-btn" onclick="showMain()">← Back to Trakie</button>
         
-        <div class="receive-form">
-            <h1 class="receive-title">Receive Package</h1>
-            <p class="receive-subtitle">Scan or upload product images to auto-fill inventory data</p>
-            
-            <div class="form-grid">
-                <div class="form-group">
-                    <label>Package ID</label>
-                    <input type="text" value="TRK-2024-001234" readonly>
+        <div class="receive-container">
+            <!-- Left Side: Scan & Upload -->
+            <div class="scan-upload-section">
+                <h2 class="section-title">Scan or Upload</h2>
+                
+                <div class="scan-options">
+                    <button class="scan-btn">🎤 Voice Scan</button>
+                    <button class="upload-btn">📱 Upload Photo</button>
                 </div>
-                <div class="form-group">
-                    <label>Product Name *</label>
-                    <input type="text" placeholder="Auto-filled from scan">
-                </div>
-                <div class="form-group">
-                    <label>Brand *</label>
-                    <input type="text" placeholder="Auto-filled from scan">
-                </div>
-                <div class="form-group">
-                    <label>Strain *</label>
-                    <input type="text" placeholder="Auto-filled from scan">
-                </div>
-                <div class="form-group">
-                    <label>Product Type *</label>
-                    <select>
-                        <option>Auto-detected</option>
-                        <option>Flower</option>
-                        <option>Pre-roll</option>
-                        <option>Concentrate</option>
-                        <option>Edible</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label>Weight/Quantity *</label>
-                    <input type="text" placeholder="Auto-filled from scan">
-                </div>
-                <div class="form-group">
-                    <label>THC % *</label>
-                    <input type="text" placeholder="Auto-filled from scan">
-                </div>
-                <div class="form-group">
-                    <label>CBD % *</label>
-                    <input type="text" placeholder="Auto-filled from scan">
-                </div>
-                <div class="form-group">
-                    <label>Vendor *</label>
-                    <select>
-                        <option>Auto-detected vendor</option>
-                        <option>Vendor A</option>
-                        <option>Vendor B</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label>Room *</label>
-                    <select>
-                        <option>Select room</option>
-                        <option>Storage A</option>
-                        <option>Storage B</option>
-                        <option>Display</option>
-                    </select>
+                
+                <div class="photo-upload-area">
+                    <div style="font-size: 40px; margin-bottom: 10px; color: #60A5FA;">📸</div>
+                    <p class="photo-instructions">Drop photos here or click to upload</p>
+                    <p style="font-size: 12px; color: #666;">Front & back photos recommended</p>
                 </div>
             </div>
-            
-            <button class="save-btn">Save Package</button>
+
+            <!-- Right Side: Product Details -->
+            <div class="product-details-section">
+                <h2 class="section-title">Product Details</h2>
+                
+                <div class="quantity-input">
+                    <label>How many products do you have?</label>
+                    <input type="number" placeholder="Enter quantity" min="1" value="1">
+                </div>
+
+                <div class="photo-upload-area">
+                    <div style="font-size: 30px; margin-bottom: 10px; color: #10b981;">📦</div>
+                    <p class="photo-instructions">Upload 1-3 photos per item</p>
+                    <p style="font-size: 12px; color: #666;">Front, back, and label photos</p>
+                </div>
+
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label>Package ID</label>
+                        <input type="text" value="TRK-2024-001234" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label>Product Name *</label>
+                        <input type="text" placeholder="Auto-filled from scan">
+                    </div>
+                    <div class="form-group">
+                        <label>Brand *</label>
+                        <input type="text" placeholder="Auto-filled from scan">
+                    </div>
+                    <div class="form-group">
+                        <label>Strain *</label>
+                        <input type="text" placeholder="Auto-filled from scan">
+                    </div>
+                    <div class="form-group">
+                        <label>Product Type *</label>
+                        <select>
+                            <option>Auto-detected</option>
+                            <option>Flower</option>
+                            <option>Pre-roll</option>
+                            <option>Concentrate</option>
+                            <option>Edible</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Weight/Quantity *</label>
+                        <input type="text" placeholder="Auto-filled from scan">
+                    </div>
+                    <div class="form-group">
+                        <label>THC % *</label>
+                        <input type="text" placeholder="Auto-filled from scan">
+                    </div>
+                    <div class="form-group">
+                        <label>CBD % *</label>
+                        <input type="text" placeholder="Auto-filled from scan">
+                    </div>
+                    <div class="form-group">
+                        <label>Vendor *</label>
+                        <select>
+                            <option>Auto-detected vendor</option>
+                            <option>Vendor A</option>
+                            <option>Vendor B</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Room *</label>
+                        <select>
+                            <option>Select room</option>
+                            <option>Storage A</option>
+                            <option>Storage B</option>
+                            <option>Display</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <button class="save-btn">Save Package</button>
+            </div>
         </div>
     </div>
 
@@ -913,10 +1051,10 @@
 
         function startTypeAnimation() {
             const fields = [
-                { id: 'productName', text: 'Your Brand | Blue Dream | Sativa|  3.5g Flower', delay: 500 },
+                { id: 'productName', text: 'Blue Dream 3.5g Flower', delay: 500 },
                 { id: 'thcPercent', text: '22%', delay: 1000 },
                 { id: 'strainName', text: 'Sativa Hybrid', delay: 1500 },
-                { id: 'vendorName', text: 'Vendor Name Here', delay: 2000 },
+                { id: 'vendorName', text: 'Premium Growers', delay: 2000 },
                 { id: 'batchId', text: 'B2024-089', delay: 2500 }
             ];
             
