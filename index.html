@@ -1,4 +1,260 @@
-<!DOCTYPE html>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrious/4.0.2/qrious.min.js"></script>
+    <script>
+        let isYearly = false;
+        let currentSection = 'home';
+
+        // Bubble data for AI Budtender
+        const bubbleData = [
+            { name: 'Best Sellers', size: 'extra-large', position: { top: '20%', left: '25%' }, data: ['Blue Dream', 'Girl Scout Cookies', 'Wedding Cake', 'Purple Haze', 'Gorilla Glue'] },
+            { name: 'Push Products', size: 'large', position: { top: '40%', left: '70%' }, data: ['Old Stock Indica', 'Expiring Edibles', 'Slow Movers', 'Overstock Items', 'Clearance'] },
+            { name: 'Restock Alerts', size: 'medium', position: { top: '65%', left: '40%' }, data: ['Popular Pre-rolls', 'Fast Edibles', 'Top Concentrates', 'Bestselling Flower', 'High-demand Vapes'] },
+            { name: 'Vendor Performance', size: 'large', position: { top: '15%', left: '60%' }, data: ['Green Thumb Co', 'Premium Growers', 'Quality Cannabis', 'Top Shelf', 'Elite Extracts'] }
+        ];
+
+        function login() {
+            const password = document.getElementById('passwordInput').value;
+            const error = document.getElementById('errorMsg');
+            
+            if (password === 'PasswordBoss123!') {
+                document.getElementById('welcomeScreen').classList.add('hide');
+                document.getElementById('mainSite').classList.add('show');
+                generateQR();
+                startTypeAnimation();
+                initializeBubbles();
+            } else {
+                error.textContent = 'Invalid password';
+                document.getElementById('passwordInput').value = '';
+            }
+        }
+
+        function showSection(sectionName) {
+            // Hide all sections
+            document.querySelectorAll('.page-section').forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            // Remove active class from all nav links
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.classList.remove('active');
+            });
+            
+            // Show selected section
+            document.getElementById(sectionName + 'Section').classList.add('active');
+            
+            // Add active class to clicked nav link
+            document.querySelector(`[data-section="${sectionName}"]`)?.classList.add('active');
+            
+            currentSection = sectionName;
+            
+            // Initialize bubbles if showing bubbles section
+            if (sectionName === 'bubbles') {
+                setTimeout(() => initializeBubbles(), 100);
+            }
+        }
+
+        function initializeBubbles() {
+            const container = document.getElementById('bubblesContainer');
+            if (!container) return;
+            
+            container.innerHTML = ''; // Clear existing bubbles
+            
+            bubbleData.forEach((bubble, index) => {
+                const bubbleElement = document.createElement('div');
+                bubbleElement.className = `bubble ${bubble.size}`;
+                bubbleElement.style.top = bubble.position.top;
+                bubbleElement.style.left = bubble.position.left;
+                bubbleElement.innerHTML = bubble.name;
+                
+                // Add click handler for bubble interaction
+                bubbleElement.addEventListener('click', () => showBubbleData(bubble));
+                
+                // Add slight delay for each bubble appearance
+                setTimeout(() => {
+                    container.appendChild(bubbleElement);
+                }, index * 200);
+            });
+        }
+
+        function showBubbleData(bubble) {
+            alert(`${bubble.name} Top 5:\n\n${bubble.data.map((item, i) => `${i+1}. ${item}`).join('\n')}\n\n🎯 AI-powered insights helping budtenders sell smarter!`);
+        }
+
+        function showReceiveQR() {
+            // Check if user is on mobile
+            if (window.innerWidth <= 768 || /Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+                // Skip QR and go directly to mobile receive
+                goToMobileReceive();
+            } else {
+                // Show QR modal for desktop users
+                document.getElementById('qrModal').classList.add('show');
+                generateQR();
+            }
+        }
+
+        function closeQRModal() {
+            document.getElementById('qrModal').classList.remove('show');
+        }
+
+        function goToMobileReceive() {
+            document.getElementById('mainSite').style.display = 'none';
+            document.getElementById('qrModal').classList.remove('show');
+            document.getElementById('mobileReceiveSection').style.display = 'block';
+        }
+
+        function goBackToMain() {
+            document.getElementById('mobileReceiveSection').style.display = 'none';
+            document.getElementById('mainSite').style.display = 'block';
+        }
+
+        function generateQR() {
+            setTimeout(() => {
+                if (typeof QRious !== 'undefined') {
+                    // For main QR section
+                    const mainCanvas = document.getElementById('qrCanvasMain');
+                    if (mainCanvas) {
+                        new QRious({
+                            element: mainCanvas,
+                            value: window.location.href + '?mobile=1',
+                            size: 200,
+                            background: '#ffffff',
+                            foreground: '#1a1a1a'
+                        });
+                    }
+                    
+                    // For modal QR
+                    const modalCanvas = document.getElementById('qrCanvas');
+                    if (modalCanvas) {
+                        new QRious({
+                            element: modalCanvas,
+                            value: window.location.href + '?mobile=1',
+                            size: 200,
+                            background: '#ffffff',
+                            foreground: '#1a1a1a'
+                        });
+                    }
+                }
+            }, 100);
+        }
+
+        function toggleBilling() {
+            isYearly = !isYearly;
+            const toggle = document.getElementById('billingToggle');
+            const professionalPrice = document.getElementById('professionalPrice');
+            const professionalPeriod = document.getElementById('professionalPeriod');
+            const multiPrice = document.getElementById('multiPrice');
+            const multiPeriod = document.getElementById('multiPeriod');
+            const enterprisePrice = document.getElementById('enterprisePrice');
+            const enterprisePeriod = document.getElementById('enterprisePeriod');
+
+            if (isYearly) {
+                toggle.classList.add('active');
+                professionalPrice.textContent = '$79';
+                professionalPeriod.textContent = 'per location/month (billed yearly)';
+                multiPrice.textContent = '$266';
+                multiPeriod.textContent = 'per month (4 locations, billed yearly)';
+                enterprisePrice.textContent = '$399';
+                enterprisePeriod.textContent = 'per month (unlimited, billed yearly)';
+            } else {
+                toggle.classList.remove('active');
+                professionalPrice.textContent = '$99';
+                professionalPeriod.textContent = 'per location/month';
+                multiPrice.textContent = '$333';
+                multiPeriod.textContent = 'per month (4 locations)';
+                enterprisePrice.textContent = '$499';
+                enterprisePeriod.textContent = 'per month (unlimited)';
+            }
+        }
+
+        function typeText(id, text, delay = 0) {
+            setTimeout(() => {
+                const element = document.getElementById(id);
+                if (!element) return;
+                let i = 0;
+                element.textContent = '';
+                const interval = setInterval(() => {
+                    element.textContent += text[i];
+                    i++;
+                    if (i >= text.length) clearInterval(interval);
+                }, 80);
+            }, delay);
+        }
+
+        function startTypeAnimation() {
+            const fields = [
+                { id: 'productName', text: 'Blue Dream 3.5g Flower', delay: 500 },
+                { id: 'thcPercent', text: '22%', delay: 1000 },
+                { id: 'strainName', text: 'Sativa Hybrid', delay: 1500 },
+                { id: 'vendorName', text: 'Premium Growers', delay: 2000 },
+                { id: 'batchId', text: 'B2024-089', delay: 2500 }
+            ];
+            
+            fields.forEach(field => {
+                typeText(field.id, field.text, field.delay);
+            });
+            
+            setTimeout(startTypeAnimation, 6000);
+        }
+
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function switchTab(tabName) {
+            // Remove active class from all tabs and buttons
+            document.querySelectorAll('.tab-button').forEach(btn => btn.classList.remove('active'));
+            document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+            
+            // Add active class to clicked button and corresponding content
+            event.target.classList.add('active');
+            document.getElementById(tabName + 'Tab').classList.add('active');
+        }
+
+        // Handle URL routing for direct access to sections
+        function handleRouting() {
+            const path = window.location.pathname;
+            if (path.includes('/bubbles')) {
+                showSection('bubbles');
+            } else if (path.includes('/data')) {
+                showSection('data');
+            } else if (path.includes('/pricing')) {
+                showSection('pricing');
+            } else {
+                showSection('home');
+            }
+        }
+
+        // Update URL when section changes (for future navigation)
+        function updateURL(section) {
+            const baseUrl = window.location.origin + window.location.pathname.split('/').slice(0, -1).join('/');
+            let newUrl = baseUrl;
+            
+            if (section !== 'home') {
+                newUrl += '/' + section;
+            }
+            
+            // Don't actually change URL yet to avoid breaking current functionality
+            // history.pushState({section}, '', newUrl);
+        }
+
+        document.getElementById('passwordInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') login();
+        });
+
+        window.onload = function() {
+            document.getElementById('passwordInput').focus();
+            
+            // Check if coming from QR scan
+            const urlParams = new URLSearchParams(window.location.search);
+            if (urlParams.get('mobile') === '1') {
+                goToMobileReceive();
+            }
+            
+            // Handle routing
+            handleRouting();
+        };
+    </script>
+</body>
+</html><!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -252,8 +508,16 @@
             cursor: pointer;
         }
 
-        .nav-links a:hover {
+        .nav-links a:hover, .nav-links a.active {
             color: white;
+        }
+
+        .nav-links a.bubbles-link {
+            color: #10b981;
+        }
+
+        .nav-links a.data-link {
+            color: #60A5FA;
         }
 
         .nav-cta {
@@ -263,6 +527,17 @@
             border-radius: 8px;
             text-decoration: none;
             font-weight: 600;
+        }
+
+        /* Page Sections */
+        .page-section {
+            display: none;
+            min-height: 100vh;
+            padding: 100px 40px 80px;
+        }
+
+        .page-section.active {
+            display: block;
         }
 
         /* Hero Section */
@@ -866,6 +1141,111 @@
             box-shadow: 0 6px 20px rgba(96, 165, 250, 0.4);
         }
 
+        /* Bubbles Section */
+        .bubbles-container {
+            height: 80vh;
+            position: relative;
+            background: radial-gradient(ellipse at center, rgba(16, 185, 129, 0.1) 0%, rgba(0, 0, 0, 0.8) 70%);
+            border-radius: 20px;
+            overflow: hidden;
+            margin: 20px 0;
+        }
+
+        .bubble {
+            position: absolute;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            font-weight: 700;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 32px rgba(16, 185, 129, 0.3);
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.8), rgba(34, 197, 94, 0.6));
+            color: white;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .bubble:hover {
+            transform: scale(1.1);
+            box-shadow: 0 12px 48px rgba(16, 185, 129, 0.5);
+        }
+
+        .bubble.large { width: 150px; height: 150px; font-size: 16px; }
+        .bubble.medium { width: 120px; height: 120px; font-size: 14px; }
+        .bubble.small { width: 90px; height: 90px; font-size: 12px; }
+        .bubble.extra-large { width: 180px; height: 180px; font-size: 18px; }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            33% { transform: translateY(-10px) rotate(1deg); }
+            66% { transform: translateY(10px) rotate(-1deg); }
+        }
+
+        .bubble:nth-child(2) { animation-delay: -2s; }
+        .bubble:nth-child(3) { animation-delay: -4s; }
+        .bubble:nth-child(4) { animation-delay: -6s; }
+
+        /* Data Analytics Section */
+        .analytics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+        }
+
+        .analytics-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 30px;
+            transition: all 0.3s;
+        }
+
+        .analytics-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .card-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: #10b981;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .chart-placeholder {
+            height: 200px;
+            background: rgba(16, 185, 129, 0.1);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #10b981;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+
+        .page-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .page-title {
+            font-size: 48px;
+            font-weight: 900;
+            margin-bottom: 15px;
+        }
+
+        .page-subtitle {
+            font-size: 18px;
+            color: #888;
+        }
+
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
@@ -887,438 +1267,11 @@
             .pricing-card.featured {
                 transform: none;
             }
-            .photo-sections {
+            .analytics-grid {
                 grid-template-columns: 1fr;
             }
+            .bubble.large { width: 120px; height: 120px; font-size: 14px; }
+            .bubble.medium { width: 100px; height: 100px; font-size: 12px; }
+            .bubble.small { width: 80px; height: 80px; font-size: 10px; }
+            .bubble.extra-large { width: 140px; height: 140px; font-size: 16px; }
         }
-    </style>
-</head>
-<body>
-    <!-- Welcome Screen -->
-    <div class="welcome-screen" id="welcomeScreen">
-        <img src="icon48.png" alt="Trakie.ai" class="logo">
-        <h1 class="title">#1 Cannabis Inventory AI</h1>
-        <p class="subtitle">The AI shortcut to Dutchie they don't want you to have.</p>
-        <p class="members-text">Members Only Access</p>
-        
-        <div class="login-box">
-            <input type="password" class="password-input" id="passwordInput" placeholder="Enter Password" autocomplete="off">
-            <button class="login-btn" onclick="login()">Access Platform</button>
-            <div class="error" id="errorMsg"></div>
-        </div>
-    </div>
-
-    <!-- QR Modal -->
-    <div class="qr-modal" id="qrModal">
-        <div class="qr-modal-content">
-            <button class="close-qr" onclick="closeQRModal()">×</button>
-            <h2 class="qr-modal-title">Scan to Access Mobile</h2>
-            <p class="qr-modal-subtitle">Use your phone camera to scan this QR code</p>
-            <canvas id="qrCanvas" class="qr-canvas" width="200" height="200"></canvas>
-            <button class="manual-next-btn" onclick="goToMobileReceive()">Continue on Mobile</button>
-        </div>
-    </div>
-
-    <!-- Main Site -->
-    <div class="main-site" id="mainSite">
-        <!-- Navigation -->
-        <nav class="nav">
-            <div class="nav-content">
-                <div class="nav-logo" onclick="scrollToTop()">
-                    <img src="icon48.png" alt="Trakie.ai" width="32" height="32">
-                    <span>Trakie.ai</span>
-                </div>
-                <div class="nav-links">
-                    <a href="#scan">Scan</a>
-                    <a onclick="showReceiveQR()">Receive</a>
-                    <a href="#pricing">Pricing</a>
-                </div>
-                <a href="#pricing" class="nav-cta">Get Started Free</a>
-            </div>
-        </nav>
-
-        <!-- Hero -->
-        <section class="hero">
-            <h1 class="hero-title">#1 Cannabis Inventory AI</h1>
-            <p class="hero-subtitle">Your competition manually enters. You use Trakie AI.</p>
-            <p class="hero-blue">No More Headaches.</p>
-            <p class="hero-speed">10x faster than manual entry</p>
-            <p class="hero-tagline">The AI shortcut to Dutchie they don't want you to have</p>
-        </section>
-
-        <!-- Magic Demo -->
-        <section class="magic-section">
-            <h2 class="magic-title">The Trakie AI Magic</h2>
-            <p class="magic-subtitle">Snap a few photos.</p>
-            <p class="magic-subtitle-indent">Watch everything auto-fill instantly.</p>
-            
-            <div class="demo-container">
-                <div class="step">
-                    <div class="step-number">1</div>
-                    <h3>Snap a few photos</h3>
-                    <div class="photo-box">
-                        <img src="icon48.png" alt="Trakie.ai" style="width: 40px; height: 40px; margin-bottom: 12px; opacity: 0.8;">
-                        <p>Front + Back of product</p>
-                    </div>
-                </div>
-                
-                <div class="arrow-down">↓</div>
-                
-                <div class="step">
-                    <div class="step-number">2</div>
-                    <h3>AI Magic Happens</h3>
-                    <div class="autofill-box">
-                        <div class="form-field">
-                            <span class="field-label">Product:</span>
-                            <span class="field-value" id="productName"></span>
-                        </div>
-                        <div class="form-field">
-                            <span class="field-label">THC:</span>
-                            <span class="field-value" id="thcPercent"></span>
-                        </div>
-                        <div class="form-field">
-                            <span class="field-label">Strain:</span>
-                            <span class="field-value" id="strainName"></span>
-                        </div>
-                        <div class="form-field">
-                            <span class="field-label">Vendor:</span>
-                            <span class="field-value" id="vendorName"></span>
-                        </div>
-                        <div class="form-field">
-                            <span class="field-label">Batch:</span>
-                            <span class="field-value" id="batchId"></span>
-                        </div>
-                        <div style="position: absolute; top: 10px; right: 10px; font-size: 20px;">✨</div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="metrics">
-                <div>
-                    <div class="metric-number">10x</div>
-                    <div class="metric-label">Faster</div>
-                </div>
-                <div>
-                    <div class="metric-number">99.99%</div>
-                    <div class="metric-label">Accurate</div>
-                </div>
-                <div>
-                    <div class="metric-number">$0</div>
-                    <div class="metric-label">Headaches</div>
-                </div>
-            </div>
-        </section>
-
-        <!-- QR Section -->
-        <section class="qr-section" id="scan">
-            <h2 class="qr-title">Now Try With Trakie</h2>
-            <div class="qr-box">
-                <canvas id="qrCanvasMain" width="200" height="200"></canvas>
-            </div>
-            <br>
-            <button class="qr-btn" onclick="showReceiveQR()">Scan QR Code</button>
-        </section>
-
-        <!-- Pricing -->
-        <section class="pricing" id="pricing">
-            <div class="pricing-header">
-                <h2 class="pricing-title">Simple Pricing</h2>
-                <p class="pricing-subtitle">Start free, scale as you grow</p>
-                
-                <div class="billing-toggle">
-                    <span style="color: #888;">Monthly</span>
-                    <div class="toggle-wrapper">
-                        <div class="toggle-switch" id="billingToggle" onclick="toggleBilling()">
-                            <div class="toggle-slider"></div>
-                        </div>
-                        <span class="discount-badge">Save 20%</span>
-                    </div>
-                    <span style="color: #10b981;">Yearly</span>
-                </div>
-            </div>
-            
-            <div class="pricing-grid">
-                <div class="pricing-card">
-                    <h3 class="plan-name">Starter</h3>
-                    <div class="plan-price">Free</div>
-                    <p class="plan-period">7 day trial</p>
-                    <ul class="features">
-                        <li>Up to 50 products</li>
-                        <li>Basic AI recognition</li>
-                        <li>Email support</li>
-                        <li>Single location</li>
-                    </ul>
-                    <button class="plan-btn secondary">Start Free Trial</button>
-                </div>
-
-                <div class="pricing-card featured">
-                    <div class="popular-badge">Most Popular</div>
-                    <h3 class="plan-name">Professional</h3>
-                    <div class="plan-price" id="professionalPrice">$99</div>
-                    <p class="plan-period" id="professionalPeriod">per location/month</p>
-                    <ul class="features">
-                        <li>Unlimited products</li>
-                        <li>Advanced AI recognition</li>
-                        <li>Dutchie integration</li>
-                        <li>Priority support</li>
-                        <li>Single location</li>
-                    </ul>
-                    <button class="plan-btn">Choose Professional</button>
-                </div>
-
-                <div class="pricing-card">
-                    <h3 class="plan-name">Multi-Location</h3>
-                    <div class="plan-price" id="multiPrice">$333</div>
-                    <p class="plan-period" id="multiPeriod">per month (4 locations)</p>
-                    <ul class="features">
-                        <li>Everything in Professional</li>
-                        <li>Up to 4 locations</li>
-                        <li>Multi-store management</li>
-                        <li>Advanced analytics</li>
-                        <li>Dedicated support</li>
-                    </ul>
-                    <button class="plan-btn">Choose Multi-Location</button>
-                </div>
-
-                <div class="pricing-card">
-                    <h3 class="plan-name">Enterprise</h3>
-                    <div class="plan-price" id="enterprisePrice">$499</div>
-                    <p class="plan-period" id="enterprisePeriod">per month (unlimited)</p>
-                    <ul class="features">
-                        <li>Unlimited locations</li>
-                        <li>Custom AI training</li>
-                        <li>White-label options</li>
-                        <li>24/7 phone support</li>
-                        <li>Custom integrations</li>
-                    </ul>
-                    <button class="plan-btn">Contact Sales</button>
-                </div>
-            </div>
-        </section>
-    </div>
-
-    <!-- Mobile Receive Section -->
-    <div class="mobile-receive-section" id="mobileReceiveSection">
-        <button class="back-btn-mobile" onclick="goBackToMain()">← Back to Main</button>
-        
-        <div class="mobile-header">
-            <h1 class="mobile-title">Receive Package</h1>
-            <p class="mobile-subtitle">Scan or upload product images to auto-fill inventory data</p>
-            
-            <div class="trust-message">
-                Don't worry, no data is saved. We are not them.
-            </div>
-        </div>
-
-        <div class="step-header">
-            <div class="step-number-large">1</div>
-            <div class="step-title">Take photos of invoice</div>
-        </div>
-
-        <div class="tab-container">
-            <button class="tab-button active" onclick="switchTab('invoice')">Invoice</button>
-            <button class="tab-button" onclick="switchTab('products')">Product Photos</button>
-        </div>
-
-        <div class="tab-content active" id="invoiceTab">
-            <div class="action-buttons">
-                <button class="action-btn take-photo-btn">
-                    📸 Take Photo
-                </button>
-                <button class="action-btn upload-photo-btn">
-                    📁 Upload Photo
-                </button>
-            </div>
-            
-            <div class="upload-area">
-                <div class="upload-icon">📄</div>
-                <div class="upload-text">Invoice Document</div>
-                <div class="upload-subtext">Capture or upload your invoice</div>
-            </div>
-        </div>
-
-        <div class="tab-content" id="productsTab">
-            <div class="action-buttons">
-                <button class="action-btn take-photo-btn">
-                    📸 Take Photo
-                </button>
-                <button class="action-btn upload-photo-btn">
-                    📁 Upload Photo
-                </button>
-            </div>
-            
-            <div class="upload-area">
-                <div class="upload-icon">📦</div>
-                <div class="upload-text">Product Photos</div>
-                <div class="upload-subtext">Front, back, and label photos</div>
-            </div>
-        </div>
-
-        <button class="process-btn">Process & Save Package</button>
-    </div>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrious/4.0.2/qrious.min.js"></script>
-    <script>
-        let isYearly = false;
-
-        function login() {
-            const password = document.getElementById('passwordInput').value;
-            const error = document.getElementById('errorMsg');
-            
-            if (password === 'PasswordBoss123!') {
-                document.getElementById('welcomeScreen').classList.add('hide');
-                document.getElementById('mainSite').classList.add('show');
-                generateQR();
-                startTypeAnimation();
-            } else {
-                error.textContent = 'Invalid password';
-                document.getElementById('passwordInput').value = '';
-            }
-        }
-
-        function showReceiveQR() {
-            // Check if user is on mobile
-            if (window.innerWidth <= 768 || /Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
-                // Skip QR and go directly to mobile receive
-                goToMobileReceive();
-            } else {
-                // Show QR modal for desktop users
-                document.getElementById('qrModal').classList.add('show');
-                generateQR();
-            }
-        }
-
-        function closeQRModal() {
-            document.getElementById('qrModal').classList.remove('show');
-        }
-
-        function goToMobileReceive() {
-            document.getElementById('mainSite').style.display = 'none';
-            document.getElementById('qrModal').classList.remove('show');
-            document.getElementById('mobileReceiveSection').style.display = 'block';
-        }
-
-        function goBackToMain() {
-            document.getElementById('mobileReceiveSection').style.display = 'none';
-            document.getElementById('mainSite').style.display = 'block';
-        }
-
-        function generateQR() {
-            setTimeout(() => {
-                if (typeof QRious !== 'undefined') {
-                    // For main QR section
-                    const mainCanvas = document.getElementById('qrCanvasMain');
-                    if (mainCanvas) {
-                        new QRious({
-                            element: mainCanvas,
-                            value: window.location.href + '?mobile=1',
-                            size: 200,
-                            background: '#ffffff',
-                            foreground: '#1a1a1a'
-                        });
-                    }
-                    
-                    // For modal QR
-                    const modalCanvas = document.getElementById('qrCanvas');
-                    if (modalCanvas) {
-                        new QRious({
-                            element: modalCanvas,
-                            value: window.location.href + '?mobile=1',
-                            size: 200,
-                            background: '#ffffff',
-                            foreground: '#1a1a1a'
-                        });
-                    }
-                }
-            }, 100);
-        }
-
-        function toggleBilling() {
-            isYearly = !isYearly;
-            const toggle = document.getElementById('billingToggle');
-            const professionalPrice = document.getElementById('professionalPrice');
-            const professionalPeriod = document.getElementById('professionalPeriod');
-            const multiPrice = document.getElementById('multiPrice');
-            const multiPeriod = document.getElementById('multiPeriod');
-            const enterprisePrice = document.getElementById('enterprisePrice');
-            const enterprisePeriod = document.getElementById('enterprisePeriod');
-
-            if (isYearly) {
-                toggle.classList.add('active');
-                professionalPrice.textContent = '$79';
-                professionalPeriod.textContent = 'per location/month (billed yearly)';
-                multiPrice.textContent = '$266';
-                multiPeriod.textContent = 'per month (4 locations, billed yearly)';
-                enterprisePrice.textContent = '$399';
-                enterprisePeriod.textContent = 'per month (unlimited, billed yearly)';
-            } else {
-                toggle.classList.remove('active');
-                professionalPrice.textContent = '$99';
-                professionalPeriod.textContent = 'per location/month';
-                multiPrice.textContent = '$333';
-                multiPeriod.textContent = 'per month (4 locations)';
-                enterprisePrice.textContent = '$499';
-                enterprisePeriod.textContent = 'per month (unlimited)';
-            }
-        }
-
-        function typeText(id, text, delay = 0) {
-            setTimeout(() => {
-                const element = document.getElementById(id);
-                if (!element) return;
-                let i = 0;
-                element.textContent = '';
-                const interval = setInterval(() => {
-                    element.textContent += text[i];
-                    i++;
-                    if (i >= text.length) clearInterval(interval);
-                }, 80);
-            }, delay);
-        }
-
-        function startTypeAnimation() {
-            const fields = [
-                { id: 'productName', text: 'Blue Dream 3.5g Flower', delay: 500 },
-                { id: 'thcPercent', text: '22%', delay: 1000 },
-                { id: 'strainName', text: 'Sativa Hybrid', delay: 1500 },
-                { id: 'vendorName', text: 'Premium Growers', delay: 2000 },
-                { id: 'batchId', text: 'B2024-089', delay: 2500 }
-            ];
-            
-            fields.forEach(field => {
-                typeText(field.id, field.text, field.delay);
-            });
-            
-            setTimeout(startTypeAnimation, 6000);
-        }
-
-        function scrollToTop() {
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
-
-        function switchTab(tabName) {
-            // Remove active class from all tabs and buttons
-            document.querySelectorAll('.tab-button').forEach(btn => btn.classList.remove('active'));
-            document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
-            
-            // Add active class to clicked button and corresponding content
-            event.target.classList.add('active');
-            document.getElementById(tabName + 'Tab').classList.add('active');
-        }
-
-        document.getElementById('passwordInput').addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') login();
-        });
-
-        window.onload = function() {
-            document.getElementById('passwordInput').focus();
-            
-            // Check if coming from QR scan
-            const urlParams = new URLSearchParams(window.location.search);
-            if (urlParams.get('mobile') === '1') {
-                goToMobileReceive();
-            }
-        };
-    </script>
-</body>
-</html>
