@@ -1208,7 +1208,7 @@
 <body>
     <!-- Welcome Screen -->
     <div class="welcome-screen" id="welcomeScreen">
-        <div style="width: 80px; height: 80px; background: linear-gradient(135deg, #10b981, #60A5FA); border-radius: 16px; display: flex; align-items: center; justify-content: center; font-size: 32px; font-weight: 900; margin-bottom: 40px; animation: fadeIn 1s ease 0.5s forwards; opacity: 0;">T</div>
+        <img src="icon48.png" alt="Trakie.ai" class="logo">
         <h1 class="title">#1 Cannabis Inventory AI</h1>
         <p class="subtitle">The AI shortcut to Dutchie they don't want you to have.</p>
         <p class="members-text">Members Only Access</p>
@@ -1690,7 +1690,6 @@
                 // Add click handler for bubble interaction
                 bubbleElement.addEventListener('click', () => showBubbleData(bubble));
                 
-                // Add slight delay for each bubble appearance
                 setTimeout(() => {
                     container.appendChild(bubbleElement);
                 }, index * 200);
