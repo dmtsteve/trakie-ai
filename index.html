@@ -93,6 +93,8 @@
             font-size: 16px;
             margin-bottom: 15px;
             font-family: 'Inter', sans-serif;
+            position: relative;
+            z-index: 10000;
         }
 
         .password-input::placeholder {
@@ -102,6 +104,7 @@
         .password-input:focus {
             outline: none;
             border-color: #60A5FA;
+            background: rgba(255, 255, 255, 0.15);
         }
 
         .login-btn {
