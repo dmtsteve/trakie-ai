@@ -875,14 +875,15 @@
             box-shadow: 0 6px 20px rgba(96, 165, 250, 0.4);
         }
 
-        /* Bubbles Section */
+        /* Bubbles Section - Crypto Style */
         .bubbles-container {
-            height: 80vh;
+            height: 85vh;
             position: relative;
-            background: radial-gradient(ellipse at center, rgba(16, 185, 129, 0.1) 0%, rgba(0, 0, 0, 0.8) 70%);
+            background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 1) 100%);
             border-radius: 20px;
             overflow: hidden;
             margin: 20px 0;
+            border: 1px solid rgba(255, 255, 255, 0.05);
         }
 
         .bubble {
@@ -894,32 +895,270 @@
             justify-content: center;
             text-align: center;
             font-weight: 700;
-            transition: all 0.3s ease;
-            box-shadow: 0 8px 32px rgba(16, 185, 129, 0.3);
-            background: linear-gradient(135deg, rgba(16, 185, 129, 0.8), rgba(34, 197, 94, 0.6));
-            color: white;
-            animation: float 6s ease-in-out infinite;
+            transition: all 0.4s ease;
+            backdrop-filter: blur(10px);
+            border: 2px solid;
+            animation: float 8s ease-in-out infinite, neonPulse 3s ease-in-out infinite alternate;
+            box-shadow: 0 0 30px rgba(255, 255, 255, 0.1), inset 0 0 30px rgba(255, 255, 255, 0.05);
         }
 
         .bubble:hover {
-            transform: scale(1.1);
-            box-shadow: 0 12px 48px rgba(16, 185, 129, 0.5);
+            transform: scale(1.15);
+            animation-play-state: paused;
+            box-shadow: 0 0 50px currentColor, inset 0 0 50px rgba(255, 255, 255, 0.1);
         }
 
-        .bubble.large { width: 150px; height: 150px; font-size: 16px; }
-        .bubble.medium { width: 120px; height: 120px; font-size: 14px; }
-        .bubble.small { width: 90px; height: 90px; font-size: 12px; }
-        .bubble.extra-large { width: 180px; height: 180px; font-size: 18px; }
+        .bubble.profit-high { 
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.3), rgba(34, 197, 94, 0.2));
+            border-color: #10b981;
+            color: #10b981;
+            box-shadow: 0 0 30px rgba(16, 185, 129, 0.4), inset 0 0 30px rgba(16, 185, 129, 0.1);
+        }
+
+        .bubble.profit-medium { 
+            background: linear-gradient(135deg, rgba(251, 191, 36, 0.3), rgba(245, 158, 11, 0.2));
+            border-color: #fbbf24;
+            color: #fbbf24;
+            box-shadow: 0 0 30px rgba(251, 191, 36, 0.4), inset 0 0 30px rgba(251, 191, 36, 0.1);
+        }
+
+        .bubble.buffer-zone { 
+            background: linear-gradient(135deg, rgba(249, 115, 22, 0.3), rgba(234, 88, 12, 0.2));
+            border-color: #f97316;
+            color: #f97316;
+            box-shadow: 0 0 30px rgba(249, 115, 22, 0.4), inset 0 0 30px rgba(249, 115, 22, 0.1);
+        }
+
+        .bubble.danger { 
+            background: linear-gradient(135deg, rgba(239, 68, 68, 0.3), rgba(220, 38, 38, 0.2));
+            border-color: #ef4444;
+            color: #ef4444;
+            box-shadow: 0 0 30px rgba(239, 68, 68, 0.4), inset 0 0 30px rgba(239, 68, 68, 0.1);
+        }
+
+        .bubble.push-product { 
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.3), rgba(37, 99, 235, 0.2));
+            border-color: #3b82f6;
+            color: #3b82f6;
+            box-shadow: 0 0 30px rgba(59, 130, 246, 0.4), inset 0 0 30px rgba(59, 130, 246, 0.1);
+        }
+
+        .bubble.revenue-xl { width: 200px; height: 200px; font-size: 16px; }
+        .bubble.revenue-large { width: 160px; height: 160px; font-size: 14px; }
+        .bubble.revenue-medium { width: 120px; height: 120px; font-size: 12px; }
+        .bubble.revenue-small { width: 90px; height: 90px; font-size: 11px; }
 
         @keyframes float {
             0%, 100% { transform: translateY(0px) rotate(0deg); }
-            33% { transform: translateY(-10px) rotate(1deg); }
-            66% { transform: translateY(10px) rotate(-1deg); }
+            25% { transform: translateY(-15px) rotate(0.5deg); }
+            50% { transform: translateY(-5px) rotate(-0.5deg); }
+            75% { transform: translateY(-20px) rotate(0.3deg); }
         }
 
-        .bubble:nth-child(2) { animation-delay: -2s; }
-        .bubble:nth-child(3) { animation-delay: -4s; }
-        .bubble:nth-child(4) { animation-delay: -6s; }
+        @keyframes neonPulse {
+            0% { 
+                box-shadow: 0 0 20px currentColor, inset 0 0 20px rgba(255, 255, 255, 0.05);
+                border-width: 2px;
+            }
+            100% { 
+                box-shadow: 0 0 40px currentColor, inset 0 0 40px rgba(255, 255, 255, 0.1);
+                border-width: 3px;
+            }
+        }
+
+        .bubble-tooltip {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0, 0, 0, 0.9);
+            border: 1px solid currentColor;
+            border-radius: 8px;
+            padding: 10px;
+            font-size: 10px;
+            white-space: nowrap;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s;
+            backdrop-filter: blur(10px);
+        }
+
+        .bubble:hover .bubble-tooltip {
+            opacity: 1;
+        }
+
+        .bubble-filters {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 8px 16px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            color: #ccc;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            backdrop-filter: blur(10px);
+        }
+
+        .filter-btn.active {
+            background: rgba(16, 185, 129, 0.2);
+            border-color: #10b981;
+            color: #10b981;
+            box-shadow: 0 0 20px rgba(16, 185, 129, 0.3);
+        }
+
+        .filter-btn:hover {
+            border-color: #10b981;
+            color: #10b981;
+        }
+
+        /* Data Section - Air Traffic Control */
+        .data-container {
+            padding: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .data-tabs {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 40px;
+            justify-content: center;
+        }
+
+        .data-tab {
+            padding: 12px 24px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 12px;
+            color: #ccc;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .data-tab.active {
+            background: rgba(60, 165, 250, 0.2);
+            border-color: #60A5FA;
+            color: #60A5FA;
+            box-shadow: 0 0 20px rgba(60, 165, 250, 0.3);
+        }
+
+        .data-content {
+            display: none;
+        }
+
+        .data-content.active {
+            display: block;
+        }
+
+        .timeline-container {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 30px;
+            margin-bottom: 30px;
+        }
+
+        .timeline-header {
+            font-size: 18px;
+            font-weight: 700;
+            color: #60A5FA;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .timeline-bar {
+            height: 40px;
+            background: linear-gradient(90deg, rgba(16, 185, 129, 0.8) 0%, rgba(249, 115, 22, 0.8) 70%, rgba(239, 68, 68, 0.8) 100%);
+            border-radius: 20px;
+            position: relative;
+            margin: 20px 0;
+            overflow: hidden;
+            animation: stockDrain 10s linear infinite;
+        }
+
+        @keyframes stockDrain {
+            0% { background-size: 100% 100%; }
+            100% { background-size: 95% 100%; }
+        }
+
+        .timeline-marker {
+            position: absolute;
+            top: -5px;
+            width: 2px;
+            height: 50px;
+            background: white;
+            border-radius: 1px;
+        }
+
+        .timeline-marker.sellout { left: 70%; background: #ef4444; }
+        .timeline-marker.shipment { left: 85%; background: #10b981; }
+
+        .reorder-cart {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 30px;
+        }
+
+        .cart-header {
+            font-size: 18px;
+            font-weight: 700;
+            color: #10b981;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .cart-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 10px;
+            margin-bottom: 10px;
+            transition: all 0.3s;
+        }
+
+        .cart-item:hover {
+            background: rgba(255, 255, 255, 0.05);
+            transform: translateX(5px);
+        }
+
+        .cart-summary {
+            background: rgba(16, 185, 129, 0.1);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            border-radius: 12px;
+            padding: 20px;
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .export-btn {
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 15px;
+            transition: all 0.3s;
+        }
+
+        .export-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(16, 185, 129, 0.4);
+        }
 
         .page-header {
             text-align: center;
@@ -1099,24 +1338,75 @@
         <div class="page-section" id="bubblesSection">
             <div class="page-header">
                 <h1 class="page-title">Trakie AI Bubbles</h1>
-                <p class="page-subtitle">Your AI budtender assistant - helping customers choose better, faster</p>
+                <p class="page-subtitle">Your AI budtender assistant - crypto-style revenue intelligence</p>
+            </div>
+            
+            <div class="bubble-filters">
+                <button class="filter-btn active" onclick="filterBubbles('all')">All Products</button>
+                <button class="filter-btn" onclick="filterBubbles('best-sellers')">Best Sellers</button>
+                <button class="filter-btn" onclick="filterBubbles('vendor-performance')">Vendor Performance</button>
+                <button class="filter-btn" onclick="filterBubbles('restock-alerts')">Restock Alerts</button>
+                <button class="filter-btn" onclick="filterBubbles('push-products')">Push Products</button>
             </div>
             
             <div class="bubbles-container" id="bubblesContainer">
-                <!-- Bubbles will be dynamically generated here -->
+                <!-- Crypto-style bubbles will be dynamically generated here -->
             </div>
         </div>
 
         <!-- Data Section -->
         <div class="page-section" id="dataSection">
             <div class="page-header">
-                <h1 class="page-title">Data Analytics</h1>
-                <p class="page-subtitle">AI-powered insights for smarter inventory decisions</p>
+                <h1 class="page-title">Data Command Center</h1>
+                <p class="page-subtitle">Air traffic control for your cannabis operations</p>
             </div>
             
-            <div style="padding: 40px; text-align: center;">
-                <h3 style="color: #10b981; margin-bottom: 20px;">Coming Soon</h3>
-                <p style="color: #888;">Advanced analytics dashboard with vendor performance, sample ROI, and restock predictions</p>
+            <div class="data-container">
+                <div class="data-tabs">
+                    <button class="data-tab active" onclick="switchDataTab('timeline')">📅 Calendar Timeline</button>
+                    <button class="data-tab" onclick="switchDataTab('reorder')">🛒 Smart Reorder</button>
+                </div>
+                
+                <div class="data-content active" id="timelineContent">
+                    <div class="timeline-container">
+                        <div class="timeline-header">Stock Depletion Timeline - Next 30 Days</div>
+                        <div class="timeline-bar">
+                            <div class="timeline-marker sellout" title="Projected Sellout: Oct 25"></div>
+                            <div class="timeline-marker shipment" title="Next Shipment: Oct 28"></div>
+                        </div>
+                        <p style="color: #888; font-size: 14px; text-align: center; margin-top: 15px;">
+                            🔴 Sellout Risk | 🟢 Inbound Shipment | Bar drains based on velocity
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="data-content" id="reorderContent">
+                    <div class="reorder-cart">
+                        <div class="cart-header">🛒 Recommended Reorders - Tesla Style</div>
+                        
+                        <div class="cart-item">
+                            <span>Blue Dream 3.5g</span>
+                            <span style="color: #10b981;">40 units</span>
+                        </div>
+                        
+                        <div class="cart-item">
+                            <span>Wedding Cake Pre-rolls</span>
+                            <span style="color: #f97316;">25 units</span>
+                        </div>
+                        
+                        <div class="cart-item">
+                            <span>Gorilla Glue Concentrates</span>
+                            <span style="color: #ef4444;">15 units</span>
+                        </div>
+                        
+                        <div class="cart-summary">
+                            <p style="font-weight: 600; margin-bottom: 10px;">Order Summary</p>
+                            <p style="color: #888; font-size: 14px;">Coverage until: November 15th</p>
+                            <p style="color: #888; font-size: 14px;">Total investment: $8,420</p>
+                            <button class="export-btn" onclick="exportOrder()">📧 Generate PO Email</button>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -1263,13 +1553,82 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrious/4.0.2/qrious.min.js"></script>
     <script>
         let isYearly = false;
+        let currentFilter = 'all';
         
-        // Bubble data for AI Budtender
+        // Enhanced bubble data with crypto-style properties
         const bubbleData = [
-            { name: 'Best Sellers', size: 'extra-large', position: { top: '20%', left: '25%' }, data: ['Blue Dream', 'Girl Scout Cookies', 'Wedding Cake', 'Purple Haze', 'Gorilla Glue'] },
-            { name: 'Push Products', size: 'large', position: { top: '40%', left: '70%' }, data: ['Old Stock Indica', 'Expiring Edibles', 'Slow Movers', 'Overstock Items', 'Clearance'] },
-            { name: 'Restock Alerts', size: 'medium', position: { top: '65%', left: '40%' }, data: ['Popular Pre-rolls', 'Fast Edibles', 'Top Concentrates', 'Bestselling Flower', 'High-demand Vapes'] },
-            { name: 'Vendor Performance', size: 'large', position: { top: '15%', left: '60%' }, data: ['Green Thumb Co', 'Premium Growers', 'Quality Cannabis', 'Top Shelf', 'Elite Extracts'] }
+            { 
+                name: 'Blue Dream', 
+                category: 'best-sellers',
+                revenue: 15420, 
+                velocity: 'high', 
+                status: 'profit-high', 
+                size: 'revenue-xl',
+                position: { top: '25%', left: '20%' },
+                margin: '68%',
+                sellout: 'Oct 28',
+                reorder: '40 units'
+            },
+            { 
+                name: 'Wedding Cake', 
+                category: 'best-sellers',
+                revenue: 12200, 
+                velocity: 'medium-high', 
+                status: 'profit-high', 
+                size: 'revenue-large',
+                position: { top: '60%', left: '70%' },
+                margin: '72%',
+                sellout: 'Nov 5',
+                reorder: '25 units'
+            },
+            { 
+                name: 'OG Kush', 
+                category: 'push-products',
+                revenue: 8900, 
+                velocity: 'slow', 
+                status: 'push-product', 
+                size: 'revenue-medium',
+                position: { top: '40%', left: '45%' },
+                margin: '45%',
+                sellout: 'Dec 15',
+                reorder: 'Push for upsell'
+            },
+            { 
+                name: 'Critical Stock', 
+                category: 'restock-alerts',
+                revenue: 6800, 
+                velocity: 'critical', 
+                status: 'danger', 
+                size: 'revenue-medium',
+                position: { top: '15%', left: '65%' },
+                margin: '52%',
+                sellout: 'Oct 22',
+                reorder: 'URGENT: 30 units'
+            },
+            { 
+                name: 'Premium Growers', 
+                category: 'vendor-performance',
+                revenue: 11500, 
+                velocity: 'steady', 
+                status: 'profit-medium', 
+                size: 'revenue-large',
+                position: { top: '70%', left: '25%' },
+                margin: '61%',
+                sellout: 'Nov 12',
+                reorder: '35 units'
+            },
+            { 
+                name: 'Buffer Zone', 
+                category: 'restock-alerts',
+                revenue: 5200, 
+                velocity: 'medium', 
+                status: 'buffer-zone', 
+                size: 'revenue-small',
+                position: { top: '50%', left: '80%' },
+                margin: '48%',
+                sellout: 'Nov 8',
+                reorder: '20 units'
+            }
         ];
 
         function login() {
@@ -1308,12 +1667,25 @@
             
             container.innerHTML = ''; // Clear existing bubbles
             
-            bubbleData.forEach((bubble, index) => {
+            const filteredBubbles = currentFilter === 'all' 
+                ? bubbleData 
+                : bubbleData.filter(bubble => bubble.category === currentFilter);
+            
+            filteredBubbles.forEach((bubble, index) => {
                 const bubbleElement = document.createElement('div');
-                bubbleElement.className = `bubble ${bubble.size}`;
+                bubbleElement.className = `bubble ${bubble.status} ${bubble.size}`;
                 bubbleElement.style.top = bubble.position.top;
                 bubbleElement.style.left = bubble.position.left;
-                bubbleElement.innerHTML = bubble.name;
+                bubbleElement.style.animationDelay = `${index * 0.5}s`;
+                
+                bubbleElement.innerHTML = `
+                    ${bubble.name}
+                    <div class="bubble-tooltip">
+                        💰 Margin: ${bubble.margin}<br>
+                        📅 Sellout: ${bubble.sellout}<br>
+                        📦 ${bubble.reorder}
+                    </div>
+                `;
                 
                 // Add click handler for bubble interaction
                 bubbleElement.addEventListener('click', () => showBubbleData(bubble));
@@ -1325,8 +1697,42 @@
             });
         }
 
+        function filterBubbles(category) {
+            currentFilter = category;
+            
+            // Update filter button states
+            document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            // Reinitialize bubbles with filter
+            initializeBubbles();
+        }
+
+        function switchDataTab(tabName) {
+            // Update tab buttons
+            document.querySelectorAll('.data-tab').forEach(tab => tab.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            // Update content
+            document.querySelectorAll('.data-content').forEach(content => content.classList.remove('active'));
+            document.getElementById(tabName + 'Content').classList.add('active');
+        }
+
+        function exportOrder() {
+            alert('📧 Purchase Order Email Generated!\n\nSent to: vendors@premiumgrowers.com\n\nOrder details:\n• Blue Dream 3.5g - 40 units\n• Wedding Cake Pre-rolls - 25 units\n• Gorilla Glue Concentrates - 15 units\n\nTotal: $8,420\nCoverage: Nov 15th');
+        }
+
         function showBubbleData(bubble) {
-            alert(`${bubble.name} Top 5:\n\n${bubble.data.map((item, i) => `${i+1}. ${item}`).join('\n')}\n\n🎯 AI-powered insights helping budtenders sell smarter!`);
+            const statusEmoji = {
+                'profit-high': '🟢',
+                'profit-medium': '🟡', 
+                'buffer-zone': '🟠',
+                'danger': '🔴',
+                'push-product': '🔵'
+            };
+            
+            alert(`${statusEmoji[bubble.status]} ${bubble.name}\n\n💰 Revenue Impact: ${bubble.revenue.toLocaleString()}\n📊 Margin: ${bubble.margin}\n📅 Sellout Date: ${bubble.sellout}\n📦 Action: ${bubble.reorder}\n\n🎯 Crypto-style intelligence for smarter decisions!`);
+        }item}`).join('\n')}\n\n🎯 AI-powered insights helping budtenders sell smarter!`);
         }
 
         function showReceiveQR() {
