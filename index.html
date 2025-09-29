@@ -271,6 +271,31 @@
             text-align: center;
             max-width: 1200px;
             margin: 0 auto;
+            position: relative;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800"><path d="M0,400 Q300,200 600,400 T1200,400 L1200,800 L0,800 Z" fill="%2310b981" opacity="0.03"/><path d="M0,500 Q300,300 600,500 T1200,500 L1200,800 L0,800 Z" fill="%238b5cf6" opacity="0.02"/></svg>');
+            background-size: cover;
+            pointer-events: none;
+            z-index: 0;
+            animation: floatCurves 20s ease-in-out infinite;
+        }
+
+        @keyframes floatCurves {
+            0%, 100% { transform: translateY(0) scale(1); }
+            50% { transform: translateY(-20px) scale(1.02); }
+        }
+
+        .hero > * {
+            position: relative;
+            z-index: 1;
         }
 
         .hero-title {
@@ -880,6 +905,177 @@
             .pricing-card.featured {
                 transform: none;
             }
+            .bubble.revenue-xl { width: 140px; height: 140px; }
+            .bubble.revenue-large { width: 110px; height: 110px; }
+        }
+
+        /* Page Sections */
+        .page-section {
+            display: none;
+        }
+
+        .page-section.active {
+            display: block;
+        }
+
+        /* Bubbles Section - Crypto Style */
+        .bubbles-wrapper {
+            padding: 100px 40px 40px;
+            min-height: 100vh;
+        }
+
+        .bubbles-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .bubbles-title {
+            font-size: 48px;
+            font-weight: 900;
+            color: #10b981;
+            margin-bottom: 15px;
+        }
+
+        .bubbles-subtitle {
+            color: #888;
+            font-size: 18px;
+        }
+
+        .bubbles-container {
+            height: 70vh;
+            position: relative;
+            background: radial-gradient(ellipse at center, rgba(16, 185, 129, 0.05) 0%, rgba(0, 0, 0, 0.95) 70%);
+            border-radius: 20px;
+            border: 1px solid rgba(16, 185, 129, 0.2);
+            overflow: hidden;
+        }
+
+        .bubble {
+            position: absolute;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            font-weight: 700;
+            font-size: 13px;
+            transition: all 0.4s ease;
+            backdrop-filter: blur(10px);
+            border: 2px solid;
+            animation: float 8s ease-in-out infinite, neonPulse 3s ease-in-out infinite alternate;
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.3), rgba(5, 150, 105, 0.2));
+            border-color: #10b981;
+            color: #10b981;
+            box-shadow: 0 0 30px rgba(16, 185, 129, 0.4), inset 0 0 30px rgba(16, 185, 129, 0.1);
+        }
+
+        .bubble:hover {
+            transform: scale(1.2);
+            box-shadow: 0 0 50px #10b981, inset 0 0 50px rgba(16, 185, 129, 0.2);
+        }
+
+        .bubble.revenue-xl { width: 180px; height: 180px; }
+        .bubble.revenue-large { width: 140px; height: 140px; }
+        .bubble.revenue-medium { width: 110px; height: 110px; }
+        .bubble.revenue-small { width: 80px; height: 80px; }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            25% { transform: translateY(-15px) rotate(1deg); }
+            50% { transform: translateY(-8px) rotate(-1deg); }
+            75% { transform: translateY(-18px) rotate(0.5deg); }
+        }
+
+        @keyframes neonPulse {
+            0% { 
+                box-shadow: 0 0 20px currentColor, inset 0 0 20px rgba(16, 185, 129, 0.1);
+                border-width: 2px;
+            }
+            100% { 
+                box-shadow: 0 0 40px currentColor, inset 0 0 40px rgba(16, 185, 129, 0.2);
+                border-width: 3px;
+            }
+        }
+
+        /* Data Section - Futuristic Dashboard */
+        .data-wrapper {
+            padding: 100px 40px 40px;
+            min-height: 100vh;
+        }
+
+        .data-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .data-title {
+            font-size: 48px;
+            font-weight: 900;
+            color: #8b5cf6;
+            margin-bottom: 15px;
+        }
+
+        .data-subtitle {
+            color: #888;
+            font-size: 18px;
+        }
+
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .dashboard-card {
+            background: rgba(139, 92, 246, 0.05);
+            border: 1px solid rgba(139, 92, 246, 0.3);
+            border-radius: 16px;
+            padding: 25px;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .dashboard-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #8b5cf6, #10b981, #f59e0b);
+            opacity: 0.8;
+        }
+
+        .dashboard-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 40px rgba(139, 92, 246, 0.3);
+            border-color: #8b5cf6;
+        }
+
+        .card-header {
+            font-size: 18px;
+            font-weight: 700;
+            color: #10b981;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .card-metric {
+            font-size: 36px;
+            font-weight: 900;
+            color: #8b5cf6;
+            margin-bottom: 10px;
+        }
+
+        .card-label {
+            color: #888;
+            font-size: 14px;
         }
     </style>
 </head>
@@ -914,26 +1110,29 @@
         <!-- Navigation -->
         <nav class="nav">
             <div class="nav-content">
-                <div class="nav-logo" onclick="scrollToTop()">
+                <div class="nav-logo" onclick="showSection('home')">
                     <img src="icon48.png" alt="Trakie.ai" width="32" height="32">
                     <span>Trakie.ai</span>
                 </div>
                 <div class="nav-links">
-                    <a href="#scan">Scan</a>
+                    <a onclick="showSection('home')">Home</a>
                     <a onclick="showReceiveQR()">Receive</a>
-                    <a href="#pricing">Pricing</a>
+                    <a onclick="showSection('bubbles')" style="color: #10b981;">Bubbles</a>
+                    <a onclick="showSection('data')" style="color: #8b5cf6;">Data</a>
+                    <a onclick="showSection('pricing')">Pricing</a>
                 </div>
                 <a href="#pricing" class="nav-cta">Get Started Free</a>
             </div>
         </nav>
 
-        <!-- Hero -->
+        <!-- Home Section -->
+        <div class="page-section active" id="homeSection">
         <section class="hero">
-            <h1 class="hero-title">#1 Cannabis Inventory AI</h1>
+            <h1 class="hero-title">Become an Inventory Wizard</h1>
             <p class="hero-subtitle">Your competition manually enters. You use Trakie AI.</p>
-            <p class="hero-blue">No More Headaches.</p>
-            <p class="hero-speed">10x faster than manual entry</p>
-            <p class="hero-tagline">The AI shortcut to Dutchie they don't want you to have</p>
+            <p class="hero-blue">PhD-Level Inventory Intelligence.</p>
+            <p class="hero-speed">Quant-backed formulas. Restock recommendations. Trend predictions.</p>
+            <p class="hero-tagline">The AI wizard they don't want you to have</p>
         </section>
 
         <!-- Magic Demo -->
@@ -1151,6 +1350,15 @@
     <script>
         let isYearly = false;
 
+        const bubbleProducts = [
+            { name: 'Blue Dream', revenue: 18500, size: 'revenue-xl', pos: { top: '20%', left: '25%' } },
+            { name: 'Wedding Cake', revenue: 14200, size: 'revenue-large', pos: { top: '55%', left: '70%' } },
+            { name: 'Gorilla Glue', revenue: 12800, size: 'revenue-large', pos: { top: '40%', left: '15%' } },
+            { name: 'OG Kush', revenue: 9400, size: 'revenue-medium', pos: { top: '70%', left: '45%' } },
+            { name: 'Sour Diesel', revenue: 8200, size: 'revenue-medium', pos: { top: '25%', left: '65%' } },
+            { name: 'Purple Haze', revenue: 6100, size: 'revenue-small', pos: { top: '60%', left: '80%' } }
+        ];
+
         function login() {
             const password = document.getElementById('passwordInput').value;
             const error = document.getElementById('errorMsg');
@@ -1160,10 +1368,39 @@
                 document.getElementById('mainSite').classList.add('show');
                 generateQR();
                 startTypeAnimation();
+                initBubbles();
             } else {
                 error.textContent = 'Invalid password';
                 document.getElementById('passwordInput').value = '';
             }
+        }
+
+        function showSection(sectionName) {
+            document.querySelectorAll('.page-section').forEach(s => s.classList.remove('active'));
+            document.getElementById(sectionName + 'Section').classList.add('active');
+            
+            if (sectionName === 'bubbles') {
+                setTimeout(() => initBubbles(), 100);
+            }
+        }
+
+        function initBubbles() {
+            const container = document.getElementById('bubblesContainer');
+            if (!container) return;
+            
+            container.innerHTML = '';
+            
+            bubbleProducts.forEach((product, i) => {
+                const bubble = document.createElement('div');
+                bubble.className = `bubble ${product.size}`;
+                bubble.style.top = product.pos.top;
+                bubble.style.left = product.pos.left;
+                bubble.style.animationDelay = `${i * 0.5}s`;
+                bubble.textContent = product.name;
+                bubble.onclick = () => alert(`${product.name}\n\n💰 Revenue: ${product.revenue.toLocaleString()}\n🔮 Wizard-level insight ready!`);
+                
+                setTimeout(() => container.appendChild(bubble), i * 150);
+            });
         }
 
         function showReceiveQR() {
@@ -1275,6 +1512,68 @@
             });
             
             setTimeout(startTypeAnimation, 6000);
+        }
+
+        function switchTab(tabName, buttonElement) {
+            document.querySelectorAll('.tab-button').forEach(btn => btn.classList.remove('active'));
+            document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+            
+            buttonElement.classList.add('active');
+            document.getElementById(tabName + 'Tab').classList.add('active');
+        }
+
+        document.getElementById('passwordInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') login();
+        });
+
+        window.onload = function() {
+            document.getElementById('passwordInput').focus();
+            
+            const urlParams = new URLSearchParams(window.location.search);
+            if (urlParams.get('mobile') === '1') {
+                goToMobileReceive();
+            }
+        };
+    </script>per location/month';
+                multiPrice.textContent = '$333';
+                multiPeriod.textContent = 'per month (4 locations)';
+                enterprisePrice.textContent = '$499';
+                enterprisePeriod.textContent = 'per month (unlimited)';
+            }
+        }
+
+        function typeText(id, text, delay = 0) {
+            setTimeout(() => {
+                const element = document.getElementById(id);
+                if (!element) return;
+                let i = 0;
+                element.textContent = '';
+                const interval = setInterval(() => {
+                    element.textContent += text[i];
+                    i++;
+                    if (i >= text.length) clearInterval(interval);
+                }, 80);
+            }, delay);
+        }
+
+        function startTypeAnimation() {
+            const fields = [
+                { id: 'productName', text: 'Blue Dream 3.5g Flower', delay: 500 },
+                { id: 'thcPercent', text: '22%', delay: 1000 },
+                { id: 'strainName', text: 'Sativa Hybrid', delay: 1500 },
+                { id: 'vendorName', text: 'Premium Growers', delay: 2000 },
+                { id: 'batchId', text: 'B2024-089', delay: 2500 }
+            ];
+            
+            fields.forEach(field => {
+                typeText(field.id, field.text, field.delay);
+            });
+            
+            setTimeout(startTypeAnimation, 6000);
+        }
+
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
         function scrollToTop() {
