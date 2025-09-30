@@ -35,6 +35,26 @@
             justify-content: center;
             z-index: 9999;
             text-align: center;
+            overflow: hidden;
+        }
+
+        .welcome-bg-video {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            transform: translate(-50%, -50%);
+            opacity: 0.2;
+            z-index: 0;
+            object-fit: cover;
+        }
+
+        .welcome-screen > * {
+            position: relative;
+            z-index: 1;
         }
 
         .welcome-screen.hide {
@@ -1082,6 +1102,10 @@
 <body>
     <!-- Welcome Screen -->
     <div class="welcome-screen" id="welcomeScreen">
+        <video class="welcome-bg-video" autoplay loop muted playsinline>
+            <source src="wizard-360.mp4" type="video/mp4">
+        </video>
+        
         <img src="icon48.png" alt="Trakie.ai" class="logo">
         <h1 class="title">#1 Cannabis Inventory AI</h1>
         <p class="subtitle">The AI shortcut to Dutchie they don't want you to have.</p>
@@ -1484,7 +1508,8 @@
             }
         }
 
-        function typeText(id, text, delay = 0) {
+        function typeText(id, text, delay) {
+            delay = delay || 0;
             setTimeout(() => {
                 const element = document.getElementById(id);
                 if (!element) return;
@@ -1512,72 +1537,6 @@
             });
             
             setTimeout(startTypeAnimation, 6000);
-        }
-
-        function switchTab(tabName, buttonElement) {
-            document.querySelectorAll('.tab-button').forEach(btn => btn.classList.remove('active'));
-            document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
-            
-            buttonElement.classList.add('active');
-            document.getElementById(tabName + 'Tab').classList.add('active');
-        }
-
-        document.getElementById('passwordInput').addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') login();
-        });
-
-        window.onload = function() {
-            document.getElementById('passwordInput').focus();
-            
-            const urlParams = new URLSearchParams(window.location.search);
-            if (urlParams.get('mobile') === '1') {
-                goToMobileReceive();
-            }
-        };
-    </script>per location/month';
-                multiPrice.textContent = '$333';
-                multiPeriod.textContent = 'per month (4 locations)';
-                enterprisePrice.textContent = '$499';
-                enterprisePeriod.textContent = 'per month (unlimited)';
-            }
-        }
-
-        function typeText(id, text, delay = 0) {
-            setTimeout(() => {
-                const element = document.getElementById(id);
-                if (!element) return;
-                let i = 0;
-                element.textContent = '';
-                const interval = setInterval(() => {
-                    element.textContent += text[i];
-                    i++;
-                    if (i >= text.length) clearInterval(interval);
-                }, 80);
-            }, delay);
-        }
-
-        function startTypeAnimation() {
-            const fields = [
-                { id: 'productName', text: 'Blue Dream 3.5g Flower', delay: 500 },
-                { id: 'thcPercent', text: '22%', delay: 1000 },
-                { id: 'strainName', text: 'Sativa Hybrid', delay: 1500 },
-                { id: 'vendorName', text: 'Premium Growers', delay: 2000 },
-                { id: 'batchId', text: 'B2024-089', delay: 2500 }
-            ];
-            
-            fields.forEach(field => {
-                typeText(field.id, field.text, field.delay);
-            });
-            
-            setTimeout(startTypeAnimation, 6000);
-        }
-
-        function scrollToTop() {
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
-
-        function scrollToTop() {
-            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
         function switchTab(tabName, buttonElement) {
