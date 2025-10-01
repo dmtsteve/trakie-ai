@@ -38,19 +38,22 @@
             overflow: hidden;
         }
 
-        .welcome-bg-video {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            min-width: 100%;
-            min-height: 100%;
-            width: auto;
-            height: auto;
-            transform: translate(-50%, -50%);
-            opacity: 1.0;
-            z-index: 0;
-            object-fit: cover;
-        }
+       .hero-bg-video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.3;
+    z-index: 0;
+    pointer-events: none;
+}
+
+.hero {
+    position: relative;
+    overflow: hidden;
+}
 
         .welcome-screen > * {
             position: relative;
@@ -1107,10 +1110,6 @@
 <body>
     <!-- Welcome Screen -->
     <div class="welcome-screen" id="welcomeScreen">
-    .welcome-bg-video {
-    border: 5px solid red; /* temporary debug border */
-    opacity: 1.0;
-    z-index: 0;
 }
         
         <img src="icon48.png" alt="Trakie.ai" class="logo">
@@ -1159,6 +1158,13 @@
         <!-- Home Section -->
         <div class="page-section active" id="homeSection">
         <section class="hero">
+            <section class="hero">
+    <video class="hero-bg-video" autoplay loop muted playsinline webkit-playsinline preload="auto">
+        <source src="mp4mp4.mp4" type="video/mp4">
+    </video>
+    
+    <h1 class="hero-title">Become an Inventory Wizard</h1>
+    <!-- rest of hero content -->
             <h1 class="hero-title">Become an Inventory Wizard</h1>
             <p class="hero-subtitle">Your competition manually enters. You use Trakie AI.</p>
             <p class="hero-blue">PhD-Level Inventory Intelligence.</p>
