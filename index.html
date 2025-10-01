@@ -38,23 +38,6 @@
             overflow: hidden;
         }
 
-       .hero-bg-video {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    opacity: 0.3;
-    z-index: 0;
-    pointer-events: none;
-}
-
-.hero {
-    position: relative;
-    overflow: hidden;
-}
-
         .welcome-screen > * {
             position: relative;
             z-index: 1;
@@ -288,13 +271,29 @@
             font-weight: 600;
         }
 
-        /* Hero Section */
+        /* Hero Section with Video Background */
         .hero {
             padding: 140px 40px 80px;
             text-align: center;
             max-width: 1200px;
             margin: 0 auto;
             position: relative;
+            overflow: hidden;
+        }
+
+        .hero-bg-video {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            object-fit: cover;
+            opacity: 0.3;
+            z-index: 0;
+            pointer-events: none;
         }
 
         .hero::before {
@@ -307,7 +306,7 @@
             background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800"><path d="M0,400 Q300,200 600,400 T1200,400 L1200,800 L0,800 Z" fill="%2310b981" opacity="0.03"/><path d="M0,500 Q300,300 600,500 T1200,500 L1200,800 L0,800 Z" fill="%238b5cf6" opacity="0.02"/></svg>');
             background-size: cover;
             pointer-events: none;
-            z-index: 0;
+            z-index: 1;
             animation: floatCurves 20s ease-in-out infinite;
         }
 
@@ -318,7 +317,7 @@
 
         .hero > * {
             position: relative;
-            z-index: 1;
+            z-index: 2;
         }
 
         .hero-title {
@@ -912,31 +911,6 @@
             box-shadow: 0 6px 20px rgba(96, 165, 250, 0.4);
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        @media (max-width: 768px) {
-            .demo-container { 
-                gap: 30px; 
-            }
-            .metrics { 
-                gap: 30px; 
-            }
-            .nav-links { 
-                display: none; 
-            }
-            .pricing-grid {
-                grid-template-columns: 1fr;
-            }
-            .pricing-card.featured {
-                transform: none;
-            }
-            .bubble.revenue-xl { width: 140px; height: 140px; }
-            .bubble.revenue-large { width: 110px; height: 110px; }
-        }
-
         /* Page Sections */
         .page-section {
             display: none;
@@ -1105,13 +1079,36 @@
             color: #888;
             font-size: 14px;
         }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (max-width: 768px) {
+            .demo-container { 
+                gap: 30px; 
+            }
+            .metrics { 
+                gap: 30px; 
+            }
+            .nav-links { 
+                display: none; 
+            }
+            .pricing-grid {
+                grid-template-columns: 1fr;
+            }
+            .pricing-card.featured {
+                transform: none;
+            }
+            .bubble.revenue-xl { width: 140px; height: 140px; }
+            .bubble.revenue-large { width: 110px; height: 110px; }
+        }
     </style>
 </head>
 <body>
     <!-- Welcome Screen -->
     <div class="welcome-screen" id="welcomeScreen">
-}
-        
         <img src="icon48.png" alt="Trakie.ai" class="logo">
         <h1 class="title">#1 Cannabis Inventory AI</h1>
         <p class="subtitle">The AI shortcut to Dutchie they don't want you to have.</p>
@@ -1157,93 +1154,90 @@
 
         <!-- Home Section -->
         <div class="page-section active" id="homeSection">
-        <section class="hero">
             <section class="hero">
-    <video class="hero-bg-video" autoplay loop muted playsinline webkit-playsinline preload="auto">
-        <source src="mp4mp4.mp4" type="video/mp4">
-    </video>
-    
-    <h1 class="hero-title">Become an Inventory Wizard</h1>
-    <!-- rest of hero content -->
-            <h1 class="hero-title">Become an Inventory Wizard</h1>
-            <p class="hero-subtitle">Your competition manually enters. You use Trakie AI.</p>
-            <p class="hero-blue">PhD-Level Inventory Intelligence.</p>
-            <p class="hero-speed">Quant-backed formulas. Restock recommendations. Trend predictions.</p>
-            <p class="hero-tagline">The AI wizard they don't want you to have</p>
-        </section>
+                <video class="hero-bg-video" autoplay loop muted playsinline webkit-playsinline preload="auto">
+                    <source src="mp4mp4.mp4" type="video/mp4">
+                </video>
+                
+                <h1 class="hero-title">Become an Inventory Wizard</h1>
+                <p class="hero-subtitle">Your competition manually enters. You use Trakie AI.</p>
+                <p class="hero-blue">PhD-Level Inventory Intelligence.</p>
+                <p class="hero-speed">Quant-backed formulas. Restock recommendations. Trend predictions.</p>
+                <p class="hero-tagline">The AI wizard they don't want you to have</p>
+            </section>
 
-        <!-- Magic Demo -->
-        <section class="magic-section">
-            <h2 class="magic-title">The Trakie AI Magic</h2>
-            <p class="magic-subtitle">Snap a few photos.</p>
-            <p class="magic-subtitle-indent">Watch everything auto-fill instantly.</p>
-            
-            <div class="demo-container">
-                <div class="step">
-                    <div class="step-number">1</div>
-                    <h3>Snap a few photos</h3>
-                    <div class="photo-box">
-                        <p style="font-size: 40px; margin-bottom: 10px;">📸</p>
-                        <p>Front + Back of product</p>
+            <!-- Magic Demo -->
+            <section class="magic-section">
+                <h2 class="magic-title">The Trakie AI Magic</h2>
+                <p class="magic-subtitle">Snap a few photos.</p>
+                <p class="magic-subtitle-indent">Watch everything auto-fill instantly.</p>
+                
+                <div class="demo-container">
+                    <div class="step">
+                        <div class="step-number">1</div>
+                        <h3>Snap a few photos</h3>
+                        <div class="photo-box">
+                            <p style="font-size: 40px; margin-bottom: 10px;">📸</p>
+                            <p>Front + Back of product</p>
+                        </div>
+                    </div>
+                    
+                    <div class="arrow-down">↓</div>
+                    
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <h3>AI Magic Happens</h3>
+                        <div class="autofill-box">
+                            <div class="form-field">
+                                <span class="field-label">Product:</span>
+                                <span class="field-value" id="productName"></span>
+                            </div>
+                            <div class="form-field">
+                                <span class="field-label">THC:</span>
+                                <span class="field-value" id="thcPercent"></span>
+                            </div>
+                            <div class="form-field">
+                                <span class="field-label">Strain:</span>
+                                <span class="field-value" id="strainName"></span>
+                            </div>
+                            <div class="form-field">
+                                <span class="field-label">Vendor:</span>
+                                <span class="field-value" id="vendorName"></span>
+                            </div>
+                            <div class="form-field">
+                                <span class="field-label">Batch:</span>
+                                <span class="field-value" id="batchId"></span>
+                            </div>
+                            <div style="position: absolute; top: 10px; right: 10px; font-size: 20px;">✨</div>
+                        </div>
                     </div>
                 </div>
                 
-                <div class="arrow-down">↓</div>
-                
-                <div class="step">
-                    <div class="step-number">2</div>
-                    <h3>AI Magic Happens</h3>
-                    <div class="autofill-box">
-                        <div class="form-field">
-                            <span class="field-label">Product:</span>
-                            <span class="field-value" id="productName"></span>
-                        </div>
-                        <div class="form-field">
-                            <span class="field-label">THC:</span>
-                            <span class="field-value" id="thcPercent"></span>
-                        </div>
-                        <div class="form-field">
-                            <span class="field-label">Strain:</span>
-                            <span class="field-value" id="strainName"></span>
-                        </div>
-                        <div class="form-field">
-                            <span class="field-label">Vendor:</span>
-                            <span class="field-value" id="vendorName"></span>
-                        </div>
-                        <div class="form-field">
-                            <span class="field-label">Batch:</span>
-                            <span class="field-value" id="batchId"></span>
-                        </div>
-                        <div style="position: absolute; top: 10px; right: 10px; font-size: 20px;">✨</div>
+                <div class="metrics">
+                    <div>
+                        <div class="metric-number">10x</div>
+                        <div class="metric-label">Faster</div>
+                    </div>
+                    <div>
+                        <div class="metric-number">99.99%</div>
+                        <div class="metric-label">Accurate</div>
+                    </div>
+                    <div>
+                        <div class="metric-number">$0</div>
+                        <div class="metric-label">Headaches</div>
                     </div>
                 </div>
-            </div>
-            
-            <div class="metrics">
-                <div>
-                    <div class="metric-number">10x</div>
-                    <div class="metric-label">Faster</div>
-                </div>
-                <div>
-                    <div class="metric-number">99.99%</div>
-                    <div class="metric-label">Accurate</div>
-                </div>
-                <div>
-                    <div class="metric-number">$0</div>
-                    <div class="metric-label">Headaches</div>
-                </div>
-            </div>
-        </section>
+            </section>
 
-        <!-- QR Section -->
-        <section class="qr-section" id="scan">
-            <h2 class="qr-title">Now Try With Trakie</h2>
-            <div class="qr-box">
-                <canvas id="qrCanvasMain" width="200" height="200"></canvas>
-            </div>
-            <br>
-            <button class="qr-btn" onclick="showReceiveQR()">Scan QR Code</button>
-        </section>
+            <!-- QR Section -->
+            <section class="qr-section" id="scan">
+                <h2 class="qr-title">Now Try With Trakie</h2>
+                <div class="qr-box">
+                    <canvas id="qrCanvasMain" width="200" height="200"></canvas>
+                </div>
+                <br>
+                <button class="qr-btn" onclick="showReceiveQR()">Scan QR Code</button>
+            </section>
         </div>
 
         <!-- Bubbles Section -->
@@ -1303,81 +1297,82 @@
 
         <!-- Pricing Section -->
         <div class="page-section" id="pricingSection">
-        <section class="pricing" id="pricing">
-            <div class="pricing-header">
-                <h2 class="pricing-title">Simple Pricing</h2>
-                <p class="pricing-subtitle">Start free, scale as you grow</p>
-                
-                <div class="billing-toggle">
-                    <span style="color: #888;">Monthly</span>
-                    <div class="toggle-wrapper">
-                        <div class="toggle-switch" id="billingToggle" onclick="toggleBilling()">
-                            <div class="toggle-slider"></div>
+            <section class="pricing" id="pricing">
+                <div class="pricing-header">
+                    <h2 class="pricing-title">Simple Pricing</h2>
+                    <p class="pricing-subtitle">Start free, scale as you grow</p>
+                    
+                    <div class="billing-toggle">
+                        <span style="color: #888;">Monthly</span>
+                        <div class="toggle-wrapper">
+                            <div class="toggle-switch" id="billingToggle" onclick="toggleBilling()">
+                                <div class="toggle-slider"></div>
+                            </div>
+                            <span class="discount-badge">Save 20%</span>
                         </div>
-                        <span class="discount-badge">Save 20%</span>
+                        <span style="color: #10b981;">Yearly</span>
                     </div>
-                    <span style="color: #10b981;">Yearly</span>
                 </div>
-            </div>
-            
-            <div class="pricing-grid">
-                <div class="pricing-card">
-                    <h3 class="plan-name">Starter</h3>
-                    <div class="plan-price">Free</div>
-                    <p class="plan-period">7 day trial</p>
-                    <ul class="features">
-                        <li>Up to 50 products</li>
-                        <li>Basic AI recognition</li>
-                        <li>Email support</li>
-                        <li>Single location</li>
-                    </ul>
-                    <button class="plan-btn secondary">Start Free Trial</button>
-                </div>
+                
+                <div class="pricing-grid">
+                    <div class="pricing-card">
+                        <h3 class="plan-name">Starter</h3>
+                        <div class="plan-price">Free</div>
+                        <p class="plan-period">7 day trial</p>
+                        <ul class="features">
+                            <li>Up to 50 products</li>
+                            <li>Basic AI recognition</li>
+                            <li>Email support</li>
+                            <li>Single location</li>
+                        </ul>
+                        <button class="plan-btn secondary">Start Free Trial</button>
+                    </div>
 
-                <div class="pricing-card featured">
-                    <div class="popular-badge">Most Popular</div>
-                    <h3 class="plan-name">Professional</h3>
-                    <div class="plan-price" id="professionalPrice">$99</div>
-                    <p class="plan-period" id="professionalPeriod">per location/month</p>
-                    <ul class="features">
-                        <li>Unlimited products</li>
-                        <li>Advanced AI recognition</li>
-                        <li>Dutchie integration</li>
-                        <li>Priority support</li>
-                        <li>Single location</li>
-                    </ul>
-                    <button class="plan-btn">Choose Professional</button>
-                </div>
+                    <div class="pricing-card featured">
+                        <div class="popular-badge">Most Popular</div>
+                        <h3 class="plan-name">Professional</h3>
+                        <div class="plan-price" id="professionalPrice">$99</div>
+                        <p class="plan-period" id="professionalPeriod">per location/month</p>
+                        <ul class="features">
+                            <li>Unlimited products</li>
+                            <li>Advanced AI recognition</li>
+                            <li>Dutchie integration</li>
+                            <li>Priority support</li>
+                            <li>Single location</li>
+                        </ul>
+                        <button class="plan-btn">Choose Professional</button>
+                    </div>
 
-                <div class="pricing-card">
-                    <h3 class="plan-name">Multi-Location</h3>
-                    <div class="plan-price" id="multiPrice">$333</div>
-                    <p class="plan-period" id="multiPeriod">per month (4 locations)</p>
-                    <ul class="features">
-                        <li>Everything in Professional</li>
-                        <li>Up to 4 locations</li>
-                        <li>Multi-store management</li>
-                        <li>Advanced analytics</li>
-                        <li>Dedicated support</li>
-                    </ul>
-                    <button class="plan-btn">Choose Multi-Location</button>
-                </div>
+                    <div class="pricing-card">
+                        <h3 class="plan-name">Multi-Location</h3>
+                        <div class="plan-price" id="multiPrice">$333</div>
+                        <p class="plan-period" id="multiPeriod">per month (4 locations)</p>
+                        <ul class="features">
+                            <li>Everything in Professional</li>
+                            <li>Up to 4 locations</li>
+                            <li>Multi-store management</li>
+                            <li>Advanced analytics</li>
+                            <li>Dedicated support</li>
+                        </ul>
+                        <button class="plan-btn">Choose Multi-Location</button>
+                    </div>
 
-                <div class="pricing-card">
-                    <h3 class="plan-name">Enterprise</h3>
-                    <div class="plan-price" id="enterprisePrice">$499</div>
-                    <p class="plan-period" id="enterprisePeriod">per month (unlimited)</p>
-                    <ul class="features">
-                        <li>Unlimited locations</li>
-                        <li>Custom AI training</li>
-                        <li>White-label options</li>
-                        <li>24/7 phone support</li>
-                        <li>Custom integrations</li>
-                    </ul>
-                    <button class="plan-btn">Contact Sales</button>
+                    <div class="pricing-card">
+                        <h3 class="plan-name">Enterprise</h3>
+                        <div class="plan-price" id="enterprisePrice">$499</div>
+                        <p class="plan-period" id="enterprisePeriod">per month (unlimited)</p>
+                        <ul class="features">
+                            <li>Unlimited locations</li>
+                            <li>Custom AI training</li>
+                            <li>White-label options</li>
+                            <li>24/7 phone support</li>
+                            <li>Custom integrations</li>
+                        </ul>
+                        <button class="plan-btn">Contact Sales</button>
+                    </div>
                 </div>
-            </div>
-        </section>
+            </section>
+        </div>
     </div>
 
     <!-- Mobile Receive Section -->
@@ -1491,7 +1486,7 @@
                 bubble.style.left = product.pos.left;
                 bubble.style.animationDelay = `${i * 0.5}s`;
                 bubble.textContent = product.name;
-                bubble.onclick = () => alert(`${product.name}\n\n💰 Revenue: ${product.revenue.toLocaleString()}\n🔮 Wizard-level insight ready!`);
+                bubble.onclick = () => alert(`${product.name}\n\n💰 Revenue: $${product.revenue.toLocaleString()}\n🔮 Wizard-level insight ready!`);
                 
                 setTimeout(() => container.appendChild(bubble), i * 150);
             });
