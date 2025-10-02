@@ -271,7 +271,7 @@
             font-weight: 600;
         }
 
-        /* Hero Section with Video Background */
+        /* Hero Section with Video Background - FULL TRANSPARENCY */
         .hero {
             padding: 140px 40px 80px;
             text-align: center;
@@ -279,40 +279,35 @@
             margin: 0 auto;
             position: relative;
             overflow: hidden;
+            min-height: 600px;
         }
 
         .hero-bg-video {
             position: absolute;
-            top: 0;
+            top: 50%;
             left: 50%;
-            transform: translateX(-50%);
+            transform: translate(-50%, -50%);
             min-width: 100%;
             min-height: 100%;
             width: auto;
             height: auto;
             object-fit: cover;
-            opacity: 0.3;
-            z-index: 0;
+            opacity: 1.0; /* FULL TRANSPARENCY - MAXIMUM VISIBILITY */
+            z-index: -1;
             pointer-events: none;
         }
 
-        .hero::before {
+        /* Dark overlay to ensure text readability */
+        .hero::after {
             content: '';
             position: absolute;
             top: 0;
             left: 0;
             right: 0;
             bottom: 0;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800"><path d="M0,400 Q300,200 600,400 T1200,400 L1200,800 L0,800 Z" fill="%2310b981" opacity="0.03"/><path d="M0,500 Q300,300 600,500 T1200,500 L1200,800 L0,800 Z" fill="%238b5cf6" opacity="0.02"/></svg>');
-            background-size: cover;
+            background: rgba(0, 0, 0, 0.5); /* Semi-transparent black overlay */
+            z-index: 0;
             pointer-events: none;
-            z-index: 1;
-            animation: floatCurves 20s ease-in-out infinite;
-        }
-
-        @keyframes floatCurves {
-            0%, 100% { transform: translateY(0) scale(1); }
-            50% { transform: translateY(-20px) scale(1.02); }
         }
 
         .hero > * {
@@ -324,12 +319,14 @@
             font-size: clamp(48px, 8vw, 80px);
             font-weight: 900;
             margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
         }
 
         .hero-subtitle {
             font-size: 24px;
-            color: #888;
+            color: #ffffff;
             margin-bottom: 15px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
         }
 
         .hero-blue {
@@ -337,18 +334,21 @@
             color: #60A5FA;
             font-weight: 600;
             margin-bottom: 15px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
         }
 
         .hero-speed {
             font-size: 18px;
-            color: #999;
+            color: #ffffff;
             margin-bottom: 40px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
         }
 
         .hero-tagline {
             font-size: 18px;
             color: #60A5FA;
             font-style: italic;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
         }
 
         /* Magic Demo */
@@ -1054,7 +1054,7 @@
 
         .dashboard-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 10px 40px rgba(139, 92, 246, 0.3);
+            box-shadow: 0 10px 40px rgba(139, 92,246, 0.3);
             border-color: #8b5cf6;
         }
 
@@ -1155,9 +1155,11 @@
         <!-- Home Section -->
         <div class="page-section active" id="homeSection">
             <section class="hero">
-               <video class="hero-bg-video" autoplay loop muted playsinline webkit-playsinline preload="auto">
-    <source src="welcome.mp4" type="video/mp4">
-</video>
+                <!-- VIDEO WITH FULL TRANSPARENCY -->
+                <video class="hero-bg-video" autoplay loop muted playsinline webkit-playsinline preload="auto">
+                    <source src="welcome.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
                 
                 <h1 class="hero-title">Become an Inventory Wizard</h1>
                 <p class="hero-subtitle">Your competition manually enters. You use Trakie AI.</p>
