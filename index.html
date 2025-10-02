@@ -271,7 +271,7 @@
             font-weight: 600;
         }
 
-     /* Hero Section with Video Background */
+/* Hero Section with Video Background */
 .hero {
     padding: 140px 40px 80px;
     text-align: center;
@@ -282,6 +282,7 @@
     min-height: 600px;
 }
 
+/* background video */
 .hero-bg-video {
     position: absolute;
     top: 0;
@@ -290,51 +291,67 @@
     height: 100%;
     object-fit: cover;
     opacity: 1.0;
-    z-index: -1;
+    z-index: -2; /* sit below overlay */
     pointer-events: none;
 }
 
+/* dark overlay */
+.hero::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0, 0, 0, 0.4); /* subtle dark veil */
+    z-index: -1; /* between video and text */
+}
+
+/* text always above */
 .hero > * {
     position: relative;
     z-index: 10;
 }
-        }
 
-        .hero-title {
-            font-size: clamp(48px, 8vw, 80px);
-            font-weight: 900;
-            margin-bottom: 20px;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
-        }
+/* title */
+.hero-title {
+    font-size: clamp(48px, 8vw, 80px);
+    font-weight: 900;
+    margin-bottom: 20px;
+    color: #ffffff; /* ensure white text */
+    text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.9);
+}
 
-      .hero-subtitle {
+/* subtitle */
+.hero-subtitle {
     font-size: 24px;
     color: #ffffff;
     margin-bottom: 15px;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.9);
+    text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.95);
 }
 
-        .hero-blue {
-            font-size: 20px;
-            color: #60A5FA;
-            font-weight: 600;
-            margin-bottom: 15px;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
-        }
+/* blue highlight */
+.hero-blue {
+    font-size: 20px;
+    color: #60A5FA;
+    font-weight: 600;
+    margin-bottom: 15px;
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, 1);
+}
 
-      .hero-speed {
+/* speed tagline */
+.hero-speed {
     font-size: 18px;
     color: #ffffff;
     margin-bottom: 40px;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.9);
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 1);
 }
 
-        .hero-tagline {
-            font-size: 18px;
-            color: #60A5FA;
-            font-style: italic;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
-        }
+/* final tagline */
+.hero-tagline {
+    font-size: 18px;
+    color: #60A5FA;
+    font-style: italic;
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, 1);
+}
+
 
         /* Magic Demo */
         .magic-section {
