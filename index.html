@@ -273,27 +273,83 @@
 
 /* Hero Section with Video Background */
 .hero {
+    position: relative;
+    overflow: hidden;
+    min-height: 600px;
     padding: 140px 40px 80px;
     text-align: center;
     max-width: 1200px;
     margin: 0 auto;
-    position: relative;
-    overflow: hidden;
-    min-height: 600px;
 }
 
 /* background video */
 .hero-bg-video {
     position: absolute;
-    top: 0;
-    left: 0;
+    top: 0; left: 0;
     width: 100%;
     height: 100%;
     object-fit: cover;
-    opacity: 1.0;
-    z-index: -2; /* sit below overlay */
+    z-index: 0; /* bottom */
     pointer-events: none;
 }
+
+/* gradient overlay: cinematic 2030 vibes */
+.hero::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: linear-gradient(
+        to bottom,
+        rgba(0, 0, 0, 0.2) 0%,
+        rgba(0, 0, 0, 0.4) 40%,
+        rgba(0, 0, 0, 0.7) 100%
+    );
+    z-index: 1; /* above video, under text */
+}
+
+/* wrapper for text content */
+.hero-content {
+    position: relative;
+    z-index: 2; /* top layer */
+}
+
+/* --- your existing text styles (kept the same) --- */
+.hero-title {
+    font-size: clamp(48px, 8vw, 80px);
+    font-weight: 900;
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+}
+
+.hero-subtitle {
+    font-size: 24px;
+    color: #ffffff;
+    margin-bottom: 15px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.9);
+}
+
+.hero-blue {
+    font-size: 20px;
+    color: #60A5FA;
+    font-weight: 600;
+    margin-bottom: 15px;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+}
+
+.hero-speed {
+    font-size: 18px;
+    color: #ffffff;
+    margin-bottom: 40px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.9);
+}
+
+.hero-tagline {
+    font-size: 18px;
+    color: #60A5FA;
+    font-style: italic;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+}
+
 
 /* dark overlay */
 .hero::before {
@@ -1158,20 +1214,22 @@
         </nav>
 
         <!-- Home Section -->
-        <div class="page-section active" id="homeSection">
-            <section class="hero">
-                <!-- VIDEO WITH FULL TRANSPARENCY -->
-                <video class="hero-bg-video" autoplay loop muted playsinline webkit-playsinline preload="auto">
-                    <source src="welcome.mp4" type="video/mp4">
-                    Your browser does not support the video tag.
-                </video>
-                
-                <h1 class="hero-title">Become an Inventory Wizard</h1>
-                <p class="hero-subtitle">Your competition manually enters. You use Trakie AI.</p>
-                <p class="hero-blue">PhD-Level Inventory Intelligence.</p>
-                <p class="hero-speed">Quant-backed formulas. Restock recommendations. Trend predictions.</p>
-                <p class="hero-tagline">The AI wizard they don't want you to have</p>
-            </section>
+     <!-- HERO SECTION -->
+<section class="hero">
+  <!-- background video -->
+  <video class="hero-bg-video" autoplay muted loop playsinline>
+    <source src="your-video.mp4" type="video/mp4">
+  </video>
+
+  <!-- text content -->
+  <div class="hero-content">
+    <h1 class="hero-title">Welcome to the Future</h1>
+    <p class="hero-subtitle">Built for speed, clarity & magic</p>
+    <p class="hero-blue">Trakie AI</p>
+    <p class="hero-speed">Autofill inventory at lightning speed</p>
+    <p class="hero-tagline">"Become an inventory wizard"</p>
+  </div>
+</section>
 
             <!-- Magic Demo -->
             <section class="magic-section">
