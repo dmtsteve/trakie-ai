@@ -271,146 +271,88 @@
             font-weight: 600;
         }
 
-/* Hero Section with Video Background */
-.hero {
-    position: relative;
-    overflow: hidden;
-    min-height: 600px;
-    padding: 140px 40px 80px;
-    text-align: center;
-    max-width: 1200px;
-    margin: 0 auto;
-}
+        /* Hero Section with Video Background */
+        .hero {
+            position: relative;
+            overflow: hidden;
+            min-height: 600px;
+            padding: 140px 40px 80px;
+            text-align: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
 
-/* background video */
-.hero-bg-video {
-    position: absolute;
-    top: 0; left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    z-index: 0; /* bottom */
-    pointer-events: none;
-}
+        .hero-bg-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 0;
+            pointer-events: none;
+        }
 
-/* gradient overlay: cinematic 2030 vibes */
-.hero::before {
-    content: "";
-    position: absolute;
-    top: 0; left: 0; right: 0; bottom: 0;
-    background: linear-gradient(
-        to bottom,
-        rgba(0, 0, 0, 0.2) 0%,
-        rgba(0, 0, 0, 0.4) 40%,
-        rgba(0, 0, 0, 0.7) 100%
-    );
-    z-index: 1; /* above video, under text */
-}
+        .hero::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(
+                to bottom,
+                rgba(0, 0, 0, 0.2) 0%,
+                rgba(0, 0, 0, 0.4) 40%,
+                rgba(0, 0, 0, 0.7) 100%
+            );
+            z-index: 1;
+        }
 
-/* wrapper for text content */
-.hero-content {
-    position: relative;
-    z-index: 2; /* top layer */
-}
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
 
-/* --- your existing text styles (kept the same) --- */
-.hero-title {
-    font-size: clamp(48px, 8vw, 80px);
-    font-weight: 900;
-    margin-bottom: 20px;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
-}
+        .hero-title {
+            font-size: clamp(48px, 8vw, 80px);
+            font-weight: 900;
+            margin-bottom: 20px;
+            color: #ffffff;
+            text-shadow: 
+                0 0 12px rgba(96, 165, 250, 0.8),
+                2px 2px 8px rgba(0, 0, 0, 0.8);
+        }
 
-.hero-subtitle {
-    font-size: 24px;
-    color: #ffffff;
-    margin-bottom: 15px;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.9);
-}
+        .hero-subtitle {
+            font-size: 24px;
+            color: #ffffff;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.95);
+        }
 
-.hero-blue {
-    font-size: 20px;
-    color: #60A5FA;
-    font-weight: 600;
-    margin-bottom: 15px;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
-}
+        .hero-blue {
+            font-size: 20px;
+            color: #60A5FA;
+            font-weight: 600;
+            margin-bottom: 15px;
+            text-shadow: 1px 1px 4px rgba(0, 0, 0, 1);
+        }
 
-.hero-speed {
-    font-size: 18px;
-    color: #ffffff;
-    margin-bottom: 40px;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.9);
-}
+        .hero-speed {
+            font-size: 18px;
+            color: #ffffff;
+            margin-bottom: 40px;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 1);
+        }
 
-.hero-tagline {
-    font-size: 18px;
-    color: #60A5FA;
-    font-style: italic;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
-}
-
-
-/* dark overlay */
-.hero::before {
-    content: "";
-    position: absolute;
-    top: 0; left: 0; right: 0; bottom: 0;
-    background: rgba(0, 0, 0, 0.4); /* subtle dark veil */
-    z-index: -1; /* between video and text */
-}
-
-/* text always above */
-.hero > * {
-    position: relative;
-    z-index: 10;
-}
-
-.hero-title {
-    font-size: clamp(48px, 8vw, 80px);
-    font-weight: 900;
-    margin-bottom: 20px;
-    color: #ffffff;
-    text-shadow: 
-        0 0 12px rgba(96, 165, 250, 0.8), /* neon blue glow */
-        2px 2px 8px rgba(0, 0, 0, 0.8);   /* dark depth */
-}
-
-
-/* subtitle */
-.hero-subtitle {
-    font-size: 24px;
-    color: #ffffff;
-    margin-bottom: 15px;
-    text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.95);
-}
-
-/* blue highlight */
-.hero-blue {
-    font-size: 20px;
-    color: #60A5FA;
-    font-weight: 600;
-    margin-bottom: 15px;
-    text-shadow: 1px 1px 4px rgba(0, 0, 0, 1);
-}
-
-/* speed tagline */
-.hero-speed {
-    font-size: 18px;
-    color: #ffffff;
-    margin-bottom: 40px;
-    text-shadow: 2px 2px 5px rgba(0, 0, 0, 1);
-}
-
-/* final tagline */
-.hero-tagline {
-    font-size: 18px;
-    color: #60A5FA;
-    font-style: italic;
-  text-shadow: 0 0 8px rgba(96, 165, 250, 0.7),
-                 1px 1px 4px rgba(0, 0, 0, 1);
-}
-
+        .hero-tagline {
+            font-size: 18px;
+            color: #60A5FA;
+            font-style: italic;
+            text-shadow: 0 0 8px rgba(96, 165, 250, 0.7),
+                         1px 1px 4px rgba(0, 0, 0, 1);
+        }
 
         /* Magic Demo */
         .magic-section {
@@ -1043,6 +985,26 @@
         .bubble.revenue-medium { width: 110px; height: 110px; }
         .bubble.revenue-small { width: 80px; height: 80px; }
 
+        .back-to-categories {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(16, 185, 129, 0.2);
+            border: 2px solid #10b981;
+            color: #10b981;
+            padding: 12px 24px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .back-to-categories:hover {
+            background: rgba(16, 185, 129, 0.3);
+            transform: translateX(-50%) scale(1.05);
+        }
+
         @keyframes float {
             0%, 100% { transform: translateY(0) rotate(0deg); }
             25% { transform: translateY(-15px) rotate(1deg); }
@@ -1094,7 +1056,7 @@
 
         .dashboard-card {
             background: rgba(139, 92, 246, 0.05);
-            border: 1px solid rgba(139, 92, 246, 0.3);
+            border: 1pxsolid rgba(139, 92, 246, 0.3);
             border-radius: 16px;
             padding: 25px;
             transition: all 0.3s;
@@ -1115,7 +1077,7 @@
 
         .dashboard-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 10px 40px rgba(139, 92,246, 0.3);
+            box-shadow: 0 10px 40px rgba(139, 92, 246, 0.3);
             border-color: #8b5cf6;
         }
 
@@ -1214,24 +1176,20 @@
         </nav>
 
         <!-- Home Section -->
-     <!-- HERO SECTION -->
-<section class="hero">
-    <video class="hero-bg-video" autoplay loop muted playsinline webkit-playsinline preload="auto">
-        <source src="welcome.mp4" type="video/mp4">
-    </video>
-    
-    <div class="hero-content">
-        <h1 class="hero-title">Become an Inventory Wizard</h1>
-        <p class="hero-subtitle">Your competition manually enters. You use Trakie AI.</p>
-        <p class="hero-blue">PhD-Level Inventory Intelligence.</p>
-        <p class="hero-speed">Quant-backed formulas. Restock recommendations. Trend predictions.</p>
-        <p class="hero-tagline">The AI wizard they don't want you to have</p>
-    </div>
-</section>
-        .hero-content {
-    position: relative;
-    z-index: 100;
-}
+        <div class="page-section active" id="homeSection">
+            <section class="hero">
+                <video class="hero-bg-video" autoplay loop muted playsinline webkit-playsinline preload="auto">
+                    <source src="welcome.mp4" type="video/mp4">
+                </video>
+                
+                <div class="hero-content">
+                    <h1 class="hero-title">Become an Inventory Wizard</h1>
+                    <p class="hero-subtitle">Your competition manually enters. You use Trakie AI.</p>
+                    <p class="hero-blue">PhD-Level Inventory Intelligence.</p>
+                    <p class="hero-speed">Quant-backed formulas. Restock recommendations. Trend predictions.</p>
+                    <p class="hero-tagline">The AI wizard they don't want you to have</p>
+                </div>
+            </section>
 
             <!-- Magic Demo -->
             <section class="magic-section">
@@ -1308,19 +1266,18 @@
         </div>
 
         <!-- Bubbles Section -->
-      <!-- Bubbles Section -->
-<div class="page-section" id="bubblesSection">
-    <div class="bubbles-wrapper">
-        <div class="bubbles-header">
-            <h1 class="bubbles-title">Inventory Categories</h1>
-            <p class="bubbles-subtitle">Click a category to explore products</p>
+        <div class="page-section" id="bubblesSection">
+            <div class="bubbles-wrapper">
+                <div class="bubbles-header">
+                    <h1 class="bubbles-title">Inventory Categories</h1>
+                    <p class="bubbles-subtitle">Click a category to explore products</p>
+                </div>
+                <div class="bubbles-container" id="bubblesContainer">
+                    <!-- Categories will be generated by JS -->
+                </div>
+                <button class="back-to-categories" id="backToCategories" style="display: none;">← Back to Categories</button>
+            </div>
         </div>
-        <div class="bubbles-container" id="bubblesContainer">
-            <!-- Categories will be generated by JS -->
-        </div>
-        <button class="back-to-categories" id="backToCategories" style="display: none;">← Back to Categories</button>
-    </div>
-</div>
 
         <!-- Data Section -->
         <div class="page-section" id="dataSection">
@@ -1506,134 +1463,113 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrious/4.0.2/qrious.min.js"></script>
     <script>
-       // Product categories
-const categories = [
-    { name: 'Flower', size: 'revenue-xl', pos: { top: '20%', left: '25%' }, icon: '🌿' },
-    { name: 'Pre-Rolls', size: 'revenue-large', pos: { top: '45%', left: '65%' }, icon: '🚬' },
-    { name: 'Vaporizers', size: 'revenue-large', pos: { top: '35%', left: '15%' }, icon: '💨' },
-    { name: 'Concentrates', size: 'revenue-medium', pos: { top: '65%', left: '40%' }, icon: '💎' },
-    { name: 'Edibles', size: 'revenue-large', pos: { top: '25%', left: '60%' }, icon: '🍫' },
-    { name: 'Tinctures', size: 'revenue-small', pos: { top: '55%', left: '80%' }, icon: '💧' },
-    { name: 'CBD', size: 'revenue-medium', pos: { top: '70%', left: '20%' }, icon: '🟢' },
-    { name: 'Orals', size: 'revenue-small', pos: { top: '15%', left: '45%' }, icon: '💊' }
-];
+        let isYearly = false;
 
-// Sample products for each category
-const productsByCategory = {
-    'Flower': [
-        { name: 'Blue Dream', revenue: 18500, thc: '22%' },
-        { name: 'OG Kush', revenue: 14200, thc: '24%' },
-        { name: 'Gorilla Glue', revenue: 12800, thc: '28%' }
-    ],
-    'Pre-Rolls': [
-        { name: 'Wedding Cake Pre-Roll', revenue: 8400, thc: '23%' },
-        { name: 'Sour Diesel Joint', revenue: 6200, thc: '20%' }
-    ],
-    'Edibles': [
-        { name: 'Chocolate Bar 100mg', revenue: 9800, thc: '100mg' },
-        { name: 'Gummy Bears', revenue: 7600, thc: '50mg' }
-    ]
-    // Add more products as needed
-};
+        // Product categories
+        const categories = [
+            { name: 'Flower', size: 'revenue-xl', pos: { top: '20%', left: '25%' }, icon: '🌿' },
+            { name: 'Pre-Rolls', size: 'revenue-large', pos: { top: '45%', left: '65%' }, icon: '🚬' },
+            { name: 'Vaporizers', size: 'revenue-large', pos: { top: '35%', left: '15%' }, icon: '💨' },
+            { name: 'Concentrates', size: 'revenue-medium', pos: { top: '65%', left: '40%' }, icon: '💎' },
+            { name: 'Edibles', size: 'revenue-large', pos: { top: '25%', left: '60%' }, icon: '🍫' },
+            { name: 'Tinctures', size: 'revenue-small', pos: { top: '55%', left: '80%' }, icon: '💧' },
+            { name: 'CBD', size: 'revenue-medium', pos: { top: '70%', left: '20%' }, icon: '🟢' },
+            { name: 'Orals', size: 'revenue-small', pos: { top: '15%', left: '45%' }, icon: '💊' }
+        ];
 
-function initBubbles(showCategories = true) {
-    const container = document.getElementById('bubblesContainer');
-    const backBtn = document.getElementById('backToCategories');
-    if (!container) return;
-    
-    container.innerHTML = '';
-    
-    if (showCategories) {
-        // Show category bubbles
-        backBtn.style.display = 'none';
-        document.querySelector('.bubbles-title').textContent = 'Inventory Categories';
-        
-        categories.forEach((category, i) => {
-            const bubble = document.createElement('div');
-            bubble.className = `bubble ${category.size}`;
-            bubble.style.top = category.pos.top;
-            bubble.style.left = category.pos.left;
-            bubble.style.animationDelay = `${i * 0.2}s`;
-            bubble.innerHTML = `
-                <div style="text-align: center;">
-                    <div style="font-size: 30px; margin-bottom: 5px;">${category.icon}</div>
-                    <div>${category.name}</div>
-                </div>
-            `;
-            bubble.onclick = () => showCategoryProducts(category.name);
+        // Sample products for each category
+        const productsByCategory = {
+            'Flower': [
+                { name: 'Blue Dream', revenue: 18500, thc: '22%' },
+                { name: 'OG Kush', revenue: 14200, thc: '24%' },
+                { name: 'Gorilla Glue', revenue: 12800, thc: '28%' }
+            ],
+            'Pre-Rolls': [
+                { name: 'Wedding Cake Pre-Roll', revenue: 8400, thc: '23%' },
+                { name: 'Sour Diesel Joint', revenue: 6200, thc: '20%' }
+            ],
+            'Edibles': [
+                { name: 'Chocolate Bar 100mg', revenue: 9800, thc: '100mg' },
+                { name: 'Gummy Bears', revenue: 7600, thc: '50mg' }
+            ]
+        };
+
+        function initBubbles(showCategories = true) {
+            const container = document.getElementById('bubblesContainer');
+            const backBtn = document.getElementById('backToCategories');
+            if (!container) return;
             
-            setTimeout(() => container.appendChild(bubble), i * 100);
+            container.innerHTML = '';
+            
+            if (showCategories) {
+                if (backBtn) backBtn.style.display = 'none';
+                const titleElement = document.querySelector('.bubbles-title');
+                if (titleElement) titleElement.textContent = 'Inventory Categories';
+                
+                categories.forEach((category, i) => {
+                    const bubble = document.createElement('div');
+                    bubble.className = `bubble ${category.size}`;
+                    bubble.style.top = category.pos.top;
+                    bubble.style.left = category.pos.left;
+                    bubble.style.animationDelay = `${i * 0.2}s`;
+                    bubble.innerHTML = `
+                        <div style="text-align: center;">
+                            <div style="font-size: 30px; margin-bottom: 5px;">${category.icon}</div>
+                            <div>${category.name}</div>
+                        </div>
+                    `;
+                    bubble.onclick = () => showCategoryProducts(category.name);
+                    
+                    setTimeout(() => container.appendChild(bubble), i * 100);
+                });
+            }
+        }
+
+        function showCategoryProducts(categoryName) {
+            const container = document.getElementById('bubblesContainer');
+            const backBtn = document.getElementById('backToCategories');
+            const products = productsByCategory[categoryName] || [];
+            
+            const titleElement = document.querySelector('.bubbles-title');
+            if (titleElement) titleElement.textContent = categoryName + ' Products';
+            if (backBtn) backBtn.style.display = 'block';
+            
+            container.style.opacity = '0';
+            
+            setTimeout(() => {
+                container.innerHTML = '';
+                container.style.opacity = '1';
+                
+                products.forEach((product, i) => {
+                    const bubble = document.createElement('div');
+                    const sizes = ['revenue-xl', 'revenue-large', 'revenue-medium'];
+                    bubble.className = `bubble ${sizes[i % sizes.length]}`;
+                    
+                    bubble.style.top = Math.random() * 60 + 15 + '%';
+                    bubble.style.left = Math.random() * 60 + 15 + '%';
+                    bubble.style.animationDelay = `${i * 0.2}s`;
+                    
+                    bubble.innerHTML = `
+                        <div style="text-align: center;">
+                            <div style="font-size: 14px; font-weight: bold;">${product.name}</div>
+                            <div style="font-size: 12px; margin-top: 5px;">THC: ${product.thc}</div>
+                            <div style="font-size: 11px; margin-top: 3px;">$${product.revenue.toLocaleString()}</div>
+                        </div>
+                    `;
+                    
+                    bubble.onclick = () => alert(`${product.name}\n\nTHC: ${product.thc}\nRevenue: $${product.revenue.toLocaleString()}\n\nDetailed analytics coming soon!`);
+                    
+                    setTimeout(() => container.appendChild(bubble), i * 150);
+                });
+            }, 300);
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const backBtn = document.getElementById('backToCategories');
+            if (backBtn) {
+                backBtn.onclick = () => initBubbles(true);
+            }
         });
-    }
-}
-
-function showCategoryProducts(categoryName) {
-    const container = document.getElementById('bubblesContainer');
-    const backBtn = document.getElementById('backToCategories');
-    const products = productsByCategory[categoryName] || [];
-    
-    // Update header
-    document.querySelector('.bubbles-title').textContent = categoryName + ' Products';
-    backBtn.style.display = 'block';
-    
-    // Clear and animate out
-    container.style.opacity = '0';
-    
-    setTimeout(() => {
-        container.innerHTML = '';
-        container.style.opacity = '1';
-        
-        products.forEach((product, i) => {
-            const bubble = document.createElement('div');
-            const sizes = ['revenue-xl', 'revenue-large', 'revenue-medium'];
-            bubble.className = `bubble ${sizes[i % sizes.length]}`;
-            
-            // Random positioning
-            bubble.style.top = Math.random() * 60 + 15 + '%';
-            bubble.style.left = Math.random() * 60 + 15 + '%';
-            bubble.style.animationDelay = `${i * 0.2}s`;
-            
-            bubble.innerHTML = `
-                <div style="text-align: center;">
-                    <div style="font-size: 14px; font-weight: bold;">${product.name}</div>
-                    <div style="font-size: 12px; margin-top: 5px;">THC: ${product.thc}</div>
-                    <div style="font-size: 11px; margin-top: 3px;">$${product.revenue.toLocaleString()}</div>
-                </div>
-            `;
-            
-            bubble.onclick = () => alert(`${product.name}\n\nTHC: ${product.thc}\nRevenue: $${product.revenue.toLocaleString()}\n\nDetailed analytics coming soon!`);
-            
-            setTimeout(() => container.appendChild(bubble), i * 150);
-        });
-    }, 300);
-}
-
-// Back button handler
-document.addEventListener('DOMContentLoaded', function() {
-    const backBtn = document.getElementById('backToCategories');
-    if (backBtn) {
-        backBtn.onclick = () => initBubbles(true);
-    }
-});
-        .back-to-categories {
-    position: absolute;
-    bottom: 30px;
-    left: 50%;
-    transform: translateX(-50%);
-    background: rgba(16, 185, 129, 0.2);
-    border: 2px solid #10b981;
-    color: #10b981;
-    padding: 12px 24px;
-    border-radius: 25px;
-    cursor: pointer;
-    font-weight: 600;
-    transition: all 0.3s;
-}
-
-.back-to-categories:hover {
-    background: rgba(16, 185, 129, 0.3);
-    transform: translateX(-50%) scale(1.05);
-}
 
         function login() {
             const password = document.getElementById('passwordInput').value;
@@ -1644,7 +1580,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 document.getElementById('mainSite').classList.add('show');
                 generateQR();
                 startTypeAnimation();
-                initBubbles();
+                initBubbles(true);
             } else {
                 error.textContent = 'Invalid password';
                 document.getElementById('passwordInput').value = '';
@@ -1656,27 +1592,8 @@ document.addEventListener('DOMContentLoaded', function() {
             document.getElementById(sectionName + 'Section').classList.add('active');
             
             if (sectionName === 'bubbles') {
-                setTimeout(() => initBubbles(), 100);
+                setTimeout(() => initBubbles(true), 100);
             }
-        }
-
-        function initBubbles() {
-            const container = document.getElementById('bubblesContainer');
-            if (!container) return;
-            
-            container.innerHTML = '';
-            
-            bubbleProducts.forEach((product, i) => {
-                const bubble = document.createElement('div');
-                bubble.className = `bubble ${product.size}`;
-                bubble.style.top = product.pos.top;
-                bubble.style.left = product.pos.left;
-                bubble.style.animationDelay = `${i * 0.5}s`;
-                bubble.textContent = product.name;
-                bubble.onclick = () => alert(`${product.name}\n\n💰 Revenue: $${product.revenue.toLocaleString()}\n🔮 Wizard-level insight ready!`);
-                
-                setTimeout(() => container.appendChild(bubble), i * 150);
-            });
         }
 
         function showReceiveQR() {
