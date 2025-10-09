@@ -1139,24 +1139,23 @@
     </style>
 </head>
 <body>
-    <!-- Welcome Screen -->
-    <div class="welcome-screen" id="welcomeScreen">
-        <div class="welcome-screen" id="welcomeScreen">
-    <video class="welcome-bg-video" autoplay loop muted playsinline>
+  <!-- Welcome Screen -->
+<div class="welcome-screen" id="welcomeScreen">
+    <video autoplay loop muted playsinline webkit-playsinline style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.4; z-index: 0;">
+        <source src="welcome0.mov" type="video/quicktime">
         <source src="welcome0.mov" type="video/mp4">
     </video>
-    <img src="icon48.png" alt="Trakie.ai" class="logo">
-        <img src="icon48.png" alt="Trakie.ai" class="logo">
-        <h1 class="title">#1 Cannabis Inventory AI</h1>
-        <p class="subtitle">The AI shortcut to Dutchie they don't want you to have.</p>
-        <p class="members-text">Members Only Access</p>
-        
-        <div class="login-box">
-            <input type="password" class="password-input" id="passwordInput" placeholder="Enter Password" autocomplete="off">
-            <button class="login-btn" onclick="login()">Access Platform</button>
-            <div class="error" id="errorMsg"></div>
-        </div>
+    
+    <h1 class="title">#1 Cannabis Inventory AI</h1>
+    <p class="subtitle">The AI shortcut to Dutchie they don't want you to have.</p>
+    <p class="members-text">Members Only Access</p>
+    
+    <div class="login-box">
+        <input type="password" class="password-input" id="passwordInput" placeholder="Enter Password" autocomplete="off">
+        <button class="login-btn" onclick="login()">Access Platform</button>
+        <div class="error" id="errorMsg"></div>
     </div>
+</div>
 
     <!-- QR Modal -->
     <div class="qr-modal" id="qrModal">
@@ -1480,16 +1479,16 @@
         let isYearly = false;
 
         // Product categories
-        const categories = [
-            { name: 'Flower', size: 'revenue-xl', pos: { top: '20%', left: '25%' }, icon: '🌿' },
-            { name: 'Pre-Rolls', size: 'revenue-large', pos: { top: '45%', left: '65%' }, icon: '🚬' },
-            {name: 'Vaporizers', size: 'revenue-large', pos: { top: '35%', left: '15%' }, icon: '💨', video: 'vape1.mov' },
-            { name: 'Concentrates', size: 'revenue-medium', pos: { top: '65%', left: '40%' }, icon: '💎' },
-            { name: 'Edibles', size: 'revenue-large', pos: { top: '25%', left: '60%' }, icon: '🍫' },
-            { name: 'Tinctures', size: 'revenue-small', pos: { top: '55%', left: '80%' }, icon: '💧' },
-            { name: 'CBD', size: 'revenue-medium', pos: { top: '70%', left: '20%' }, icon: '🟢' },
-            { name: 'Orals', size: 'revenue-small', pos: { top: '15%', left: '45%' }, icon: '💊' }
-        ];
+      const categories = [
+    { name: 'Flower', size: 'revenue-xl', pos: { top: '20%', left: '25%' }, icon: '🌿', video: 'vape1.mov' },
+    { name: 'Pre-Rolls', size: 'revenue-large', pos: { top: '45%', left: '65%' }, icon: '🚬', video: 'vape2.mov' },
+    { name: 'Vaporizers', size: 'revenue-large', pos: { top: '35%', left: '15%' }, icon: '💨', video: 'vape1.mov' },
+    { name: 'Concentrates', size: 'revenue-medium', pos: { top: '65%', left: '40%' }, icon: '💎', video: 'vape2.mov' },
+    { name: 'Edibles', size: 'revenue-large', pos: { top: '25%', left: '60%' }, icon: '🍫', video: 'vape1.mov' },
+    { name: 'Tinctures', size: 'revenue-small', pos: { top: '55%', left: '80%' }, icon: '💧', video: 'vape2.mov' },
+    { name: 'CBD', size: 'revenue-medium', pos: { top: '70%', left: '20%' }, icon: '🟢', video: 'vape1.mov' },
+    { name: 'Orals', size: 'revenue-small', pos: { top: '15%', left: '45%' }, icon: '💊', video: 'vape2.mov' }
+];
 
         // Sample products for each category
         const productsByCategory = {
@@ -1527,24 +1526,20 @@ function initBubbles(showCategories = true) {
             bubble.style.left = category.pos.left;
             bubble.style.animationDelay = `${i * 0.2}s`;
             
-            // NEW: Add video inside bubble
+            // VIDEO INSIDE BUBBLE - FIXED!
             bubble.innerHTML = `
-                <div style="position: relative; width: 100%; height: 100%; border-radius: 50%; overflow: hidden;">
-                    <video 
-                        autoplay 
-                        loop 
-                        muted 
-                        playsinline 
-                        style="width: 100%; height: 100%; object-fit: cover; position: absolute; top: 0; left: 0;">
-                        <source src="${category.video}" type="video/mp4">
-                        <!-- Fallback if video doesn't load -->
-                        <div style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; font-size: 30px;">
-                            ${category.icon}
-                        </div>
-                    </video>
-                    <div style="position: absolute; bottom: 15%; left: 50%; transform: translateX(-50%); text-align: center; text-shadow: 2px 2px 8px rgba(0,0,0,0.9); z-index: 10; font-size: 16px; font-weight: 800;">
-                        ${category.name}
-                    </div>
+                <video 
+                    autoplay 
+                    loop 
+                    muted 
+                    playsinline
+                    webkit-playsinline
+                    style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;">
+                    <source src="${category.video}" type="video/mp4">
+                    <source src="${category.video}" type="video/quicktime">
+                </video>
+                <div style="position: absolute; bottom: 15%; left: 50%; transform: translateX(-50%); text-align: center; text-shadow: 2px 2px 8px rgba(0,0,0,0.9); z-index: 10; font-size: 16px; font-weight: 800; width: 90%;">
+                    ${category.name}
                 </div>
             `;
             bubble.onclick = () => showCategoryProducts(category.name);
