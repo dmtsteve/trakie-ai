@@ -964,35 +964,37 @@
             overflow: hidden;
         }
 
-        .bubble {
-            position: absolute;
-            border-radius: 50%;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            font-weight: 700;
-            font-size: 13px;
-            transition: all 0.4s ease;
-            backdrop-filter: blur(10px);
-            border: 2px solid;
-            animation: float 8s ease-in-out infinite, neonPulse 3s ease-in-out infinite alternate;
-            background: linear-gradient(135deg, rgba(16, 185, 129, 0.3), rgba(5, 150, 105, 0.2));
-            border-color: #10b981;
-            color: #10b981;
-            box-shadow: 0 0 30px rgba(16, 185, 129, 0.4), inset 0 0 30px rgba(16, 185, 129, 0.1);
-        }
+.bubble {
+    position: absolute;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-weight: 700;
+    font-size: 13px;
+    transition: all 0.4s ease;
+    backdrop-filter: blur(10px);
+    border: 3px solid;  /* Changed from 2px to 3px */
+    animation: float 8s ease-in-out infinite, neonPulse 3s ease-in-out infinite alternate;
+    background: linear-gradient(135deg, rgba(16, 185, 129, 0.2), rgba(5, 150, 105, 0.1));  /* Lighter */
+    border-color: #10b981;
+    color: #10b981;
+    box-shadow: 0 0 40px rgba(16, 185, 129, 0.5), inset 0 0 30px rgba(16, 185, 129, 0.1);  /* Stronger glow */
+    overflow: hidden;  /* IMPORTANT: keeps video inside circle */
+}
 
-        .bubble:hover {
-            transform: scale(1.2);
-            box-shadow: 0 0 50px #10b981, inset 0 0 50px rgba(16, 185, 129, 0.2);
-        }
+.bubble:hover {
+    transform: scale(1.15);  /* Bigger hover effect */
+    box-shadow: 0 0 60px #10b981, inset 0 0 50px rgba(16, 185, 129, 0.2);
+    border-width: 4px;  /* Thicker border on hover */
+}
 
-        .bubble.revenue-xl { width: 180px; height: 180px; }
-        .bubble.revenue-large { width: 140px; height: 140px; }
-        .bubble.revenue-medium { width: 110px; height: 110px; }
-        .bubble.revenue-small { width: 80px; height: 80px; }
+        .bubble.revenue-xl { width: 220px; height: 220px; }
+        .bubble.revenue-large { width: 180px; height: 180px; }
+        .bubble.revenue-medium { width: 140px; height: 140px; }
+        .bubble.revenue-small { width: 100px; height: 100px; }
 
         .back-to-categories {
             position: absolute;
@@ -1141,7 +1143,7 @@
 <body>
   <!-- Welcome Screen -->
 <div class="welcome-screen" id="welcomeScreen">
-    <video autoplay loop muted playsinline webkit-playsinline style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.4; z-index: 0;">
+    <video id="welcomeVideo" autoplay loop muted playsinline webkit-playsinline style="position: absolute; top: -20%; left: 0; width: 100%; height: 120%; object-fit: cover; opacity: 0.5; z-index: 0;">
         <source src="welcome0.mov" type="video/quicktime">
         <source src="welcome0.mov" type="video/mp4">
     </video>
@@ -1157,6 +1159,16 @@
     </div>
 </div>
 
+<script>
+// Slow down the welcome video
+document.addEventListener('DOMContentLoaded', function() {
+    const welcomeVid = document.getElementById('welcomeVideo');
+    if (welcomeVid) {
+        welcomeVid.playbackRate = 0.5;  // 0.5 = half speed (change to 0.3 for even slower)
+    }
+});
+</script>
+    
     <!-- QR Modal -->
     <div class="qr-modal" id="qrModal">
         <div class="qr-modal-content">
@@ -1526,22 +1538,38 @@ function initBubbles(showCategories = true) {
             bubble.style.left = category.pos.left;
             bubble.style.animationDelay = `${i * 0.2}s`;
             
-            // VIDEO INSIDE BUBBLE - FIXED!
-            bubble.innerHTML = `
-                <video 
-                    autoplay 
-                    loop 
-                    muted 
-                    playsinline
-                    webkit-playsinline
-                    style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;">
-                    <source src="${category.video}" type="video/mp4">
-                    <source src="${category.video}" type="video/quicktime">
-                </video>
-                <div style="position: absolute; bottom: 15%; left: 50%; transform: translateX(-50%); text-align: center; text-shadow: 2px 2px 8px rgba(0,0,0,0.9); z-index: 10; font-size: 16px; font-weight: 800; width: 90%;">
-                    ${category.name}
-                </div>
-            `;
+            // CREATE VIDEO ELEMENT PROPERLY
+            const video = document.createElement('video');
+            video.autoplay = true;
+            video.loop = true;
+            video.muted = true;
+            video.playsInline = true;
+            video.setAttribute('playsinline', '');
+            video.setAttribute('webkit-playsinline', '');
+            video.style.cssText = 'width: 110%; height: 110%; object-fit: cover; border-radius: 50%; position: absolute; top: -5%; left: -5%;';
+            
+            const source1 = document.createElement('source');
+            source1.src = category.video;
+            source1.type = 'video/quicktime';
+            
+            const source2 = document.createElement('source');
+            source2.src = category.video;
+            source2.type = 'video/mp4';
+            
+            video.appendChild(source1);
+            video.appendChild(source2);
+            
+            // Force play after loading
+            video.addEventListener('loadeddata', function() {
+                video.play().catch(e => console.log('Autoplay blocked:', e));
+            });
+            
+            const label = document.createElement('div');
+            label.style.cssText = 'position: absolute; bottom: 15%; left: 50%; transform: translateX(-50%); text-align: center; text-shadow: 2px 2px 8px rgba(0,0,0,0.9); z-index: 10; font-size: 18px; font-weight: 900; width: 90%; color: #10b981;';
+            label.textContent = category.name;
+            
+            bubble.appendChild(video);
+            bubble.appendChild(label);
             bubble.onclick = () => showCategoryProducts(category.name);
             
             setTimeout(() => container.appendChild(bubble), i * 100);
