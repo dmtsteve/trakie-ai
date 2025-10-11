@@ -1627,23 +1627,23 @@ const categories = [
     { 
         name: 'Beverages', 
         size: 'revenue-large',  // Uniform large (was Tinctures)
-        pos: { top: '55%', left: '32%' },
+        pos: { top: '48%', left: '32%' },
         icon: '🥤',
         video: 'bev.MOV'
     },
-    { 
-        name: 'Balms', 
-        size: 'revenue-large',  // NEW category, uniform large
-        pos: { top: '55%', left: '56%' },
-        icon: '🧴',
-        video: 'balm.MOV'
-    },
+   { 
+    name: 'Balms', 
+    size: 'revenue-large', 
+    pos: { top: '48%', left: '56%' },  // ← MOVED UP (55% → 48%)
+    icon: '🧴',
+    video: 'vape1.mov'
+},
     { 
         name: 'CBD', 
         size: 'revenue-large',  // Uniform large
         pos: { top: '55%', left: '80%' },
         icon: '🟢',
-        video: 'vape1.mov'
+        video: 'balm.MOV'
     }
 ];
         // Sample products for each category
@@ -1702,9 +1702,9 @@ function initBubbles(showCategories = true) {
          video.appendChild(source1);
 video.appendChild(source2);
 
-// SPECIAL ZOOM ADJUSTMENTS FOR EACH CATEGORY
+// Zoom Flower MORE to remove black sides
 if (category.name === 'Flower') {
-    video.style.transform = 'scale(1.2)';  // Slight zoom in to show purple
+    video.style.transform = 'scale(1.8)';  // ← INCREASED from 1.2 to 1.8
     video.style.objectPosition = 'center center';
 }
 
