@@ -215,7 +215,101 @@
             cursor: pointer;
             margin-top: 15px;
         }
+/* ========== CART ICON STYLES ========== */
+.cart-icon {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1000;
+    cursor: pointer;
+}
 
+.cart-badge {
+    width: 70px;
+    height: 70px;
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 8px 24px rgba(16, 185, 129, 0.4);
+    position: relative;
+    transition: transform 0.3s ease;
+}
+
+.cart-badge::before {
+    content: '';
+    position: absolute;
+    inset: -4px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #10b981, #059669);
+    opacity: 0.6;
+    filter: blur(12px);
+    animation: cartPulse 2s ease-in-out infinite;
+}
+
+@keyframes cartPulse {
+    0%, 100% { 
+        opacity: 0.4; 
+        transform: scale(1); 
+    }
+    50% { 
+        opacity: 0.7; 
+        transform: scale(1.05); 
+    }
+}
+
+.cart-icon svg {
+    width: 32px;
+    height: 32px;
+    color: white;
+    position: relative;
+    z-index: 1;
+}
+
+.cart-count {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    background: #ef4444;
+    color: white;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    font-weight: 700;
+    border: 3px solid #000;
+    z-index: 2;
+}
+
+.cart-count:empty,
+.cart-count[data-count="0"] {
+    display: none;
+}
+
+.cart-badge.item-added {
+    animation: cartBounce 0.5s ease;
+}
+
+@keyframes cartBounce {
+    0%, 100% { transform: scale(1); }
+    25% { transform: scale(1.2); }
+    50% { transform: scale(0.95); }
+    75% { transform: scale(1.1); }
+}
+
+.cart-icon:hover .cart-badge {
+    transform: scale(1.05);
+}
+/* ========== END CART ICON STYLES ========== */
+
+/* Navigation */
+.nav {
+    position: fixed;
         /* Navigation */
         .nav {
             position: fixed;
@@ -1279,8 +1373,22 @@ document.addEventListener('DOMContentLoaded', function() {
 
     <!-- Main Site -->
     <div class="main-site" id="mainSite">
-        <!-- Navigation -->
-        <nav class="nav">
+     <!-- Navigation -->
+<nav class="nav">
+    
+    <!-- ✨ NEW CART ICON - ADD THIS WHOLE BLOCK ✨ -->
+    <div class="cart-icon" id="cartIcon" onclick="openCart()">
+        <div class="cart-badge">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+            </svg>
+            <span class="cart-count" id="cartCount">0</span>
+        </div>
+    </div>
+    <!-- ✨ END NEW CART ICON ✨ -->
+    
+    <div class="nav-content">
+        <div class="nav-logo" onclick="showSection('home')">
             <div class="nav-content">
                 <div class="nav-logo" onclick="showSection('home')">
                     <img src="icon48.png" alt="Trakie.ai" width="32" height="32">
@@ -1939,7 +2047,79 @@ video.addEventListener('loadeddata', function() {
         document.getElementById('passwordInput').addEventListener('keypress', function(e) {
             if (e.key === 'Enter') login();
         });
+// ========== CART FUNCTIONS ==========
+let cart = [];
 
+function openCart() {
+    alert('Cart clicked! Working!');
+}
+
+function addToCart(product) {
+    cart.push(product);
+    updateCartCount();
+    
+    const cartBadge = document.querySelector('.cart-badge');
+    cartBadge.classList.add('item-added');
+    setTimeout(() => {
+        cartBadge.classList.remove('item-added');
+    }, 500);
+}
+
+function updateCartCount() {
+    const cartCount = document.getElementById('cartCount');
+    cartCount.textContent = cart.length;
+    cartCount.setAttribute('data-count', cart.length);
+}
+
+function clearCart() {
+    cart = [];
+    updateCartCount();
+}
+// ========== END CART FUNCTIONS ==========
+
+// ========== IDLE TIMER ==========
+let idleTimer = 0;
+let checkoutCompleted = false;
+
+function resetIdleTimer() {
+    idleTimer = 0;
+}
+
+document.addEventListener('touchstart', resetIdleTimer);
+document.addEventListener('click', resetIdleTimer);
+document.addEventListener('scroll', resetIdleTimer);
+document.addEventListener('mousemove', resetIdleTimer);
+
+setInterval(() => {
+    idleTimer++;
+    
+    if (idleTimer >= 69 && !checkoutCompleted) {
+        console.log('Idle 69 seconds - back to bubbles');
+        returnToBubbles();
+    }
+    
+    if (checkoutCompleted && idleTimer >= 7) {
+        console.log('Checkout done - refreshing');
+        window.location.reload();
+    }
+}, 1000);
+
+function returnToBubbles() {
+    clearCart();
+    showSection('bubbles');
+    initBubbles(true);
+    idleTimer = 0;
+    checkoutCompleted = false;
+}
+
+function onCheckoutComplete() {
+    checkoutCompleted = true;
+    idleTimer = 0;
+}
+// ========== END IDLE TIMER ==========
+
+window.onload = function() {
+    document.getElementById('passwordInput').focus();
         window.onload = function() {
             document.getElementById('passwordInput').focus();
             
