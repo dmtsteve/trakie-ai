@@ -1585,16 +1585,63 @@ document.addEventListener('DOMContentLoaded', function() {
     <script>
         let isYearly = false;
 
-        // Product categories
-      const categories = [
-    { name: 'Flower', size: 'revenue-xl', pos: { top: '25%', left: '22%' }, icon: '🌿', video: 'flower.mov' },
-    { name: 'Pre-Rolls', size: 'revenue-large', pos: { top: '55%', left: '70%' }, icon: '🚬', video: 'preroll.mp4' },
-    { name: 'Vaporizers', size: 'revenue-large', pos: { top: '40%', left: '8%' }, icon: '💨', video: 'vape1.mov' },
-    { name: 'Concentrates', size: 'revenue-medium', pos: { top: '72%', left: '42%' }, icon: '💎', video: 'vape2.mov' },
-    { name: 'Edibles', size: 'revenue-large', pos: { top: '20%', left: '65%' }, icon: '🍫', video: 'vape1.mov' },
-    { name: 'Tinctures', size: 'revenue-small', pos: { top: '60%', left: '85%' }, icon: '💧', video: 'vape2.mov' },
-    { name: 'CBD', size: 'revenue-medium', pos: { top: '70%', left: '15%' }, icon: '🟢', video: 'vape1.mov' },
-    { name: 'Orals', size: 'revenue-small', pos: { top: '12%', left: '48%' }, icon: '💊', video: 'vape2.mov' }
+ const categories = [
+    { 
+        name: 'Flower', 
+        size: 'revenue-xl', 
+        pos: { top: '30%', left: '35%' },  // ← CENTER-LEFT, more space
+        icon: '🌿',
+        video: 'flower.mov'
+    },
+    { 
+        name: 'Pre-Rolls', 
+        size: 'revenue-large', 
+        pos: { top: '65%', left: '65%' },  // ← BOTTOM-RIGHT, far from others
+        icon: '🚬',
+        video: 'preroll.mp4'
+    },
+    { 
+        name: 'Vaporizers', 
+        size: 'revenue-large', 
+        pos: { top: '45%', left: '5%' },  // ← LEFT EDGE, more separation
+        icon: '💨',
+        video: 'vape1.mov'
+    },
+    { 
+        name: 'Concentrates', 
+        size: 'revenue-medium', 
+        pos: { top: '75%', left: '38%' },  // ← BOTTOM-CENTER, clear space
+        icon: '💎',
+        video: 'vape2.mov'
+    },
+    { 
+        name: 'Edibles', 
+        size: 'revenue-large', 
+        pos: { top: '28%', left: '72%' },  // ← TOP-RIGHT, far from Flower
+        icon: '🍫',
+        video: 'vape1.mov'
+    },
+    { 
+        name: 'Tinctures', 
+        size: 'revenue-small', 
+        pos: { top: '55%', left: '88%' },  // ← RIGHT EDGE, small so fits
+        icon: '💧',
+        video: 'vape2.mov'
+    },
+    { 
+        name: 'CBD', 
+        size: 'revenue-medium', 
+        pos: { top: '70%', left: '12%' },  // ← BOTTOM-LEFT, clear from Vaporizers
+        icon: '🟢',
+        video: 'vape1.mov'
+    },
+    { 
+        name: 'Orals', 
+        size: 'revenue-small', 
+        pos: { top: '10%', left: '55%' },  // ← TOP, between Flower and Edibles
+        icon: '💊',
+        video: 'vape2.mov'
+    }
 ];
 
         // Sample products for each category
