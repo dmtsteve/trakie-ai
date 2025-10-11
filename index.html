@@ -963,15 +963,16 @@
 }
 
 .bubbles-container {
-    height: 75vh;
+    height: 82vh;
     position: relative;
-    background: radial-gradient(ellipse at center, rgba(16, 185, 129, 0.03) 0%, rgba(0, 0, 0, 0.98) 70%);
+    background: radial-gradient(ellipse at center, rgba(16, 185, 129, 0.02) 0%, rgba(0, 0, 0, 0.98) 65%);
     border-radius: 24px;
-    border: 1px solid rgba(16, 185, 129, 0.15);
+    border: 1px solid rgba(16, 185, 129, 0.12);
     overflow: visible;
-    padding: 20px;
+    padding: 40px 30px;
+    max-width: 1600px;
+    margin: 0 auto;
 }
-
 .bubble {
     position: absolute;
     cursor: pointer;
@@ -1001,25 +1002,26 @@
     border-color: #10b981;
 }
 
-/* NEW SIZES - Wider to show full product */
-.bubble.revenue-xl { 
-    width: 280px; 
-    height: 320px; 
-}
-
+/* UNIFORM PREMIUM SIZING */
 .bubble.revenue-large { 
     width: 240px; 
     height: 280px; 
 }
 
+/* Keep these for flexibility, but we're using revenue-large for all */
+.bubble.revenue-xl { 
+    width: 240px; 
+    height: 280px; 
+}
+
 .bubble.revenue-medium { 
-    width: 200px; 
-    height: 240px; 
+    width: 240px; 
+    height: 280px; 
 }
 
 .bubble.revenue-small { 
-    width: 160px; 
-    height: 200px; 
+    width: 240px; 
+    height: 280px; 
 }
 
 /* Video inside bubble - SHOWS FULL PRODUCT */
@@ -1613,7 +1615,7 @@ const categories = [
         size: 'revenue-large',  // Uniform large
         pos: { top: '12%', left: '80%' },
         icon: '🍫',
-        video: 'vape1.mov'
+        video: 'edible.mov'
     },
     { 
         name: 'Concentrates', 
@@ -1697,18 +1699,28 @@ function initBubbles(showCategories = true) {
             source2.src = category.video;
             source2.type = 'video/mp4';
             
-            video.appendChild(source1);
-            video.appendChild(source2);
-            
-            // ZOOM FLOWER TO SHOW PURPLE
-            if (category.name === 'Flower') {
-                video.style.transform = 'scale(2.5)';
-                video.style.objectPosition = 'center 35%';
-            }
-            
-            video.addEventListener('loadeddata', function() {
-                video.play().catch(e => console.log('Autoplay prevented'));
-            });
+         video.appendChild(source1);
+video.appendChild(source2);
+
+// SPECIAL ZOOM ADJUSTMENTS FOR EACH CATEGORY
+if (category.name === 'Flower') {
+    video.style.transform = 'scale(1.2)';  // Slight zoom in to show purple
+    video.style.objectPosition = 'center center';
+}
+
+if (category.name === 'Vaporizers') {
+    video.style.transform = 'scale(0.95)';  // Slight zoom out to show full device
+    video.style.objectPosition = 'center center';
+}
+
+if (category.name === 'Pre-Rolls') {
+    video.style.transform = 'scale(0.9)';  // Zoom out to show full pre-roll
+    video.style.objectPosition = 'center center';
+}
+
+video.addEventListener('loadeddata', function() {
+    video.play().catch(e => console.log('Autoplay prevented'));
+});
             
             // Label
             const label = document.createElement('div');
