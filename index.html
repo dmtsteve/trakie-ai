@@ -1585,65 +1585,65 @@ document.addEventListener('DOMContentLoaded', function() {
     <script>
         let isYearly = false;
 
+// PREMIUM 8-CATEGORY GRID - Uniform sizing, zero overlap
 const categories = [
     { 
         name: 'Flower', 
-        size: 'revenue-xl', 
-        pos: { top: '5%', left: '6%' },  // ← TOP LEFT
+        size: 'revenue-large',  // Uniform large
+        pos: { top: '12%', left: '8%' },
         icon: '🌿',
         video: 'flower.mov'
     },
     { 
         name: 'Vaporizers', 
-        size: 'revenue-large', 
-        pos: { top: '10%', left: '38%' },  // ← TOP CENTER
+        size: 'revenue-large',  // Uniform large
+        pos: { top: '12%', left: '32%' },
         icon: '💨',
         video: 'vape1.mov'
     },
     { 
         name: 'Pre-Rolls', 
-        size: 'revenue-large', 
-        pos: { top: '15%', left: '68%' },  // ← TOP RIGHT
+        size: 'revenue-large',  // Uniform large
+        pos: { top: '12%', left: '56%' },
         icon: '🚬',
         video: 'preroll.mp4'
     },
     { 
         name: 'Edibles', 
-        size: 'revenue-large', 
-        pos: { top: '50%', left: '12%' },  // ← BOTTOM LEFT
+        size: 'revenue-large',  // Uniform large
+        pos: { top: '12%', left: '80%' },
         icon: '🍫',
         video: 'vape1.mov'
     },
     { 
         name: 'Concentrates', 
-        size: 'revenue-medium', 
-        pos: { top: '62%', left: '47%' },  // ← BOTTOM CENTER
+        size: 'revenue-large',  // Uniform large
+        pos: { top: '55%', left: '8%' },
         icon: '💎',
         video: 'vape2.mov'
     },
     { 
-        name: 'Tinctures', 
-        size: 'revenue-medium', 
-        pos: { top: '70%', left: '70%' },  // ← BOTTOM RIGHT (Tinctures)
-        icon: '💧',
+        name: 'Beverages', 
+        size: 'revenue-large',  // Uniform large (was Tinctures)
+        pos: { top: '55%', left: '32%' },
+        icon: '🥤',
         video: 'vape2.mov'
     },
     { 
-        name: 'Orals', 
-        size: 'revenue-small', 
-        pos: { top: '48%', left: '90%' },  // ← SMALL, sits above Tinctures
-        icon: '💊',
-        video: 'vape2.mov'
+        name: 'Balms', 
+        size: 'revenue-large',  // NEW category, uniform large
+        pos: { top: '55%', left: '56%' },
+        icon: '🧴',
+        video: 'vape1.mov'
     },
     { 
         name: 'CBD', 
-        size: 'revenue-medium', 
-        pos: { top: '53%', left: '35%' },  // ← MIDDLE, between rows
+        size: 'revenue-large',  // Uniform large
+        pos: { top: '55%', left: '80%' },
         icon: '🟢',
         video: 'vape1.mov'
     }
 ];
-
         // Sample products for each category
         const productsByCategory = {
             'Flower': [
