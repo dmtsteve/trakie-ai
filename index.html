@@ -1702,25 +1702,34 @@ function initBubbles(showCategories = true) {
          video.appendChild(source1);
 video.appendChild(source2);
 
-// Zoom Flower MORE to remove black sides
+// SPECIAL ADJUSTMENTS FOR EACH CATEGORY
 if (category.name === 'Flower') {
-    video.style.transform = 'scale(1.8)';  // ← INCREASED from 1.2 to 1.8
+    video.style.transform = 'scale(1.8)';
     video.style.objectPosition = 'center center';
 }
 
 if (category.name === 'Vaporizers') {
-    video.style.transform = 'scale(0.95)';  // Slight zoom out to show full device
+    video.style.transform = 'scale(0.95)';
     video.style.objectPosition = 'center center';
 }
 
 if (category.name === 'Pre-Rolls') {
-    video.style.transform = 'scale(0.9)';  // Zoom out to show full pre-roll
+    video.style.transform = 'scale(0.9)';
     video.style.objectPosition = 'center center';
+}
+
+if (category.name === 'Balms') {
+    video.style.objectPosition = 'center 30%';  // ← MOVES VIDEO UP
+}
+
+if (category.name === 'Beverages') {
+    video.style.objectPosition = 'center 30%';  // ← MOVES VIDEO UP
 }
 
 video.addEventListener('loadeddata', function() {
     video.play().catch(e => console.log('Autoplay prevented'));
 });
+            
             
             // Label
             const label = document.createElement('div');
