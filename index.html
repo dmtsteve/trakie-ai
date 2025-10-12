@@ -37,7 +37,86 @@
             text-align: center;
             overflow: hidden;
         }
+/* Stats Ticker */
+        .stats-ticker {
+            position: absolute;
+            top: 30px;
+            left: 0;
+            width: 100%;
+            overflow: hidden;
+            z-index: 1;
+            opacity: 0;
+            animation: fadeIn 1s ease 0.5s forwards;
+        }
 
+        .ticker-content {
+            display: flex;
+            gap: 30px;
+            animation: scroll 30s linear infinite;
+            white-space: nowrap;
+        }
+
+        .ticker-content span {
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.6);
+            font-weight: 500;
+        }
+
+        .ticker-dot {
+            color: #10b981;
+        }
+
+        @keyframes scroll {
+            from { transform: translateX(0); }
+            to { transform: translateX(-50%); }
+        }
+
+        /* Gradient Accent */
+        .gradient-accent {
+            width: 200px;
+            height: 3px;
+            background: linear-gradient(90deg, #10b981 0%, #60A5FA 50%, #8b5cf6 100%);
+            border-radius: 2px;
+            margin-bottom: 30px;
+            opacity: 0;
+            animation: fadeIn 1s ease 0.9s forwards;
+        }
+
+        /* Welcome Subtitle */
+        .welcome-subtitle {
+            font-size: 20px;
+            color: #ccc;
+            margin-bottom: 30px;
+            font-weight: 500;
+            opacity: 0;
+            animation: fadeIn 1s ease 1.1s forwards;
+        }
+
+        /* Value Props */
+        .value-props {
+            margin-bottom: 25px;
+            opacity: 0;
+            animation: fadeIn 1s ease 1.3s forwards;
+        }
+
+        .value-prop {
+            font-size: 15px;
+            color: #999;
+            margin-bottom: 12px;
+            font-weight: 400;
+            line-height: 1.5;
+        }
+
+        /* Welcome Tagline */
+        .welcome-tagline {
+            font-size: 14px;
+            color: #60A5FA;
+            font-style: italic;
+            margin-bottom: 40px;
+            opacity: 0;
+            animation: fadeIn 1s ease 1.5s forwards;
+        }
+        
         .welcome-screen > * {
             position: relative;
             z-index: 1;
@@ -50,19 +129,11 @@
         .title {
             font-size: 64px;
             font-weight: 900;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
             opacity: 0;
             animation: fadeIn 1s ease 0.7s forwards;
         }
 
-        .members-text {
-            font-size: 16px;
-            color: #666;
-            font-style: italic;
-            margin-bottom: 40px;
-            opacity: 0;
-            animation: fadeIn 1s ease 1.1s forwards;
-        }
 
         .login-box {
             background: rgba(255, 255, 255, 0.05);
@@ -863,8 +934,7 @@
             <source src="welcome0.mov" type="video/mp4">
         </video>
         
-        <p class="members-text" style="position: absolute; top: 40px; left: 0; right: 0; margin: 0; text-align: center; width: 100%;">Members Only Access</p>
-        
+     
         <h1 class="title">#1 Cannabis Inventory AI</h1>
         
         <div class="login-box" style="margin-top: 210px;">
@@ -901,13 +971,50 @@
                     <source src="welcome.mp4" type="video/mp4">
                 </video>
                 
-                <div class="hero-content">
-                    <h1 class="hero-title">Become an Inventory Wizard</h1>
-                    <p class="hero-subtitle">Your competition manually enters. You use Trakie AI.</p>
-                    <p class="hero-blue">PhD-Level Inventory Intelligence.</p>
-                    <p class="hero-speed">Quant-backed formulas. Restock recommendations. Trend predictions.</p>
-                    <p class="hero-tagline">The AI wizard they don't want you to have</p>
-                </div>
+             <!-- Welcome Screen -->
+    <div class="welcome-screen" id="welcomeScreen">
+        <video id="welcomeVideo" autoplay loop muted playsinline webkit-playsinline style="position: absolute; top: -20%; left: 0; width: 100%; height: 120%; object-fit: cover; opacity: 0.4; filter: blur(2px); z-index: 0;">
+            <source src="welcome0.mov" type="video/quicktime">
+            <source src="welcome0.mov" type="video/mp4">
+        </video>
+        
+        <!-- Animated Stats Ticker -->
+        <div class="stats-ticker">
+            <div class="ticker-content">
+                <span>52,847 products recognized today</span>
+                <span class="ticker-dot">•</span>
+                <span>127 dispensaries powered</span>
+                <span class="ticker-dot">•</span>
+                <span>99.8% AI accuracy</span>
+                <span class="ticker-dot">•</span>
+                <span>52,847 products recognized today</span>
+                <span class="ticker-dot">•</span>
+                <span>127 dispensaries powered</span>
+                <span class="ticker-dot">•</span>
+                <span>99.8% AI accuracy</span>
+            </div>
+        </div>
+        
+        <div class="gradient-accent"></div>
+        
+        <h1 class="title">Inventory Intelligence. Automated.</h1>
+        
+        <p class="welcome-subtitle">Real-time recognition. Predictive restocking. Zero manual entry.</p>
+        
+        <div class="value-props">
+            <p class="value-prop">→ Computer vision trained on 50,000+ SKUs</p>
+            <p class="value-prop">→ Algorithmic restock alerts based on velocity and lead time</p>
+            <p class="value-prop">→ Sample tracking with attribution modeling</p>
+        </div>
+        
+        <p class="welcome-tagline">Purpose-built for cannabis retail at scale.</p>
+        
+        <div class="login-box">
+            <input type="password" class="password-input" id="passwordInput" placeholder="Enter Password" autocomplete="off">
+            <button class="login-btn" onclick="login()">Access Platform</button>
+            <div class="error" id="errorMsg"></div>
+        </div>
+    </div>
             </section>
 
             <!-- Magic Demo -->
