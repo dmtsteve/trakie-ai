@@ -37,7 +37,8 @@
             text-align: center;
             overflow: hidden;
         }
-/* Stats Ticker */
+
+        /* Stats Ticker */
         .stats-ticker {
             position: absolute;
             top: 30px;
@@ -134,14 +135,13 @@
             animation: fadeIn 1s ease 0.7s forwards;
         }
 
-
         .login-box {
             background: rgba(255, 255, 255, 0.05);
             border: 1px solid rgba(255, 255, 255, 0.1);
             border-radius: 16px;
             padding: 30px;
             opacity: 0;
-            animation: fadeIn 1s ease 1.3s forwards;
+            animation: fadeIn 1s ease 1.7s forwards;
         }
 
         .password-input {
@@ -764,6 +764,11 @@
             filter: brightness(1.1) contrast(1.05);
         }
 
+        /* Flower video specific zoom */
+        .bubble[data-category="Flower"] video {
+            transform: scale(1.3);
+        }
+
         .bubble::before {
             content: '';
             position: absolute;
@@ -927,8 +932,7 @@
     </style>
 </head>
 <body>
-        
-             <!-- Welcome Screen -->
+    <!-- Welcome Screen -->
     <div class="welcome-screen" id="welcomeScreen">
         <video id="welcomeVideo" autoplay loop muted playsinline webkit-playsinline style="position: absolute; top: -20%; left: 0; width: 100%; height: 120%; object-fit: cover; opacity: 0.4; filter: blur(2px); z-index: 0;">
             <source src="welcome0.mov" type="video/quicktime">
@@ -951,11 +955,22 @@
                 <span>99.8% AI accuracy</span>
             </div>
         </div>
- 
-     
-        <h1 class="title">#1 Cannabis Inventory AI</h1>
         
-        <div class="login-box" style="margin-top: 210px;">
+        <div class="gradient-accent"></div>
+        
+        <h1 class="title">Inventory Intelligence. Automated.</h1>
+        
+        <p class="welcome-subtitle">Real-time recognition. Predictive restocking. Zero manual entry.</p>
+        
+        <div class="value-props">
+            <p class="value-prop">→ Computer vision trained on 50,000+ SKUs</p>
+            <p class="value-prop">→ Algorithmic restock alerts based on velocity and lead time</p>
+            <p class="value-prop">→ Sample tracking with attribution modeling</p>
+        </div>
+        
+        <p class="welcome-tagline">Purpose-built for cannabis retail at scale.</p>
+        
+        <div class="login-box">
             <input type="password" class="password-input" id="passwordInput" placeholder="Enter Password" autocomplete="off">
             <button class="login-btn" onclick="login()">Access Platform</button>
             <div class="error" id="errorMsg"></div>
@@ -988,28 +1003,14 @@
                 <video class="hero-bg-video" autoplay loop muted playsinline webkit-playsinline preload="auto">
                     <source src="welcome.mp4" type="video/mp4">
                 </video>
-            
-        
-        <div class="gradient-accent"></div>
-        
-        <h1 class="title">Inventory Intelligence. Automated.</h1>
-        
-        <p class="welcome-subtitle">Real-time recognition. Predictive restocking. Zero manual entry.</p>
-        
-        <div class="value-props">
-            <p class="value-prop">→ Computer vision trained on 50,000+ SKUs</p>
-            <p class="value-prop">→ Algorithmic restock alerts based on velocity and lead time</p>
-            <p class="value-prop">→ Sample tracking with attribution modeling</p>
-        </div>
-        
-        <p class="welcome-tagline">Purpose-built for cannabis retail at scale.</p>
-        
-        <div class="login-box">
-            <input type="password" class="password-input" id="passwordInput" placeholder="Enter Password" autocomplete="off">
-            <button class="login-btn" onclick="login()">Access Platform</button>
-            <div class="error" id="errorMsg"></div>
-        </div>
-    </div>
+                
+                <div class="hero-content">
+                    <h1 class="hero-title">Become an Inventory Wizard</h1>
+                    <p class="hero-subtitle">Your competition manually enters. You use Trakie AI.</p>
+                    <p class="hero-blue">PhD-Level Inventory Intelligence.</p>
+                    <p class="hero-speed">Quant-backed formulas. Restock recommendations. Trend predictions.</p>
+                    <p class="hero-tagline">The AI wizard they don't want you to have</p>
+                </div>
             </section>
 
             <!-- Magic Demo -->
@@ -1104,13 +1105,13 @@
         <div class="page-section" id="dataSection">
             <div class="data-wrapper">
                 <div class="data-header">
-                    <h1 class="data-title">Inventory Dashboard</h1>
-                    <p class="data-subtitle">PhD-Level Quant Analysis with Restock formulas and Grap</p>
+                    <h1 class="data-title">Wizard Dashboard</h1>
+                    <p class="data-subtitle">PhD-level quant analysis with restock formulas</p>
                 </div>
                 <div class="dashboard-grid">
                     <div class="dashboard-card">
-                        <div class="card-header">🔮 Optimized Restock</div>
-                        <div class="card-metric">3 days </div>
+                        <div class="card-header">🔮 Restock Formula</div>
+                        <div class="card-metric">3 days</div>
                         <div class="card-label">Until Blue Dream stockout<br>Formula: (Current Stock / Daily Velocity) = Days Remaining</div>
                     </div>
                     <div class="dashboard-card">
@@ -1119,7 +1120,7 @@
                         <div class="card-label">Wedding Cake momentum<br>Formula: (Week2 Sales - Week1 Sales) / Week1 Sales × 100</div>
                     </div>
                     <div class="dashboard-card">
-                        <div class="card-header">⚡ Buffer Not Selling Alert</div>
+                        <div class="card-header">⚡ Buffer Zone Alert</div>
                         <div class="card-metric">5 SKUs</div>
                         <div class="card-label">Below safety stock<br>Formula: Current < (Daily Velocity × Lead Time × 1.5)</div>
                     </div>
@@ -1134,7 +1135,7 @@
                         <div class="card-label">Prediction accuracy<br>Based on 30-day moving average + seasonality</div>
                     </div>
                     <div class="dashboard-card">
-                        <div class="card-header">🔥 Most Popular</div>
+                        <div class="card-header">🔥 Top Velocity</div>
                         <div class="card-metric">Gorilla Glue</div>
                         <div class="card-label">8.2 units/day average<br>Formula: Total Units Sold / Days in Period</div>
                     </div>
@@ -1262,11 +1263,12 @@
             if (showCategories) {
                 if (backBtn) backBtn.style.display = 'none';
                 const titleElement = document.querySelector('.bubbles-title');
-                if (titleElement) titleElement.textContent = 'Product Categories';
+                if (titleElement) titleElement.textContent = 'Inventory Categories';
                 
                 categories.forEach((category, i) => {
                     const bubble = document.createElement('div');
                     bubble.className = 'bubble';
+                    bubble.setAttribute('data-category', category.name);
                     
                     const video = document.createElement('video');
                     video.autoplay = true;
