@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>#1 Cannabis Inventory AI - Trakie.ai</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
 
         * {
             margin: 0;
@@ -59,7 +59,7 @@
         .ticker-content span {
             font-size: 13px;
             color: rgba(255, 255, 255, 0.6);
-            font-weight: 500;
+            font-weight: 400;
         }
 
         .ticker-dot {
@@ -73,7 +73,7 @@
 
         .gradient-accent {
             width: 200px;
-            height: 3px;
+            height: 2px;
             background: linear-gradient(90deg, #10b981 0%, #60A5FA 50%, #8b5cf6 100%);
             border-radius: 2px;
             margin-bottom: 30px;
@@ -85,7 +85,7 @@
             font-size: 20px;
             color: #ccc;
             margin-bottom: 30px;
-            font-weight: 500;
+            font-weight: 400;
             opacity: 0;
             animation: fadeIn 1s ease 1.1s forwards;
         }
@@ -100,7 +100,7 @@
             font-size: 15px;
             color: #999;
             margin-bottom: 12px;
-            font-weight: 400;
+            font-weight: 300;
             line-height: 1.5;
         }
 
@@ -111,6 +111,7 @@
             margin-bottom: 40px;
             opacity: 0;
             animation: fadeIn 1s ease 1.5s forwards;
+            font-weight: 400;
         }
         
         .welcome-screen > * {
@@ -124,10 +125,11 @@
 
         .title {
             font-size: 64px;
-            font-weight: 900;
+            font-weight: 700;
             margin-bottom: 15px;
             opacity: 0;
             animation: fadeIn 1s ease 0.7s forwards;
+            letter-spacing: -1px;
         }
 
         .login-box {
@@ -199,7 +201,7 @@
             top: 0;
             left: 0;
             right: 0;
-            background: rgba(0, 0, 0, 0.9);
+            background: rgba(0, 0, 0, 0.95);
             backdrop-filter: blur(20px);
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
             z-index: 100;
@@ -228,7 +230,7 @@
 
         .nav-logo span {
             font-size: 18px;
-            font-weight: 700;
+            font-weight: 600;
         }
 
         .nav-links {
@@ -239,7 +241,7 @@
         .nav-links a {
             color: #ccc;
             text-decoration: none;
-            font-weight: 500;
+            font-weight: 400;
             transition: color 0.2s;
             cursor: pointer;
         }
@@ -257,15 +259,13 @@
             font-weight: 600;
         }
 
-        /* Hero Section */
+        /* Hero Section - FULL WIDTH */
         .hero {
             position: relative;
             overflow: hidden;
-            min-height: 600px;
-            padding: 140px 40px 80px;
+            min-height: 700px;
+            padding: 140px 0 80px;
             text-align: center;
-            max-width: 1200px;
-            margin: 0 auto;
         }
 
         .hero-bg-video {
@@ -293,21 +293,26 @@
         .hero-content {
             position: relative;
             z-index: 2;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 40px;
         }
 
         .hero-title {
-            font-size: clamp(48px, 8vw, 72px);
-            font-weight: 900;
+            font-size: clamp(48px, 7vw, 72px);
+            font-weight: 600;
             margin-bottom: 20px;
             color: #ffffff;
-            text-shadow: 0 0 20px rgba(96, 165, 250, 0.5), 2px 2px 8px rgba(0, 0, 0, 0.9);
+            text-shadow: 0 0 20px rgba(96, 165, 250, 0.4), 2px 2px 8px rgba(0, 0, 0, 0.9);
+            letter-spacing: -1px;
         }
 
         .hero-subtitle {
-            font-size: 22px;
+            font-size: 20px;
             color: #ccc;
-            margin-bottom: 50px;
+            margin-bottom: 60px;
             text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.95);
+            font-weight: 400;
         }
 
         /* Four Pillars Grid */
@@ -316,7 +321,7 @@
             grid-template-columns: repeat(2, 1fr);
             gap: 30px;
             max-width: 1000px;
-            margin: 0 auto;
+            margin: 0 auto 0;
         }
 
         .pillar-card {
@@ -344,23 +349,54 @@
 
         .pillar-title {
             font-size: 24px;
-            font-weight: 800;
+            font-weight: 600;
             color: #10b981;
             margin-bottom: 12px;
+            letter-spacing: -0.5px;
         }
 
         .pillar-desc {
             font-size: 15px;
             color: #ccc;
             line-height: 1.6;
+            font-weight: 300;
         }
 
-        .hero-tagline {
-            font-size: 18px;
+        /* Value Section (moved from welcome) */
+        .value-section {
+            position: relative;
+            z-index: 2;
+            max-width: 900px;
+            margin: 80px auto 0;
+            padding: 0 40px;
+            text-align: center;
+        }
+
+        .value-section-subtitle {
+            font-size: 20px;
+            color: #bbb;
+            margin-bottom: 30px;
+            font-weight: 400;
+            letter-spacing: 0.3px;
+        }
+
+        .value-section-props {
+            margin-bottom: 25px;
+        }
+
+        .value-section-prop {
+            font-size: 16px;
+            color: #999;
+            margin-bottom: 14px;
+            font-weight: 300;
+            line-height: 1.6;
+        }
+
+        .value-section-tagline {
+            font-size: 15px;
             color: #60A5FA;
-            margin-top: 50px;
-            font-weight: 600;
-            text-shadow: 0 0 8px rgba(96, 165, 250, 0.7), 1px 1px 4px rgba(0, 0, 0, 1);
+            font-style: italic;
+            font-weight: 400;
         }
 
         /* Receive Section */
@@ -377,17 +413,19 @@
 
         .receive-title {
             font-size: 64px;
-            font-weight: 900;
+            font-weight: 600;
             background: linear-gradient(135deg, #60A5FA 0%, #3B82F6 50%, #60A5FA 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
             margin-bottom: 20px;
+            letter-spacing: -1px;
         }
 
         .receive-subtitle {
             color: #888;
             font-size: 22px;
+            font-weight: 300;
         }
 
         .receive-container {
@@ -407,7 +445,7 @@
 
         .section-title {
             font-size: 24px;
-            font-weight: 700;
+            font-weight: 600;
             color: #60A5FA;
             margin-bottom: 20px;
         }
@@ -463,7 +501,7 @@
 
         .product-name {
             font-size: 16px;
-            font-weight: 600;
+            font-weight: 500;
             color: #10b981;
         }
 
@@ -477,15 +515,17 @@
 
         .qr-title {
             font-size: 48px;
-            font-weight: 800;
+            font-weight: 600;
             margin-bottom: 20px;
             color: #10b981;
+            letter-spacing: -0.5px;
         }
 
         .qr-subtitle {
             font-size: 18px;
             color: #888;
             margin-bottom: 40px;
+            font-weight: 300;
         }
 
         .qr-box {
@@ -539,23 +579,25 @@
 
         .pricing-title {
             font-size: 48px;
-            font-weight: 800;
+            font-weight: 600;
             margin-bottom: 20px;
+            letter-spacing: -0.5px;
         }
 
         .pricing-subtitle {
             font-size: 18px;
             color: #888;
             margin-bottom: 30px;
+            font-weight: 300;
         }
 
         .pricing-grid {
             display: flex;
             justify-content: center;
-            gap: 30px;
-            max-width: 1100px;
+            gap: 40px;
+            max-width: 900px;
             margin: 0 auto;
-            flex-wrap: wrap;
+            align-items: stretch;
         }
 
         .pricing-card {
@@ -565,11 +607,12 @@
             padding: 40px;
             text-align: center;
             position: relative;
-            height: fit-content;
             flex: 1;
-            min-width: 280px;
-            max-width: 350px;
+            min-width: 320px;
+            max-width: 420px;
             transition: all 0.3s;
+            display: flex;
+            flex-direction: column;
         }
 
         .pricing-card:hover {
@@ -596,15 +639,16 @@
 
         .plan-name {
             font-size: 24px;
-            font-weight: 800;
+            font-weight: 600;
             margin-bottom: 20px;
             color: #10b981;
+            letter-spacing: -0.3px;
         }
 
         .plan-price {
-            font-size: 48px;
-            font-weight: 900;
-            margin-bottom: 5px;
+            font-size: 56px;
+            font-weight: 700;
+            margin-bottom: 8px;
             line-height: 1;
         }
 
@@ -612,12 +656,14 @@
             color: #888;
             margin-bottom: 30px;
             font-size: 15px;
+            font-weight: 300;
         }
 
         .features {
             list-style: none;
             margin-bottom: 30px;
             text-align: left;
+            flex-grow: 1;
         }
 
         .features li {
@@ -627,6 +673,7 @@
             font-size: 15px;
             line-height: 1.5;
             color: #ccc;
+            font-weight: 300;
         }
 
         .features li::before {
@@ -645,21 +692,16 @@
             color: white;
             border: none;
             border-radius: 12px;
-            font-weight: 700;
+            font-weight: 600;
             cursor: pointer;
             font-size: 16px;
             transition: all 0.3s;
+            margin-top: auto;
         }
 
         .plan-btn:hover {
             transform: translateY(-2px);
             box-shadow: 0 6px 20px rgba(96, 165, 250, 0.4);
-        }
-
-        .plan-btn.secondary {
-            background: transparent;
-            border: 2px solid #60A5FA;
-            color: #60A5FA;
         }
 
         /* Page Sections */
@@ -671,7 +713,7 @@
             display: block;
         }
 
-        /* Bubbles Section */
+        /* Bubbles Section - SOPHISTICATED */
         .bubbles-wrapper {
             padding: 120px 40px 60px;
             min-height: 100vh;
@@ -685,7 +727,7 @@
 
         .bubbles-title {
             font-size: 64px;
-            font-weight: 900;
+            font-weight: 600;
             background: linear-gradient(135deg, #10b981 0%, #059669 50%, #10b981 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -696,8 +738,9 @@
 
         .bubbles-subtitle {
             color: #888;
-            font-size: 22px;
-            font-weight: 500;
+            font-size: 20px;
+            font-weight: 300;
+            font-style: italic;
         }
 
         .bubbles-container {
@@ -740,7 +783,7 @@
         }
 
         .bubble[data-category="Flower"] video {
-            transform: scale(1.3);
+            transform: scale(1.5);
         }
 
         .bubble::before {
@@ -764,17 +807,17 @@
             padding: 16px;
             background: linear-gradient(135deg, rgba(16, 185, 129, 0.95), rgba(5, 150, 105, 0.95));
             font-size: 20px;
-            font-weight: 900;
+            font-weight: 700;
             color: #000000;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
+            letter-spacing: 1px;
             z-index: 2;
             border-radius: 0 0 18px 18px;
             backdrop-filter: blur(10px);
             text-align: center;
         }
 
-        /* Data Section */
+        /* Data Section - SOPHISTICATED */
         .data-wrapper {
             padding: 100px 40px 40px;
             min-height: 100vh;
@@ -786,15 +829,17 @@
         }
 
         .data-title {
-            font-size: 48px;
-            font-weight: 900;
+            font-size: 56px;
+            font-weight: 600;
             color: #8b5cf6;
             margin-bottom: 15px;
+            letter-spacing: -1px;
         }
 
         .data-subtitle {
             color: #888;
             font-size: 18px;
+            font-weight: 300;
         }
 
         .dashboard-grid {
@@ -834,7 +879,7 @@
 
         .card-header {
             font-size: 18px;
-            font-weight: 700;
+            font-weight: 600;
             color: #10b981;
             margin-bottom: 20px;
             display: flex;
@@ -844,7 +889,7 @@
 
         .card-metric {
             font-size: 36px;
-            font-weight: 900;
+            font-weight: 700;
             color: #8b5cf6;
             margin-bottom: 10px;
         }
@@ -852,6 +897,7 @@
         .card-label {
             color: #888;
             font-size: 14px;
+            font-weight: 300;
         }
 
         @keyframes fadeIn {
@@ -988,10 +1034,21 @@
                             <p class="pillar-desc">Smart product recommendations. Sample attribution modeling. Turn your team into revenue machines.</p>
                         </div>
                     </div>
-                    
-                    <p class="hero-tagline">Where precision meets performance.</p>
                 </div>
             </section>
+
+            <!-- Value Section (moved from welcome screen) -->
+            <div class="value-section">
+                <p class="value-section-subtitle">Real-time recognition. Predictive restocking. Zero manual entry.</p>
+                
+                <div class="value-section-props">
+                    <p class="value-section-prop">→ Computer vision trained on 50,000+ SKUs</p>
+                    <p class="value-section-prop">→ Algorithmic restock alerts based on velocity and lead time</p>
+                    <p class="value-section-prop">→ Sample tracking with attribution modeling</p>
+                </div>
+                
+                <p class="value-section-tagline">Purpose-built for cannabis retail at scale.</p>
+            </div>
 
             <!-- QR Section -->
             <section class="qr-section">
@@ -1051,8 +1108,8 @@
         <div class="page-section" id="bubblesSection">
             <div class="bubbles-wrapper">
                 <div class="bubbles-header">
-                    <h1 class="bubbles-title">Inventory Categories</h1>
-                    <p class="bubbles-subtitle">Click a category to explore products</p>
+                    <h1 class="bubbles-title">Cannabis Vault</h1>
+                    <p class="bubbles-subtitle">Curated selections for the discerning customer</p>
                 </div>
                 <div class="bubbles-container" id="bubblesContainer"></div>
             </div>
@@ -1062,8 +1119,8 @@
         <div class="page-section" id="dataSection">
             <div class="data-wrapper">
                 <div class="data-header">
-                    <h1 class="data-title">Intelligence Dashboard</h1>
-                    <p class="data-subtitle">Predictive analytics with PhD-level quant formulas</p>
+                    <h1 class="data-title">Operations Dashboard</h1>
+                    <p class="data-subtitle">Algorithmic forecasting. Velocity analytics. Attribution modeling.</p>
                 </div>
                 <div class="dashboard-grid">
                     <div class="dashboard-card">
@@ -1105,26 +1162,12 @@
             <section class="pricing">
                 <div class="pricing-header">
                     <h2 class="pricing-title">Simple Pricing</h2>
-                    <p class="pricing-subtitle">$99/week per store per user</p>
+                    <p class="pricing-subtitle">Built for dispensaries of all sizes</p>
                 </div>
                 
                 <div class="pricing-grid">
                     <div class="pricing-card">
-                        <h3 class="plan-name">Free Trial</h3>
-                        <div class="plan-price">$0</div>
-                        <p class="plan-period">7 days free</p>
-                        <ul class="features">
-                            <li>Full platform access</li>
-                            <li>Up to 50 products</li>
-                            <li>1 location</li>
-                            <li>Email support</li>
-                        </ul>
-                        <button class="plan-btn secondary">Start Free Trial</button>
-                    </div>
-
-                    <div class="pricing-card featured">
-                        <div class="popular-badge">Most Popular</div>
-                        <h3 class="plan-name">Per User</h3>
+                        <h3 class="plan-name">Single Location</h3>
                         <div class="plan-price">$99</div>
                         <p class="plan-period">per week / per store / per user</p>
                         <ul class="features">
@@ -1136,23 +1179,25 @@
                             <li>Sample tracking</li>
                             <li>Priority support</li>
                         </ul>
-                        <button class="plan-btn">Get Started</button>
+                        <button class="plan-btn" onclick="alert('Contact us for a personalized demo!')">Inquire for Demo</button>
                     </div>
 
-                    <div class="pricing-card">
-                        <h3 class="plan-name">Enterprise</h3>
-                        <div class="plan-price">Custom</div>
-                        <p class="plan-period">multi-location pricing</p>
+                    <div class="pricing-card featured">
+                        <div class="popular-badge">Best Value</div>
+                        <h3 class="plan-name">Unlimited Stores</h3>
+                        <div class="plan-price">$999</div>
+                        <p class="plan-period">for your entire brand</p>
                         <ul class="features">
-                            <li>Everything in Per User</li>
+                            <li>Everything in Single Location</li>
                             <li>Unlimited locations</li>
+                            <li>Multi-store analytics</li>
                             <li>Custom AI training</li>
                             <li>White-label options</li>
                             <li>Dedicated account manager</li>
                             <li>24/7 phone support</li>
                             <li>Custom integrations</li>
                         </ul>
-                        <button class="plan-btn">Contact Sales</button>
+                        <button class="plan-btn" onclick="alert('Contact us for a personalized demo!')">Inquire for Demo</button>
                     </div>
                 </div>
             </section>
