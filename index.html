@@ -1064,7 +1064,530 @@
                 grid-template-columns: 1fr;
             }
         }
+/* ===== NEW RECEIVE PAGE STYLES ===== */
+        
+        /* Receive Landing */
+        .receive-landing {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            text-align: center;
+            padding: 40px;
+        }
 
+        .receive-landing-title {
+            font-size: 72px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            letter-spacing: -2px;
+        }
+
+        .receive-landing-subtitle {
+            font-size: 48px;
+            font-weight: 300;
+            color: #60A5FA;
+            margin-bottom: 40px;
+            letter-spacing: -1px;
+        }
+
+        .early-bird-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+            color: #000;
+            padding: 12px 30px;
+            border-radius: 50px;
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 60px;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .start-receive-btn {
+            padding: 25px 80px;
+            background: linear-gradient(135deg, #60A5FA 0%, #3B82F6 100%);
+            color: white;
+            border: none;
+            border-radius: 60px;
+            font-size: 28px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 10px 40px rgba(96, 165, 250, 0.4);
+        }
+
+        .start-receive-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 50px rgba(96, 165, 250, 0.6);
+        }
+
+        /* QR Code Screen */
+        .qr-screen {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            text-align: center;
+        }
+
+        .qr-screen.active {
+            display: flex;
+        }
+
+        .qr-code-box {
+            width: 300px;
+            height: 300px;
+            background: white;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 30px;
+            animation: qrPulse 1.5s ease-in-out infinite;
+        }
+
+        @keyframes qrPulse {
+            0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(96, 165, 250, 0.7); }
+            50% { transform: scale(1.05); box-shadow: 0 0 0 20px rgba(96, 165, 250, 0); }
+        }
+
+        .qr-code-box img {
+            width: 280px;
+            height: 280px;
+        }
+
+        .qr-instruction {
+            font-size: 24px;
+            color: #ccc;
+            margin-bottom: 20px;
+        }
+
+        /* Split Screen */
+        .split-screen {
+            display: none;
+            min-height: 100vh;
+            padding-top: 100px;
+        }
+
+        .split-screen.active {
+            display: grid;
+            grid-template-columns: 50% 50%;
+            gap: 0;
+        }
+
+        .split-left, .split-right {
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+        }
+
+        .split-left {
+            border-right: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .section-title {
+            font-size: 28px;
+            font-weight: 600;
+            color: #60A5FA;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .mock-invoice {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 30px;
+            width: 100%;
+            max-width: 500px;
+        }
+
+        .invoice-header {
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding-bottom: 20px;
+            margin-bottom: 20px;
+        }
+
+        .invoice-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            font-size: 14px;
+        }
+
+        .invoice-row strong {
+            color: #60A5FA;
+        }
+
+        .invoice-items {
+            margin-top: 20px;
+        }
+
+        .invoice-item {
+            padding: 12px;
+            background: rgba(96, 165, 250, 0.1);
+            border-radius: 8px;
+            margin-bottom: 10px;
+            font-size: 15px;
+        }
+
+        .iphone-mockup {
+            width: 300px;
+            height: 600px;
+            background: #1a1a1a;
+            border-radius: 40px;
+            border: 8px solid #2a2a2a;
+            position: relative;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            overflow: hidden;
+        }
+
+        .iphone-notch {
+            width: 150px;
+            height: 30px;
+            background: #000;
+            border-radius: 0 0 20px 20px;
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 10;
+        }
+
+        .iphone-screen {
+            width: 100%;
+            height: 100%;
+            background: #000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            padding: 40px 20px;
+        }
+
+        .camera-icon-large {
+            font-size: 80px;
+            margin-bottom: 20px;
+            animation: cameraPulse 1s ease-in-out infinite;
+        }
+
+        @keyframes cameraPulse {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.1); opacity: 0.7; }
+        }
+
+        .photo-preview {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .photo-thumbnail {
+            width: 100%;
+            height: 100px;
+            background: rgba(16, 185, 129, 0.2);
+            border: 2px solid #10b981;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 40px;
+            animation: photoAppear 0.3s ease-out;
+        }
+
+        @keyframes photoAppear {
+            from { opacity: 0; transform: scale(0.8); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        /* Processing Screen */
+        .processing-screen {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            text-align: center;
+            padding: 40px;
+        }
+
+        .processing-screen.active {
+            display: flex;
+        }
+
+        .processing-title {
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 40px;
+        }
+
+        .spinner-large {
+            width: 100px;
+            height: 100px;
+            border: 8px solid rgba(96, 165, 250, 0.2);
+            border-top: 8px solid #60A5FA;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-bottom: 40px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .processing-steps {
+            max-width: 600px;
+            text-align: left;
+        }
+
+        .process-step {
+            background: rgba(255, 255, 255, 0.05);
+            border-left: 4px solid #10b981;
+            padding: 20px;
+            margin-bottom: 15px;
+            border-radius: 8px;
+            opacity: 0;
+            transform: translateX(-30px);
+        }
+
+        .process-step.active {
+            animation: slideInStep 0.5s ease-out forwards;
+        }
+
+        @keyframes slideInStep {
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .process-step-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #10b981;
+            margin-bottom: 8px;
+        }
+
+        .process-step-text {
+            font-size: 14px;
+            color: #888;
+            font-family: monospace;
+        }
+
+        .typing-text {
+            display: inline-block;
+            border-right: 2px solid #10b981;
+            animation: blink 0.7s step-end infinite;
+        }
+
+        @keyframes blink {
+            50% { border-color: transparent; }
+        }
+
+        /* Results Screen */
+        .results-screen {
+            display: none;
+            min-height: 100vh;
+            padding-top: 100px;
+        }
+
+        .results-screen.active {
+            display: grid;
+            grid-template-columns: 70% 30%;
+            gap: 0;
+        }
+
+        .results-left {
+            padding: 40px;
+            overflow-y: auto;
+            max-height: calc(100vh - 100px);
+        }
+
+        .results-right {
+            padding: 40px;
+            border-left: 1px solid rgba(255, 255, 255, 0.1);
+            position: sticky;
+            top: 100px;
+            height: fit-content;
+        }
+
+        .results-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .results-title {
+            font-size: 48px;
+            font-weight: 700;
+            color: #10b981;
+            margin-bottom: 20px;
+        }
+
+        .completion-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: #000;
+            padding: 15px 40px;
+            border-radius: 50px;
+            font-size: 20px;
+            font-weight: 700;
+        }
+
+        .timer-display {
+            font-size: 64px;
+            font-weight: 900;
+            color: #60A5FA;
+            margin: 30px 0;
+        }
+
+        /* Pokemon Card Style */
+        .product-cards {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        .product-card {
+            background: linear-gradient(135deg, rgba(96, 165, 250, 0.1) 0%, rgba(16, 185, 129, 0.1) 100%);
+            border: 2px solid rgba(96, 165, 250, 0.3);
+            border-radius: 20px;
+            overflow: hidden;
+            transition: all 0.3s;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            border-color: #60A5FA;
+            box-shadow: 0 15px 50px rgba(96, 165, 250, 0.4);
+        }
+
+        .product-card-images {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0;
+            border-bottom: 2px solid rgba(96, 165, 250, 0.3);
+        }
+
+        .product-image-option {
+            aspect-ratio: 1;
+            background: #1a1a1a;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s;
+        }
+
+        .product-image-option:hover {
+            background: #2a2a2a;
+        }
+
+        .product-image-option.selected {
+            border: 4px solid #10b981;
+        }
+
+        .product-image-option img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .product-image-placeholder {
+            font-size: 60px;
+        }
+
+        .image-number {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 14px;
+        }
+
+        .product-card-title {
+            background: linear-gradient(135deg, #60A5FA 0%, #3B82F6 100%);
+            color: #000;
+            padding: 15px 20px;
+            font-size: 18px;
+            font-weight: 700;
+            text-align: center;
+            letter-spacing: 0.5px;
+        }
+
+        .product-card-stats {
+            padding: 20px;
+        }
+
+        .stat-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 15px;
+        }
+
+        .stat-row:last-child {
+            border-bottom: none;
+        }
+
+        .stat-label {
+            color: #888;
+            font-weight: 500;
+        }
+
+        .stat-value {
+            color: #fff;
+            font-weight: 600;
+        }
+
+        .stat-value.highlight {
+            color: #10b981;
+            font-size: 18px;
+        }
+
+        /* Smart Move Buttons */
+        .smart-move-controls {
+            position: sticky;
+            top: 120px;
+        }
+
+        .controls-title {
+            font-size: 24px;
+            font-weight: 600;
+            color: #60A5FA;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .move-button-group {
+            margin-bottom: 30px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15p
+                
         @media (max-width: 768px) {
             .bubbles-container {
                 grid-template-columns: 1fr;
@@ -1226,46 +1749,90 @@
             </div>
         </div>
 
-        <!-- Receive Section -->
+<!-- Receive Section -->
         <div class="page-section" id="receiveSection">
-            <div class="receive-wrapper">
-                <div class="receive-header">
-                    <h1 class="receive-title">Receive Inventory</h1>
-                    <p class="receive-subtitle">Complete your delivery in 2 simple steps</p>
+            <!-- Landing Screen -->
+            <div class="receive-landing" id="receiveLanding">
+                <h1 class="receive-landing-title">Receive Inventory</h1>
+                <h2 class="receive-landing-subtitle">From an Hour to 1 Minute</h2>
+                <div class="early-bird-badge">🔥 21 Early Bird Discounts Only</div>
+                <button class="start-receive-btn" onclick="startReceiving()">Start Receiving</button>
+            </div>
+
+            <!-- QR Code Screen -->
+            <div class="qr-screen" id="qrScreen">
+                <h2 class="section-title">Scan with Your Phone</h2>
+                <div class="qr-code-box">
+                    <div style="font-size: 200px;">📱</div>
                 </div>
-                
-                <div class="receive-steps">
-                    <div class="step-section">
-                        <h3 class="step-title">STEP 1: Invoice</h3>
-                        <div class="step-options">
-                            <div class="step-option">
-                                <div class="option-icon">📋</div>
-                                <div class="option-title">Upload PDF</div>
-                                <p class="option-desc">Drag & drop or browse files</p>
+                <p class="qr-instruction">Loading camera and invoice...</p>
+            </div>
+
+            <!-- Split Screen -->
+            <div class="split-screen" id="splitScreen">
+                <div class="split-left">
+                    <h3 class="section-title">📄 Digital Invoice</h3>
+                    <div class="mock-invoice">
+                        <div class="invoice-header">
+                            <div class="invoice-row">
+                                <strong>Vendor:</strong>
+                                <span>Green Leaf Supply Co.</span>
                             </div>
-                            <div class="step-option">
-                                <div class="option-icon">📸</div>
-                                <div class="option-title">Scan Invoice</div>
-                                <p class="option-desc">Use camera to capture</p>
+                            <div class="invoice-row">
+                                <strong>Invoice #:</strong>
+                                <span>INV-2025-1115</span>
                             </div>
+                            <div class="invoice-row">
+                                <strong>Date:</strong>
+                                <span>Nov 15, 2025</span>
+                            </div>
+                        </div>
+                        <div class="invoice-items">
+                            <div class="invoice-item">Blue Dream 3.5g - 12 units</div>
+                            <div class="invoice-item">OG Kush 1oz - 8 units</div>
+                            <div class="invoice-item">Sour Diesel 3.5g - 15 units</div>
+                            <div class="invoice-item">Purple Haze 1g - 20 units</div>
+                            <div class="invoice-item">Gelato 3.5g - 10 units</div>
                         </div>
                     </div>
-                    
-                    <div class="step-section">
-                        <h3 class="step-title">STEP 2: Product Photos</h3>
-                        <div class="step-options">
-                            <div class="step-option">
-                                <div class="option-icon">📸</div>
-                                <div class="option-title">Start Camera</div>
-                                <p class="option-desc">Snap product photos</p>
-                            </div>
-                            <div class="step-option">
-                                <div class="option-icon">📁</div>
-                                <div class="option-title">Upload Photos</div>
-                                <p class="option-desc">Browse existing images</p>
-                            </div>
+                </div>
+
+                <div class="split-right">
+                    <h3 class="section-title">📸 Product Photos</h3>
+                    <div class="iphone-mockup">
+                        <div class="iphone-notch"></div>
+                        <div class="iphone-screen" id="iphoneScreen">
+                            <div class="camera-icon-large">📷</div>
+                            <p style="color: #888;">Taking photos...</p>
+                            <div class="photo-preview" id="photoPreview"></div>
                         </div>
-                        <p style="text-align: center; color: #10b981; margin-top: 20px; font-size: 14px;">AI will auto-match products to your invoice</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Processing Screen -->
+            <div class="processing-screen" id="processingScreen">
+                <h2 class="processing-title">🤖 AI Processing</h2>
+                <div class="spinner-large"></div>
+                <div class="processing-steps" id="processingSteps"></div>
+            </div>
+
+            <!-- Results Screen -->
+            <div class="results-screen" id="resultsScreen">
+                <div class="results-left">
+                    <div class="results-header">
+                        <h2 class="results-title">✅ Receiving Complete!</h2>
+                        <div class="completion-badge">5 products processed</div>
+                        <div class="timer-display" id="timerDisplay">0:58</div>
+                    </div>
+                    <div class="product-cards" id="productCards"></div>
+                </div>
+
+                <div class="results-right">
+                    <h3 class="controls-title">Smart Move to Sales</h3>
+                    <div id="smartMoveControls"></div>
+                    <div class="completion-actions">
+                        <button class="complete-btn" onclick="resetReceiving()">← Start New Delivery</button>
                     </div>
                 </div>
             </div>
@@ -1598,6 +2165,296 @@
             }
         });
 
+        // ===== RECEIVE PAGE FUNCTIONS =====
+        
+        const products = [
+            {
+                name: 'Blue Dream',
+                strain: 'Sativa',
+                strainType: 'Hybrid',
+                productType: 'Flower',
+                thc: '24.5%',
+                cbd: '0.3%',
+                expDate: '12/2025',
+                quantity: 12,
+                unitCost: 35.00,
+                images: ['🌿', '🌿', '🌿']
+            },
+            {
+                name: 'OG Kush',
+                strain: 'Indica',
+                strainType: 'Indica',
+                productType: 'Flower',
+                thc: '26.8%',
+                cbd: '0.2%',
+                expDate: '01/2026',
+                quantity: 8,
+                unitCost: 42.00,
+                images: ['🌿', '🌿', '🌿']
+            },
+            {
+                name: 'Sour Diesel',
+                strain: 'Sativa',
+                strainType: 'Sativa',
+                productType: 'Flower',
+                thc: '22.3%',
+                cbd: '0.4%',
+                expDate: '12/2025',
+                quantity: 15,
+                unitCost: 32.00,
+                images: ['🌿', '🌿', '🌿']
+            },
+            {
+                name: 'Purple Haze',
+                strain: 'Sativa',
+                strainType: 'Sativa',
+                productType: 'Flower',
+                thc: '28.1%',
+                cbd: '0.1%',
+                expDate: '01/2026',
+                quantity: 20,
+                unitCost: 28.00,
+                images: ['🌿', '🌿', '🌿']
+            },
+            {
+                name: 'Gelato',
+                strain: 'Hybrid',
+                strainType: 'Hybrid',
+                productType: 'Flower',
+                thc: '25.7%',
+                cbd: '0.3%',
+                expDate: '12/2025',
+                quantity: 10,
+                unitCost: 38.00,
+                images: ['🌿', '🌿', '🌿']
+            }
+        ];
+
+        let receiveStartTime;
+        let selectedImages = {};
+
+        function startReceiving() {
+            receiveStartTime = Date.now();
+            document.getElementById('receiveLanding').style.display = 'none';
+            document.getElementById('qrScreen').classList.add('active');
+            
+            // Auto-advance after 8 seconds
+            setTimeout(() => {
+                document.getElementById('qrScreen').classList.remove('active');
+                document.getElementById('splitScreen').classList.add('active');
+                simulatePhotoTaking();
+            }, 8000);
+        }
+
+        function simulatePhotoTaking() {
+            const preview = document.getElementById('photoPreview');
+            let photoCount = 0;
+            
+            const takePhoto = setInterval(() => {
+                if (photoCount < 5) {
+                    const photo = document.createElement('div');
+                    photo.className = 'photo-thumbnail';
+                    photo.textContent = '📸';
+                    preview.appendChild(photo);
+                    photoCount++;
+                } else {
+                    clearInterval(takePhoto);
+                    // Wait 2 seconds then go to processing
+                    setTimeout(() => {
+                        document.getElementById('splitScreen').classList.remove('active');
+                        document.getElementById('processingScreen').classList.add('active');
+                        startProcessing();
+                    }, 2000);
+                }
+            }, 1000);
+        }
+
+        function startProcessing() {
+            const steps = [
+                { title: 'Reading Labels', text: 'OCR extracting text from photos...' },
+                { title: 'Identifying Products', text: 'Matching to catalog database...' },
+                { title: 'Searching Images', text: 'Finding best Google images...' },
+                { title: 'Extracting Details', text: 'THC%, batch numbers, quantities...' },
+                { title: 'Generating Descriptions', text: 'AI creating product descriptions...' },
+                { title: 'Syncing to POS', text: 'Auto-filling inventory system...' }
+            ];
+
+            const container = document.getElementById('processingSteps');
+            container.innerHTML = '';
+            
+            steps.forEach((step, index) => {
+                setTimeout(() => {
+                    const stepDiv = document.createElement('div');
+                    stepDiv.className = 'process-step';
+                    stepDiv.innerHTML = `
+                        <div class="process-step-title">✓ ${step.title}</div>
+                        <div class="process-step-text typing-text">${step.text}</div>
+                    `;
+                    container.appendChild(stepDiv);
+                    setTimeout(() => stepDiv.classList.add('active'), 50);
+                }, index * 1500);
+            });
+
+            // After 10 seconds, show results
+            setTimeout(() => {
+                showResults();
+            }, 10000);
+        }
+
+        function showResults() {
+            const elapsedTime = Math.floor((Date.now() - receiveStartTime) / 1000);
+            document.getElementById('processingScreen').classList.remove('active');
+            document.getElementById('resultsScreen').classList.add('active');
+            document.getElementById('timerDisplay').textContent = `0:${elapsedTime}`;
+            
+            renderProductCards();
+            renderSmartMoveControls();
+        }
+
+        function renderProductCards() {
+            const container = document.getElementById('productCards');
+            container.innerHTML = '';
+            
+            products.forEach((product, index) => {
+                const card = document.createElement('div');
+                card.className = 'product-card';
+                card.innerHTML = `
+                    <div class="product-card-images">
+                        <div class="product-image-option ${selectedImages[index] === 0 ? 'selected' : ''}" 
+                             onclick="selectImage(${index}, 0)">
+                            <div class="image-number">1</div>
+                            <div class="product-image-placeholder">${product.images[0]}</div>
+                        </div>
+                        <div class="product-image-option ${selectedImages[index] === 1 ? 'selected' : ''}" 
+                             onclick="selectImage(${index}, 1)">
+                            <div class="image-number">2</div>
+                            <div class="product-image-placeholder">${product.images[1]}</div>
+                        </div>
+                        <div class="product-image-option ${selectedImages[index] === 2 ? 'selected' : ''}" 
+                             onclick="selectImage(${index}, 2)">
+                            <div class="image-number">3</div>
+                            <div class="product-image-placeholder">${product.images[2]}</div>
+                        </div>
+                    </div>
+                    <div class="product-card-title">
+                        ${product.name} | ${product.strain} | ${product.strainType} | ${product.productType}
+                    </div>
+                    <div class="product-card-stats">
+                        <div class="stat-row">
+                            <span class="stat-label">THC / CBD:</span>
+                            <span class="stat-value highlight">${product.thc} / ${product.cbd}</span>
+                        </div>
+                        <div class="stat-row">
+                            <span class="stat-label">Exp Date:</span>
+                            <span class="stat-value">${product.expDate}</span>
+                        </div>
+                        <div class="stat-row">
+                            <span class="stat-label">Quantity:</span>
+                            <span class="stat-value">${product.quantity} units</span>
+                        </div>
+                        <div class="stat-row">
+                            <span class="stat-label">Unit Cost:</span>
+                            <span class="stat-value">$${product.unitCost.toFixed(2)}</span>
+                        </div>
+                        <div class="stat-row">
+                            <span class="stat-label">Total Package:</span>
+                            <span class="stat-value highlight">$${(product.quantity * product.unitCost).toFixed(2)}</span>
+                        </div>
+                    </div>
+                `;
+                container.appendChild(card);
+                
+                // Set default selection to first image
+                if (!selectedImages[index]) {
+                    selectedImages[index] = 0;
+                }
+            });
+        }
+
+        function selectImage(productIndex, imageIndex) {
+            selectedImages[productIndex] = imageIndex;
+            renderProductCards();
+        }
+
+        function renderSmartMoveControls() {
+            const container = document.getElementById('smartMoveControls');
+            container.innerHTML = '';
+            
+            products.forEach((product, index) => {
+                const group = document.createElement('div');
+                group.className = 'move-button-group';
+                group.id = `moveGroup${index}`;
+                group.innerHTML = `
+                    <div class="move-product-name">${product.name}</div>
+                    <div class="move-buttons">
+                        <button class="move-btn" onclick="moveToSales(${index}, 5)">
+                            Move 5
+                        </button>
+                        <button class="move-btn" onclick="moveToSales(${index}, 10)">
+                            Move 10
+                        </button>
+                    </div>
+                `;
+                container.appendChild(group);
+            });
+        }
+
+        function moveToSales(productIndex, amount) {
+            const product = products[productIndex];
+            const group = document.getElementById(`moveGroup${productIndex}`);
+            const buttons = group.querySelectorAll('.move-btn');
+            
+            buttons.forEach(btn => {
+                btn.classList.add('moved');
+                btn.disabled = true;
+            });
+            
+            alert(`✅ Moved ${amount} units of ${product.name} to sales floor!\n\n📦 Remaining in vault: ${product.quantity - amount} units`);
+        }
+
+        function resetReceiving() {
+            selectedImages = {};
+            document.getElementById('resultsScreen').classList.remove('active');
+            document.getElementById('receiveLanding').style.display = 'flex';
+            document.getElementById('qrScreen').classList.remove('active');
+            document.getElementById('splitScreen').classList.remove('active');
+            document.getElementById('processingScreen').classList.remove('active');
+            document.getElementById('photoPreview').innerHTML = '';
+        }
+```
+
+---
+
+## **✅ DONE! TEST IT**
+
+**To test:**
+1. Save your HTML file
+2. Refresh browser
+3. Click "Receive" in nav
+4. Click "Start Receiving"
+5. Watch the magic! 🎮
+
+---
+
+## **🎯 WHAT HAPPENS:**
+```
+1. Landing → "From an Hour to 1 Minute" + badge
+   ↓ Click button
+   
+2. QR Code → Shows 8 seconds, auto-advances
+   ↓
+   
+3. Split Screen → Invoice left, iPhone taking photos right
+   ↓ Photos appear 1 by 1
+   
+4. Processing → 10 seconds, 6 steps with live text
+   ↓
+   
+5. Results → Pokemon cards left, Smart Move buttons right
+   - Click image options (1, 2, 3) to select
+   - Click Move 5 or Move 10 on right
+   - Buttons turn gray when clicked
+        
         window.onload = function() {
             document.getElementById('passwordInput').focus();
         };
