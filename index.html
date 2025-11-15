@@ -21,7 +21,7 @@
             -webkit-font-smoothing: antialiased;
         }
 
-        /* Welcome Screen - SIMPLIFIED */
+        /* Welcome Screen */
         .welcome-screen {
             position: fixed;
             top: 0;
@@ -53,7 +53,7 @@
             display: flex;
             gap: 30px;
             animation: scroll 30s linear infinite;
-            whitespace: nowrap;
+            white-space: nowrap;
         }
 
         .ticker-content span {
@@ -208,11 +208,6 @@
             cursor: pointer;
         }
 
-        .nav-logo img {
-            width: 48px;
-            height: 48px;
-        }
-
         .nav-logo span {
             font-size: 18px;
             font-weight: 600;
@@ -244,12 +239,7 @@
             font-weight: 600;
         }
 
-        /* Scrollable Home - ALL SECTIONS IN ONE PAGE */
-        .home-scroll-container {
-            scroll-behavior: smooth;
-        }
-
-        /* Hero Section - FULL WIDTH */
+        /* Hero Section */
         .hero {
             position: relative;
             overflow: hidden;
@@ -258,17 +248,6 @@
             align-items: center;
             justify-content: center;
             text-align: center;
-        }
-
-        .hero-bg-video {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            z-index: 0;
-            pointer-events: none;
         }
 
         .hero::before {
@@ -357,7 +336,7 @@
             font-weight: 300;
         }
 
-        /* Stats Showcase Section */
+        /* Stats Section */
         .stats-section {
             padding: 80px 40px;
             background: #000000;
@@ -491,581 +470,14 @@
             box-shadow: 0 8px 20px rgba(16, 185, 129, 0.4);
         }
 
-        /* Receive Section */
-        .receive-wrapper {
-            padding: 120px 40px 60px;
-            min-height: 100vh;
-            background: #000000;
-        }
-
-        .receive-header {
-            text-align: center;
-            margin-bottom: 60px;
-        }
-
-        .receive-title {
-            font-size: 64px;
-            font-weight: 600;
-            background: linear-gradient(135deg, #60A5FA 0%, #3B82F6 50%, #60A5FA 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: 20px;
-            letter-spacing: -1px;
-        }
-
-        .receive-subtitle {
-            color: #888;
-            font-size: 22px;
-            font-weight: 300;
-        }
-
-        .receive-steps {
-            max-width: 900px;
-            margin: 0 auto;
-        }
-
-        .step-section {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 20px;
-            padding: 40px;
-            margin-bottom: 30px;
-        }
-
-        .step-title {
-            font-size: 24px;
-            font-weight: 600;
-            color: #60A5FA;
-            margin-bottom: 20px;
-        }
-
-        .step-options {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-        }
-
-        .step-option {
-            background: rgba(96, 165, 250, 0.1);
-            border: 2px dashed rgba(96, 165, 250, 0.4);
-            border-radius: 12px;
-            padding: 40px;
-            text-align: center;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-
-        .step-option:hover {
-            background: rgba(96, 165, 250, 0.15);
-            border-color: #60A5FA;
-        }
-
-        .option-icon {
-            font-size: 60px;
-            margin-bottom: 15px;
-        }
-
-        .option-title {
-            font-size: 18px;
-            font-weight: 600;
-            color: #60A5FA;
-            margin-bottom: 10px;
-        }
-
-        .option-desc {
-            font-size: 14px;
-            color: #ccc;
-        }
-
-        /* Bubbles Section with Tabs */
-        .bubbles-wrapper {
-            padding: 120px 40px 60px;
-            min-height: 100vh;
-            background: #000000;
-        }
-
-        .bubbles-header {
-            text-align: center;
-            margin-bottom: 40px;
-        }
-
-        .bubbles-title {
-            font-size: 64px;
-            font-weight: 600;
-            background: linear-gradient(135deg, #10b981 0%, #059669 50%, #10b981 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: 20px;
-            letter-spacing: -1px;
-        }
-
-        .bubbles-subtitle {
-            color: #888;
-            font-size: 20px;
-            font-weight: 300;
-            font-style: italic;
-            margin-bottom: 40px;
-        }
-
-        /* Tabs */
-        .bubbles-tabs {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            margin-bottom: 40px;
-        }
-
-        .bubble-tab {
-            padding: 12px 30px;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 12px;
-            color: #ccc;
-            font-weight: 500;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-
-        .bubble-tab:hover {
-            background: rgba(16, 185, 129, 0.1);
-            border-color: #10b981;
-            color: #10b981;
-        }
-
-        .bubble-tab.active {
-            background: linear-gradient(135deg, #10b981, #059669);
-            border-color: #10b981;
-            color: #000;
-            font-weight: 700;
-        }
-
-        .bubbles-container {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 24px;
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 40px;
-        }
-
-        .bubble {
-            position: relative;
-            width: 100%;
-            height: 320px;
-            cursor: pointer;
-            border-radius: 20px;
-            background: linear-gradient(135deg, rgba(16, 185, 129, 0.08), rgba(5, 150, 105, 0.04));
-            border: 2px solid rgba(16, 185, 129, 0.3);
-            box-shadow: 0 8px 32px rgba(16, 185, 129, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.1);
-            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-            overflow: hidden;
-        }
-
-        .bubble:hover {
-            transform: translateY(-8px) scale(1.03);
-            box-shadow: 0 20px 60px rgba(16, 185, 129, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.2);
-            border-color: #10b981;
-        }
-
-        .bubble video {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            border-radius: 20px;
-            position: absolute;
-            top: 0;
-            left: 0;
-            filter: brightness(1.1) contrast(1.05);
-        }
-
-        .bubble[data-category="Flower"] video {
-            transform: scale(2.0);
-        }
-
-        .bubble::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,0.7) 85%);
-            z-index: 1;
-            border-radius: 20px;
-            pointer-events: none;
-        }
-
-        .bubble-label {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            padding: 16px;
-            background: linear-gradient(135deg, rgba(16, 185, 129, 0.95), rgba(5, 150, 105, 0.95));
-            font-size: 20px;
-            font-weight: 700;
-            color: #000000;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            z-index: 2;
-            border-radius: 0 0 18px 18px;
-            backdrop-filter: blur(10px);
-            text-align: center;
-        }
-
-        /* Data Section */
-        .data-wrapper {
-            padding: 100px 40px 40px;
-            min-height: 100vh;
-        }
-
-        .data-header {
-            text-align: center;
-            margin-bottom: 50px;
-        }
-
-        .data-title {
-            font-size: 56px;
-            font-weight: 600;
-            color: #8b5cf6;
-            margin-bottom: 15px;
-            letter-spacing: -1px;
-        }
-
-        .data-subtitle {
-            color: #888;
-            font-size: 18px;
-            font-weight: 300;
-        }
-
-        .dashboard-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 25px;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .dashboard-card {
-            background: rgba(139, 92, 246, 0.05);
-            border: 1px solid rgba(139, 92, 246, 0.3);
-            border-radius: 16px;
-            padding: 25px;
-            transition: all 0.3s;
-            position: relative;
-            overflow: hidden;
-            cursor: pointer;
-        }
-
-        .dashboard-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 3px;
-            background: linear-gradient(90deg, #8b5cf6, #10b981, #f59e0b);
-            opacity: 0.8;
-        }
-
-        .dashboard-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 40px rgba(139, 92, 246, 0.3);
-            border-color: #8b5cf6;
-        }
-
-        .card-header {
-            font-size: 18px;
-            font-weight: 600;
-            color: #10b981;
-            margin-bottom: 20px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .card-metric {
-            font-size: 36px;
-            font-weight: 700;
-            color: #8b5cf6;
-            margin-bottom: 10px;
-        }
-
-        .card-label {
-            color: #888;
-            font-size: 14px;
-            font-weight: 300;
-        }
-
-        /* Modal for Dashboard Details */
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.95);
-            z-index: 1000;
-            overflow-y: auto;
-        }
-
-        .modal.active {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .modal-content {
-            background: #0a0a0a;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 24px;
-            max-width: 1200px;
-            width: 90%;
-            max-height: 90vh;
-            overflow-y: auto;
-            padding: 40px;
-            position: relative;
-        }
-
-        .modal-close {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            font-size: 30px;
-            color: #ccc;
-            cursor: pointer;
-            background: none;
-            border: none;
-            padding: 10px;
-        }
-
-        .modal-close:hover {
-            color: white;
-        }
-
-        .modal-header {
-            margin-bottom: 30px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            padding-bottom: 20px;
-        }
-
-        .modal-title {
-            font-size: 36px;
-            font-weight: 700;
-            color: #8b5cf6;
-        }
-
-        /* Pricing */
-        .pricing {
-            padding: 80px 40px;
-            background: #000000;
-        }
-
-        .pricing-header {
-            text-align: center;
-            margin-bottom: 40px;
-        }
-
-        .pricing-title {
-            font-size: 48px;
-            font-weight: 600;
-            margin-bottom: 20px;
-            letter-spacing: -0.5px;
-        }
-
-        .pricing-subtitle {
-            font-size: 18px;
-            color: #888;
-            margin-bottom: 30px;
-            font-weight: 300;
-        }
-
-        .billing-toggle {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 20px;
-            margin-bottom: 50px;
-        }
-
-        .billing-option {
-            padding: 10px 25px;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 10px;
-            color: #ccc;
-            font-weight: 500;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-
-        .billing-option:hover {
-            background: rgba(16, 185, 129, 0.1);
-            border-color: #10b981;
-            color: #10b981;
-        }
-
-        .billing-option.active {
-            background: linear-gradient(135deg, #10b981, #059669);
-            border-color: #10b981;
-            color: #000;
-            font-weight: 700;
-        }
-
-        .pricing-grid {
-            display: flex;
-            justify-content: center;
-            gap: 40px;
-            max-width: 1100px;
-            margin: 0 auto;
-            align-items: stretch;
-        }
-
-        .pricing-card {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 20px;
-            padding: 40px;
-            text-align: center;
-            position: relative;
-            flex: 1;
-            min-width: 320px;
-            max-width: 500px;
-            transition: all 0.3s;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .pricing-card:hover {
-            transform: translateY(-5px);
-            border-color: #60A5FA;
-            box-shadow: 0 10px 40px rgba(96, 165, 250, 0.3);
-        }
-
-        .pricing-card.featured {
-            border-color: #10b981;
-            border-width: 2px;
-        }
-
-        .popular-badge {
-            background: #10b981;
-            color: #000;
-            padding: 8px 20px;
-            border-radius: 20px;
-            font-size: 13px;
-            font-weight: 700;
-            margin-bottom: 20px;
-            display: inline-block;
-        }
-
-        .plan-name {
-            font-size: 28px;
-            font-weight: 700;
-            margin-bottom: 20px;
-            color: #10b981;
-            letter-spacing: -0.3px;
-        }
-
-        .plan-price {
-            font-size: 56px;
-            font-weight: 800;
-            margin-bottom: 8px;
-            line-height: 1;
-        }
-
-        .plan-period {
-            color: #888;
-            margin-bottom: 30px;
-            font-size: 15px;
-            font-weight: 300;
-        }
-
-        .features {
-            list-style: none;
-            margin-bottom: 30px;
-            text-align: left;
-            flex-grow: 1;
-        }
-
-        .features li {
-            padding: 10px 0;
-            position: relative;
-            padding-left: 30px;
-            font-size: 15px;
-            line-height: 1.5;
-            color: #ccc;
-            font-weight: 300;
-        }
-
-        .features li::before {
-            content: "✓";
-            position: absolute;
-            left: 0;
-            color: #10b981;
-            font-weight: bold;
-            font-size: 18px;
-        }
-
-        .plan-btn {
-            width: 100%;
-            padding: 16px;
-            background: #60A5FA;
-            color: white;
-            border: none;
-            border-radius: 12px;
-            font-weight: 600;
-            cursor: pointer;
-            font-size: 16px;
-            transition: all 0.3s;
-            margin-top: auto;
-        }
-
-        .plan-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(96, 165, 250, 0.4);
-        }
-
-        .savings-badge {
-            display: inline-block;
-            background: rgba(16, 185, 129, 0.2);
-            color: #10b981;
-            padding: 4px 12px;
-            border-radius: 8px;
-            font-size: 12px;
-            font-weight: 600;
-            margin-left: 10px;
-        }
-
-        /* Page Sections */
-        .page-section {
-            display: none;
-        }
-
-        .page-section.active {
-            display: block;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        @media (max-width: 1200px) {
-            .bubbles-container {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            .pillars-grid {
-                grid-template-columns: 1fr;
-            }
-            .stats-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-/* ===== NEW RECEIVE PAGE STYLES ===== */
+        /* ===== NEW RECEIVE PAGE STYLES ===== */
         
+        .receive-wrapper {
+            padding: 100px 40px 60px;
+            min-height: 100vh;
+            background: #000000;
+        }
+
         /* Receive Landing */
         .receive-landing {
             display: flex;
@@ -1156,11 +568,6 @@
         @keyframes qrPulse {
             0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(96, 165, 250, 0.7); }
             50% { transform: scale(1.05); box-shadow: 0 0 0 20px rgba(96, 165, 250, 0); }
-        }
-
-        .qr-code-box img {
-            width: 280px;
-            height: 280px;
         }
 
         .qr-instruction {
@@ -1386,16 +793,6 @@
             font-family: monospace;
         }
 
-        .typing-text {
-            display: inline-block;
-            border-right: 2px solid #10b981;
-            animation: blink 0.7s step-end infinite;
-        }
-
-        @keyframes blink {
-            50% { border-color: transparent; }
-        }
-
         /* Results Screen */
         .results-screen {
             display: none;
@@ -1500,12 +897,6 @@
             border: 4px solid #10b981;
         }
 
-        .product-image-option img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
         .product-image-placeholder {
             font-size: 60px;
         }
@@ -1586,8 +977,490 @@
             padding: 20px;
             background: rgba(255, 255, 255, 0.05);
             border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 15p
-                
+            border-radius: 15px;
+        }
+
+        .move-product-name {
+            font-size: 16px;
+            font-weight: 600;
+            color: #fff;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .move-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        .move-btn {
+            flex: 1;
+            padding: 15px;
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: #000;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .move-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(16, 185, 129, 0.4);
+        }
+
+        .move-btn:active {
+            transform: translateY(0);
+        }
+
+        .move-btn.moved {
+            background: rgba(16, 185, 129, 0.3);
+            color: #10b981;
+            cursor: default;
+        }
+
+        .completion-actions {
+            margin-top: 30px;
+            text-align: center;
+        }
+
+        .complete-btn {
+            padding: 15px 40px;
+            background: linear-gradient(135deg, #60A5FA 0%, #3B82F6 100%);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .complete-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(96, 165, 250, 0.4);
+        }
+
+        /* Bubbles Section */
+        .bubbles-wrapper {
+            padding: 120px 40px 60px;
+            min-height: 100vh;
+            background: #000000;
+        }
+
+        .bubbles-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .bubbles-title {
+            font-size: 64px;
+            font-weight: 600;
+            background: linear-gradient(135deg, #10b981 0%, #059669 50%, #10b981 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 20px;
+            letter-spacing: -1px;
+        }
+
+        .bubbles-subtitle {
+            color: #888;
+            font-size: 20px;
+            font-weight: 300;
+            font-style: italic;
+            margin-bottom: 40px;
+        }
+
+        .bubbles-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .bubble-tab {
+            padding: 12px 30px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            color: #ccc;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .bubble-tab:hover {
+            background: rgba(16, 185, 129, 0.1);
+            border-color: #10b981;
+            color: #10b981;
+        }
+
+        .bubble-tab.active {
+            background: linear-gradient(135deg, #10b981, #059669);
+            border-color: #10b981;
+            color: #000;
+            font-weight: 700;
+        }
+
+        .bubbles-container {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 24px;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 40px;
+        }
+
+        .bubble {
+            position: relative;
+            width: 100%;
+            height: 320px;
+            cursor: pointer;
+            border-radius: 20px;
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.08), rgba(5, 150, 105, 0.04));
+            border: 2px solid rgba(16, 185, 129, 0.3);
+            box-shadow: 0 8px 32px rgba(16, 185, 129, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            overflow: hidden;
+        }
+
+        .bubble:hover {
+            transform: translateY(-8px) scale(1.03);
+            box-shadow: 0 20px 60px rgba(16, 185, 129, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+            border-color: #10b981;
+        }
+
+        .bubble::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,0.7) 85%);
+            z-index: 1;
+            border-radius: 20px;
+            pointer-events: none;
+        }
+
+        .bubble-label {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 16px;
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.95), rgba(5, 150, 105, 0.95));
+            font-size: 20px;
+            font-weight: 700;
+            color: #000000;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            z-index: 2;
+            border-radius: 0 0 18px 18px;
+            backdrop-filter: blur(10px);
+            text-align: center;
+        }
+
+        /* Data Section */
+        .data-wrapper {
+            padding: 100px 40px 40px;
+            min-height: 100vh;
+        }
+
+        .data-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .data-title {
+            font-size: 56px;
+            font-weight: 600;
+            color: #8b5cf6;
+            margin-bottom: 15px;
+            letter-spacing: -1px;
+        }
+
+        .data-subtitle {
+            color: #888;
+            font-size: 18px;
+            font-weight: 300;
+        }
+
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .dashboard-card {
+            background: rgba(139, 92, 246, 0.05);
+            border: 1px solid rgba(139, 92, 246, 0.3);
+            border-radius: 16px;
+            padding: 25px;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .dashboard-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #8b5cf6, #10b981, #f59e0b);
+            opacity: 0.8;
+        }
+
+        .dashboard-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 40px rgba(139, 92, 246, 0.3);
+            border-color: #8b5cf6;
+        }
+
+        .card-header {
+            font-size: 18px;
+            font-weight: 600;
+            color: #10b981;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .card-metric {
+            font-size: 36px;
+            font-weight: 700;
+            color: #8b5cf6;
+            margin-bottom: 10px;
+        }
+
+        .card-label {
+            color: #888;
+            font-size: 14px;
+            font-weight: 300;
+        }
+
+        /* Pricing */
+        .pricing {
+            padding: 80px 40px;
+            background: #000000;
+        }
+
+        .pricing-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .pricing-title {
+            font-size: 48px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            letter-spacing: -0.5px;
+        }
+
+        .pricing-subtitle {
+            font-size: 18px;
+            color: #888;
+            margin-bottom: 30px;
+            font-weight: 300;
+        }
+
+        .billing-toggle {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 50px;
+        }
+
+        .billing-option {
+            padding: 10px 25px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            color: #ccc;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .billing-option:hover {
+            background: rgba(16, 185, 129, 0.1);
+            border-color: #10b981;
+            color: #10b981;
+        }
+
+        .billing-option.active {
+            background: linear-gradient(135deg, #10b981, #059669);
+            border-color: #10b981;
+            color: #000;
+            font-weight: 700;
+        }
+
+        .pricing-grid {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            max-width: 1100px;
+            margin: 0 auto;
+            align-items: stretch;
+        }
+
+        .pricing-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 40px;
+            text-align: center;
+            position: relative;
+            flex: 1;
+            min-width: 320px;
+            max-width: 500px;
+            transition: all 0.3s;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-5px);
+            border-color: #60A5FA;
+            box-shadow: 0 10px 40px rgba(96, 165, 250, 0.3);
+        }
+
+        .pricing-card.featured {
+            border-color: #10b981;
+            border-width: 2px;
+        }
+
+        .popular-badge {
+            background: #10b981;
+            color: #000;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            display: inline-block;
+        }
+
+        .plan-name {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: #10b981;
+            letter-spacing: -0.3px;
+        }
+
+        .plan-price {
+            font-size: 56px;
+            font-weight: 800;
+            margin-bottom: 8px;
+            line-height: 1;
+        }
+
+        .plan-period {
+            color: #888;
+            margin-bottom: 30px;
+            font-size: 15px;
+            font-weight: 300;
+        }
+
+        .features {
+            list-style: none;
+            margin-bottom: 30px;
+            text-align: left;
+            flex-grow: 1;
+        }
+
+        .features li {
+            padding: 10px 0;
+            position: relative;
+            padding-left: 30px;
+            font-size: 15px;
+            line-height: 1.5;
+            color: #ccc;
+            font-weight: 300;
+        }
+
+        .features li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #10b981;
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        .plan-btn {
+            width: 100%;
+            padding: 16px;
+            background: #60A5FA;
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 16px;
+            transition: all 0.3s;
+            margin-top: auto;
+        }
+
+        .plan-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(96, 165, 250, 0.4);
+        }
+
+        .savings-badge {
+            display: inline-block;
+            background: rgba(16, 185, 129, 0.2);
+            color: #10b981;
+            padding: 4px 12px;
+            border-radius: 8px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-left: 10px;
+        }
+
+        /* Page Sections */
+        .page-section {
+            display: none;
+        }
+
+        .page-section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (max-width: 1200px) {
+            .bubbles-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .pillars-grid {
+                grid-template-columns: 1fr;
+            }
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+            .results-screen.active {
+                grid-template-columns: 1fr;
+            }
+            .results-right {
+                position: static;
+            }
+        }
+
         @media (max-width: 768px) {
             .bubbles-container {
                 grid-template-columns: 1fr;
@@ -1598,20 +1471,21 @@
             .pricing-grid {
                 flex-direction: column;
             }
-            .step-options {
+            .split-screen.active {
                 grid-template-columns: 1fr;
+            }
+            .receive-landing-title {
+                font-size: 48px;
+            }
+            .receive-landing-subtitle {
+                font-size: 32px;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Welcome Screen - SIMPLIFIED (NO TECHNICAL DETAILS) -->
+    <!-- Welcome Screen -->
     <div class="welcome-screen" id="welcomeScreen">
-        <video id="welcomeVideo" autoplay loop muted playsinline webkit-playsinline style="position: absolute; top: -20%; left: 0; width: 100%; height: 120%; object-fit: cover; opacity: 0.4; filter: blur(2px); z-index: 0;">
-            <source src="welcome0.mov" type="video/quicktime">
-            <source src="welcome0.mov" type="video/mp4">
-        </video>
-        
         <div class="stats-ticker">
             <div class="ticker-content">
                 <span>52,847 products recognized today</span>
@@ -1638,7 +1512,7 @@
         
         <div class="login-box">
             <input type="password" class="password-input" id="passwordInput" placeholder="Enter Password" autocomplete="off">
-            <button class="login-btn" onclick="login()">Access Platform</button>
+            <button class="login-btn" onclick="attemptLogin()">Access Platform</button>
             <div class="error" id="errorMsg"></div>
         </div>
     </div>
@@ -1649,7 +1523,6 @@
         <nav class="nav">
             <div class="nav-content">
                 <div class="nav-logo" onclick="scrollToTop()">
-                    <img src="icon48.png" alt="Trakie.ai" width="32" height="32">
                     <span>Trakie.ai</span>
                 </div>
                 <div class="nav-links">
@@ -1663,15 +1536,11 @@
             </div>
         </nav>
 
-        <!-- Home Section - SCROLLABLE -->
+        <!-- Home Section -->
         <div class="page-section active" id="homeSection">
             <div class="home-scroll-container">
                 <!-- Hero -->
                 <section class="hero">
-                    <video class="hero-bg-video" autoplay loop muted playsinline webkit-playsinline preload="auto">
-                        <source src="welcome.mp4" type="video/mp4">
-                    </video>
-                    
                     <div class="hero-content">
                         <h1 class="hero-title">Built for Cannabis. Engineered for Scale.</h1>
                         <p class="hero-subtitle">The complete dispensary intelligence platform</p>
@@ -1749,7 +1618,7 @@
             </div>
         </div>
 
-<!-- Receive Section -->
+        <!-- Receive Section -->
         <div class="page-section" id="receiveSection">
             <!-- Landing Screen -->
             <div class="receive-landing" id="receiveLanding">
@@ -1838,7 +1707,7 @@
             </div>
         </div>
 
-        <!-- Bubbles Section with Tabs -->
+        <!-- Bubbles Section -->
         <div class="page-section" id="bubblesSection">
             <div class="bubbles-wrapper">
                 <div class="bubbles-header">
@@ -1863,35 +1732,35 @@
                     <p class="data-subtitle">Algorithmic forecasting. Velocity analytics. Attribution modeling.</p>
                 </div>
                 <div class="dashboard-grid">
-                    <div class="dashboard-card" onclick="openRestockModal()">
+                    <div class="dashboard-card">
                         <div class="card-header">🔮 Restock Alert</div>
                         <div class="card-metric">3 days</div>
-                        <div class="card-label">Until Blue Dream stockout<br>Click to view bulletin board</div>
+                        <div class="card-label">Until Blue Dream stockout</div>
                     </div>
-                    <div class="dashboard-card" onclick="openTrendModal()">
+                    <div class="dashboard-card">
                         <div class="card-header">📈 Trend Velocity</div>
                         <div class="card-metric">+127%</div>
-                        <div class="card-label">Wedding Cake momentum<br>Click for velocity intelligence</div>
+                        <div class="card-label">Wedding Cake momentum</div>
                     </div>
                     <div class="dashboard-card">
                         <div class="card-header">⚡ Low Stock Alert</div>
                         <div class="card-metric">5 SKUs</div>
-                        <div class="card-label">Below safety buffer<br>Formula: Current < (Velocity × Lead Time × 1.5)</div>
+                        <div class="card-label">Below safety buffer</div>
                     </div>
                     <div class="dashboard-card">
                         <div class="card-header">💎 Revenue Opportunity</div>
                         <div class="card-metric">$12.4K</div>
-                        <div class="card-label">Potential profit gain<br>Formula: Σ(Stockout Days × Avg Daily Revenue)</div>
+                        <div class="card-label">Potential profit gain</div>
                     </div>
                     <div class="dashboard-card">
                         <div class="card-header">🎯 AI Confidence</div>
                         <div class="card-metric">99.8%</div>
-                        <div class="card-label">Prediction accuracy<br>Based on 30-day moving average + seasonality</div>
+                        <div class="card-label">Prediction accuracy</div>
                     </div>
                     <div class="dashboard-card">
                         <div class="card-header">🔥 Top Seller</div>
                         <div class="card-metric">Gorilla Glue</div>
-                        <div class="card-label">8.2 units/day velocity<br>Formula: Total Units Sold / Days in Period</div>
+                        <div class="card-label">8.2 units/day velocity</div>
                     </div>
                 </div>
             </div>
@@ -1911,262 +1780,24 @@
                     </div>
                 </div>
                 
-                <div class="pricing-grid" id="pricingGrid">
-                    <!-- Pricing cards will be dynamically generated -->
-                </div>
+                <div class="pricing-grid" id="pricingGrid"></div>
             </section>
         </div>
     </div>
 
-    <!-- Modal for Restock Dashboard -->
-    <div class="modal" id="restockModal">
-        <div class="modal-content">
-            <button class="modal-close" onclick="closeModal('restockModal')">×</button>
-            <div class="modal-header">
-                <h2 class="modal-title">🔮 Restock Command Center</h2>
-            </div>
-            <div style="text-align: center; padding: 60px; color: #888;">
-                <p style="font-size: 24px; margin-bottom: 20px;">🚧 Dashboard Coming Soon</p>
-                <p>Search products → Add to bulletin board → Send order</p>
-                <p style="margin-top: 20px;">Visual bulletin board with video thumbnails for each category</p>
-            </div>
-        </div>
-    </div>
-
-    <!-- Modal for Trend Velocity -->
-    <div class="modal" id="trendModal">
-        <div class="modal-content">
-            <button class="modal-close" onclick="closeModal('trendModal')">×</button>
-            <div class="modal-header">
-                <h2 class="modal-title">📈 Velocity Intelligence</h2>
-            </div>
-            <div style="text-align: center; padding: 60px; color: #888;">
-                <p style="font-size: 24px; margin-bottom: 20px;">🚧 Dashboard Coming Soon</p>
-                <p>Real-time momentum graphs + Velocity meters + Heat maps</p>
-                <p style="margin-top: 20px;">AI-powered predictive insights for trending products</p>
-            </div>
-        </div>
-    </div>
-
     <script>
+        // ===== GLOBAL STATE =====
         const categories = [
-            { name: 'Flower', icon: '🌿', video: 'flower.mov' },
-            { name: 'Vaporizers', icon: '💨', video: 'vape.MOV' },
-            { name: 'Pre-Rolls', icon: '🚬', video: 'preroll.MOV' },
-            { name: 'Edibles', icon: '🍫', video: 'edible.MOV' },
-            { name: 'Concentrates', icon: '💎', video: 'concentrate.mov' },
-            { name: 'Beverages', icon: '🥤', video: 'bev.mov' },
-            { name: 'Tinctures', icon: '🧴', video: 'tincture.MOV' },
-            { name: 'CBD', icon: '🟢', video: 'balm.MOV' }
+            { name: 'Flower', icon: '🌿' },
+            { name: 'Vaporizers', icon: '💨' },
+            { name: 'Pre-Rolls', icon: '🚬' },
+            { name: 'Edibles', icon: '🍫' },
+            { name: 'Concentrates', icon: '💎' },
+            { name: 'Beverages', icon: '🥤' },
+            { name: 'Tinctures', icon: '🧴' },
+            { name: 'CBD', icon: '🟢' }
         ];
 
-        let currentBillingMode = 'weekly';
-
-        const pricing = {
-            weekly: {
-                standard: { 
-                    price: '$99', 
-                    period: 'per week / per store',
-                    savings: ''
-                },
-                premium: { 
-                    price: '$333', 
-                    period: 'per week (2-5 stores)',
-                    savings: ''
-                }
-            },
-            monthly: {
-                standard: { 
-                    price: '$329', 
-                    period: 'per month / per store',
-                    savings: 'Save 25%'
-                },
-                premium: { 
-                    price: '$1,111', 
-                    period: 'per month (2-5 stores)',
-                    savings: 'Save 25%'
-                }
-            },
-            yearly: {
-                standard: { 
-                    price: '$279', 
-                    period: 'per month ($3,348/year)',
-                    savings: 'Save 35%'
-                },
-                premium: { 
-                    price: '$888', 
-                    period: 'per month ($10,656/year)',
-                    savings: 'Save 35%'
-                }
-            }
-        };
-
-        function initBubbles(tab = 'explore') {
-            const container = document.getElementById('bubblesContainer');
-            if (!container) return;
-            
-            container.innerHTML = '';
-            
-            let displayCategories = categories;
-            
-            // Filter based on tab
-            if (tab === 'bestsellers') {
-                displayCategories = categories.slice(0, 4);
-            } else if (tab === 'rush') {
-                displayCategories = categories.slice(0, 3);
-            }
-            
-            displayCategories.forEach((category) => {
-                const bubble = document.createElement('div');
-                bubble.className = 'bubble';
-                bubble.setAttribute('data-category', category.name);
-                
-                const video = document.createElement('video');
-                video.autoplay = true;
-                video.loop = true;
-                video.muted = true;
-                video.playsInline = true;
-                video.setAttribute('playsinline', '');
-                video.setAttribute('webkit-playsinline', '');
-                
-                const source1 = document.createElement('source');
-                source1.src = category.video;
-                source1.type = 'video/quicktime';
-                
-                const source2 = document.createElement('source');
-                source2.src = category.video;
-                source2.type = 'video/mp4';
-                
-                video.appendChild(source1);
-                video.appendChild(source2);
-                
-                video.addEventListener('loadeddata', function() {
-                    video.play().catch(e => console.log('Autoplay prevented'));
-                });
-                
-                const label = document.createElement('div');
-                label.className = 'bubble-label';
-                label.textContent = category.name;
-                
-                bubble.appendChild(video);
-                bubble.appendChild(label);
-                bubble.onclick = () => alert(`${category.name} products coming soon!`);
-                
-                container.appendChild(bubble);
-            });
-        }
-
-        function switchBubbleTab(tab) {
-            document.querySelectorAll('.bubble-tab').forEach(t => t.classList.remove('active'));
-            event.target.classList.add('active');
-            initBubbles(tab);
-        }
-
-        function switchBilling(mode) {
-            currentBillingMode = mode;
-            document.querySelectorAll('.billing-option').forEach(o => o.classList.remove('active'));
-            event.target.classList.add('active');
-            renderPricing();
-        }
-
-        function renderPricing() {
-            const grid = document.getElementById('pricingGrid');
-            const p = pricing[currentBillingMode];
-            
-            grid.innerHTML = `
-                <div class="pricing-card">
-                    <h3 class="plan-name">Standard</h3>
-                    <div class="plan-price">${p.standard.price}${p.standard.savings ? '<span class="savings-badge">' + p.standard.savings + '</span>' : ''}</div>
-                    <p class="plan-period">${p.standard.period}</p>
-                    <ul class="features">
-                        <li>Single location</li>
-                        <li>Unlimited products</li>
-                        <li>AI instant recognition</li>
-                        <li>3D interactive menus</li>
-                        <li>Predictive restocking</li>
-                        <li>AI budtender assistant</li>
-                        <li>Sample tracking</li>
-                        <li>Priority support</li>
-                    </ul>
-                    <button class="plan-btn" onclick="alert('Contact us for a personalized demo!')">Inquire for Demo</button>
-                </div>
-
-                <div class="pricing-card featured">
-                    <div class="popular-badge">Best Value</div>
-                    <h3 class="plan-name">Premium</h3>
-                    <div class="plan-price">${p.premium.price}${p.premium.savings ? '<span class="savings-badge">' + p.premium.savings + '</span>' : ''}</div>
-                    <p class="plan-period">${p.premium.period}</p>
-                    <ul class="features">
-                        <li>2-5 locations included</li>
-                        <li>Everything in Standard</li>
-                        <li>Cross-store analytics</li>
-                        <li>Transfer recommendations (AI suggests which products to move between stores)</li>
-                        <li>Unified dashboard (see all stores in one view)</li>
-                        <li>Bulk reordering</li>
-                        <li>Custom integrations (Dutchie, Treez, etc.)</li>
-                        <li>24/7 phone support</li>
-                        <li>Dedicated account manager</li>
-                        <li>White-label options</li>
-                    </ul>
-                    <button class="plan-btn" onclick="alert('Contact us for a personalized demo!')">Inquire for Demo</button>
-                </div>
-            `;
-        }
-
-        function openRestockModal() {
-            document.getElementById('restockModal').classList.add('active');
-        }
-
-        function openTrendModal() {
-            document.getElementById('trendModal').classList.add('active');
-        }
-
-        function closeModal(modalId) {
-            document.getElementById(modalId).classList.remove('active');
-        }
-
-        function login() {
-            const password = document.getElementById('passwordInput').value;
-            const error = document.getElementById('errorMsg');
-            
-            if (password === 'PasswordBoss123!') {
-                document.getElementById('welcomeScreen').classList.add('hide');
-                document.getElementById('mainSite').classList.add('show');
-                renderPricing();
-            } else {
-                error.textContent = 'Invalid password';
-                document.getElementById('passwordInput').value = '';
-            }
-        }
-
-        function showSection(sectionName) {
-            document.querySelectorAll('.page-section').forEach(s => s.classList.remove('active'));
-            document.getElementById(sectionName + 'Section').classList.add('active');
-            
-            if (sectionName === 'bubbles') {
-                setTimeout(() => initBubbles('explore'), 100);
-            }
-            
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
-
-        function scrollToTop() {
-            showSection('home');
-        }
-
-        document.getElementById('passwordInput').addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') login();
-        });
-
-        document.addEventListener('DOMContentLoaded', function() {
-            const welcomeVid = document.getElementById('welcomeVideo');
-            if (welcomeVid) {
-                welcomeVid.playbackRate = 0.5;
-            }
-        });
-
-        // ===== RECEIVE PAGE FUNCTIONS =====
-        
         const products = [
             {
                 name: 'Blue Dream',
@@ -2230,9 +1861,66 @@
             }
         ];
 
+        let currentBillingMode = 'weekly';
         let receiveStartTime;
         let selectedImages = {};
 
+        const pricing = {
+            weekly: {
+                standard: { 
+                    price: '$99', 
+                    period: 'per week / per store',
+                    savings: ''
+                },
+                premium: { 
+                    price: '$333', 
+                    period: 'per week (2-5 stores)',
+                    savings: ''
+                }
+            },
+            monthly: {
+                standard: { 
+                    price: '$329', 
+                    period: 'per month / per store',
+                    savings: 'Save 25%'
+                },
+                premium: { 
+                    price: '$1,111', 
+                    period: 'per month (2-5 stores)',
+                    savings: 'Save 25%'
+                }
+            },
+            yearly: {
+                standard: { 
+                    price: '$279', 
+                    period: 'per month ($3,348/year)',
+                    savings: 'Save 35%'
+                },
+                premium: { 
+                    price: '$888', 
+                    period: 'per month ($10,656/year)',
+                    savings: 'Save 35%'
+                }
+            }
+        };
+
+        // ===== LOGIN FUNCTION =====
+        function attemptLogin() {
+            const password = document.getElementById('passwordInput').value;
+            const error = document.getElementById('errorMsg');
+            
+            // More secure password
+            if (password === 'TrackieAI2025!Secure') {
+                document.getElementById('welcomeScreen').classList.add('hide');
+                document.getElementById('mainSite').classList.add('show');
+                renderPricing();
+            } else {
+                error.textContent = 'Invalid password';
+                document.getElementById('passwordInput').value = '';
+            }
+        }
+
+        // ===== RECEIVE PAGE FUNCTIONS =====
         function startReceiving() {
             receiveStartTime = Date.now();
             document.getElementById('receiveLanding').style.display = 'none';
@@ -2259,7 +1947,6 @@
                     photoCount++;
                 } else {
                     clearInterval(takePhoto);
-                    // Wait 2 seconds then go to processing
                     setTimeout(() => {
                         document.getElementById('splitScreen').classList.remove('active');
                         document.getElementById('processingScreen').classList.add('active');
@@ -2288,14 +1975,13 @@
                     stepDiv.className = 'process-step';
                     stepDiv.innerHTML = `
                         <div class="process-step-title">✓ ${step.title}</div>
-                        <div class="process-step-text typing-text">${step.text}</div>
+                        <div class="process-step-text">${step.text}</div>
                     `;
                     container.appendChild(stepDiv);
                     setTimeout(() => stepDiv.classList.add('active'), 50);
                 }, index * 1500);
             });
 
-            // After 10 seconds, show results
             setTimeout(() => {
                 showResults();
             }, 10000);
@@ -2364,7 +2050,6 @@
                 `;
                 container.appendChild(card);
                 
-                // Set default selection to first image
                 if (!selectedImages[index]) {
                     selectedImages[index] = 0;
                 }
@@ -2421,3 +2106,120 @@
             document.getElementById('processingScreen').classList.remove('active');
             document.getElementById('photoPreview').innerHTML = '';
         }
+
+        // ===== BUBBLES FUNCTIONS =====
+        function initBubbles(tab = 'explore') {
+            const container = document.getElementById('bubblesContainer');
+            if (!container) return;
+            
+            container.innerHTML = '';
+            
+            let displayCategories = categories;
+            
+            if (tab === 'bestsellers') {
+                displayCategories = categories.slice(0, 4);
+            } else if (tab === 'rush') {
+                displayCategories = categories.slice(0, 3);
+            }
+            
+            displayCategories.forEach((category) => {
+                const bubble = document.createElement('div');
+                bubble.className = 'bubble';
+                bubble.setAttribute('data-category', category.name);
+                
+                const label = document.createElement('div');
+                label.className = 'bubble-label';
+                label.textContent = category.name;
+                
+                bubble.appendChild(label);
+                bubble.onclick = () => alert(`${category.name} products coming soon!`);
+                
+                container.appendChild(bubble);
+            });
+        }
+
+        function switchBubbleTab(tab) {
+            document.querySelectorAll('.bubble-tab').forEach(t => t.classList.remove('active'));
+            event.target.classList.add('active');
+            initBubbles(tab);
+        }
+
+        // ===== PRICING FUNCTIONS =====
+        function switchBilling(mode) {
+            currentBillingMode = mode;
+            document.querySelectorAll('.billing-option').forEach(o => o.classList.remove('active'));
+            event.target.classList.add('active');
+            renderPricing();
+        }
+
+        function renderPricing() {
+            const grid = document.getElementById('pricingGrid');
+            const p = pricing[currentBillingMode];
+            
+            grid.innerHTML = `
+                <div class="pricing-card">
+                    <h3 class="plan-name">Standard</h3>
+                    <div class="plan-price">${p.standard.price}${p.standard.savings ? '<span class="savings-badge">' + p.standard.savings + '</span>' : ''}</div>
+                    <p class="plan-period">${p.standard.period}</p>
+                    <ul class="features">
+                        <li>Single location</li>
+                        <li>Unlimited products</li>
+                        <li>AI instant recognition</li>
+                        <li>3D interactive menus</li>
+                        <li>Predictive restocking</li>
+                        <li>AI budtender assistant</li>
+                        <li>Sample tracking</li>
+                        <li>Priority support</li>
+                    </ul>
+                    <button class="plan-btn" onclick="alert('Contact us for a personalized demo!')">Inquire for Demo</button>
+                </div>
+
+                <div class="pricing-card featured">
+                    <div class="popular-badge">Best Value</div>
+                    <h3 class="plan-name">Premium</h3>
+                    <div class="plan-price">${p.premium.price}${p.premium.savings ? '<span class="savings-badge">' + p.premium.savings + '</span>' : ''}</div>
+                    <p class="plan-period">${p.premium.period}</p>
+                    <ul class="features">
+                        <li>2-5 locations included</li>
+                        <li>Everything in Standard</li>
+                        <li>Cross-store analytics</li>
+                        <li>Transfer recommendations</li>
+                        <li>Unified dashboard</li>
+                        <li>Bulk reordering</li>
+                        <li>Custom integrations</li>
+                        <li>24/7 phone support</li>
+                        <li>Dedicated account manager</li>
+                        <li>White-label options</li>
+                    </ul>
+                    <button class="plan-btn" onclick="alert('Contact us for a personalized demo!')">Inquire for Demo</button>
+                </div>
+            `;
+        }
+
+        // ===== NAVIGATION FUNCTIONS =====
+        function showSection(sectionName) {
+            document.querySelectorAll('.page-section').forEach(s => s.classList.remove('active'));
+            document.getElementById(sectionName + 'Section').classList.add('active');
+            
+            if (sectionName === 'bubbles') {
+                setTimeout(() => initBubbles('explore'), 100);
+            }
+            
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function scrollToTop() {
+            showSection('home');
+        }
+
+        // ===== EVENT LISTENERS =====
+        document.getElementById('passwordInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') attemptLogin();
+        });
+
+        window.onload = function() {
+            document.getElementById('passwordInput').focus();
+        };
+    </script>
+</body>
+</html>
