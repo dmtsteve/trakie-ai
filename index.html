@@ -1502,8 +1502,7 @@
     <!-- Welcome Screen with Video -->
                 <section class="hero">
                     <video class="hero-bg-video" autoplay loop muted playsinline webkit-playsinline preload="auto" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0; pointer-events: none;">
-                        <source src="welcome.mp4" type="video/mp4">
-                        <source src="welcome.mp4" type="video/quicktime">
+                        <source src="welcome0.mp4" type="video/quicktime">
                     </video>
                     
                     <div class="hero-content">
@@ -1933,20 +1932,31 @@
         };
 
         // ===== LOGIN FUNCTION =====
-        function attemptLogin() {
-            const password = document.getElementById('passwordInput').value;
-            const error = document.getElementById('errorMsg');
-            
-            // Password
-            if (password === 'PasswordBoss123!') {
-                document.getElementById('welcomeScreen').classList.add('hide');
-                document.getElementById('mainSite').classList.add('show');
-                renderPricing();
-            } else {
-                error.textContent = 'Invalid password';
-                document.getElementById('passwordInput').value = '';
-            }
+function attemptLogin() {
+    const password = document.getElementById('passwordInput').value;
+    const error = document.getElementById('errorMsg');
+    
+    if (password === 'PasswordBoss123!') {
+        const welcomeScreen = document.getElementById('welcomeScreen');
+        const mainSite = document.getElementById('mainSite');
+        
+        if (welcomeScreen && mainSite) {
+            welcomeScreen.classList.add('hide');
+            mainSite.classList.add('show');
+            renderPricing();
+        } else {
+            console.error('Missing elements:', {
+                welcomeScreen: !!welcomeScreen,
+                mainSite: !!mainSite
+            });
         }
+    } else {
+        if (error) {
+            error.textContent = 'Invalid password';
+        }
+        document.getElementById('passwordInput').value = '';
+    }
+}
 
         // ===== RECEIVE PAGE FUNCTIONS =====
         function startReceiving() {
