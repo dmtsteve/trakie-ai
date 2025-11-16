@@ -1132,6 +1132,7 @@
             box-shadow: 0 20px 60px rgba(16, 185, 129, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.2);
             border-color: #10b981;
         }
+
         .bubble video {
             width: 100%;
             height: 100%;
@@ -1498,8 +1499,8 @@
     </style>
 </head>
 <body>
-    <!-- Welcome Screen -->
-<div class="welcome-screen" id="welcomeScreen">
+    <!-- Welcome Screen with Video -->
+    <div class="welcome-screen" id="welcomeScreen">
         <video id="welcomeVideo" autoplay loop muted playsinline webkit-playsinline style="position: absolute; top: -20%; left: 0; width: 100%; height: 120%; object-fit: cover; opacity: 0.4; filter: blur(2px); z-index: 0;">
             <source src="welcome0.mov" type="video/quicktime">
             <source src="welcome.mp4" type="video/mp4">
@@ -1806,15 +1807,15 @@
 
     <script>
         // ===== GLOBAL STATE =====
-   const categories = [
-            { name: 'Flower', icon: '🌿', video: 'flower.mp4' },
-            { name: 'Vaporizers', icon: '💨', video: 'vape.mp4' },
-            { name: 'Pre-Rolls', icon: '🚬', video: 'preroll.mp4' },
-            { name: 'Edibles', icon: '🍫', video: 'edible.mp4' },
-            { name: 'Concentrates', icon: '💎', video: 'concentrate.mp4' },
-            { name: 'Beverages', icon: '🥤', video: 'bev.mp4' },
-            { name: 'Tinctures', icon: '🧴', video: 'tincture.mp4' },
-            { name: 'CBD', icon: '🟢', video: 'balm.mp4' }
+        const categories = [
+            { name: 'Flower', icon: '🌿', video: 'flower.mov' },
+            { name: 'Vaporizers', icon: '💨', video: 'vape.MOV' },
+            { name: 'Pre-Rolls', icon: '🚬', video: 'preroll.MOV' },
+            { name: 'Edibles', icon: '🍫', video: 'edible.MOV' },
+            { name: 'Concentrates', icon: '💎', video: 'concentrate.mov' },
+            { name: 'Beverages', icon: '🥤', video: 'bev.mov' },
+            { name: 'Tinctures', icon: '🧴', video: 'tincture.MOV' },
+            { name: 'CBD', icon: '🟢', video: 'balm.MOV' }
         ];
 
         const products = [
@@ -1928,8 +1929,8 @@
             const password = document.getElementById('passwordInput').value;
             const error = document.getElementById('errorMsg');
             
-            // More secure password
-            if (password === 'TrakieAI2025!') {
+            // Password
+            if (password === 'PasswordBoss123!') {
                 document.getElementById('welcomeScreen').classList.add('hide');
                 document.getElementById('mainSite').classList.add('show');
                 renderPricing();
@@ -1945,7 +1946,6 @@
             document.getElementById('receiveLanding').style.display = 'none';
             document.getElementById('qrScreen').classList.add('active');
             
-            // Auto-advance after 8 seconds
             setTimeout(() => {
                 document.getElementById('qrScreen').classList.remove('active');
                 document.getElementById('splitScreen').classList.add('active');
@@ -2127,7 +2127,7 @@
         }
 
         // ===== BUBBLES FUNCTIONS =====
-function initBubbles(tab = 'explore') {
+        function initBubbles(tab = 'explore') {
             const container = document.getElementById('bubblesContainer');
             if (!container) return;
             
@@ -2146,7 +2146,6 @@ function initBubbles(tab = 'explore') {
                 bubble.className = 'bubble';
                 bubble.setAttribute('data-category', category.name);
                 
-                // Add video
                 const video = document.createElement('video');
                 video.autoplay = true;
                 video.loop = true;
@@ -2259,6 +2258,13 @@ function initBubbles(tab = 'explore') {
         // ===== EVENT LISTENERS =====
         document.getElementById('passwordInput').addEventListener('keypress', function(e) {
             if (e.key === 'Enter') attemptLogin();
+        });
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const welcomeVid = document.getElementById('welcomeVideo');
+            if (welcomeVid) {
+                welcomeVid.playbackRate = 0.5;
+            }
         });
 
         window.onload = function() {
