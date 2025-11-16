@@ -1132,6 +1132,20 @@
             box-shadow: 0 20px 60px rgba(16, 185, 129, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.2);
             border-color: #10b981;
         }
+        .bubble video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 20px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            filter: brightness(1.1) contrast(1.05);
+        }
+
+        .bubble[data-category="Flower"] video {
+            transform: scale(2.0);
+        }
 
         .bubble::before {
             content: '';
@@ -1485,7 +1499,12 @@
 </head>
 <body>
     <!-- Welcome Screen -->
-    <div class="welcome-screen" id="welcomeScreen">
+<div class="welcome-screen" id="welcomeScreen">
+        <video id="welcomeVideo" autoplay loop muted playsinline webkit-playsinline style="position: absolute; top: -20%; left: 0; width: 100%; height: 120%; object-fit: cover; opacity: 0.4; filter: blur(2px); z-index: 0;">
+            <source src="welcome0.mov" type="video/quicktime">
+            <source src="welcome.mp4" type="video/mp4">
+        </video>
+        
         <div class="stats-ticker">
             <div class="ticker-content">
                 <span>52,847 products recognized today</span>
@@ -1787,15 +1806,15 @@
 
     <script>
         // ===== GLOBAL STATE =====
-        const categories = [
-            { name: 'Flower', icon: '🌿' },
-            { name: 'Vaporizers', icon: '💨' },
-            { name: 'Pre-Rolls', icon: '🚬' },
-            { name: 'Edibles', icon: '🍫' },
-            { name: 'Concentrates', icon: '💎' },
-            { name: 'Beverages', icon: '🥤' },
-            { name: 'Tinctures', icon: '🧴' },
-            { name: 'CBD', icon: '🟢' }
+   const categories = [
+            { name: 'Flower', icon: '🌿', video: 'flower.mp4' },
+            { name: 'Vaporizers', icon: '💨', video: 'vape.mp4' },
+            { name: 'Pre-Rolls', icon: '🚬', video: 'preroll.mp4' },
+            { name: 'Edibles', icon: '🍫', video: 'edible.mp4' },
+            { name: 'Concentrates', icon: '💎', video: 'concentrate.mp4' },
+            { name: 'Beverages', icon: '🥤', video: 'bev.mp4' },
+            { name: 'Tinctures', icon: '🧴', video: 'tincture.mp4' },
+            { name: 'CBD', icon: '🟢', video: 'balm.mp4' }
         ];
 
         const products = [
@@ -2108,7 +2127,7 @@
         }
 
         // ===== BUBBLES FUNCTIONS =====
-        function initBubbles(tab = 'explore') {
+function initBubbles(tab = 'explore') {
             const container = document.getElementById('bubblesContainer');
             if (!container) return;
             
@@ -2127,10 +2146,35 @@
                 bubble.className = 'bubble';
                 bubble.setAttribute('data-category', category.name);
                 
+                // Add video
+                const video = document.createElement('video');
+                video.autoplay = true;
+                video.loop = true;
+                video.muted = true;
+                video.playsInline = true;
+                video.setAttribute('playsinline', '');
+                video.setAttribute('webkit-playsinline', '');
+                
+                const source1 = document.createElement('source');
+                source1.src = category.video;
+                source1.type = 'video/quicktime';
+                
+                const source2 = document.createElement('source');
+                source2.src = category.video;
+                source2.type = 'video/mp4';
+                
+                video.appendChild(source1);
+                video.appendChild(source2);
+                
+                video.addEventListener('loadeddata', function() {
+                    video.play().catch(e => console.log('Autoplay prevented'));
+                });
+                
                 const label = document.createElement('div');
                 label.className = 'bubble-label';
                 label.textContent = category.name;
                 
+                bubble.appendChild(video);
                 bubble.appendChild(label);
                 bubble.onclick = () => alert(`${category.name} products coming soon!`);
                 
