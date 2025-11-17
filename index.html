@@ -6,7 +6,28 @@
     <title>#1 Cannabis Inventory AI - Trakie.ai</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap');
 
+    /* NUCLEAR FIX - ADD THESE LINES */
+    html {
+        margin: 0 !important;
+        padding: 0 !important;
+        overflow-x: hidden;
+    }
+
+    body {
+        margin: 0 !important;
+        padding: 0 !important;
+        overflow-x: hidden;
+    }
+
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+    /* END NUCLEAR FIX */
+        
         * {
             margin: 0;
             padding: 0;
@@ -62,21 +83,22 @@
             filter: drop-shadow(0 4px 12px rgba(0,0,0,0.8));
         }
 
-        .stats-ticker {
-            position: fixed;
-            top: -1px;
-            left: 0;
-            right: 0;  
-            width: 100%;
-            overflow: hidden;
-            z-index: 9999;
-            background: rgba(0, 0, 0, 0.95);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            padding: 10px 0;
-            margin: 0; 
-            margin-top: 0 ;
-        }
+       .stats-ticker {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    width: 100vw !important;
+    overflow: hidden;
+    z-index: 99999 !important;
+    background: rgba(0, 0, 0, 0.95);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 10px 0;
+    margin: 0 !important;
+    margin-top: 0 !important;
+    transform: translateZ(0);
+}
 
         .ticker-content {
             display: flex;
