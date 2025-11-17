@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>#1 Cannabis Inventory AI - Trakie.ai</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap');
 
         * {
             margin: 0;
@@ -14,7 +14,7 @@
         }
 
         body {
-            font-family: 'Inter', -apple-system, system-ui, sans-serif;
+            font-family: 'Outfit', -apple-system, system-ui, sans-serif;
             background: #000000;
             color: #ffffff;
             line-height: 1.6;
@@ -32,34 +32,53 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
+            justify-content: flex-end;
+            padding-bottom: 80px;
             z-index: 9999;
             text-align: center;
             overflow: hidden;
         }
 
-        .stats-ticker {
+        /* Trakie Logo Overlay */
+        .welcome-logo-overlay {
             position: absolute;
-            top: 30px;
-            left: 0;
-            width: 100%;
-            overflow: hidden;
-            z-index: 1;
+            top: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 2;
             opacity: 0;
             animation: fadeIn 1s ease 0.5s forwards;
         }
 
+        .welcome-logo-overlay img {
+            height: 60px;
+            filter: drop-shadow(0 4px 12px rgba(0,0,0,0.8));
+        }
+
+        .stats-ticker {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            overflow: hidden;
+            z-index: 3;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 12px 0;
+        }
+
         .ticker-content {
             display: flex;
-            gap: 30px;
-            animation: scroll 30s linear infinite;
+            gap: 40px;
+            animation: scroll 25s linear infinite;
             white-space: nowrap;
         }
 
         .ticker-content span {
-            font-size: 13px;
-            color: rgba(255, 255, 255, 0.6);
-            font-weight: 400;
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.8);
+            font-weight: 500;
         }
 
         .ticker-dot {
@@ -136,7 +155,7 @@
             color: white;
             font-size: 16px;
             margin-bottom: 15px;
-            font-family: 'Inter', sans-serif;
+            font-family: 'Outfit', sans-serif;
         }
 
         .password-input::placeholder {
@@ -292,9 +311,9 @@
 
         .pillars-grid {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 30px;
-            max-width: 1000px;
+            max-width: 1200px;
             margin: 0 auto;
         }
 
@@ -345,9 +364,9 @@
 
         .stats-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 40px;
-            max-width: 900px;
+            max-width: 1100px;
             margin: 0 auto 60px;
         }
 
@@ -470,7 +489,7 @@
             box-shadow: 0 8px 20px rgba(16, 185, 129, 0.4);
         }
 
-        /* ===== NEW RECEIVE PAGE STYLES ===== */
+        /* ===== RECEIVE PAGE ===== */
         
         .receive-wrapper {
             padding: 100px 40px 60px;
@@ -478,7 +497,20 @@
             background: #000000;
         }
 
-        /* Receive Landing */
+        .demo-badge {
+            position: fixed;
+            top: 100px;
+            right: 40px;
+            background: rgba(96, 165, 250, 0.2);
+            border: 1px solid #60A5FA;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 700;
+            color: #60A5FA;
+            z-index: 50;
+        }
+
         .receive-landing {
             display: flex;
             flex-direction: column;
@@ -522,16 +554,19 @@
         }
 
         .start-receive-btn {
-            padding: 25px 80px;
+            padding: 25px 60px;
             background: linear-gradient(135deg, #60A5FA 0%, #3B82F6 100%);
             color: white;
             border: none;
             border-radius: 60px;
-            font-size: 28px;
+            font-size: 24px;
             font-weight: 700;
             cursor: pointer;
             transition: all 0.3s;
             box-shadow: 0 10px 40px rgba(96, 165, 250, 0.4);
+            display: flex;
+            align-items: center;
+            gap: 12px;
         }
 
         .start-receive-btn:hover {
@@ -539,7 +574,6 @@
             box-shadow: 0 15px 50px rgba(96, 165, 250, 0.6);
         }
 
-        /* QR Code Screen */
         .qr-screen {
             display: none;
             flex-direction: column;
@@ -576,7 +610,6 @@
             margin-bottom: 20px;
         }
 
-        /* Split Screen */
         .split-screen {
             display: none;
             min-height: 100vh;
@@ -679,6 +712,13 @@
             justify-content: center;
             flex-direction: column;
             padding: 40px 20px;
+            overflow: hidden;
+        }
+
+        .iphone-screen video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
 
         .camera-icon-large {
@@ -718,7 +758,6 @@
             to { opacity: 1; transform: scale(1); }
         }
 
-        /* Processing Screen */
         .processing-screen {
             display: none;
             flex-direction: column;
@@ -737,6 +776,21 @@
             font-size: 48px;
             font-weight: 700;
             margin-bottom: 40px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .trakie-logo-processing {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #10b981, #60A5FA);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 900;
+            font-size: 24px;
         }
 
         .spinner-large {
@@ -793,7 +847,6 @@
             font-family: monospace;
         }
 
-        /* Results Screen */
         .results-screen {
             display: none;
             min-height: 100vh;
@@ -826,30 +879,44 @@
         }
 
         .results-title {
-            font-size: 48px;
-            font-weight: 700;
-            color: #10b981;
+            font-size: 56px;
+            font-weight: 800;
+            background: linear-gradient(135deg, #10b981, #60A5FA);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
             margin-bottom: 20px;
+            letter-spacing: -2px;
         }
 
         .completion-badge {
             display: inline-block;
             background: linear-gradient(135deg, #10b981 0%, #059669 100%);
             color: #000;
-            padding: 15px 40px;
+            padding: 12px 30px;
             border-radius: 50px;
-            font-size: 20px;
+            font-size: 16px;
             font-weight: 700;
+            letter-spacing: 0.5px;
         }
 
         .timer-display {
-            font-size: 64px;
+            font-size: 72px;
             font-weight: 900;
             color: #60A5FA;
             margin: 30px 0;
+            font-family: 'Courier New', monospace;
+            letter-spacing: 4px;
+            text-shadow: 0 0 20px rgba(96, 165, 250, 0.5);
         }
 
-        /* Pokemon Card Style */
+        .timer-label {
+            font-size: 14px;
+            color: #888;
+            font-weight: 600;
+            letter-spacing: 2px;
+        }
+
         .product-cards {
             display: flex;
             flex-direction: column;
@@ -870,51 +937,78 @@
             box-shadow: 0 15px 50px rgba(96, 165, 250, 0.4);
         }
 
-        .product-card-images {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 0;
-            border-bottom: 2px solid rgba(96, 165, 250, 0.3);
-        }
-
-        .product-image-option {
-            aspect-ratio: 1;
+        .product-card-image-container {
+            position: relative;
+            height: 300px;
             background: #1a1a1a;
             display: flex;
             align-items: center;
             justify-content: center;
+            border-bottom: 2px solid rgba(96, 165, 250, 0.3);
+        }
+
+        .product-image-main {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            padding: 20px;
+        }
+
+        .image-nav {
+            position: absolute;
+            bottom: 15px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 8px 15px;
+            border-radius: 20px;
+        }
+
+        .image-nav-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.4);
             cursor: pointer;
-            position: relative;
-            overflow: hidden;
             transition: all 0.3s;
         }
 
-        .product-image-option:hover {
-            background: #2a2a2a;
+        .image-nav-dot.active {
+            background: #60A5FA;
+            width: 24px;
+            border-radius: 4px;
         }
 
-        .product-image-option.selected {
-            border: 4px solid #10b981;
-        }
-
-        .product-image-placeholder {
-            font-size: 60px;
-        }
-
-        .image-number {
+        .image-arrow {
             position: absolute;
-            top: 10px;
-            left: 10px;
-            background: rgba(0, 0, 0, 0.8);
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0, 0, 0, 0.7);
             color: white;
-            width: 30px;
-            height: 30px;
+            border: none;
+            width: 40px;
+            height: 40px;
             border-radius: 50%;
+            font-size: 20px;
+            cursor: pointer;
+            transition: all 0.3s;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-weight: 700;
-            font-size: 14px;
+        }
+
+        .image-arrow:hover {
+            background: rgba(96, 165, 250, 0.8);
+        }
+
+        .image-arrow.left {
+            left: 15px;
+        }
+
+        .image-arrow.right {
+            right: 15px;
         }
 
         .product-card-title {
@@ -928,37 +1022,37 @@
         }
 
         .product-card-stats {
-            padding: 20px;
+            padding: 25px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px 30px;
         }
 
         .stat-row {
             display: flex;
-            justify-content: space-between;
-            padding: 12px 0;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            font-size: 15px;
-        }
-
-        .stat-row:last-child {
-            border-bottom: none;
+            flex-direction: column;
+            gap: 5px;
         }
 
         .stat-label {
             color: #888;
             font-weight: 500;
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
         .stat-value {
             color: #fff;
-            font-weight: 600;
+            font-weight: 700;
+            font-size: 18px;
         }
 
         .stat-value.highlight {
             color: #10b981;
-            font-size: 18px;
+            font-size: 22px;
         }
 
-        /* Smart Move Buttons */
         .smart-move-controls {
             position: sticky;
             top: 120px;
@@ -1444,6 +1538,86 @@
             margin-left: 10px;
         }
 
+        /* Contact Form */
+        .contact-section {
+            padding: 80px 40px;
+            background: #000000;
+        }
+
+        .contact-wrapper {
+            max-width: 600px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 40px;
+        }
+
+        .contact-title {
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        .contact-subtitle {
+            font-size: 16px;
+            color: #888;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 14px;
+            color: #ccc;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .form-input, .form-textarea {
+            width: 100%;
+            padding: 12px 16px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            color: white;
+            font-size: 15px;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        .form-input:focus, .form-textarea:focus {
+            outline: none;
+            border-color: #60A5FA;
+        }
+
+        .form-textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .form-submit {
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(135deg, #60A5FA 0%, #3B82F6 100%);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .form-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(96, 165, 250, 0.4);
+        }
+
         /* Page Sections */
         .page-section {
             display: none;
@@ -1463,7 +1637,7 @@
                 grid-template-columns: repeat(2, 1fr);
             }
             .pillars-grid {
-                grid-template-columns: 1fr;
+                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             }
             .stats-grid {
                 grid-template-columns: 1fr;
@@ -1495,6 +1669,9 @@
             .receive-landing-subtitle {
                 font-size: 32px;
             }
+            .product-card-stats {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
@@ -1505,26 +1682,34 @@
             <source src="welcome0.mov" type="video/quicktime">
             <source src="welcome0.mov" type="video/mp4">
         </video>
+
+        <div class="welcome-logo-overlay">
+            <div style="font-size: 48px; font-weight: 900; background: linear-gradient(135deg, #10b981, #60A5FA); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">T</div>
+        </div>
         
         <div class="stats-ticker">
             <div class="ticker-content">
-                <span>52,847 products recognized today</span>
+                <span>The AI layer NY dispensaries need</span>
                 <span class="ticker-dot">•</span>
-                <span>127 dispensaries powered</span>
+                <span>100% METRC Compliant</span>
                 <span class="ticker-dot">•</span>
-                <span>99.8% AI accuracy</span>
+                <span>10x faster receiving</span>
                 <span class="ticker-dot">•</span>
-                <span>52,847 products recognized today</span>
+                <span>Zero guesswork</span>
                 <span class="ticker-dot">•</span>
-                <span>127 dispensaries powered</span>
+                <span>The AI layer NY dispensaries need</span>
                 <span class="ticker-dot">•</span>
-                <span>99.8% AI accuracy</span>
+                <span>100% METRC Compliant</span>
+                <span class="ticker-dot">•</span>
+                <span>10x faster receiving</span>
+                <span class="ticker-dot">•</span>
+                <span>Zero guesswork</span>
             </div>
         </div>
         
         <div class="gradient-accent"></div>
         
-        <h1 class="title">Inventory Intelligence. Automated.</h1>
+        <h1 class="title">Automate Receiving. Predict Demand. Accelerate Sales.</h1>
         
         <p class="welcome-subtitle">The future of cannabis retail operations.</p>
         
@@ -1551,6 +1736,7 @@
                     <a onclick="showSection('bubbles')" style="color: #10b981;">Bubbles</a>
                     <a onclick="showSection('data')" style="color: #8b5cf6;">Data</a>
                     <a onclick="showSection('pricing')">Pricing</a>
+                    <a onclick="showSection('contact')">Contact</a>
                 </div>
                 <a href="#" onclick="showSection('pricing')" class="nav-cta">Get Started</a>
             </div>
@@ -1567,8 +1753,8 @@
                     </video>
                     
                     <div class="hero-content">
-                        <h1 class="hero-title">Built for Cannabis. Engineered for Scale.</h1>
-                        <p class="hero-subtitle">The complete dispensary intelligence platform</p>
+                        <h1 class="hero-title">Cannabis Retail Intelligence</h1>
+                        <p class="hero-subtitle">Instant inventory recognition. Predictive restocking intelligence. Automated budget management.</p>
                     </div>
                 </section>
 
@@ -1598,6 +1784,12 @@
                             <h3 class="pillar-title">AI Budtender</h3>
                             <p class="pillar-desc">Smart product recommendations. Sample attribution modeling. Turn your team into revenue machines.</p>
                         </div>
+
+                        <div class="pillar-card">
+                            <span class="pillar-icon">🛡️</span>
+                            <h3 class="pillar-title">METRC Integration</h3>
+                            <p class="pillar-desc">Full compliance automation. Prevent fines. Real-time state reporting built in.</p>
+                        </div>
                     </div>
                 </section>
 
@@ -1611,6 +1803,10 @@
                         <div class="stat-card">
                             <div class="stat-number">99.9%</div>
                             <div class="stat-label">Accurate</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number">100%</div>
+                            <div class="stat-label">Compliant</div>
                         </div>
                         <div class="stat-card">
                             <div class="stat-number">$0</div>
@@ -1645,12 +1841,17 @@
 
         <!-- Receive Section -->
         <div class="page-section" id="receiveSection">
+            <div class="demo-badge">LIVE DEMO</div>
+            
             <!-- Landing Screen -->
             <div class="receive-landing" id="receiveLanding">
                 <h1 class="receive-landing-title">Receive Inventory</h1>
                 <h2 class="receive-landing-subtitle">From an Hour to 1 Minute</h2>
-                <div class="early-bird-badge">🔥 21 Early Bird Discounts Only</div>
-                <button class="start-receive-btn" onclick="startReceiving()">Start Receiving</button>
+                <div class="early-bird-badge">🔥 21 Early Bird Spots • 80% OFF</div>
+                <button class="start-receive-btn" onclick="startReceiving()">
+                    <span>⚡</span>
+                    <span>Experience Trakie AI Instant Receiving</span>
+                </button>
             </div>
 
             <!-- QR Code Screen -->
@@ -1678,7 +1879,7 @@
                             </div>
                             <div class="invoice-row">
                                 <strong>Date:</strong>
-                                <span>Nov 15, 2025</span>
+                                <span>Nov 16, 2025</span>
                             </div>
                         </div>
                         <div class="invoice-items">
@@ -1692,13 +1893,14 @@
                 </div>
 
                 <div class="split-right">
-                    <h3 class="section-title">📸 Product Photos</h3>
+                    <h3 class="section-title">📸 AI Scanning</h3>
                     <div class="iphone-mockup">
                         <div class="iphone-notch"></div>
                         <div class="iphone-screen" id="iphoneScreen">
-                            <div class="camera-icon-large">📷</div>
-                            <p style="color: #888;">Taking photos...</p>
-                            <div class="photo-preview" id="photoPreview"></div>
+                            <video autoplay loop muted playsinline webkit-playsinline style="width: 100%; height: 100%; object-fit: cover;">
+                                <source src="camera.mov" type="video/quicktime">
+                                <source src="camera.mov" type="video/mp4">
+                            </video>
                         </div>
                     </div>
                 </div>
@@ -1706,7 +1908,10 @@
 
             <!-- Processing Screen -->
             <div class="processing-screen" id="processingScreen">
-                <h2 class="processing-title">🤖 AI Processing</h2>
+                <h2 class="processing-title">
+                    <div class="trakie-logo-processing">T</div>
+                    <span>AI Processing</span>
+                </h2>
                 <div class="spinner-large"></div>
                 <div class="processing-steps" id="processingSteps"></div>
             </div>
@@ -1715,9 +1920,10 @@
             <div class="results-screen" id="resultsScreen">
                 <div class="results-left">
                     <div class="results-header">
-                        <h2 class="results-title">✅ Receiving Complete!</h2>
-                        <div class="completion-badge">5 products processed</div>
-                        <div class="timer-display" id="timerDisplay">0:58</div>
+                        <h2 class="results-title">Receiving Complete!</h2>
+                        <div class="completion-badge">5 PRODUCTS PROCESSED</div>
+                        <div class="timer-display" id="timerDisplay">00:00</div>
+                        <div class="timer-label">SECONDS</div>
                     </div>
                     <div class="product-cards" id="productCards"></div>
                 </div>
@@ -1795,8 +2001,8 @@
         <div class="page-section" id="pricingSection">
             <section class="pricing">
                 <div class="pricing-header">
-                    <h2 class="pricing-title">Simple Pricing</h2>
-                    <p class="pricing-subtitle">Built for dispensaries of all sizes</p>
+                    <h2 class="pricing-title">Early Bird Pricing</h2>
+                    <p class="pricing-subtitle">Limited time: First 21 customers get 80% OFF</p>
                     
                     <div class="billing-toggle">
                         <div class="billing-option active" onclick="switchBilling('weekly')">Weekly</div>
@@ -1806,6 +2012,35 @@
                 </div>
                 
                 <div class="pricing-grid" id="pricingGrid"></div>
+            </section>
+        </div>
+
+        <!-- Contact Section -->
+        <div class="page-section" id="contactSection">
+            <section class="contact-section">
+                <div class="contact-wrapper">
+                    <h2 class="contact-title">Get in Touch</h2>
+                    <p class="contact-subtitle">Ready to transform your dispensary operations?</p>
+                    <form id="contactForm" onsubmit="handleContactSubmit(event)">
+                        <div class="form-group">
+                            <label class="form-label">Name *</label>
+                            <input type="text" class="form-input" required placeholder="Your name">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Email *</label>
+                            <input type="email" class="form-input" required placeholder="your@email.com">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Dispensary Name</label>
+                            <input type="text" class="form-input" placeholder="Your dispensary">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Message *</label>
+                            <textarea class="form-textarea" required placeholder="Tell us about your needs..."></textarea>
+                        </div>
+                        <button type="submit" class="form-submit">Send Message</button>
+                    </form>
+                </div>
             </section>
         </div>
     </div>
@@ -1826,8 +2061,7 @@
         const products = [
             {
                 name: 'Blue Dream',
-                strain: 'Sativa',
-                strainType: 'Hybrid',
+                strain: 'Hybrid',
                 productType: 'Flower',
                 thc: '24.5%',
                 cbd: '0.3%',
@@ -1839,7 +2073,6 @@
             {
                 name: 'OG Kush',
                 strain: 'Indica',
-                strainType: 'Indica',
                 productType: 'Flower',
                 thc: '26.8%',
                 cbd: '0.2%',
@@ -1851,7 +2084,6 @@
             {
                 name: 'Sour Diesel',
                 strain: 'Sativa',
-                strainType: 'Sativa',
                 productType: 'Flower',
                 thc: '22.3%',
                 cbd: '0.4%',
@@ -1863,7 +2095,6 @@
             {
                 name: 'Purple Haze',
                 strain: 'Sativa',
-                strainType: 'Sativa',
                 productType: 'Flower',
                 thc: '28.1%',
                 cbd: '0.1%',
@@ -1875,7 +2106,6 @@
             {
                 name: 'Gelato',
                 strain: 'Hybrid',
-                strainType: 'Hybrid',
                 productType: 'Flower',
                 thc: '25.7%',
                 cbd: '0.3%',
@@ -1893,43 +2123,49 @@
         const pricing = {
             weekly: {
                 standard: { 
-                    price: '$99', 
+                    price: '$199', 
+                    originalPrice: '$999',
                     period: 'per week / per store',
-                    savings: ''
+                    savings: '80% OFF'
                 },
                 premium: { 
-                    price: '$333', 
+                    price: '$666', 
+                    originalPrice: '$3,333',
                     period: 'per week (2-5 stores)',
-                    savings: ''
+                    savings: '80% OFF'
                 }
             },
             monthly: {
                 standard: { 
-                    price: '$329', 
+                    price: '$796', 
+                    originalPrice: '$3,996',
                     period: 'per month / per store',
-                    savings: 'Save 25%'
+                    savings: '80% OFF + Save 25%'
                 },
                 premium: { 
-                    price: '$1,111', 
+                    price: '$2,664', 
+                    originalPrice: '$13,332',
                     period: 'per month (2-5 stores)',
-                    savings: 'Save 25%'
+                    savings: '80% OFF + Save 25%'
                 }
             },
             yearly: {
                 standard: { 
-                    price: '$279', 
-                    period: 'per month ($3,348/year)',
-                    savings: 'Save 35%'
+                    price: '$677', 
+                    originalPrice: '$3,385',
+                    period: 'per month ($8,124/year)',
+                    savings: '80% OFF + Save 35%'
                 },
                 premium: { 
-                    price: '$888', 
-                    period: 'per month ($10,656/year)',
-                    savings: 'Save 35%'
+                    price: '$2,131', 
+                    originalPrice: '$10,656',
+                    period: 'per month ($25,572/year)',
+                    savings: '80% OFF + Save 35%'
                 }
             }
         };
 
-        // ===== LOGIN FUNCTION - TESTED 3X =====
+        // ===== LOGIN FUNCTION =====
         function attemptLogin() {
             const passwordInput = document.getElementById('passwordInput');
             const errorMsg = document.getElementById('errorMsg');
@@ -1969,25 +2205,11 @@
         }
 
         function simulatePhotoTaking() {
-            const preview = document.getElementById('photoPreview');
-            let photoCount = 0;
-            
-            const takePhoto = setInterval(() => {
-                if (photoCount < 5) {
-                    const photo = document.createElement('div');
-                    photo.className = 'photo-thumbnail';
-                    photo.textContent = '📸';
-                    preview.appendChild(photo);
-                    photoCount++;
-                } else {
-                    clearInterval(takePhoto);
-                    setTimeout(() => {
-                        document.getElementById('splitScreen').classList.remove('active');
-                        document.getElementById('processingScreen').classList.add('active');
-                        startProcessing();
-                    }, 2000);
-                }
-            }, 1000);
+            setTimeout(() => {
+                document.getElementById('splitScreen').classList.remove('active');
+                document.getElementById('processingScreen').classList.add('active');
+                startProcessing();
+            }, 10000);
         }
 
         function startProcessing() {
@@ -1997,7 +2219,7 @@
                 { title: 'Searching Images', text: 'Finding best Google images...' },
                 { title: 'Extracting Details', text: 'THC%, batch numbers, quantities...' },
                 { title: 'Generating Descriptions', text: 'AI creating product descriptions...' },
-                { title: 'Syncing to POS', text: 'Auto-filling inventory system...' }
+                { title: 'Syncing to METRC', text: 'Real-time compliance reporting...' }
             ];
 
             const container = document.getElementById('processingSteps');
@@ -2025,7 +2247,18 @@
             const elapsedTime = Math.floor((Date.now() - receiveStartTime) / 1000);
             document.getElementById('processingScreen').classList.remove('active');
             document.getElementById('resultsScreen').classList.add('active');
-            document.getElementById('timerDisplay').textContent = `0:${elapsedTime}`;
+            
+            // Animate timer count-up
+            let currentTime = 0;
+            const timerInterval = setInterval(() => {
+                if (currentTime >= elapsedTime) {
+                    clearInterval(timerInterval);
+                    document.getElementById('timerDisplay').textContent = `00:${elapsedTime.toString().padStart(2, '0')}`;
+                } else {
+                    currentTime++;
+                    document.getElementById('timerDisplay').textContent = `00:${currentTime.toString().padStart(2, '0')}`;
+                }
+            }, 30);
             
             renderProductCards();
             renderSmartMoveControls();
@@ -2039,45 +2272,36 @@
                 const card = document.createElement('div');
                 card.className = 'product-card';
                 card.innerHTML = `
-                    <div class="product-card-images">
-                        <div class="product-image-option ${selectedImages[index] === 0 ? 'selected' : ''}" 
-                             onclick="selectImage(${index}, 0)">
-                            <div class="image-number">1</div>
-                            <div class="product-image-placeholder">${product.images[0]}</div>
-                        </div>
-                        <div class="product-image-option ${selectedImages[index] === 1 ? 'selected' : ''}" 
-                             onclick="selectImage(${index}, 1)">
-                            <div class="image-number">2</div>
-                            <div class="product-image-placeholder">${product.images[1]}</div>
-                        </div>
-                        <div class="product-image-option ${selectedImages[index] === 2 ? 'selected' : ''}" 
-                             onclick="selectImage(${index}, 2)">
-                            <div class="image-number">3</div>
-                            <div class="product-image-placeholder">${product.images[2]}</div>
+                    <div class="product-card-image-container">
+                        <div class="product-image-main" style="font-size: 120px;">${product.images[selectedImages[index] || 0]}</div>
+                        <button class="image-arrow left" onclick="previousImage(${index})">‹</button>
+                        <button class="image-arrow right" onclick="nextImage(${index})">›</button>
+                        <div class="image-nav">
+                            ${product.images.map((_, i) => `<div class="image-nav-dot ${(selectedImages[index] || 0) === i ? 'active' : ''}" onclick="selectImage(${index}, ${i})"></div>`).join('')}
                         </div>
                     </div>
                     <div class="product-card-title">
-                        ${product.name} | ${product.strain} | ${product.strainType} | ${product.productType}
+                        ${product.name} | ${product.strain} | ${product.productType}
                     </div>
                     <div class="product-card-stats">
                         <div class="stat-row">
-                            <span class="stat-label">THC / CBD:</span>
+                            <span class="stat-label">THC / CBD</span>
                             <span class="stat-value highlight">${product.thc} / ${product.cbd}</span>
                         </div>
                         <div class="stat-row">
-                            <span class="stat-label">Exp Date:</span>
+                            <span class="stat-label">Exp Date</span>
                             <span class="stat-value">${product.expDate}</span>
                         </div>
                         <div class="stat-row">
-                            <span class="stat-label">Quantity:</span>
+                            <span class="stat-label">Quantity</span>
                             <span class="stat-value">${product.quantity} units</span>
                         </div>
                         <div class="stat-row">
-                            <span class="stat-label">Unit Cost:</span>
+                            <span class="stat-label">Unit Cost</span>
                             <span class="stat-value">$${product.unitCost.toFixed(2)}</span>
                         </div>
-                        <div class="stat-row">
-                            <span class="stat-label">Total Package:</span>
+                        <div class="stat-row" style="grid-column: 1 / -1;">
+                            <span class="stat-label">Total Value</span>
                             <span class="stat-value highlight">$${(product.quantity * product.unitCost).toFixed(2)}</span>
                         </div>
                     </div>
@@ -2093,6 +2317,18 @@
         function selectImage(productIndex, imageIndex) {
             selectedImages[productIndex] = imageIndex;
             renderProductCards();
+        }
+
+        function previousImage(productIndex) {
+            const currentIndex = selectedImages[productIndex] || 0;
+            const newIndex = currentIndex === 0 ? products[productIndex].images.length - 1 : currentIndex - 1;
+            selectImage(productIndex, newIndex);
+        }
+
+        function nextImage(productIndex) {
+            const currentIndex = selectedImages[productIndex] || 0;
+            const newIndex = (currentIndex + 1) % products[productIndex].images.length;
+            selectImage(productIndex, newIndex);
         }
 
         function renderSmartMoveControls() {
@@ -2138,7 +2374,6 @@
             document.getElementById('qrScreen').classList.remove('active');
             document.getElementById('splitScreen').classList.remove('active');
             document.getElementById('processingScreen').classList.remove('active');
-            document.getElementById('photoPreview').innerHTML = '';
         }
 
         // ===== BUBBLES FUNCTIONS =====
@@ -2219,8 +2454,12 @@
             grid.innerHTML = `
                 <div class="pricing-card">
                     <h3 class="plan-name">Standard</h3>
-                    <div class="plan-price">${p.standard.price}${p.standard.savings ? '<span class="savings-badge">' + p.standard.savings + '</span>' : ''}</div>
+                    <div class="plan-price">
+                        ${p.standard.price}
+                        <span class="savings-badge">${p.standard.savings}</span>
+                    </div>
                     <p class="plan-period">${p.standard.period}</p>
+                    <p style="color: #666; text-decoration: line-through; font-size: 14px; margin-bottom: 20px;">Regular ${p.standard.originalPrice}</p>
                     <ul class="features">
                         <li>Single location</li>
                         <li>Unlimited products</li>
@@ -2229,16 +2468,21 @@
                         <li>Predictive restocking</li>
                         <li>AI budtender assistant</li>
                         <li>Sample tracking</li>
+                        <li>METRC integration</li>
                         <li>Priority support</li>
                     </ul>
-                    <button class="plan-btn" onclick="alert('Contact us for a personalized demo!')">Inquire for Demo</button>
+                    <button class="plan-btn" onclick="showSection('contact')">Claim Your Spot</button>
                 </div>
 
                 <div class="pricing-card featured">
                     <div class="popular-badge">Best Value</div>
                     <h3 class="plan-name">Premium</h3>
-                    <div class="plan-price">${p.premium.price}${p.premium.savings ? '<span class="savings-badge">' + p.premium.savings + '</span>' : ''}</div>
+                    <div class="plan-price">
+                        ${p.premium.price}
+                        <span class="savings-badge">${p.premium.savings}</span>
+                    </div>
                     <p class="plan-period">${p.premium.period}</p>
+                    <p style="color: #666; text-decoration: line-through; font-size: 14px; margin-bottom: 20px;">Regular ${p.premium.originalPrice}</p>
                     <ul class="features">
                         <li>2-5 locations included</li>
                         <li>Everything in Standard</li>
@@ -2251,9 +2495,16 @@
                         <li>Dedicated account manager</li>
                         <li>White-label options</li>
                     </ul>
-                    <button class="plan-btn" onclick="alert('Contact us for a personalized demo!')">Inquire for Demo</button>
+                    <button class="plan-btn" onclick="showSection('contact')">Claim Your Spot</button>
                 </div>
             `;
+        }
+
+        // ===== CONTACT FORM =====
+        function handleContactSubmit(e) {
+            e.preventDefault();
+            alert('Thank you for your interest! We\'ll be in touch within 24 hours.');
+            e.target.reset();
         }
 
         // ===== NAVIGATION FUNCTIONS =====
