@@ -6,38 +6,24 @@
     <title>#1 Cannabis Inventory AI - Trakie.ai</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap');
 
-    /* NUCLEAR FIX - ADD THESE LINES */
-    html {
-        margin: 0 !important;
-        padding: 0 !important;
-        overflow-x: hidden;
-    }
+        /* NUCLEAR FIX */
+        html {
+            margin: 0 !important;
+            padding: 0 !important;
+            overflow-x: hidden;
+        }
 
-    body {
-        margin: 0 !important;
-        padding: 0 !important;
-        overflow-x: hidden;
-    }
+        body {
+            margin: 0 !important;
+            padding: 0 !important;
+            overflow-x: hidden;
+        }
 
-    * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-    }
-    /* END NUCLEAR FIX */
-        
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-        }
-
-        html, body {
-            margin: 0;
-            padding: 0;
-            overflow-x: hidden;
         }
 
         body {
@@ -48,40 +34,42 @@
             -webkit-font-smoothing: antialiased;
         }
 
-       .welcome-screen {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100vh;
-    background: #000000;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;  
-    padding-top: 588px;           
-    z-index: 9999;
-    text-align: center;
-    overflow: hidden;
-}
+        /* Welcome Screen */
+        .welcome-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: #000000;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            padding-top: 220px;
+            z-index: 9999;
+            text-align: center;
+            overflow: hidden;
+            margin: 0;
+            padding-bottom: 0;
+        }
 
-
-       .stats-ticker {
-    position: fixed !important;
-    top: 0 !important;
-    left: 0 !important;
-    right: 0 !important;
-    width: 100vw !important;
-    overflow: hidden;
-    z-index: 99999 !important;
-    background: rgba(0, 0, 0, 0.95);
-    backdrop-filter: blur(10px);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    padding: 10px 0;
-    margin: 0 !important;
-    margin-top: 0 !important;
-    transform: translateZ(0);
-}
+        .stats-ticker {
+            position: fixed !important;
+            top: 0 !important;
+            left: 0 !important;
+            right: 0 !important;
+            width: 100vw !important;
+            overflow: hidden;
+            z-index: 99999 !important;
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 10px 0;
+            margin: 0 !important;
+            margin-top: 0 !important;
+            transform: translateZ(0);
+        }
 
         .ticker-content {
             display: flex;
@@ -123,16 +111,6 @@
             opacity: 0;
             animation: fadeIn 1s ease 1.1s forwards;
             line-height: 1.3;
-        }
-
-        .welcome-tagline {
-            font-size: 14px;
-            color: #60A5FA;
-            font-style: italic;
-            margin-bottom: 25px;
-            opacity: 0;
-            animation: fadeIn 1s ease 1.3s forwards;
-            font-weight: 400;
         }
         
         .welcome-screen > * {
@@ -222,7 +200,7 @@
             top: 0;
             left: 0;
             right: 0;
-            background: rgba(0, 0, 0, 0.95);
+            background: rgba(0, 0, 0, 0.7);
             backdrop-filter: blur(20px);
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
             z-index: 100;
@@ -244,9 +222,15 @@
             cursor: pointer;
         }
 
+        .nav-logo-video {
+            width: 50px;
+            height: 50px;
+            object-fit: contain;
+        }
+
         .nav-logo span {
-            font-size: 18px;
-            font-weight: 600;
+            font-size: 28px;
+            font-weight: 700;
         }
 
         .nav-links {
@@ -284,6 +268,8 @@
             align-items: center;
             justify-content: center;
             text-align: center;
+            padding-top: 0;
+            margin-top: -80px;
         }
 
         .hero::before {
@@ -305,12 +291,25 @@
         }
 
         .hero-title {
-            font-size: clamp(48px, 7vw, 72px);
-            font-weight: 600;
+            font-size: clamp(48px, 7vw, 90px);
+            font-weight: 900;
             margin-bottom: 20px;
             color: #ffffff;
-            text-shadow: 0 0 20px rgba(96, 165, 250, 0.4), 2px 2px 8px rgba(0, 0, 0, 0.9);
-            letter-spacing: -1px;
+            text-shadow: 0 0 40px rgba(96, 165, 250, 0.6), 0 4px 20px rgba(0, 0, 0, 0.95);
+            letter-spacing: -2px;
+            text-transform: uppercase;
+            animation: titleFadeIn 1.5s ease-out;
+        }
+
+        @keyframes titleFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .hero-subtitle {
@@ -752,15 +751,9 @@
         }
 
         .trakie-logo-processing {
-            width: 50px;
-            height: 50px;
-            background: linear-gradient(135deg, #10b981, #60A5FA);
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 900;
-            font-size: 24px;
+            width: 60px;
+            height: 60px;
+            object-fit: contain;
         }
 
         .spinner-large {
@@ -893,62 +886,121 @@
             gap: 30px;
         }
 
+        /* POKEMON CARD STYLING */
         .product-card {
-            background: linear-gradient(135deg, rgba(96, 165, 250, 0.1) 0%, rgba(16, 185, 129, 0.1) 100%);
-            border: 2px solid rgba(96, 165, 250, 0.3);
-            border-radius: 20px;
+            background: linear-gradient(135deg, rgba(96, 165, 250, 0.15) 0%, rgba(16, 185, 129, 0.15) 100%);
+            border: 3px solid rgba(96, 165, 250, 0.4);
+            border-radius: 24px;
             overflow: hidden;
             transition: all 0.3s;
+            position: relative;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
         }
 
         .product-card:hover {
-            transform: translateY(-5px);
+            transform: translateY(-8px) scale(1.02);
             border-color: #60A5FA;
-            box-shadow: 0 15px 50px rgba(96, 165, 250, 0.4);
+            box-shadow: 0 20px 60px rgba(96, 165, 250, 0.5);
         }
 
+        /* POKEMON CARD HEADER */
+        .product-card-header {
+            background: linear-gradient(135deg, #60A5FA 0%, #3B82F6 100%);
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 3px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .product-card-title-left {
+            flex: 1;
+            text-align: left;
+        }
+
+        .product-brand {
+            font-size: 11px;
+            font-weight: 600;
+            color: rgba(0, 0, 0, 0.6);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .product-strain {
+            font-size: 22px;
+            font-weight: 900;
+            color: #000;
+            margin-top: 2px;
+            letter-spacing: -0.5px;
+        }
+
+        .product-type {
+            font-size: 10px;
+            font-weight: 600;
+            color: rgba(0, 0, 0, 0.5);
+            text-transform: uppercase;
+            margin-top: 2px;
+        }
+
+        .product-quantity {
+            background: rgba(0, 0, 0, 0.25);
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 16px;
+            font-weight: 900;
+            color: #fff;
+        }
+
+        /* IMAGE CONTAINER WITH THC OVERLAY */
         .product-card-image-container {
             position: relative;
-            height: 300px;
-            background: #1a1a1a;
+            height: 350px;
+            background: linear-gradient(to bottom, #1a1a1a 0%, #0a0a0a 100%);
             display: flex;
             align-items: center;
             justify-content: center;
-            border-bottom: 2px solid rgba(96, 165, 250, 0.3);
+            overflow: hidden;
         }
 
         .product-image-main {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-            padding: 20px;
-        }
-
-        .image-nav {
-            position: absolute;
-            bottom: 15px;
-            left: 50%;
-            transform: translateX(-50%);
+            width: 70%;
+            height: 70%;
+            font-size: 120px;
             display: flex;
-            gap: 10px;
-            background: rgba(0, 0, 0, 0.7);
-            padding: 8px 15px;
-            border-radius: 20px;
+            align-items: center;
+            justify-content: center;
         }
 
-        .image-nav-dot {
-            width: 8px;
-            height: 8px;
+        /* THC SLASH OVERLAY (CHARIZARD STYLE) */
+        .thc-overlay {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(135deg, #f59e0b, #d97706);
             border-radius: 50%;
-            background: rgba(255, 255, 255, 0.4);
-            cursor: pointer;
-            transition: all 0.3s;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 8px 24px rgba(245, 158, 11, 0.6);
+            border: 4px solid #fbbf24;
+            transform: rotate(-15deg);
         }
 
-        .image-nav-dot.active {
-            background: #60A5FA;
-            width: 24px;
-            border-radius: 4px;
+        .thc-percentage {
+            font-size: 28px;
+            font-weight: 900;
+            color: #000;
+            line-height: 1;
+        }
+
+        .thc-label {
+            font-size: 10px;
+            font-weight: 700;
+            color: rgba(0, 0, 0, 0.7);
+            text-transform: uppercase;
         }
 
         .image-arrow {
@@ -981,21 +1033,70 @@
             right: 15px;
         }
 
-        .product-card-title {
-            background: linear-gradient(135deg, #60A5FA 0%, #3B82F6 100%);
-            color: #000;
-            padding: 15px 20px;
-            font-size: 18px;
-            font-weight: 700;
-            text-align: center;
-            letter-spacing: 0.5px;
+        .image-nav {
+            position: absolute;
+            bottom: 15px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 8px;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 6px 12px;
+            border-radius: 20px;
         }
 
+        .image-nav-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.4);
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .image-nav-dot.active {
+            background: #60A5FA;
+            width: 20px;
+            border-radius: 4px;
+        }
+
+        /* PRICE SECTION */
+        .product-price-section {
+            background: rgba(16, 185, 129, 0.2);
+            padding: 20px;
+            text-align: center;
+            border-top: 3px solid rgba(16, 185, 129, 0.4);
+        }
+
+        .price-label {
+            font-size: 11px;
+            color: #888;
+            text-transform: uppercase;
+            margin-bottom: 5px;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+
+        .product-price {
+            font-size: 40px;
+            font-weight: 900;
+            color: #10b981;
+            text-shadow: 0 2px 10px rgba(16, 185, 129, 0.5);
+        }
+
+        .price-note {
+            font-size: 10px;
+            color: #666;
+            margin-top: 3px;
+        }
+
+        /* PRODUCT STATS (Below price) */
         .product-card-stats {
-            padding: 25px;
+            padding: 20px;
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 12px 25px;
+            gap: 10px 20px;
+            background: rgba(0, 0, 0, 0.3);
         }
 
         .stat-row {
@@ -1006,8 +1107,8 @@
 
         .stat-label {
             color: #888;
-            font-weight: 500;
-            font-size: 12px;
+            font-weight: 600;
+            font-size: 11px;
             text-transform: uppercase;
             letter-spacing: 1px;
         }
@@ -1015,12 +1116,12 @@
         .stat-value {
             color: #fff;
             font-weight: 700;
-            font-size: 17px;
+            font-size: 16px;
         }
 
         .stat-value.highlight {
             color: #10b981;
-            font-size: 20px;
+            font-size: 18px;
         }
 
         .smart-move-controls {
@@ -1037,11 +1138,17 @@
         }
 
         .move-button-group {
-            margin-bottom: 30px;
+            margin-bottom: 20px;
             padding: 20px;
             background: rgba(255, 255, 255, 0.05);
             border: 1px solid rgba(255, 255, 255, 0.1);
             border-radius: 15px;
+            transition: all 0.3s;
+        }
+
+        .move-button-group.selected {
+            background: rgba(245, 158, 11, 0.15);
+            border-color: #f59e0b;
         }
 
         .move-product-name {
@@ -1075,14 +1182,31 @@
             box-shadow: 0 8px 25px rgba(16, 185, 129, 0.4);
         }
 
-        .move-btn:active {
-            transform: translateY(0);
+        .move-btn.selected {
+            background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+            color: #fff;
+            box-shadow: 0 0 20px rgba(245, 158, 11, 0.6);
         }
 
-        .move-btn.moved {
-            background: rgba(16, 185, 129, 0.3);
-            color: #10b981;
-            cursor: default;
+        .move-all-btn {
+            width: 100%;
+            padding: 20px;
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: #000;
+            border: none;
+            border-radius: 16px;
+            font-size: 20px;
+            font-weight: 900;
+            cursor: pointer;
+            margin-top: 30px;
+            box-shadow: 0 10px 40px rgba(16, 185, 129, 0.5);
+            animation: pulse 2s ease-in-out infinite;
+            transition: all 0.3s;
+        }
+
+        .move-all-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 50px rgba(16, 185, 129, 0.7);
         }
 
         .completion-actions {
@@ -1100,6 +1224,11 @@
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s;
+            display: none;
+        }
+
+        .complete-btn.show {
+            display: inline-block;
         }
 
         .complete-btn:hover {
@@ -1119,24 +1248,16 @@
             margin-bottom: 40px;
         }
 
-    .bubbles-title {
-    font-size: 72px;
-    font-weight: 900;
-    background: linear-gradient(90deg, #10b981, #60A5FA, #8b5cf6, #10b981);
-    background-size: 200% 200%;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    animation: gradientShift 3s ease infinite;
-    margin-bottom: 8px;
-    letter-spacing: -2px;
-    text-shadow: 0 0 60px rgba(16, 185, 129, 0.6);
-}
-
-@keyframes gradientShift {
-    0%, 100% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-}
+        .bubbles-title {
+            font-size: 64px;
+            font-weight: 600;
+            background: linear-gradient(135deg, #10b981 0%, #059669 50%, #10b981 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 8px;
+            letter-spacing: -1px;
+        }
 
         .bubbles-subtitle {
             color: #888;
@@ -1665,12 +1786,16 @@
         <nav class="nav">
             <div class="nav-content">
                 <div class="nav-logo" onclick="scrollToTop()">
+                    <video class="nav-logo-video" autoplay loop muted playsinline webkit-playsinline>
+                        <source src="trakielogo.mov" type="video/quicktime">
+                        <source src="trakielogo.mov" type="video/mp4">
+                    </video>
                     <span>Trakie.ai</span>
                 </div>
                 <div class="nav-links">
                     <a onclick="showSection('home')">Home</a>
                     <a onclick="showSection('receive')">Receive</a>
-                    <a onclick="showSection('bubbles')" style="color: #10b981;">Bubbles</a>
+                    <a onclick="showSection('bubbles')" style="color: #10b981;">Intelligent Inventory</a>
                     <a onclick="showSection('data')" style="color: #8b5cf6;">Data</a>
                     <a onclick="showSection('pricing')">Pricing</a>
                     <a onclick="showSection('contact')">Contact</a>
@@ -1817,15 +1942,15 @@
                             </div>
                             <div class="invoice-row">
                                 <strong>Date:</strong>
-                                <span>Nov 16, 2025</span>
+                                <span>Nov 17, 2025</span>
                             </div>
                         </div>
                         <div class="invoice-items">
-                            <div class="invoice-item">Blue Dream 3.5g - 12 units</div>
-                            <div class="invoice-item">OG Kush 1oz - 8 units</div>
-                            <div class="invoice-item">Sour Diesel 3.5g - 15 units</div>
-                            <div class="invoice-item">Purple Haze 1g - 20 units</div>
-                            <div class="invoice-item">Gelato 3.5g - 10 units</div>
+                            <div class="invoice-item">Green Leaf Farms | Blue Dream | Hybrid - 12 units</div>
+                            <div class="invoice-item">Green Leaf Farms | OG Kush | Indica - 8 units</div>
+                            <div class="invoice-item">Green Leaf Farms | Sour Diesel | Sativa - 15 units</div>
+                            <div class="invoice-item">Green Leaf Farms | Purple Haze | Sativa - 20 units</div>
+                            <div class="invoice-item">Green Leaf Farms | Gelato | Hybrid - 10 units</div>
                         </div>
                     </div>
                 </div>
@@ -1847,7 +1972,10 @@
             <!-- Processing Screen -->
             <div class="processing-screen" id="processingScreen">
                 <h2 class="processing-title">
-                    <div class="trakie-logo-processing">T</div>
+                    <video class="trakie-logo-processing" autoplay loop muted playsinline webkit-playsinline>
+                        <source src="trakielogo.mov" type="video/quicktime">
+                        <source src="trakielogo.mov" type="video/mp4">
+                    </video>
                     <span>AI Processing</span>
                 </h2>
                 <div class="spinner-large"></div>
@@ -1870,7 +1998,7 @@
                     <h3 class="controls-title">Smart Move to Sales</h3>
                     <div id="smartMoveControls"></div>
                     <div class="completion-actions">
-                        <button class="complete-btn" onclick="resetReceiving()">← Start New Delivery</button>
+                        <button class="complete-btn" id="completeBtn" onclick="resetReceiving()">← Start New Delivery</button>
                     </div>
                 </div>
             </div>
@@ -1881,7 +2009,7 @@
             <div class="bubbles-wrapper">
                 <div class="bubbles-header">
                     <h1 class="bubbles-title">Intelligent Inventory</h1>
-                    <p class="bubbles-subtitle">curated cannabis for the discerning customer</p>
+                    <p class="bubbles-subtitle">AI-curated selections for the modern customer</p>
                     
                     <div class="bubbles-tabs">
                         <div class="bubble-tab active" onclick="switchBubbleTab('explore')">Explore</div>
@@ -1980,8 +2108,8 @@
         <div class="page-section" id="contactSection">
             <section class="contact-section">
                 <div class="contact-wrapper">
-                    <h2 class="contact-title">Let's Talk</h2>
-                    <p class="contact-subtitle">Ready to Trakie your dispensary?</p>
+                    <h2 class="contact-title">Get in Touch</h2>
+                    <p class="contact-subtitle">Ready to transform your dispensary operations?</p>
                     <form id="contactForm" onsubmit="handleContactSubmit(event)">
                         <div class="form-group">
                             <label class="form-label">Name *</label>
@@ -2021,64 +2149,70 @@
 
         const products = [
             {
+                brand: 'Green Leaf Farms',
                 name: 'Blue Dream',
                 strain: 'Hybrid',
-                productType: 'Flower',
                 thc: '24.5%',
                 cbd: '0.3%',
                 expDate: '12/2025',
                 quantity: 12,
                 unitCost: 35.00,
+                priceAfterTax: 42.00,
                 images: ['🌿', '🌿', '🌿']
             },
             {
+                brand: 'Green Leaf Farms',
                 name: 'OG Kush',
                 strain: 'Indica',
-                productType: 'Flower',
                 thc: '26.8%',
                 cbd: '0.2%',
                 expDate: '01/2026',
                 quantity: 8,
                 unitCost: 42.00,
+                priceAfterTax: 50.40,
                 images: ['🌿', '🌿', '🌿']
             },
             {
+                brand: 'Green Leaf Farms',
                 name: 'Sour Diesel',
                 strain: 'Sativa',
-                productType: 'Flower',
                 thc: '22.3%',
                 cbd: '0.4%',
                 expDate: '12/2025',
                 quantity: 15,
                 unitCost: 32.00,
+                priceAfterTax: 38.40,
                 images: ['🌿', '🌿', '🌿']
             },
             {
+                brand: 'Green Leaf Farms',
                 name: 'Purple Haze',
                 strain: 'Sativa',
-                productType: 'Flower',
                 thc: '28.1%',
                 cbd: '0.1%',
                 expDate: '01/2026',
                 quantity: 20,
                 unitCost: 28.00,
+                priceAfterTax: 33.60,
                 images: ['🌿', '🌿', '🌿']
             },
             {
+                brand: 'Green Leaf Farms',
                 name: 'Gelato',
                 strain: 'Hybrid',
-                productType: 'Flower',
                 thc: '25.7%',
                 cbd: '0.3%',
                 expDate: '12/2025',
                 quantity: 10,
                 unitCost: 38.00,
+                priceAfterTax: 45.60,
                 images: ['🌿', '🌿', '🌿']
             }
         ];
 
         let receiveStartTime;
         let selectedImages = {};
+        let selectedProducts = new Set();
 
         // ===== LOGIN FUNCTION =====
         function attemptLogin() {
@@ -2162,7 +2296,6 @@
             document.getElementById('processingScreen').classList.remove('active');
             document.getElementById('resultsScreen').classList.add('active');
             
-            // Animate timer count-up
             let currentTime = 0;
             const timerInterval = setInterval(() => {
                 if (currentTime >= elapsedTime) {
@@ -2186,33 +2319,42 @@
                 const card = document.createElement('div');
                 card.className = 'product-card';
                 card.innerHTML = `
+                    <div class="product-card-header">
+                        <div class="product-card-title-left">
+                            <div class="product-brand">${product.brand}</div>
+                            <div class="product-strain">${product.name}</div>
+                            <div class="product-type">${product.strain}</div>
+                        </div>
+                        <div class="product-quantity">QTY ${product.quantity}</div>
+                    </div>
+                    
                     <div class="product-card-image-container">
-                        <div class="product-image-main" style="font-size: 120px;">${product.images[selectedImages[index] || 0]}</div>
+                        <div class="product-image-main">${product.images[selectedImages[index] || 0]}</div>
+                        <div class="thc-overlay">
+                            <div class="thc-percentage">${product.thc.replace('%', '')}</div>
+                            <div class="thc-label">THC</div>
+                        </div>
                         <button class="image-arrow left" onclick="previousImage(${index})">‹</button>
                         <button class="image-arrow right" onclick="nextImage(${index})">›</button>
                         <div class="image-nav">
                             ${product.images.map((_, i) => `<div class="image-nav-dot ${(selectedImages[index] || 0) === i ? 'active' : ''}" onclick="selectImage(${index}, ${i})"></div>`).join('')}
                         </div>
                     </div>
-                    <div class="product-card-title">
-                        ${product.name} | ${product.strain} | ${product.productType}
+                    
+                    <div class="product-price-section">
+                        <div class="price-label">Price (After Tax)</div>
+                        <div class="product-price">$${product.priceAfterTax.toFixed(2)}</div>
+                        <div class="price-note">per unit</div>
                     </div>
+                    
                     <div class="product-card-stats">
                         <div class="stat-row">
-                            <span class="stat-label">THC / CBD</span>
-                            <span class="stat-value highlight">${product.thc} / ${product.cbd}</span>
+                            <span class="stat-label">CBD</span>
+                            <span class="stat-value">${product.cbd}</span>
                         </div>
                         <div class="stat-row">
                             <span class="stat-label">Exp Date</span>
                             <span class="stat-value">${product.expDate}</span>
-                        </div>
-                        <div class="stat-row">
-                            <span class="stat-label">Quantity</span>
-                            <span class="stat-value">${product.quantity} units</span>
-                        </div>
-                        <div class="stat-row">
-                            <span class="stat-label">Unit Cost</span>
-                            <span class="stat-value">$${product.unitCost.toFixed(2)}</span>
                         </div>
                         <div class="stat-row" style="grid-column: 1 / -1;">
                             <span class="stat-label">Total Value</span>
@@ -2256,11 +2398,11 @@
                 group.innerHTML = `
                     <div class="move-product-name">${product.name}</div>
                     <div class="move-buttons">
-                        <button class="move-btn" onclick="moveToSales(${index}, 5)">
-                            Move 5
+                        <button class="move-btn" onclick="toggleProductSelection(${index}, 5)" data-amount="5">
+                            Select 5
                         </button>
-                        <button class="move-btn" onclick="moveToSales(${index}, 10)">
-                            Move 10
+                        <button class="move-btn" onclick="toggleProductSelection(${index}, 10)" data-amount="10">
+                            Select 10
                         </button>
                     </div>
                 `;
@@ -2268,26 +2410,62 @@
             });
         }
 
-        function moveToSales(productIndex, amount) {
-            const product = products[productIndex];
+        function toggleProductSelection(productIndex, amount) {
             const group = document.getElementById(`moveGroup${productIndex}`);
             const buttons = group.querySelectorAll('.move-btn');
+            const clickedButton = Array.from(buttons).find(btn => btn.getAttribute('data-amount') == amount);
             
-            buttons.forEach(btn => {
-                btn.classList.add('moved');
-                btn.disabled = true;
-            });
+            if (selectedProducts.has(productIndex)) {
+                selectedProducts.delete(productIndex);
+                buttons.forEach(btn => btn.classList.remove('selected'));
+                group.classList.remove('selected');
+            } else {
+                selectedProducts.add(productIndex);
+                clickedButton.classList.add('selected');
+                group.classList.add('selected');
+            }
             
-            alert(`✅ Moved ${amount} units of ${product.name} to sales floor!\n\n📦 Remaining in vault: ${product.quantity - amount} units`);
+            updateMoveAllButton();
+        }
+
+        function updateMoveAllButton() {
+            const container = document.getElementById('smartMoveControls');
+            let moveAllBtn = document.getElementById('moveAllBtn');
+            
+            if (selectedProducts.size > 0) {
+                if (!moveAllBtn) {
+                    moveAllBtn = document.createElement('button');
+                    moveAllBtn.id = 'moveAllBtn';
+                    moveAllBtn.className = 'move-all-btn';
+                    moveAllBtn.onclick = moveAllSelected;
+                    container.appendChild(moveAllBtn);
+                }
+                moveAllBtn.textContent = `Move ${selectedProducts.size} Product${selectedProducts.size > 1 ? 's' : ''} to Sales Floor`;
+            } else {
+                if (moveAllBtn) moveAllBtn.remove();
+            }
+        }
+
+        function moveAllSelected() {
+            if (selectedProducts.size === 0) return;
+            
+            alert(`✅ Moved ${selectedProducts.size} product${selectedProducts.size > 1 ? 's' : ''} to sales floor!`);
+            
+            selectedProducts.clear();
+            document.getElementById('moveAllBtn').remove();
+            
+            document.getElementById('completeBtn').classList.add('show');
         }
 
         function resetReceiving() {
             selectedImages = {};
+            selectedProducts.clear();
             document.getElementById('resultsScreen').classList.remove('active');
             document.getElementById('receiveLanding').style.display = 'flex';
             document.getElementById('qrScreen').classList.remove('active');
             document.getElementById('splitScreen').classList.remove('active');
             document.getElementById('processingScreen').classList.remove('active');
+            document.getElementById('completeBtn').classList.remove('show');
         }
 
         // ===== BUBBLES FUNCTIONS =====
@@ -2376,6 +2554,22 @@
         function scrollToTop() {
             showSection('home');
         }
+
+        // ===== SCROLL ANIMATION FOR HERO =====
+        window.addEventListener('scroll', function() {
+            const scrolled = window.pageYOffset;
+            const heroTitle = document.querySelector('.hero-title');
+            const heroSubtitle = document.querySelector('.hero-subtitle');
+            
+            if (heroTitle && scrolled < window.innerHeight) {
+                heroTitle.style.transform = `translateY(${scrolled * 0.5}px)`;
+                heroTitle.style.opacity = 1 - (scrolled / 500);
+                
+                if (heroSubtitle) {
+                    heroSubtitle.style.opacity = 1 - (scrolled / 400);
+                }
+            }
+        });
 
         // ===== EVENT LISTENERS =====
         document.addEventListener('DOMContentLoaded', function() {
