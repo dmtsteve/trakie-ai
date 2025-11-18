@@ -222,7 +222,7 @@
             top: 0;
             left: 0;
             right: 0;
-            background: rgba(0, 0, 0, 0.95);
+            background: rgba(0, 0, 0, 0.7);
             backdrop-filter: blur(20px);
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
             z-index: 100;
@@ -284,6 +284,8 @@
             align-items: center;
             justify-content: center;
             text-align: center;
+            padding-top: 0;       
+            margin-top: -80px;   
         }
 
         .hero::before {
@@ -305,12 +307,14 @@
         }
 
         .hero-title {
-            font-size: clamp(48px, 7vw, 72px);
-            font-weight: 600;
+            font-size: clamp(48px, 7vw, 90px);
+            font-weight: 900;
             margin-bottom: 20px;
             color: #ffffff;
             text-shadow: 0 0 20px rgba(96, 165, 250, 0.4), 2px 2px 8px rgba(0, 0, 0, 0.9);
-            letter-spacing: -1px;
+            letter-spacing: -2px;
+            text-transform: uppercase;            
+            animation: titleFadeIn 1.5s ease-out; 
         }
 
         .hero-subtitle {
@@ -2392,6 +2396,23 @@
                 welcomeVid.playbackRate = 0.5;
             }
         });
+             window.addEventListener('scroll', function() {
+            const scrolled = window.pageYOffset;
+            const heroTitle = document.querySelector('.hero-title');
+            const heroSubtitle = document.querySelector('.hero-subtitle');
+            
+            if (heroTitle && scrolled < window.innerHeight) {
+                // Title moves up slower (parallax)
+                heroTitle.style.transform = `translateY(${scrolled * 0.5}px)`;
+                heroTitle.style.opacity = 1 - (scrolled / 500);
+                
+                // Subtitle fades faster
+                if (heroSubtitle) {
+                    heroSubtitle.style.opacity = 1 - (scrolled / 400);
+                }
+            }
+        });
+        
     </script>
 </body>
 </html>
