@@ -1119,16 +1119,24 @@
             margin-bottom: 40px;
         }
 
-        .bubbles-title {
-            font-size: 64px;
-            font-weight: 600;
-            background: linear-gradient(135deg, #10b981 0%, #059669 50%, #10b981 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: 20px;
-            letter-spacing: -1px;
-        }
+    .bubbles-title {
+    font-size: 72px;
+    font-weight: 900;
+    background: linear-gradient(90deg, #10b981, #60A5FA, #8b5cf6, #10b981);
+    background-size: 200% 200%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: gradientShift 3s ease infinite;
+    margin-bottom: 8px;
+    letter-spacing: -2px;
+    text-shadow: 0 0 60px rgba(16, 185, 129, 0.6);
+}
+
+@keyframes gradientShift {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+}
 
         .bubbles-subtitle {
             color: #888;
@@ -1872,8 +1880,8 @@
         <div class="page-section" id="bubblesSection">
             <div class="bubbles-wrapper">
                 <div class="bubbles-header">
-                    <h1 class="bubbles-title">Cannabis Vault</h1>
-                    <p class="bubbles-subtitle">Curated selections for the discerning customer</p>
+                    <h1 class="bubbles-title">Intelligent Inventory</h1>
+                    <p class="bubbles-subtitle">curated cannabis for the discerning customer</p>
                     
                     <div class="bubbles-tabs">
                         <div class="bubble-tab active" onclick="switchBubbleTab('explore')">Explore</div>
@@ -1972,8 +1980,8 @@
         <div class="page-section" id="contactSection">
             <section class="contact-section">
                 <div class="contact-wrapper">
-                    <h2 class="contact-title">Get in Touch</h2>
-                    <p class="contact-subtitle">Ready to transform your dispensary operations?</p>
+                    <h2 class="contact-title">Let's Talk</h2>
+                    <p class="contact-subtitle">Ready to Trakie your dispensary?</p>
                     <form id="contactForm" onsubmit="handleContactSubmit(event)">
                         <div class="form-group">
                             <label class="form-label">Name *</label>
