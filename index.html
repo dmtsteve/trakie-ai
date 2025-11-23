@@ -6,6 +6,7 @@
     <title>#1 Cannabis Inventory AI - Trakie.ai</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,wght@0,400;0,700;1,400&family=Playfair+Display:wght@400;700&display=swap');
 
         /* NUCLEAR FIX */
         html {
@@ -258,6 +259,235 @@
             text-decoration: none;
             font-weight: 600;
         }
+
+        /* VOGUE STYLE ADDITIONS */
+        @keyframes fadeUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+        }
+
+        @keyframes fadeScale {
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+            from {
+                opacity: 0;
+                transform: scale(0.95);
+            }
+        }
+
+        /* HERO SECTION - Vogue Cover Style */
+        .vogue-hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            background: linear-gradient(180deg, #0A0A0A 0%, #1A1F1A 100%);
+            padding-top: 80px;
+        }
+
+        .vogue-hero-title {
+            font-family: 'Bodoni Moda', serif;
+            font-size: clamp(48px, 8vw, 120px);
+            font-weight: 400;
+            letter-spacing: -2px;
+            line-height: 0.9;
+            text-align: center;
+            opacity: 0;
+            animation: fadeUp 1.2s ease forwards;
+        }
+
+        .vogue-hero-subtitle {
+            font-family: 'Bodoni Moda', serif;
+            font-size: clamp(60px, 10vw, 140px);
+            font-weight: 700;
+            letter-spacing: -3px;
+            opacity: 0;
+            animation: fadeUp 1.4s ease 0.2s forwards;
+            background: linear-gradient(135deg, #C9A961 0%, #8B7355 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-top: -10px;
+        }
+
+        .vogue-hero-tagline {
+            font-size: 18px;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: #8B7355;
+            margin-top: 40px;
+            opacity: 0;
+            animation: fadeUp 1.6s ease 0.4s forwards;
+        }
+
+        .vogue-hero-tagline span {
+            padding: 0 20px;
+        }
+
+        /* FEATURES PYRAMID */
+        .vogue-features {
+            padding: 120px 40px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .vogue-pyramid {
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+            align-items: center;
+        }
+
+        .vogue-pyramid-row {
+            display: flex;
+            gap: 40px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .vogue-feature-card {
+            background: linear-gradient(135deg, #1A1F1A 0%, #0F1410 100%);
+            border: 1px solid rgba(201, 169, 97, 0.2);
+            padding: 50px 40px;
+            border-radius: 0;
+            width: 380px;
+            opacity: 0;
+            animation: fadeScale 0.8s ease forwards;
+            animation-delay: calc(var(--delay) * 0.15s);
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+
+        .vogue-feature-card:hover {
+            transform: translateY(-10px);
+            border-color: rgba(201, 169, 97, 0.5);
+            box-shadow: 0 20px 40px rgba(201, 169, 97, 0.1);
+        }
+
+        .vogue-feature-icon {
+            font-size: 48px;
+            margin-bottom: 25px;
+        }
+
+        .vogue-feature-title {
+            font-family: 'Bodoni Moda', serif;
+            font-size: 28px;
+            font-weight: 400;
+            color: #C9A961;
+            margin-bottom: 15px;
+            letter-spacing: -0.5px;
+        }
+
+        .vogue-feature-description {
+            font-size: 15px;
+            line-height: 1.8;
+            color: #A8A093;
+            letter-spacing: 0.3px;
+        }
+
+        /* STATS SECTION */
+        .vogue-stats {
+            padding: 100px 40px;
+            background: #0A0A0A;
+        }
+
+        .vogue-stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 3px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .vogue-stat-box {
+            background: linear-gradient(135deg, #1A1F1A 0%, #0F1410 100%);
+            padding: 60px;
+            text-align: center;
+            border: 1px solid rgba(201, 169, 97, 0.1);
+            opacity: 0;
+            animation: fadeUp 0.8s ease forwards;
+            animation-delay: calc(var(--delay) * 0.1s);
+        }
+
+        .vogue-stat-number {
+            font-family: 'Bodoni Moda', serif;
+            font-size: 72px;
+            font-weight: 300;
+            color: #C9A961;
+            letter-spacing: -2px;
+        }
+
+        .vogue-stat-label {
+            font-size: 12px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: #8B7355;
+            margin-top: 15px;
+        }
+
+        /* DEMO SECTION */
+        .vogue-demo-section {
+            padding: 120px 40px;
+            text-align: center;
+            background: linear-gradient(180deg, #0A0A0A 0%, #1A1F1A 100%);
+        }
+
+        .vogue-demo-title {
+            font-family: 'Bodoni Moda', serif;
+            font-size: 64px;
+            font-weight: 400;
+            margin-bottom: 20px;
+            letter-spacing: -1px;
+        }
+
+        .vogue-demo-subtitle {
+            font-size: 18px;
+            color: #A8A093;
+            margin-bottom: 50px;
+            letter-spacing: 1px;
+        }
+
+        .vogue-demo-button {
+            background: transparent;
+            color: #C9A961;
+            border: 1px solid #C9A961;
+            padding: 25px 60px;
+            font-size: 14px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            font-weight: 400;
+        }
+
+        .vogue-demo-button:hover {
+            background: #C9A961;
+            color: #0A0A0A;
+            transform: scale(1.05);
+        }
+
+        /* Scroll animations trigger */
+        .vogue-scroll-fade {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 1s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+
+        .vogue-scroll-fade.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* EXISTING STYLES CONTINUE BELOW */
 
         /* Hero Section */
         .hero {
@@ -1755,6 +1985,12 @@
             .product-card-stats {
                 grid-template-columns: 1fr;
             }
+            .vogue-stats-grid {
+                grid-template-columns: 1fr;
+            }
+            .vogue-pyramid-row {
+                flex-direction: column;
+            }
         }
     </style>
 </head>
@@ -1825,96 +2061,87 @@
         <!-- Home Section -->
         <div class="page-section active" id="homeSection">
             <div class="home-scroll-container">
-                <!-- Hero with WIZARD VIDEO -->
-                <section class="hero">
-                    <video class="hero-bg-video" autoplay loop muted playsinline webkit-playsinline preload="auto" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0; pointer-events: none;">
-                        <source src="welcome.mp4" type="video/mp4">
-                        <source src="welcome.mp4" type="video/quicktime">
-                    </video>
-                    
-                    <div class="hero-content">
-                        <h1 class="hero-title">Cannabis Retail Intelligence</h1>
-                        <p class="hero-subtitle">Instant inventory recognition. Predictive restocking intelligence. Automated budget management.</p>
+                <!-- VOGUE STYLE HERO -->
+                <section class="vogue-hero">
+                    <h1 class="vogue-hero-title">CANNABIS RETAIL</h1>
+                    <h2 class="vogue-hero-subtitle">INTELLIGENCE</h2>
+                    <p class="vogue-hero-tagline">
+                        <span>INSTANT INVENTORY RECOGNITION</span> • 
+                        <span>PREDICTIVE RESTOCKING</span> • 
+                        <span>AUTOMATED COMPLIANCE</span>
+                    </p>
+                </section>
+
+                <!-- VOGUE STYLE FEATURES PYRAMID -->
+                <section class="vogue-features">
+                    <div class="vogue-pyramid">
+                        <div class="vogue-pyramid-row">
+                            <div class="vogue-feature-card" style="--delay: 1">
+                                <div class="vogue-feature-icon">📸</div>
+                                <h3 class="vogue-feature-title">Instant Recognition</h3>
+                                <p class="vogue-feature-description">Computer vision trained on 50,000+ SKUs. Snap photos, auto-fill everything. Zero manual entry.</p>
+                            </div>
+                            <div class="vogue-feature-card" style="--delay: 2">
+                                <div class="vogue-feature-icon">📊</div>
+                                <h3 class="vogue-feature-title">Predictive Restocking</h3>
+                                <p class="vogue-feature-description">AI-powered velocity analytics. Algorithmic alerts prevent stockouts before they happen.</p>
+                            </div>
+                        </div>
+                        <div class="vogue-pyramid-row">
+                            <div class="vogue-feature-card" style="--delay: 3">
+                                <div class="vogue-feature-icon">💎</div>
+                                <h3 class="vogue-feature-title">3D Interactive Menus</h3>
+                                <p class="vogue-feature-description">No more boring 2D images. Gamified 3D product showcases that turn browsing into buying.</p>
+                            </div>
+                            <div class="vogue-feature-card" style="--delay: 4">
+                                <div class="vogue-feature-icon">🧠</div>
+                                <h3 class="vogue-feature-title">AI Budtender</h3>
+                                <p class="vogue-feature-description">Smart product recommendations. Sample attribution modeling. Turn your team into revenue machines.</p>
+                            </div>
+                            <div class="vogue-feature-card" style="--delay: 5">
+                                <div class="vogue-feature-icon">🛡️</div>
+                                <h3 class="vogue-feature-title">METRC Integration</h3>
+                                <p class="vogue-feature-description">Full compliance automation. Prevent fines. Real-time state reporting built in.</p>
+                            </div>
+                        </div>
                     </div>
                 </section>
 
-                <!-- Pillars -->
-                <section class="pillars-section">
-                    <div class="pillars-grid">
-                        <div class="pillar-card">
-                            <span class="pillar-icon">📸</span>
-                            <h3 class="pillar-title">Instant Recognition</h3>
-                            <p class="pillar-desc">Computer vision trained on 50,000+ SKUs. Snap photos, auto-fill everything. Zero manual entry.</p>
+                <!-- VOGUE STYLE STATS -->
+                <section class="vogue-stats">
+                    <div class="vogue-stats-grid">
+                        <div class="vogue-stat-box" style="--delay: 1">
+                            <div class="vogue-stat-number">7x</div>
+                            <div class="vogue-stat-label">Faster Than Manual</div>
                         </div>
-                        
-                        <div class="pillar-card">
-                            <span class="pillar-icon">📊</span>
-                            <h3 class="pillar-title">Predictive Restocking</h3>
-                            <p class="pillar-desc">AI-powered velocity analytics. Algorithmic alerts prevent stockouts before they happen.</p>
+                        <div class="vogue-stat-box" style="--delay: 2">
+                            <div class="vogue-stat-number">99.9%</div>
+                            <div class="vogue-stat-label">Accuracy Rate</div>
                         </div>
-                        
-                        <div class="pillar-card">
-                            <span class="pillar-icon">🎮</span>
-                            <h3 class="pillar-title">3D Interactive Menus</h3>
-                            <p class="pillar-desc">No more boring 2D images. Gamified 3D product showcases that turn browsing into buying.</p>
+                        <div class="vogue-stat-box" style="--delay: 3">
+                            <div class="vogue-stat-number">100%</div>
+                            <div class="vogue-stat-label">Compliant</div>
                         </div>
-                        
-                        <div class="pillar-card">
-                            <span class="pillar-icon">🧠</span>
-                            <h3 class="pillar-title">AI Budtender</h3>
-                            <p class="pillar-desc">Smart product recommendations. Sample attribution modeling. Turn your team into revenue machines.</p>
+                        <div class="vogue-stat-box" style="--delay: 4">
+                            <div class="vogue-stat-number">$0</div>
+                            <div class="vogue-stat-label">Setup Costs</div>
                         </div>
-
-                        <div class="pillar-card">
-                            <span class="pillar-icon">🛡️</span>
-                            <h3 class="pillar-title">METRC Integration</h3>
-                            <p class="pillar-desc">Full compliance automation. Prevent fines. Real-time state reporting built in.</p>
+                        <div class="vogue-stat-box" style="--delay: 5">
+                            <div class="vogue-stat-number">$3,847</div>
+                            <div class="vogue-stat-label">Monthly Savings</div>
+                        </div>
+                        <div class="vogue-stat-box" style="--delay: 6">
+                            <div class="vogue-stat-number">45s</div>
+                            <div class="vogue-stat-label">Average Receive</div>
                         </div>
                     </div>
                 </section>
 
-                <!-- Stats Showcase -->
-                <section class="stats-section">
-                    <div class="stats-grid">
-                        <div class="stat-card">
-                            <div class="stat-number">10x</div>
-                            <div class="stat-label">Faster</div>
-                        </div>
-                        <div class="stat-card">
-                            <div class="stat-number">99.9%</div>
-                            <div class="stat-label">Accurate</div>
-                        </div>
-                        <div class="stat-card">
-                            <div class="stat-number">100%</div>
-                            <div class="stat-label">Compliant</div>
-                        </div>
-                        <div class="stat-card">
-                            <div class="stat-number">$0</div>
-                            <div class="stat-label">Headaches</div>
-                        </div>
-                    </div>
-                    
-                    <div class="stats-details">
-                        <p class="stats-subtitle">Real-time recognition. Predictive restocking. Zero manual entry.</p>
-                        
-                        <div class="stats-list">
-                            <p>→ Computer vision trained on 50,000+ SKUs</p>
-                            <p>→ Algorithmic restock alerts based on velocity and lead time</p>
-                            <p>→ Sample tracking with attribution modeling</p>
-                        </div>
-                        
-                        <p class="stats-tagline">Purpose-built for cannabis retail at scale.</p>
-                    </div>
-                </section>
-
-                <!-- QR -->
-                <section class="qr-section">
-                    <h2 class="qr-title">Try Trakie Now</h2>
-                    <p class="qr-subtitle">Scan with your phone to experience the AI</p>
-                    <div class="qr-box">
-                        <div class="qr-placeholder">📱</div>
-                    </div>
-                    <button class="qr-btn" onclick="alert('QR scanning coming soon!')">Generate QR Code</button>
+                <!-- VOGUE STYLE DEMO -->
+                <section class="vogue-demo-section vogue-scroll-fade">
+                    <h2 class="vogue-demo-title">Experience Trakie</h2>
+                    <p class="vogue-demo-subtitle">Join NYC's most sophisticated dispensaries</p>
+                    <button class="vogue-demo-button" onclick="showSection('receive')">Schedule Personal Demo</button>
                 </section>
             </div>
         </div>
@@ -2577,24 +2804,27 @@
             showSection('home');
         }
 
-        // ===== SCROLL ANIMATION FOR HERO =====
-        window.addEventListener('scroll', function() {
-            const scrolled = window.pageYOffset;
-            const heroTitle = document.querySelector('.hero-title');
-            const heroSubtitle = document.querySelector('.hero-subtitle');
-            
-            if (heroTitle && scrolled < window.innerHeight) {
-                heroTitle.style.transform = `translateY(${scrolled * 0.5}px)`;
-                heroTitle.style.opacity = 1 - (scrolled / 500);
-                
-                if (heroSubtitle) {
-                    heroSubtitle.style.opacity = 1 - (scrolled / 400);
-                }
-            }
-        });
+        // ===== SCROLL ANIMATIONS =====
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
 
-        // ===== EVENT LISTENERS =====
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
         document.addEventListener('DOMContentLoaded', function() {
+            // Observe Vogue scroll elements
+            document.querySelectorAll('.vogue-scroll-fade').forEach(el => {
+                observer.observe(el);
+            });
+
+            // Password input
             const passwordInput = document.getElementById('passwordInput');
             if (passwordInput) {
                 passwordInput.addEventListener('keypress', function(e) {
@@ -2603,6 +2833,7 @@
                 passwordInput.focus();
             }
             
+            // Welcome video
             const welcomeVid = document.getElementById('welcomeVideo');
             if (welcomeVid) {
                 welcomeVid.playbackRate = 0.5;
