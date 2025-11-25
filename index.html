@@ -1356,6 +1356,367 @@
             box-shadow: 0 8px 25px rgba(201, 169, 97, 0.4);
         }
 
+        /* PRODUCT MODAL - TERP BROS STYLE */
+        .product-modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 10000;
+            overflow-y: auto;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .product-modal-overlay.active {
+            display: block;
+        }
+
+        .product-modal {
+            max-width: 1400px;
+            margin: 80px auto 40px;
+            background: linear-gradient(135deg, #1A1F1A 0%, #0F1410 100%);
+            border: 2px solid rgba(201, 169, 97, 0.3);
+            position: relative;
+            animation: slideUp 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 25px;
+            right: 25px;
+            width: 50px;
+            height: 50px;
+            background: rgba(201, 169, 97, 0.2);
+            border: 1px solid #C9A961;
+            color: #C9A961;
+            font-size: 28px;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10;
+        }
+
+        .modal-close:hover {
+            background: #C9A961;
+            color: #000;
+            transform: rotate(90deg);
+        }
+
+        .modal-content-grid {
+            display: grid;
+            grid-template-columns: 45% 55%;
+            gap: 0;
+            min-height: 600px;
+        }
+
+        .modal-image-section {
+            background: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 60px;
+            position: relative;
+            border-right: 2px solid rgba(201, 169, 97, 0.3);
+        }
+
+        .modal-product-image {
+            font-size: 280px;
+            max-width: 100%;
+            max-height: 500px;
+            object-fit: contain;
+            animation: imageZoom 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+
+        @keyframes imageZoom {
+            from {
+                transform: scale(0.8);
+                opacity: 0;
+            }
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        .modal-image-section img {
+            max-width: 100%;
+            max-height: 500px;
+            object-fit: contain;
+        }
+
+        .modal-info-section {
+            padding: 60px 50px;
+            overflow-y: auto;
+            max-height: 900px;
+        }
+
+        .modal-product-badges {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .modal-badge {
+            background: rgba(201, 169, 97, 0.2);
+            border: 1px solid #C9A961;
+            padding: 8px 18px;
+            font-size: 12px;
+            font-weight: 700;
+            color: #C9A961;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .modal-product-title {
+            font-family: 'Bodoni Moda', serif;
+            font-size: 56px;
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 15px;
+            letter-spacing: -2px;
+        }
+
+        .modal-brand {
+            font-size: 14px;
+            color: #C9A961;
+            margin-bottom: 25px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .modal-price-section {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 35px;
+            padding-bottom: 35px;
+            border-bottom: 1px solid rgba(201, 169, 97, 0.2);
+        }
+
+        .modal-price {
+            font-family: 'Bodoni Moda', serif;
+            font-size: 52px;
+            font-weight: 900;
+            color: #C9A961;
+        }
+
+        .modal-quantity-badge {
+            background: linear-gradient(135deg, #C9A961 0%, #8B7355 100%);
+            color: #000;
+            padding: 12px 25px;
+            font-size: 18px;
+            font-weight: 900;
+            border-radius: 30px;
+        }
+
+        .modal-description-section {
+            margin-bottom: 40px;
+        }
+
+        .section-heading {
+            font-family: 'Bodoni Moda', serif;
+            font-size: 28px;
+            font-weight: 700;
+            color: #C9A961;
+            margin-bottom: 20px;
+            letter-spacing: -0.5px;
+            text-transform: uppercase;
+        }
+
+        .modal-description-text {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 17px;
+            line-height: 1.8;
+            color: #ccc;
+            letter-spacing: 0.3px;
+        }
+
+        .modal-effects-section {
+            margin-bottom: 40px;
+        }
+
+        .effects-grid {
+            display: flex;
+            gap: 30px;
+            margin-top: 20px;
+        }
+
+        .effect-item {
+            text-align: center;
+        }
+
+        .effect-icon {
+            font-size: 52px;
+            margin-bottom: 12px;
+            filter: drop-shadow(0 4px 12px rgba(201, 169, 97, 0.3));
+        }
+
+        .effect-label {
+            font-family: 'Bodoni Moda', serif;
+            font-size: 18px;
+            font-weight: 600;
+            color: #C9A961;
+            letter-spacing: 0.5px;
+        }
+
+        .modal-potency-section {
+            margin-bottom: 40px;
+        }
+
+        .potency-bar {
+            margin-bottom: 15px;
+        }
+
+        .potency-label-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+
+        .potency-label {
+            font-size: 16px;
+            font-weight: 700;
+            color: #fff;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .potency-value {
+            font-size: 16px;
+            font-weight: 900;
+            color: #C9A961;
+        }
+
+        .potency-bar-container {
+            width: 100%;
+            height: 16px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(201, 169, 97, 0.3);
+            overflow: hidden;
+            position: relative;
+        }
+
+        .potency-bar-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #7fb800 0%, #5a8500 100%);
+            transition: width 1s cubic-bezier(0.165, 0.84, 0.44, 1);
+            width: 0;
+        }
+
+        .potency-bar-fill.animate {
+            width: var(--fill-width);
+        }
+
+        .modal-stats-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .stat-box-modal {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(201, 169, 97, 0.2);
+            padding: 20px;
+        }
+
+        .stat-box-modal .stat-label {
+            color: #888;
+            font-size: 12px;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+            letter-spacing: 1px;
+        }
+
+        .stat-box-modal .stat-value {
+            font-size: 22px;
+            font-weight: 700;
+            color: #C9A961;
+        }
+
+        .modal-related-section {
+            padding-top: 40px;
+            border-top: 1px solid rgba(201, 169, 97, 0.2);
+        }
+
+        .related-products-carousel {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-top: 25px;
+        }
+
+        .related-product-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(201, 169, 97, 0.2);
+            padding: 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .related-product-card:hover {
+            transform: translateY(-5px);
+            border-color: #C9A961;
+            box-shadow: 0 10px 30px rgba(201, 169, 97, 0.2);
+        }
+
+        .related-product-image {
+            font-size: 80px;
+            margin-bottom: 15px;
+        }
+
+        .related-product-image img {
+            width: 100%;
+            max-height: 150px;
+            object-fit: contain;
+        }
+
+        .related-product-name {
+            font-family: 'Bodoni Moda', serif;
+            font-size: 18px;
+            font-weight: 600;
+            color: #fff;
+            margin-bottom: 8px;
+        }
+
+        .related-product-price {
+            font-size: 22px;
+            font-weight: 900;
+            color: #C9A961;
+        }
+
+        @media (max-width: 1024px) {
+            .modal-content-grid {
+                grid-template-columns: 1fr;
+            }
+            .modal-image-section {
+                border-right: none;
+                border-bottom: 2px solid rgba(201, 169, 97, 0.3);
+            }
+            .related-products-carousel {
+                grid-template-columns: 1fr;
+            }
+        }
+
         /* DATA SECTION */
         .data-wrapper {
             padding: 140px 40px 60px;
@@ -2120,6 +2481,88 @@
         </div>
     </div>
 
+    <!-- Product Modal -->
+    <div class="product-modal-overlay" id="productModal">
+        <div class="product-modal">
+            <button class="modal-close" onclick="closeProductModal()">×</button>
+            
+            <div class="modal-content-grid">
+                <div class="modal-image-section">
+                    <div class="modal-product-image" id="modalImage">🌿</div>
+                </div>
+                
+                <div class="modal-info-section">
+                    <div class="modal-product-badges">
+                        <div class="modal-badge" id="modalCategory">FLOWER</div>
+                        <div class="modal-badge" id="modalStrain">SATIVA</div>
+                    </div>
+                    
+                    <h1 class="modal-product-title" id="modalTitle">Blue Dream</h1>
+                    <p class="modal-brand" id="modalBrand">By Green Leaf Farms</p>
+                    
+                    <div class="modal-price-section">
+                        <div class="modal-price" id="modalPrice">$42.00</div>
+                        <div class="modal-quantity-badge" id="modalQuantity">QTY 12</div>
+                    </div>
+                    
+                    <div class="modal-description-section">
+                        <h3 class="section-heading">Product Description</h3>
+                        <p class="modal-description-text" id="modalDescription">
+                            <!-- AI-generated description will go here -->
+                        </p>
+                    </div>
+                    
+                    <div class="modal-effects-section">
+                        <h3 class="section-heading">Product Effects</h3>
+                        <div class="effects-grid" id="modalEffects">
+                            <!-- Effects will be populated here -->
+                        </div>
+                    </div>
+                    
+                    <div class="modal-potency-section">
+                        <h3 class="section-heading">Potency Chart</h3>
+                        <div class="potency-bar">
+                            <div class="potency-label-row">
+                                <span class="potency-label">THC</span>
+                                <span class="potency-value" id="modalTHC">24.5%</span>
+                            </div>
+                            <div class="potency-bar-container">
+                                <div class="potency-bar-fill" id="thcBar" style="--fill-width: 0%"></div>
+                            </div>
+                        </div>
+                        <div class="potency-bar">
+                            <div class="potency-label-row">
+                                <span class="potency-label">CBD</span>
+                                <span class="potency-value" id="modalCBD">0.3%</span>
+                            </div>
+                            <div class="potency-bar-container">
+                                <div class="potency-bar-fill" id="cbdBar" style="--fill-width: 0%"></div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="modal-stats-grid">
+                        <div class="stat-box-modal">
+                            <div class="stat-label">Expiration Date</div>
+                            <div class="stat-value" id="modalExpDate">12/2025</div>
+                        </div>
+                        <div class="stat-box-modal">
+                            <div class="stat-label">Unit Cost</div>
+                            <div class="stat-value" id="modalUnitCost">$35.00</div>
+                        </div>
+                    </div>
+                    
+                    <div class="modal-related-section">
+                        <h3 class="section-heading">You May Also Like</h3>
+                        <div class="related-products-carousel" id="relatedProducts">
+                            <!-- Related products will be populated here -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script>
         const categories = [
             { name: 'Flower', icon: '🌿', video: 'flower.mov' },
@@ -2143,7 +2586,13 @@
                 quantity: 12,
                 unitCost: 35.00,
                 priceAfterTax: 42.00,
-                images: ['🌿', '🌿', '🌿']
+                images: ['🌿', '🌿', '🌿'],
+                description: 'Blue Dream is a sublime sativa-dominant hybrid that offers a perfectly balanced experience of cerebral elevation and physical tranquility. This exceptional cultivar begins with a gentle euphoric lift that enhances mood and perception, gradually blossoming into a soothing body relaxation that maintains functionality while melting away tension. Blue Dream features an exquisite flavor profile dominated by sweet, ripe blueberry notes complemented by subtle vanilla undertones and a honey-like smoothness on exhale. Its aroma is equally enchanting, with prominent fresh blueberry scents underscored by floral sweetness and earthy notes that become more pronounced when the delicate buds are broken apart. Medical cannabis patients particularly appreciate Blue Dream for its balanced therapeutic effects, effectively addressing anxiety, mild pain, and insomnia while promoting a sense of peaceful wellbeing.',
+                effects: [
+                    { icon: '😊', label: 'Happy' },
+                    { icon: '🛋️', label: 'Relaxed' },
+                    { icon: '🎨', label: 'Creative' }
+                ]
             },
             {
                 brand: 'Green Leaf Farms',
@@ -2155,7 +2604,13 @@
                 quantity: 8,
                 unitCost: 42.00,
                 priceAfterTax: 50.40,
-                images: ['🌿', '🌿', '🌿']
+                images: ['🌿', '🌿', '🌿'],
+                description: 'OG Kush is a legendary indica strain that delivers powerful full-body relaxation with a distinctly euphoric cerebral experience. Known for its complex terpene profile, OG Kush presents earthy pine notes layered with subtle citrus undertones and a signature fuel-like aroma that defines West Coast cannabis culture. The high begins with an uplifting mental clarity that gradually transitions into deep physical relaxation, making it ideal for evening use. Dense, resinous buds showcase vibrant green hues with fiery orange pistils and a generous coating of trichomes. Medical patients favor OG Kush for managing chronic pain, stress, and sleep disorders.',
+                effects: [
+                    { icon: '😴', label: 'Sleepy' },
+                    { icon: '🛋️', label: 'Relaxed' },
+                    { icon: '😌', label: 'Euphoric' }
+                ]
             },
             {
                 brand: 'Green Leaf Farms',
@@ -2167,7 +2622,13 @@
                 quantity: 15,
                 unitCost: 32.00,
                 priceAfterTax: 38.40,
-                images: ['🌿', '🌿', '🌿']
+                images: ['🌿', '🌿', '🌿'],
+                description: 'Sour Diesel is an energizing sativa powerhouse renowned for its invigorating cerebral effects and unmistakable diesel-fuel aroma. This strain delivers a fast-acting head high that sparks creativity, enhances focus, and promotes social engagement. The flavor profile combines pungent diesel notes with bright citrus and herbal undertones, creating a sharp, tangy experience that lingers on the palate. Bright green buds with abundant orange hairs produce a stimulating effect perfect for daytime use. Sour Diesel is celebrated among creative professionals and patients seeking relief from fatigue, depression, and lack of appetite without sedation.',
+                effects: [
+                    { icon: '⚡', label: 'Energetic' },
+                    { icon: '💡', label: 'Focused' },
+                    { icon: '😁', label: 'Uplifted' }
+                ]
             },
             {
                 brand: 'Green Leaf Farms',
@@ -2179,7 +2640,13 @@
                 quantity: 20,
                 unitCost: 28.00,
                 priceAfterTax: 33.60,
-                images: ['🌿', '🌿', '🌿']
+                images: ['🌿', '🌿', '🌿'],
+                description: 'Purple Haze is an iconic sativa that combines potent psychoactive effects with a mesmerizing visual and aromatic experience. Named for its stunning purple-hued buds that shimmer with crystalline trichomes, this strain delivers a powerful cerebral rush that inspires creativity and introspection. The flavor profile features sweet berry notes with earthy undertones and a hint of spice, while the aroma presents a complex bouquet of fresh flowers and wild berries. Purple Haze produces a long-lasting, dreamy euphoria that enhances sensory perception and promotes artistic thinking. Medical users appreciate its efficacy in managing symptoms of depression, chronic stress, and mental fatigue.',
+                effects: [
+                    { icon: '🎨', label: 'Creative' },
+                    { icon: '😌', label: 'Euphoric' },
+                    { icon: '🌟', label: 'Inspired' }
+                ]
             },
             {
                 brand: 'Green Leaf Farms',
@@ -2191,7 +2658,13 @@
                 quantity: 10,
                 unitCost: 38.00,
                 priceAfterTax: 45.60,
-                images: ['🌿', '🌿', '🌿']
+                images: ['🌿', '🌿', '🌿'],
+                description: 'Gelato is a premium hybrid strain that delivers a perfectly balanced high combining mental clarity with soothing physical relaxation. This dessert-themed cultivar features an exceptional flavor profile reminiscent of sweet sherbet with creamy citrus undertones and hints of fresh berries. Dense, colorful buds display deep purple hues contrasted by bright orange pistils and a generous coating of sticky trichomes. The effects begin with an uplifting cerebral buzz that enhances mood and sociability, followed by a gentle body melt that relieves tension without causing couch-lock. Gelato is highly sought after by both recreational users seeking a sophisticated experience and medical patients managing chronic pain, inflammation, and anxiety.',
+                effects: [
+                    { icon: '😊', label: 'Happy' },
+                    { icon: '🛋️', label: 'Relaxed' },
+                    { icon: '🎭', label: 'Balanced' }
+                ]
             }
         ];
 
@@ -2297,6 +2770,9 @@
             products.forEach((product, index) => {
                 const card = document.createElement('div');
                 card.className = 'product-card';
+                card.style.cursor = 'pointer';
+                card.onclick = () => openProductModal(index);
+                
                 card.innerHTML = `
                     <div class="product-card-header">
                         <div class="product-card-title-left">
@@ -2313,8 +2789,8 @@
                             <div class="thc-percentage">${product.thc.replace('%', '')}</div>
                             <div class="thc-label">THC</div>
                         </div>
-                        <button class="image-arrow left" onclick="previousImage(${index})">‹</button>
-                        <button class="image-arrow right" onclick="nextImage(${index})">›</button>
+                        <button class="image-arrow left" onclick="event.stopPropagation(); previousImage(${index})">‹</button>
+                        <button class="image-arrow right" onclick="event.stopPropagation(); nextImage(${index})">›</button>
                     </div>
                     
                     <div class="product-price-section">
@@ -2525,6 +3001,114 @@
             alert('Thank you for your interest! We\'ll be in touch within 24 hours.');
             e.target.reset();
         }
+
+        // PRODUCT MODAL FUNCTIONS
+        function openProductModal(productIndex) {
+            const product = products[productIndex];
+            const modal = document.getElementById('productModal');
+            
+            // Populate modal data
+            document.getElementById('modalImage').textContent = product.images[0];
+            document.getElementById('modalCategory').textContent = 'FLOWER';
+            document.getElementById('modalStrain').textContent = product.strain.toUpperCase();
+            document.getElementById('modalTitle').textContent = product.name;
+            document.getElementById('modalBrand').textContent = `By ${product.brand}`;
+            document.getElementById('modalPrice').textContent = `$${product.priceAfterTax.toFixed(2)}`;
+            document.getElementById('modalQuantity').textContent = `QTY ${product.quantity}`;
+            document.getElementById('modalDescription').textContent = product.description;
+            document.getElementById('modalTHC').textContent = product.thc;
+            document.getElementById('modalCBD').textContent = product.cbd;
+            document.getElementById('modalExpDate').textContent = product.expDate;
+            document.getElementById('modalUnitCost').textContent = `$${product.unitCost.toFixed(2)}`;
+            
+            // Populate effects
+            const effectsGrid = document.getElementById('modalEffects');
+            effectsGrid.innerHTML = '';
+            product.effects.forEach(effect => {
+                const effectDiv = document.createElement('div');
+                effectDiv.className = 'effect-item';
+                effectDiv.innerHTML = `
+                    <div class="effect-icon">${effect.icon}</div>
+                    <div class="effect-label">${effect.label}</div>
+                `;
+                effectsGrid.appendChild(effectDiv);
+            });
+            
+            // Animate potency bars
+            const thcBar = document.getElementById('thcBar');
+            const cbdBar = document.getElementById('cbdBar');
+            const thcPercent = parseFloat(product.thc);
+            const cbdPercent = parseFloat(product.cbd);
+            
+            // Reset bars
+            thcBar.style.setProperty('--fill-width', '0%');
+            cbdBar.style.setProperty('--fill-width', '0%');
+            thcBar.classList.remove('animate');
+            cbdBar.classList.remove('animate');
+            
+            // Animate after modal opens
+            setTimeout(() => {
+                thcBar.style.setProperty('--fill-width', `${(thcPercent / 35) * 100}%`);
+                cbdBar.style.setProperty('--fill-width', `${(cbdPercent / 35) * 100}%`);
+                thcBar.classList.add('animate');
+                cbdBar.classList.add('animate');
+            }, 300);
+            
+            // Populate related products
+            renderRelatedProducts(productIndex);
+            
+            // Show modal
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeProductModal() {
+            const modal = document.getElementById('productModal');
+            modal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        function renderRelatedProducts(excludeIndex) {
+            const container = document.getElementById('relatedProducts');
+            container.innerHTML = '';
+            
+            // Get 3 random products excluding current one
+            const otherProducts = products.filter((_, index) => index !== excludeIndex);
+            const shuffled = otherProducts.sort(() => 0.5 - Math.random());
+            const selected = shuffled.slice(0, 3);
+            
+            selected.forEach((product, index) => {
+                const card = document.createElement('div');
+                card.className = 'related-product-card';
+                const actualIndex = products.indexOf(product);
+                card.onclick = () => {
+                    closeProductModal();
+                    setTimeout(() => openProductModal(actualIndex), 300);
+                };
+                
+                card.innerHTML = `
+                    <div class="related-product-image">${product.images[0]}</div>
+                    <div class="related-product-name">${product.name}</div>
+                    <div class="related-product-price">$${product.priceAfterTax.toFixed(2)}</div>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        // Close modal when clicking outside
+        document.addEventListener('click', function(e) {
+            const modal = document.getElementById('productModal');
+            if (e.target === modal) {
+                closeProductModal();
+            }
+        });
+
+        // Close modal with ESC key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeProductModal();
+            }
+        });
 
         document.addEventListener('DOMContentLoaded', function() {
             const passwordInput = document.getElementById('passwordInput');
