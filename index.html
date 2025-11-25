@@ -6,20 +6,14 @@
     <title>Trakie.ai - Cannabis Retail Intelligence</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap');
-        @import url('https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,wght@0,400;0,700;1,400&family=Playfair+Display:wght@400;700&display=swap');
-        @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,wght@0,400;0,700;1,400&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&display=swap');
 
         html {
             margin: 0 !important;
             padding: 0 !important;
             overflow-x: hidden;
             scroll-behavior: smooth;
-        }
-
-        body {
-            margin: 0 !important;
-            padding: 0 !important;
-            overflow-x: hidden;
         }
 
         * {
@@ -34,6 +28,7 @@
             color: #ffffff;
             line-height: 1.6;
             -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
         }
 
         /* Welcome Screen */
@@ -52,8 +47,6 @@
             z-index: 9999;
             text-align: center;
             overflow: hidden;
-            margin: 0;
-            padding-bottom: 0;
         }
 
         .stats-ticker {
@@ -69,7 +62,6 @@
             border-bottom: 1px solid rgba(201, 169, 97, 0.2);
             padding: 10px 0;
             margin: 0 !important;
-            transform: translateZ(0);
         }
 
         .ticker-content {
@@ -98,7 +90,6 @@
             width: 200px;
             height: 2px;
             background: linear-gradient(90deg, #C9A961 0%, #8B7355 50%, #C9A961 100%);
-            border-radius: 2px;
             margin-bottom: 20px;
             opacity: 0;
             animation: fadeIn 1s ease 0.9s forwards;
@@ -111,7 +102,6 @@
             font-weight: 400;
             opacity: 0;
             animation: fadeIn 1s ease 1.1s forwards;
-            line-height: 1.3;
         }
         
         .welcome-screen > * {
@@ -137,7 +127,6 @@
             border: 1px solid rgba(201, 169, 97, 0.2);
             border-radius: 16px;
             padding: 25px 30px;
-            margin-top: 0px;
             opacity: 0;
             animation: fadeIn 1s ease 1.5s forwards;
         }
@@ -152,7 +141,6 @@
             font-size: 16px;
             margin-bottom: 15px;
             font-family: 'Outfit', sans-serif;
-            transition: all 0.3s ease;
         }
 
         .password-input::placeholder {
@@ -162,7 +150,6 @@
         .password-input:focus {
             outline: none;
             border-color: #C9A961;
-            background: rgba(255, 255, 255, 0.12);
         }
 
         .login-btn {
@@ -197,27 +184,27 @@
             display: block;
         }
 
-        /* Navigation */
+        /* Navigation - PERFECT ARCHITECTURE */
         .nav {
             position: fixed;
             top: 0;
             left: 0;
             right: 0;
-            background: rgba(0, 0, 0, 0.9);
+            background: rgba(0, 0, 0, 0.92);
             backdrop-filter: blur(20px);
-            border-bottom: 1px solid rgba(201, 169, 97, 0.2);
+            border-bottom: 1px solid rgba(201, 169, 97, 0.25);
             z-index: 100;
-            padding: 20px 50px;
+            padding: 22px 60px;
             transition: all 0.3s ease;
         }
 
         .nav:hover {
-            background: rgba(0, 0, 0, 0.95);
+            background: rgba(0, 0, 0, 0.96);
             border-bottom-color: rgba(201, 169, 97, 0.4);
         }
 
         .nav-content {
-            max-width: 1400px;
+            max-width: 1600px;
             margin: 0 auto;
             display: flex;
             justify-content: space-between;
@@ -231,21 +218,23 @@
             transition: all 0.3s ease;
         }
 
+        /* PERFECT LOGO SIZING - GOLDEN RATIO */
         .nav-logo-img {
-            height: 55px;
+            height: 85px;
             width: auto;
             object-fit: contain;
-            transition: all 0.3s ease;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            filter: drop-shadow(0 2px 8px rgba(201, 169, 97, 0.15));
         }
 
         .nav-logo:hover .nav-logo-img {
-            transform: scale(1.05);
-            filter: brightness(1.15);
+            transform: scale(1.03);
+            filter: drop-shadow(0 4px 12px rgba(201, 169, 97, 0.3));
         }
 
         .nav-links {
             display: flex;
-            gap: 35px;
+            gap: 40px;
             align-items: center;
         }
 
@@ -280,20 +269,20 @@
         }
 
         .nav-cta {
-            padding: 12px 28px;
+            padding: 12px 32px;
             background: linear-gradient(135deg, #C9A961 0%, #8B7355 100%);
             color: #000;
-            border-radius: 0;
             text-decoration: none;
             font-weight: 600;
             font-size: 14px;
             letter-spacing: 1px;
             transition: all 0.3s ease;
+            border: none;
         }
 
         .nav-cta:hover {
             transform: translateY(-2px);
-            box-shadow: 0 5px 20px rgba(201, 169, 97, 0.4);
+            box-shadow: 0 6px 20px rgba(201, 169, 97, 0.4);
         }
 
         @keyframes fadeUp {
@@ -323,16 +312,15 @@
             to { opacity: 1; }
         }
 
-        /* HERO SECTION */
+        /* HERO */
         .vogue-hero {
             min-height: 100vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            position: relative;
             background: linear-gradient(180deg, #0A0A0A 0%, #1A1F1A 100%);
-            padding-top: 100px;
+            padding-top: 130px;
         }
 
         .vogue-hero-title {
@@ -400,7 +388,6 @@
             background: linear-gradient(135deg, #1A1F1A 0%, #0F1410 100%);
             border: 1px solid rgba(201, 169, 97, 0.2);
             padding: 50px 40px;
-            border-radius: 0;
             width: 380px;
             opacity: 0;
             animation: fadeScale 0.8s ease forwards;
@@ -525,17 +512,6 @@
             transform: scale(1.05);
         }
 
-        .vogue-scroll-fade {
-            opacity: 0;
-            transform: translateY(50px);
-            transition: all 1s cubic-bezier(0.165, 0.84, 0.44, 1);
-        }
-
-        .vogue-scroll-fade.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
         /* BUBBLES */
         .bubbles-wrapper {
             padding: 140px 40px 60px;
@@ -586,7 +562,6 @@
             padding: 12px 35px;
             background: transparent;
             border: 1px solid rgba(201, 169, 97, 0.3);
-            border-radius: 0;
             color: #C9A961;
             font-size: 18px;
             font-weight: 400;
@@ -620,7 +595,6 @@
             width: 100%;
             height: 350px;
             cursor: pointer;
-            border-radius: 0;
             background: linear-gradient(135deg, #1A1F1A 0%, #0F1410 100%);
             border: 1px solid rgba(201, 169, 97, 0.2);
             box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
@@ -675,14 +649,13 @@
             font-size: 24px;
             font-weight: 400;
             color: #C9A961;
-            text-transform: none;
             letter-spacing: 0.5px;
             z-index: 2;
             text-align: center;
             border-top: 1px solid rgba(201, 169, 97, 0.3);
         }
 
-        /* RECEIVE SECTION */
+        /* RECEIVE SECTION - FULL DEMO */
         .receive-wrapper {
             padding: 140px 40px 60px;
             min-height: 100vh;
@@ -691,8 +664,8 @@
 
         .demo-badge {
             position: fixed;
-            top: 120px;
-            right: 50px;
+            top: 130px;
+            right: 60px;
             background: rgba(201, 169, 97, 0.15);
             border: 1px solid #C9A961;
             padding: 8px 20px;
@@ -764,6 +737,625 @@
             box-shadow: 0 15px 50px rgba(201, 169, 97, 0.5);
         }
 
+        .qr-screen {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            text-align: center;
+        }
+
+        .qr-screen.active {
+            display: flex;
+        }
+
+        .qr-video-container {
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .qr-video-container video {
+            width: 100%;
+            height: auto;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(201, 169, 97, 0.2);
+        }
+
+        .split-screen {
+            display: none;
+            min-height: 100vh;
+            padding-top: 130px;
+        }
+
+        .split-screen.active {
+            display: grid;
+            grid-template-columns: 50% 50%;
+            gap: 0;
+        }
+
+        .split-left, .split-right {
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+        }
+
+        .split-left {
+            border-right: 1px solid rgba(201, 169, 97, 0.2);
+        }
+
+        .section-title {
+            font-family: 'Bodoni Moda', serif;
+            font-size: 32px;
+            font-weight: 600;
+            color: #C9A961;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .mock-invoice {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(201, 169, 97, 0.2);
+            border-radius: 15px;
+            padding: 30px;
+            width: 100%;
+            max-width: 500px;
+        }
+
+        .invoice-header {
+            border-bottom: 1px solid rgba(201, 169, 97, 0.2);
+            padding-bottom: 20px;
+            margin-bottom: 20px;
+        }
+
+        .invoice-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            font-size: 14px;
+        }
+
+        .invoice-row strong {
+            color: #C9A961;
+        }
+
+        .invoice-items {
+            margin-top: 20px;
+        }
+
+        .invoice-item {
+            padding: 12px;
+            background: rgba(201, 169, 97, 0.1);
+            border-radius: 8px;
+            margin-bottom: 10px;
+            font-size: 15px;
+        }
+
+        .iphone-mockup {
+            width: 300px;
+            height: 600px;
+            background: #1a1a1a;
+            border-radius: 40px;
+            border: 8px solid #2a2a2a;
+            position: relative;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            overflow: hidden;
+        }
+
+        .iphone-notch {
+            width: 150px;
+            height: 30px;
+            background: #000;
+            border-radius: 0 0 20px 20px;
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 10;
+        }
+
+        .iphone-screen {
+            width: 100%;
+            height: 100%;
+            background: #000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .iphone-screen video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .processing-screen {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            text-align: center;
+            padding: 40px;
+        }
+
+        .processing-screen.active {
+            display: flex;
+        }
+
+        .processing-title {
+            font-family: 'Bodoni Moda', serif;
+            font-size: 56px;
+            font-weight: 700;
+            margin-bottom: 40px;
+            color: #C9A961;
+        }
+
+        .spinner-large {
+            width: 100px;
+            height: 100px;
+            border: 8px solid rgba(201, 169, 97, 0.2);
+            border-top: 8px solid #C9A961;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-bottom: 40px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .processing-steps {
+            max-width: 600px;
+            text-align: left;
+        }
+
+        .process-step {
+            background: rgba(255, 255, 255, 0.05);
+            border-left: 4px solid #C9A961;
+            padding: 20px;
+            margin-bottom: 15px;
+            border-radius: 8px;
+            opacity: 0;
+            transform: translateX(-30px);
+        }
+
+        .process-step.active {
+            animation: slideInStep 0.5s ease-out forwards;
+        }
+
+        @keyframes slideInStep {
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .process-step-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #C9A961;
+            margin-bottom: 8px;
+        }
+
+        .process-step-text {
+            font-size: 14px;
+            color: #888;
+            font-family: monospace;
+        }
+
+        /* RESULTS WITH POKEMON CARDS */
+        .results-screen {
+            display: none;
+            min-height: 100vh;
+            padding-top: 130px;
+        }
+
+        .results-screen.active {
+            display: grid;
+            grid-template-columns: 70% 30%;
+            gap: 0;
+        }
+
+        .results-left {
+            padding: 40px;
+            overflow-y: auto;
+            max-height: calc(100vh - 130px);
+        }
+
+        .results-right {
+            padding: 40px;
+            border-left: 1px solid rgba(201, 169, 97, 0.2);
+            position: sticky;
+            top: 130px;
+            height: fit-content;
+        }
+
+        .results-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .results-title {
+            font-family: 'Bodoni Moda', serif;
+            font-size: 56px;
+            font-weight: 800;
+            background: linear-gradient(135deg, #C9A961, #8B7355);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 20px;
+            letter-spacing: -2px;
+        }
+
+        .completion-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #C9A961 0%, #8B7355 100%);
+            color: #000;
+            padding: 12px 30px;
+            border-radius: 50px;
+            font-size: 16px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+
+        .timer-display {
+            font-size: 72px;
+            font-weight: 900;
+            color: #C9A961;
+            margin: 30px 0;
+            font-family: 'Courier New', monospace;
+            letter-spacing: 4px;
+            text-shadow: 0 0 20px rgba(201, 169, 97, 0.5);
+        }
+
+        .timer-label {
+            font-size: 14px;
+            color: #888;
+            font-weight: 600;
+            letter-spacing: 2px;
+        }
+
+        .product-cards {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        /* POKEMON CARD STYLING - READY FOR 3D/5D */
+        .product-card {
+            background: linear-gradient(135deg, rgba(201, 169, 97, 0.15) 0%, rgba(139, 115, 85, 0.15) 100%);
+            border: 3px solid rgba(201, 169, 97, 0.4);
+            border-radius: 24px;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+            position: relative;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+
+        .product-card:hover {
+            transform: translateY(-12px) scale(1.02);
+            border-color: #C9A961;
+            box-shadow: 0 25px 70px rgba(201, 169, 97, 0.5);
+        }
+
+        .product-card-header {
+            background: linear-gradient(135deg, #C9A961 0%, #8B7355 100%);
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 3px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .product-card-title-left {
+            flex: 1;
+            text-align: left;
+        }
+
+        .product-brand {
+            font-size: 11px;
+            font-weight: 600;
+            color: rgba(0, 0, 0, 0.6);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .product-strain {
+            font-size: 22px;
+            font-weight: 900;
+            color: #000;
+            margin-top: 2px;
+            letter-spacing: -0.5px;
+        }
+
+        .product-type {
+            font-size: 10px;
+            font-weight: 600;
+            color: rgba(0, 0, 0, 0.5);
+            text-transform: uppercase;
+            margin-top: 2px;
+        }
+
+        .product-quantity {
+            background: rgba(0, 0, 0, 0.25);
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 16px;
+            font-weight: 900;
+            color: #fff;
+        }
+
+        /* IMAGE CONTAINER - READY FOR 3D/5D IMAGES */
+        .product-card-image-container {
+            position: relative;
+            height: 350px;
+            background: linear-gradient(to bottom, #1a1a1a 0%, #0a0a0a 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .product-image-main {
+            width: 70%;
+            height: 70%;
+            font-size: 120px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.3s ease;
+        }
+
+        /* When 3D images are added, they'll fit perfectly here */
+        .product-image-main img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            transition: transform 0.3s ease;
+        }
+
+        .product-card:hover .product-image-main {
+            transform: scale(1.1);
+        }
+
+        .thc-overlay {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(135deg, #f59e0b, #d97706);
+            border-radius: 50%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 8px 24px rgba(245, 158, 11, 0.6);
+            border: 4px solid #fbbf24;
+            transform: rotate(-15deg);
+        }
+
+        .thc-percentage {
+            font-size: 28px;
+            font-weight: 900;
+            color: #000;
+            line-height: 1;
+        }
+
+        .thc-label {
+            font-size: 10px;
+            font-weight: 700;
+            color: rgba(0, 0, 0, 0.7);
+            text-transform: uppercase;
+        }
+
+        .image-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            font-size: 20px;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .image-arrow:hover {
+            background: rgba(201, 169, 97, 0.8);
+        }
+
+        .image-arrow.left {
+            left: 15px;
+        }
+
+        .image-arrow.right {
+            right: 15px;
+        }
+
+        .product-price-section {
+            background: rgba(201, 169, 97, 0.2);
+            padding: 20px;
+            text-align: center;
+            border-top: 3px solid rgba(201, 169, 97, 0.4);
+        }
+
+        .price-label {
+            font-size: 11px;
+            color: #888;
+            text-transform: uppercase;
+            margin-bottom: 5px;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+
+        .product-price {
+            font-family: 'Bodoni Moda', serif;
+            font-size: 40px;
+            font-weight: 900;
+            color: #C9A961;
+            text-shadow: 0 2px 10px rgba(201, 169, 97, 0.5);
+        }
+
+        .product-card-stats {
+            padding: 20px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px 20px;
+            background: rgba(0, 0, 0, 0.3);
+        }
+
+        .stat-row {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .stat-label {
+            color: #888;
+            font-weight: 600;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .stat-value {
+            color: #fff;
+            font-weight: 700;
+            font-size: 16px;
+        }
+
+        .stat-value.highlight {
+            color: #C9A961;
+            font-size: 18px;
+        }
+
+        .smart-move-controls {
+            position: sticky;
+            top: 150px;
+        }
+
+        .controls-title {
+            font-family: 'Bodoni Moda', serif;
+            font-size: 28px;
+            font-weight: 600;
+            color: #C9A961;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .move-button-group {
+            margin-bottom: 20px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(201, 169, 97, 0.2);
+            border-radius: 15px;
+            transition: all 0.3s;
+        }
+
+        .move-button-group.selected {
+            background: rgba(245, 158, 11, 0.15);
+            border-color: #f59e0b;
+        }
+
+        .move-product-name {
+            font-size: 16px;
+            font-weight: 600;
+            color: #fff;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .move-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        .move-btn {
+            flex: 1;
+            padding: 15px;
+            background: linear-gradient(135deg, #C9A961 0%, #8B7355 100%);
+            color: #000;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .move-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(201, 169, 97, 0.4);
+        }
+
+        .move-btn.selected {
+            background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+            color: #fff;
+            box-shadow: 0 0 20px rgba(245, 158, 11, 0.6);
+        }
+
+        .move-all-btn {
+            width: 100%;
+            padding: 20px;
+            background: linear-gradient(135deg, #C9A961 0%, #8B7355 100%);
+            color: #000;
+            border: none;
+            border-radius: 16px;
+            font-size: 20px;
+            font-weight: 900;
+            cursor: pointer;
+            margin-top: 30px;
+            box-shadow: 0 10px 40px rgba(201, 169, 97, 0.5);
+            animation: pulse 2s ease-in-out infinite;
+            transition: all 0.3s;
+        }
+
+        .move-all-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 50px rgba(201, 169, 97, 0.7);
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+        }
+
+        .complete-btn {
+            padding: 15px 40px;
+            background: linear-gradient(135deg, #C9A961 0%, #8B7355 100%);
+            color: #000;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: none;
+            margin-top: 20px;
+        }
+
+        .complete-btn.show {
+            display: inline-block;
+        }
+
+        .complete-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(201, 169, 97, 0.4);
+        }
+
         /* DATA SECTION */
         .data-wrapper {
             padding: 140px 40px 60px;
@@ -805,7 +1397,6 @@
         .dashboard-card {
             background: linear-gradient(135deg, #1A1F1A 0%, #0F1410 100%);
             border: 1px solid rgba(201, 169, 97, 0.2);
-            border-radius: 0;
             padding: 30px;
             transition: all 0.4s ease;
             position: relative;
@@ -891,7 +1482,6 @@
         .pricing-card {
             background: linear-gradient(135deg, #1A1F1A 0%, #0F1410 100%);
             border: 2px solid rgba(201, 169, 97, 0.3);
-            border-radius: 0;
             padding: 50px 40px;
             text-align: center;
             max-width: 600px;
@@ -909,7 +1499,6 @@
             background: #C9A961;
             color: #000;
             padding: 10px 25px;
-            border-radius: 0;
             font-size: 14px;
             font-weight: 700;
             margin-bottom: 25px;
@@ -924,10 +1513,6 @@
             margin-bottom: 25px;
             color: #C9A961;
             letter-spacing: -0.5px;
-        }
-
-        .price-comparison {
-            margin-bottom: 30px;
         }
 
         .plan-price {
@@ -951,14 +1536,12 @@
             color: #888;
             margin-bottom: 20px;
             font-size: 16px;
-            font-weight: 400;
         }
 
         .lifetime-lock {
             background: rgba(201, 169, 97, 0.15);
             border: 1px solid rgba(201, 169, 97, 0.3);
             padding: 15px 20px;
-            border-radius: 0;
             margin-bottom: 35px;
             font-size: 15px;
             color: #C9A961;
@@ -978,7 +1561,6 @@
             font-size: 16px;
             line-height: 1.6;
             color: #ccc;
-            font-weight: 400;
         }
 
         .features li::before {
@@ -996,7 +1578,6 @@
             background: linear-gradient(135deg, #C9A961 0%, #8B7355 100%);
             color: #000;
             border: none;
-            border-radius: 0;
             font-weight: 700;
             cursor: pointer;
             font-size: 18px;
@@ -1012,21 +1593,33 @@
         /* CONTACT */
         .contact-section {
             padding: 100px 40px;
-            background: linear-gradient(180deg, #0A0A0A 0%, #1A1F1A 100%);
+            background: linear-gradient(135deg, #0A0A0A 0%, #1A1F1A 50%, #0A0A0A 100%);
+            background-size: 200% 200%;
+            animation: gradientShift 15s ease infinite;
             position: relative;
             overflow: hidden;
         }
 
-        .contact-bg-video {
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .contact-section::before {
+            content: '';
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            object-position: center bottom;
-            z-index: 0;
-            opacity: 0.3;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(201, 169, 97, 0.05) 0%, transparent 70%);
+            animation: rotate 30s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
         }
 
         .contact-wrapper {
@@ -1035,7 +1628,6 @@
             background: rgba(0, 0, 0, 0.8);
             backdrop-filter: blur(15px);
             border: 1px solid rgba(201, 169, 97, 0.2);
-            border-radius: 0;
             padding: 50px;
             position: relative;
             z-index: 1;
@@ -1076,7 +1668,6 @@
             padding: 14px 18px;
             background: rgba(255, 255, 255, 0.05);
             border: 1px solid rgba(201, 169, 97, 0.3);
-            border-radius: 0;
             color: white;
             font-size: 15px;
             font-family: 'Outfit', sans-serif;
@@ -1100,7 +1691,6 @@
             background: linear-gradient(135deg, #C9A961 0%, #8B7355 100%);
             color: #000;
             border: none;
-            border-radius: 0;
             font-size: 16px;
             font-weight: 700;
             cursor: pointer;
@@ -1126,7 +1716,13 @@
                 grid-template-columns: repeat(2, 1fr);
             }
             .nav-links {
-                gap: 20px;
+                gap: 25px;
+            }
+            .results-screen.active {
+                grid-template-columns: 1fr;
+            }
+            .results-right {
+                position: static;
             }
         }
 
@@ -1138,16 +1734,16 @@
                 display: none;
             }
             .nav {
-                padding: 15px 25px;
+                padding: 18px 30px;
             }
             .nav-logo-img {
-                height: 45px;
+                height: 60px;
             }
-            .vogue-hero-title {
-                font-size: 48px;
+            .split-screen.active {
+                grid-template-columns: 1fr;
             }
-            .vogue-hero-subtitle {
-                font-size: 60px;
+            .product-card-stats {
+                grid-template-columns: 1fr;
             }
         }
     </style>
@@ -1288,25 +1884,108 @@
                 </div>
             </section>
 
-            <section class="vogue-demo-section vogue-scroll-fade">
+            <section class="vogue-demo-section">
                 <h2 class="vogue-demo-title">Experience Trakie</h2>
                 <p class="vogue-demo-subtitle">Join NYC's most sophisticated dispensaries</p>
                 <button class="vogue-demo-button" onclick="showSection('receive')">View Live Demo</button>
             </section>
         </div>
 
-        <!-- Receive Section -->
+        <!-- Receive Section - FULL WORKING DEMO -->
         <div class="page-section" id="receiveSection">
             <div class="receive-wrapper">
                 <div class="demo-badge">LIVE DEMO</div>
-                <div class="receive-landing">
+                
+                <!-- Landing Screen -->
+                <div class="receive-landing" id="receiveLanding">
                     <h1 class="receive-landing-title">Receive Inventory</h1>
                     <h2 class="receive-landing-subtitle">From an Hour to 1 Minute</h2>
                     <div class="early-bird-badge">🔥 21 Foundation Spots • Lock In $369 Forever</div>
-                    <button class="start-receive-btn">
+                    <button class="start-receive-btn" onclick="startReceiving()">
                         <span>⚡</span>
                         <span>Experience Trakie AI Instant Receiving</span>
                     </button>
+                </div>
+
+                <!-- QR Screen -->
+                <div class="qr-screen" id="qrScreen">
+                    <div class="qr-video-container">
+                        <video autoplay loop muted playsinline webkit-playsinline preload="auto">
+                            <source src="camera0.mov" type="video/quicktime">
+                            <source src="camera0.mov" type="video/mp4">
+                        </video>
+                    </div>
+                </div>
+
+                <!-- Split Screen -->
+                <div class="split-screen" id="splitScreen">
+                    <div class="split-left">
+                        <h3 class="section-title">📄 Digital Invoice</h3>
+                        <div class="mock-invoice">
+                            <div class="invoice-header">
+                                <div class="invoice-row">
+                                    <strong>Vendor:</strong>
+                                    <span>Green Leaf Supply Co.</span>
+                                </div>
+                                <div class="invoice-row">
+                                    <strong>Invoice #:</strong>
+                                    <span>INV-2025-1115</span>
+                                </div>
+                                <div class="invoice-row">
+                                    <strong>Date:</strong>
+                                    <span>Nov 17, 2025</span>
+                                </div>
+                            </div>
+                            <div class="invoice-items">
+                                <div class="invoice-item">Green Leaf Farms | Blue Dream | Hybrid - 12 units</div>
+                                <div class="invoice-item">Green Leaf Farms | OG Kush | Indica - 8 units</div>
+                                <div class="invoice-item">Green Leaf Farms | Sour Diesel | Sativa - 15 units</div>
+                                <div class="invoice-item">Green Leaf Farms | Purple Haze | Sativa - 20 units</div>
+                                <div class="invoice-item">Green Leaf Farms | Gelato | Hybrid - 10 units</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="split-right">
+                        <h3 class="section-title">📸 AI Scanning</h3>
+                        <div class="iphone-mockup">
+                            <div class="iphone-notch"></div>
+                            <div class="iphone-screen">
+                                <video autoplay loop muted playsinline webkit-playsinline>
+                                    <source src="camera.mov" type="video/quicktime">
+                                    <source src="camera.mov" type="video/mp4">
+                                </video>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Processing Screen -->
+                <div class="processing-screen" id="processingScreen">
+                    <h2 class="processing-title">AI Processing</h2>
+                    <div class="spinner-large"></div>
+                    <div class="processing-steps" id="processingSteps"></div>
+                </div>
+
+                <!-- Results Screen with Pokemon Cards -->
+                <div class="results-screen" id="resultsScreen">
+                    <div class="results-left">
+                        <div class="results-header">
+                            <h2 class="results-title">Receiving Complete!</h2>
+                            <div class="completion-badge">5 PRODUCTS PROCESSED</div>
+                            <div class="timer-display" id="timerDisplay">00:00</div>
+                            <div class="timer-label">SECONDS</div>
+                        </div>
+                        <div class="product-cards" id="productCards"></div>
+                    </div>
+
+                    <div class="results-right">
+                        <h3 class="controls-title">Smart Move to Sales</h3>
+                        <div id="smartMoveControls"></div>
+                        <div class="completion-actions">
+                            <button class="complete-btn" id="completeBtn" onclick="resetReceiving()">← Start New Delivery</button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -1414,10 +2093,6 @@
         <!-- Contact Section -->
         <div class="page-section" id="contactSection">
             <section class="contact-section">
-                <video class="contact-bg-video" autoplay muted loop playsinline>
-                    <source src="trakielogo.mp4" type="video/mp4">
-                </video>
-                
                 <div class="contact-wrapper">
                     <h2 class="contact-title">Get in Touch</h2>
                     <p class="contact-subtitle">Ready to transform your dispensary operations?</p>
@@ -1457,6 +2132,73 @@
             { name: 'CBD', icon: '🟢', video: 'balm.MOV' }
         ];
 
+        const products = [
+            {
+                brand: 'Green Leaf Farms',
+                name: 'Blue Dream',
+                strain: 'Hybrid',
+                thc: '24.5%',
+                cbd: '0.3%',
+                expDate: '12/2025',
+                quantity: 12,
+                unitCost: 35.00,
+                priceAfterTax: 42.00,
+                images: ['🌿', '🌿', '🌿']
+            },
+            {
+                brand: 'Green Leaf Farms',
+                name: 'OG Kush',
+                strain: 'Indica',
+                thc: '26.8%',
+                cbd: '0.2%',
+                expDate: '01/2026',
+                quantity: 8,
+                unitCost: 42.00,
+                priceAfterTax: 50.40,
+                images: ['🌿', '🌿', '🌿']
+            },
+            {
+                brand: 'Green Leaf Farms',
+                name: 'Sour Diesel',
+                strain: 'Sativa',
+                thc: '22.3%',
+                cbd: '0.4%',
+                expDate: '12/2025',
+                quantity: 15,
+                unitCost: 32.00,
+                priceAfterTax: 38.40,
+                images: ['🌿', '🌿', '🌿']
+            },
+            {
+                brand: 'Green Leaf Farms',
+                name: 'Purple Haze',
+                strain: 'Sativa',
+                thc: '28.1%',
+                cbd: '0.1%',
+                expDate: '01/2026',
+                quantity: 20,
+                unitCost: 28.00,
+                priceAfterTax: 33.60,
+                images: ['🌿', '🌿', '🌿']
+            },
+            {
+                brand: 'Green Leaf Farms',
+                name: 'Gelato',
+                strain: 'Hybrid',
+                thc: '25.7%',
+                cbd: '0.3%',
+                expDate: '12/2025',
+                quantity: 10,
+                unitCost: 38.00,
+                priceAfterTax: 45.60,
+                images: ['🌿', '🌿', '🌿']
+            }
+        ];
+
+        let receiveStartTime;
+        let selectedImages = {};
+        let selectedProducts = new Set();
+
         function attemptLogin() {
             const passwordInput = document.getElementById('passwordInput');
             const errorMsg = document.getElementById('errorMsg');
@@ -1476,6 +2218,229 @@
             }
         }
 
+        // RECEIVE DEMO FUNCTIONS
+        function startReceiving() {
+            receiveStartTime = Date.now();
+            document.getElementById('receiveLanding').style.display = 'none';
+            document.getElementById('qrScreen').classList.add('active');
+            
+            setTimeout(() => {
+                document.getElementById('qrScreen').classList.remove('active');
+                document.getElementById('splitScreen').classList.add('active');
+                simulatePhotoTaking();
+            }, 8000);
+        }
+
+        function simulatePhotoTaking() {
+            setTimeout(() => {
+                document.getElementById('splitScreen').classList.remove('active');
+                document.getElementById('processingScreen').classList.add('active');
+                startProcessing();
+            }, 10000);
+        }
+
+        function startProcessing() {
+            const steps = [
+                { title: 'Reading Labels', text: 'OCR extracting text from photos...' },
+                { title: 'Identifying Products', text: 'Matching to catalog database...' },
+                { title: 'Searching Images', text: 'Finding best Google images...' },
+                { title: 'Extracting Details', text: 'THC%, batch numbers, quantities...' },
+                { title: 'Generating Descriptions', text: 'AI creating product descriptions...' },
+                { title: 'Syncing to METRC', text: 'Real-time compliance reporting...' }
+            ];
+
+            const container = document.getElementById('processingSteps');
+            container.innerHTML = '';
+            
+            steps.forEach((step, index) => {
+                setTimeout(() => {
+                    const stepDiv = document.createElement('div');
+                    stepDiv.className = 'process-step';
+                    stepDiv.innerHTML = `
+                        <div class="process-step-title">✓ ${step.title}</div>
+                        <div class="process-step-text">${step.text}</div>
+                    `;
+                    container.appendChild(stepDiv);
+                    setTimeout(() => stepDiv.classList.add('active'), 50);
+                }, index * 1500);
+            });
+
+            setTimeout(() => {
+                showResults();
+            }, 10000);
+        }
+
+        function showResults() {
+            const elapsedTime = Math.floor((Date.now() - receiveStartTime) / 1000);
+            document.getElementById('processingScreen').classList.remove('active');
+            document.getElementById('resultsScreen').classList.add('active');
+            
+            let currentTime = 0;
+            const timerInterval = setInterval(() => {
+                if (currentTime >= elapsedTime) {
+                    clearInterval(timerInterval);
+                    document.getElementById('timerDisplay').textContent = `00:${elapsedTime.toString().padStart(2, '0')}`;
+                } else {
+                    currentTime++;
+                    document.getElementById('timerDisplay').textContent = `00:${currentTime.toString().padStart(2, '0')}`;
+                }
+            }, 30);
+            
+            renderProductCards();
+            renderSmartMoveControls();
+        }
+
+        function renderProductCards() {
+            const container = document.getElementById('productCards');
+            container.innerHTML = '';
+            
+            products.forEach((product, index) => {
+                const card = document.createElement('div');
+                card.className = 'product-card';
+                card.innerHTML = `
+                    <div class="product-card-header">
+                        <div class="product-card-title-left">
+                            <div class="product-brand">${product.brand}</div>
+                            <div class="product-strain">${product.name}</div>
+                            <div class="product-type">${product.strain}</div>
+                        </div>
+                        <div class="product-quantity">QTY ${product.quantity}</div>
+                    </div>
+                    
+                    <div class="product-card-image-container">
+                        <div class="product-image-main">${product.images[selectedImages[index] || 0]}</div>
+                        <div class="thc-overlay">
+                            <div class="thc-percentage">${product.thc.replace('%', '')}</div>
+                            <div class="thc-label">THC</div>
+                        </div>
+                        <button class="image-arrow left" onclick="previousImage(${index})">‹</button>
+                        <button class="image-arrow right" onclick="nextImage(${index})">›</button>
+                    </div>
+                    
+                    <div class="product-price-section">
+                        <div class="price-label">Price (After Tax)</div>
+                        <div class="product-price">$${product.priceAfterTax.toFixed(2)}</div>
+                    </div>
+                    
+                    <div class="product-card-stats">
+                        <div class="stat-row">
+                            <span class="stat-label">CBD</span>
+                            <span class="stat-value">${product.cbd}</span>
+                        </div>
+                        <div class="stat-row">
+                            <span class="stat-label">Exp Date</span>
+                            <span class="stat-value">${product.expDate}</span>
+                        </div>
+                        <div class="stat-row" style="grid-column: 1 / -1;">
+                            <span class="stat-label">Total Value</span>
+                            <span class="stat-value highlight">$${(product.quantity * product.unitCost).toFixed(2)}</span>
+                        </div>
+                    </div>
+                `;
+                container.appendChild(card);
+                
+                if (!selectedImages[index]) {
+                    selectedImages[index] = 0;
+                }
+            });
+        }
+
+        function previousImage(productIndex) {
+            const currentIndex = selectedImages[productIndex] || 0;
+            const newIndex = currentIndex === 0 ? products[productIndex].images.length - 1 : currentIndex - 1;
+            selectedImages[productIndex] = newIndex;
+            renderProductCards();
+        }
+
+        function nextImage(productIndex) {
+            const currentIndex = selectedImages[productIndex] || 0;
+            const newIndex = (currentIndex + 1) % products[productIndex].images.length;
+            selectedImages[productIndex] = newIndex;
+            renderProductCards();
+        }
+
+        function renderSmartMoveControls() {
+            const container = document.getElementById('smartMoveControls');
+            container.innerHTML = '';
+            
+            products.forEach((product, index) => {
+                const group = document.createElement('div');
+                group.className = 'move-button-group';
+                group.id = `moveGroup${index}`;
+                group.innerHTML = `
+                    <div class="move-product-name">${product.name}</div>
+                    <div class="move-buttons">
+                        <button class="move-btn" onclick="toggleProductSelection(${index}, 5)" data-amount="5">
+                            Select 5
+                        </button>
+                        <button class="move-btn" onclick="toggleProductSelection(${index}, 10)" data-amount="10">
+                            Select 10
+                        </button>
+                    </div>
+                `;
+                container.appendChild(group);
+            });
+        }
+
+        function toggleProductSelection(productIndex, amount) {
+            const group = document.getElementById(`moveGroup${productIndex}`);
+            const buttons = group.querySelectorAll('.move-btn');
+            const clickedButton = Array.from(buttons).find(btn => btn.getAttribute('data-amount') == amount);
+            
+            if (selectedProducts.has(productIndex)) {
+                selectedProducts.delete(productIndex);
+                buttons.forEach(btn => btn.classList.remove('selected'));
+                group.classList.remove('selected');
+            } else {
+                selectedProducts.add(productIndex);
+                clickedButton.classList.add('selected');
+                group.classList.add('selected');
+            }
+            
+            updateMoveAllButton();
+        }
+
+        function updateMoveAllButton() {
+            const container = document.getElementById('smartMoveControls');
+            let moveAllBtn = document.getElementById('moveAllBtn');
+            
+            if (selectedProducts.size > 0) {
+                if (!moveAllBtn) {
+                    moveAllBtn = document.createElement('button');
+                    moveAllBtn.id = 'moveAllBtn';
+                    moveAllBtn.className = 'move-all-btn';
+                    moveAllBtn.onclick = moveAllSelected;
+                    container.appendChild(moveAllBtn);
+                }
+                moveAllBtn.textContent = `Move ${selectedProducts.size} Product${selectedProducts.size > 1 ? 's' : ''} to Sales Floor`;
+            } else {
+                if (moveAllBtn) moveAllBtn.remove();
+            }
+        }
+
+        function moveAllSelected() {
+            if (selectedProducts.size === 0) return;
+            
+            alert(`✅ Moved ${selectedProducts.size} product${selectedProducts.size > 1 ? 's' : ''} to sales floor!`);
+            
+            selectedProducts.clear();
+            document.getElementById('moveAllBtn').remove();
+            
+            document.getElementById('completeBtn').classList.add('show');
+        }
+
+        function resetReceiving() {
+            selectedImages = {};
+            selectedProducts.clear();
+            document.getElementById('resultsScreen').classList.remove('active');
+            document.getElementById('receiveLanding').style.display = 'flex';
+            document.getElementById('qrScreen').classList.remove('active');
+            document.getElementById('splitScreen').classList.remove('active');
+            document.getElementById('processingScreen').classList.remove('active');
+            document.getElementById('completeBtn').classList.remove('show');
+        }
+
+        // BUBBLES FUNCTIONS
         function initBubbles(tab = 'explore') {
             const container = document.getElementById('bubblesContainer');
             if (!container) return;
@@ -1561,24 +2526,7 @@
             e.target.reset();
         }
 
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
-            });
-        }, observerOptions);
-
         document.addEventListener('DOMContentLoaded', function() {
-            document.querySelectorAll('.vogue-scroll-fade').forEach(el => {
-                observer.observe(el);
-            });
-
             const passwordInput = document.getElementById('passwordInput');
             if (passwordInput) {
                 passwordInput.addEventListener('keypress', function(e) {
