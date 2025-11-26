@@ -368,6 +368,18 @@
             padding: 120px 40px;
             max-width: 1400px;
             margin: 0 auto;
+            position: relative;
+        }
+
+        .vogue-features::before {
+            content: '';
+            position: absolute;
+            top: 60px;
+            left: 20px;
+            right: 20px;
+            bottom: 60px;
+            border: 1px solid rgba(201, 169, 97, 0.15);
+            pointer-events: none;
         }
 
         .vogue-pyramid {
@@ -390,9 +402,8 @@
             padding: 50px 40px;
             width: 380px;
             opacity: 0;
-            animation: fadeScale 0.8s ease forwards;
-            animation-delay: calc(var(--delay) * 0.15s);
-            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+            transform: translateY(30px);
+            transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.165, 0.84, 0.44, 1);
         }
 
         .vogue-feature-card:hover {
@@ -443,9 +454,8 @@
             text-align: center;
             border: 1px solid rgba(201, 169, 97, 0.15);
             opacity: 0;
-            animation: fadeUp 0.8s ease forwards;
-            animation-delay: calc(var(--delay) * 0.1s);
-            transition: all 0.3s ease;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.165, 0.84, 0.44, 1), border-color 0.3s ease;
         }
 
         .vogue-stat-box:hover {
@@ -475,6 +485,20 @@
             padding: 120px 40px;
             text-align: center;
             background: linear-gradient(180deg, #0A0A0A 0%, #1A1F1A 100%);
+            position: relative;
+        }
+
+        .vogue-demo-section::before {
+            content: '';
+            position: absolute;
+            top: 60px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 90%;
+            max-width: 800px;
+            bottom: 60px;
+            border: 1px solid rgba(201, 169, 97, 0.2);
+            pointer-events: none;
         }
 
         .vogue-demo-title {
@@ -1717,6 +1741,204 @@
             }
         }
 
+        /* RESTART BUTTON */
+        .restart-demo-btn {
+            width: 100%;
+            padding: 20px;
+            background: transparent;
+            color: #C9A961;
+            border: 2px solid #C9A961;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 30px;
+            transition: all 0.3s;
+            letter-spacing: 0.5px;
+        }
+
+        .restart-demo-btn:hover {
+            background: rgba(201, 169, 97, 0.1);
+            transform: translateY(-2px);
+        }
+
+        /* CATEGORY DETAIL MODAL - JOBS STYLE */
+        .category-modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.97);
+            z-index: 10000;
+            overflow-y: auto;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .category-modal-overlay.active {
+            display: block;
+        }
+
+        .category-modal {
+            max-width: 1200px;
+            margin: 100px auto 60px;
+            background: linear-gradient(135deg, #1A1F1A 0%, #0F1410 100%);
+            border: 2px solid rgba(201, 169, 97, 0.3);
+            position: relative;
+            animation: slideUp 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+
+        .category-close {
+            position: absolute;
+            top: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: rgba(201, 169, 97, 0.2);
+            border: 1px solid #C9A961;
+            color: #C9A961;
+            font-size: 28px;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10;
+        }
+
+        .category-close:hover {
+            background: #C9A961;
+            color: #000;
+            transform: rotate(90deg);
+        }
+
+        .category-hero-image {
+            width: 100%;
+            height: 400px;
+            overflow: hidden;
+            position: relative;
+            background: #000;
+        }
+
+        .category-hero-image video,
+        .category-hero-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: brightness(0.85);
+        }
+
+        .category-hero-image::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 100px;
+            background: linear-gradient(to bottom, transparent, #1A1F1A);
+        }
+
+        .category-content {
+            padding: 60px 80px 80px;
+        }
+
+        .category-headline {
+            font-family: 'Bodoni Moda', serif;
+            font-size: 56px;
+            font-weight: 700;
+            color: #C9A961;
+            margin-bottom: 20px;
+            letter-spacing: -1px;
+        }
+
+        .category-subtext {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 20px;
+            color: #A8A093;
+            margin-bottom: 50px;
+            line-height: 1.6;
+            letter-spacing: 0.3px;
+        }
+
+        .category-two-column {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            margin-bottom: 60px;
+        }
+
+        .category-column h3 {
+            font-family: 'Bodoni Moda', serif;
+            font-size: 28px;
+            color: #C9A961;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        .category-column p,
+        .category-column ul {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 17px;
+            line-height: 1.8;
+            color: #ccc;
+            letter-spacing: 0.3px;
+        }
+
+        .category-column ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .category-column ul li {
+            padding: 10px 0;
+            padding-left: 30px;
+            position: relative;
+        }
+
+        .category-column ul li::before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: #C9A961;
+            font-weight: bold;
+        }
+
+        .category-cta-section {
+            text-align: center;
+            padding-top: 40px;
+            border-top: 1px solid rgba(201, 169, 97, 0.2);
+        }
+
+        .category-cta-btn {
+            padding: 20px 50px;
+            background: linear-gradient(135deg, #C9A961 0%, #8B7355 100%);
+            color: #000;
+            border: none;
+            font-size: 18px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            letter-spacing: 1px;
+        }
+
+        .category-cta-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 35px rgba(201, 169, 97, 0.5);
+        }
+
+        @media (max-width: 768px) {
+            .category-content {
+                padding: 40px 30px;
+            }
+            .category-two-column {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+            .category-headline {
+                font-size: 40px;
+            }
+        }
+
         /* DATA SECTION */
         .data-wrapper {
             padding: 140px 40px 60px;
@@ -2005,10 +2227,11 @@
 
         .contact-subtitle {
             font-family: 'Cormorant Garamond', serif;
-            font-size: 18px;
+            font-size: 24px;
             color: #8B7355;
             margin-bottom: 40px;
             text-align: center;
+            font-weight: 400;
         }
 
         .form-group {
@@ -2346,6 +2569,7 @@
                         <div class="completion-actions">
                             <button class="complete-btn" id="completeBtn" onclick="resetReceiving()">← Start New Delivery</button>
                         </div>
+                        <button class="restart-demo-btn" onclick="restartDemo()">🔄 Restart Full Demo</button>
                     </div>
                 </div>
             </div>
@@ -2376,32 +2600,32 @@
                     <p class="data-subtitle">Algorithmic forecasting. Velocity analytics. Attribution modeling.</p>
                 </div>
                 <div class="dashboard-grid">
-                    <div class="dashboard-card">
+                    <div class="dashboard-card" onclick="showDataInsight('restock')">
                         <div class="card-header">🔮 Restock Alert</div>
                         <div class="card-metric">3 days</div>
                         <div class="card-label">Until Blue Dream stockout</div>
                     </div>
-                    <div class="dashboard-card">
+                    <div class="dashboard-card" onclick="showDataInsight('velocity')">
                         <div class="card-header">📈 Trend Velocity</div>
                         <div class="card-metric">+127%</div>
                         <div class="card-label">Wedding Cake momentum</div>
                     </div>
-                    <div class="dashboard-card">
+                    <div class="dashboard-card" onclick="showDataInsight('lowstock')">
                         <div class="card-header">⚡ Low Stock Alert</div>
                         <div class="card-metric">5 SKUs</div>
                         <div class="card-label">Below safety buffer</div>
                     </div>
-                    <div class="dashboard-card">
+                    <div class="dashboard-card" onclick="showDataInsight('revenue')">
                         <div class="card-header">💎 Revenue Opportunity</div>
                         <div class="card-metric">$12.4K</div>
                         <div class="card-label">Potential profit gain</div>
                     </div>
-                    <div class="dashboard-card">
+                    <div class="dashboard-card" onclick="showDataInsight('confidence')">
                         <div class="card-header">🎯 AI Confidence</div>
                         <div class="card-metric">99.8%</div>
                         <div class="card-label">Prediction accuracy</div>
                     </div>
-                    <div class="dashboard-card">
+                    <div class="dashboard-card" onclick="showDataInsight('topseller')">
                         <div class="card-header">🔥 Top Seller</div>
                         <div class="card-metric">Gorilla Glue</div>
                         <div class="card-label">8.2 units/day velocity</div>
@@ -2563,6 +2787,35 @@
         </div>
     </div>
 
+    <!-- Category Detail Modal -->
+    <div class="category-modal-overlay" id="categoryModal">
+        <div class="category-modal">
+            <button class="category-close" onclick="closeCategoryModal()">×</button>
+            
+            <div class="category-hero-image" id="categoryHeroImage">
+                <!-- Video or image will be inserted here -->
+            </div>
+            
+            <div class="category-content">
+                <h1 class="category-headline" id="categoryHeadline">Flower</h1>
+                <p class="category-subtext" id="categorySubtext">Premium cannabis flower selection</p>
+                
+                <div class="category-two-column">
+                    <div class="category-column" id="categoryColumn1">
+                        <!-- Content will be populated -->
+                    </div>
+                    <div class="category-column" id="categoryColumn2">
+                        <!-- Content will be populated -->
+                    </div>
+                </div>
+                
+                <div class="category-cta-section">
+                    <button class="category-cta-btn" onclick="closeCategoryModal()">← Back to Menu</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script>
         const categories = [
             { name: 'Flower', icon: '🌿', video: 'flower.mov' },
@@ -2574,6 +2827,105 @@
             { name: 'Tinctures', icon: '🧴', video: 'tincture.MOV' },
             { name: 'CBD', icon: '🟢', video: 'balm.MOV' }
         ];
+
+        const categoryDetails = {
+            'Flower': {
+                headline: 'Premium Flower',
+                subtext: 'Whole-flower cannabis buds featuring the full spectrum of terpenes, cannabinoids, and natural plant compounds.',
+                column1: {
+                    title: 'Instant Recognition',
+                    content: '<p>Trakie\'s AI instantly identifies flower products by scanning packaging, eliminating manual strain entry and reducing receive times from 45 minutes to under 2 minutes.</p><ul><li>Automatic strain detection</li><li>THC/CBD content recognition</li><li>Batch verification</li><li>Expiration tracking</li></ul>'
+                },
+                column2: {
+                    title: 'Smart Inventory',
+                    content: '<p>Track velocity, predict stockouts, and optimize your flower selection based on customer preferences and sales patterns.</p><ul><li>Velocity analytics per strain</li><li>Restock predictions</li><li>Customer preference data</li><li>Seasonal trend analysis</li></ul>'
+                }
+            },
+            'Vaporizers': {
+                headline: 'Vaporizer Cartridges',
+                subtext: 'Precision-dosed vape cartridges delivering consistent experiences with advanced hardware and premium extracts.',
+                column1: {
+                    title: 'Device Intelligence',
+                    content: '<p>Automatically catalog hardware specs, battery types, and compatible cartridges while maintaining compliance documentation.</p><ul><li>Hardware compatibility tracking</li><li>Battery management</li><li>Cartridge-device pairing</li><li>Usage analytics</li></ul>'
+                },
+                column2: {
+                    title: 'Extract Analytics',
+                    content: '<p>Monitor extract types, potency profiles, and customer preferences to optimize your vape inventory mix.</p><ul><li>Strain performance tracking</li><li>Potency analytics</li><li>Customer favorites</li><li>Vendor comparisons</li></ul>'
+                }
+            },
+            'Pre-Rolls': {
+                headline: 'Pre-Roll Collection',
+                subtext: 'Ready-to-consume joints and blunts offering convenience and consistency for customers seeking immediate use.',
+                column1: {
+                    title: 'Fast Processing',
+                    content: '<p>Scan multi-packs instantly, automatically calculating individual unit prices and tracking freshness dates.</p><ul><li>Multi-unit recognition</li><li>Individual pricing logic</li><li>Freshness monitoring</li><li>Pack-size optimization</li></ul>'
+                },
+                column2: {
+                    title: 'Format Analytics',
+                    content: '<p>Understand which sizes, strains, and pack configurations drive the highest margins and customer satisfaction.</p><ul><li>Pack size performance</li><li>Strain popularity</li><li>Price point optimization</li><li>Rotation velocity</li></ul>'
+                }
+            },
+            'Edibles': {
+                headline: 'Edible Products',
+                subtext: 'Cannabis-infused foods and beverages delivering precise dosing in familiar, enjoyable formats.',
+                column1: {
+                    title: 'Dose Tracking',
+                    content: '<p>Monitor exact dosages, allergen information, and ingredient lists while maintaining compliance with labeling requirements.</p><ul><li>Precise dose calculation</li><li>Allergen tracking</li><li>Ingredient monitoring</li><li>Compliance automation</li></ul>'
+                },
+                column2: {
+                    title: 'Category Insights',
+                    content: '<p>Analyze performance across chocolates, gummies, baked goods, and other formats to optimize your edible mix.</p><ul><li>Format performance data</li><li>Flavor trend analysis</li><li>Price sensitivity metrics</li><li>Seasonal patterns</li></ul>'
+                }
+            },
+            'Concentrates': {
+                headline: 'Cannabis Concentrates',
+                subtext: 'High-potency extracts including shatter, wax, live resin, and rosin for experienced consumers.',
+                column1: {
+                    title: 'Extract Intelligence',
+                    content: '<p>Track extraction methods, terpene profiles, and potency levels while managing specialized storage requirements.</p><ul><li>Extraction method tracking</li><li>Terpene profile analysis</li><li>Potency monitoring</li><li>Storage optimization</li></ul>'
+                },
+                column2: {
+                    title: 'Premium Analytics',
+                    content: '<p>Understand which concentrate types, potencies, and price points drive the best margins in your premium category.</p><ul><li>Extract type performance</li><li>Price-potency correlation</li><li>Margin optimization</li><li>Customer segmentation</li></ul>'
+                }
+            },
+            'Beverages': {
+                headline: 'Cannabis Beverages',
+                subtext: 'Fast-acting liquid products offering precise dosing in social, refreshing formats from sodas to seltzers.',
+                column1: {
+                    title: 'Quick Processing',
+                    content: '<p>Instantly catalog beverage specs including onset times, dose amounts, and refrigeration requirements.</p><ul><li>Onset time tracking</li><li>Dose verification</li><li>Cold chain monitoring</li><li>Expiration management</li></ul>'
+                },
+                column2: {
+                    title: 'Format Strategy',
+                    content: '<p>Analyze which beverage types, flavors, and dose levels resonate with your customer base for optimal selection.</p><ul><li>Format preference data</li><li>Flavor trend analysis</li><li>Dose preference tracking</li><li>Seasonal adjustments</li></ul>'
+                }
+            },
+            'Tinctures': {
+                headline: 'Cannabis Tinctures',
+                subtext: 'Sublingual drops and oral solutions offering precise dosing control and discreet consumption.',
+                column1: {
+                    title: 'Precise Tracking',
+                    content: '<p>Monitor exact CBD/THC ratios, carrier oil types, and recommended dosing protocols for each tincture.</p><ul><li>Ratio tracking</li><li>Carrier oil documentation</li><li>Dosing protocol storage</li><li>Batch consistency</li></ul>'
+                },
+                column2: {
+                    title: 'Medical Analytics',
+                    content: '<p>Track which ratios and formulations work best for different customer needs and medical applications.</p><ul><li>Ratio performance data</li><li>Application tracking</li><li>Patient feedback loops</li><li>Efficacy patterns</li></ul>'
+                }
+            },
+            'CBD': {
+                headline: 'CBD Products',
+                subtext: 'Non-intoxicating wellness products including topicals, capsules, and isolates for therapeutic use.',
+                column1: {
+                    title: 'Wellness Intelligence',
+                    content: '<p>Track CBD potencies, application types, and third-party lab results while managing wellness-focused inventory.</p><ul><li>Potency verification</li><li>Application tracking</li><li>Lab result storage</li><li>Wellness categorization</li></ul>'
+                },
+                column2: {
+                    title: 'Market Insights',
+                    content: '<p>Understand which CBD formats and potencies drive adoption among wellness-focused customers.</p><ul><li>Format preference analysis</li><li>Potency optimization</li><li>Customer demographics</li><li>Cross-sell opportunities</li></ul>'
+                }
+            }
+        };
 
         const products = [
             {
@@ -2966,7 +3318,7 @@
                 
                 bubble.appendChild(video);
                 bubble.appendChild(label);
-                bubble.onclick = () => alert(`${category.name} products coming soon!`);
+                bubble.onclick = () => openCategoryModal(category.name);
                 
                 container.appendChild(bubble);
             });
@@ -3110,6 +3462,177 @@
             }
         });
 
+        // CATEGORY MODAL FUNCTIONS
+        function openCategoryModal(categoryName) {
+            const category = categories.find(c => c.name === categoryName);
+            const details = categoryDetails[categoryName];
+            const modal = document.getElementById('categoryModal');
+            
+            if (!category || !details) return;
+            
+            // Set hero video/image
+            const heroSection = document.getElementById('categoryHeroImage');
+            heroSection.innerHTML = `
+                <video autoplay loop muted playsinline webkit-playsinline>
+                    <source src="${category.video}" type="video/quicktime">
+                    <source src="${category.video}" type="video/mp4">
+                </video>
+            `;
+            
+            // Set content
+            document.getElementById('categoryHeadline').textContent = details.headline;
+            document.getElementById('categorySubtext').textContent = details.subtext;
+            document.getElementById('categoryColumn1').innerHTML = `<h3>${details.column1.title}</h3>${details.column1.content}`;
+            document.getElementById('categoryColumn2').innerHTML = `<h3>${details.column2.title}</h3>${details.column2.content}`;
+            
+            // Show modal
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeCategoryModal() {
+            const modal = document.getElementById('categoryModal');
+            modal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        // Close category modal with ESC or click outside
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeCategoryModal();
+            }
+        });
+
+        document.addEventListener('click', function(e) {
+            const modal = document.getElementById('categoryModal');
+            if (e.target === modal) {
+                closeCategoryModal();
+            }
+        });
+
+        // RESTART DEMO FUNCTION
+        function restartDemo() {
+            // Reset all demo state
+            selectedImages = {};
+            selectedProducts.clear();
+            
+            // Hide all demo screens
+            document.getElementById('resultsScreen').classList.remove('active');
+            document.getElementById('processingScreen').classList.remove('active');
+            document.getElementById('splitScreen').classList.remove('active');
+            document.getElementById('qrScreen').classList.remove('active');
+            
+            // Show landing screen
+            document.getElementById('receiveLanding').style.display = 'flex';
+            
+            // Reset complete button
+            document.getElementById('completeBtn').classList.remove('show');
+            
+            // Scroll to top of receive section
+            showSection('receive');
+        }
+
+        // DATA INSIGHTS FUNCTION
+        function showDataInsight(insightType) {
+            const insights = {
+                'restock': {
+                    headline: 'Predictive Restock Intelligence',
+                    subtext: 'AI-powered stockout prevention using velocity analytics and demand forecasting.',
+                    column1: {
+                        title: 'How It Works',
+                        content: '<p>Trakie analyzes historical sales velocity, seasonal patterns, and current inventory levels to predict exactly when each product will run out.</p><ul><li>Daily velocity calculation</li><li>Seasonal adjustment factors</li><li>Lead time integration</li><li>Safety stock optimization</li></ul>'
+                    },
+                    column2: {
+                        title: 'Business Impact',
+                        content: '<p>Never lose sales to stockouts. Optimize cash flow by ordering exactly when needed, not based on guesswork.</p><ul><li>Eliminate emergency orders</li><li>Reduce carrying costs</li><li>Prevent lost sales</li><li>Improve vendor relationships</li></ul>'
+                    }
+                },
+                'velocity': {
+                    headline: 'Trend Velocity Analytics',
+                    subtext: 'Real-time momentum tracking identifies breakout products before your competitors notice.',
+                    column1: {
+                        title: 'Momentum Detection',
+                        content: '<p>Track rate-of-change in sales velocity to spot products gaining traction early, giving you first-mover advantage.</p><ul><li>Acceleration metrics</li><li>Comparative trend analysis</li><li>Early breakout detection</li><li>Category momentum shifts</li></ul>'
+                    },
+                    column2: {
+                        title: 'Strategic Advantage',
+                        content: '<p>Stock trending products before competitors, capture market share, and optimize shelf space for maximum revenue.</p><ul><li>First-mover positioning</li><li>Inventory reallocation</li><li>Margin opportunity capture</li><li>Competitive intelligence</li></ul>'
+                    }
+                },
+                'lowstock': {
+                    headline: 'Low Stock Monitoring',
+                    subtext: 'Automated alerts prevent stockouts by monitoring inventory against sales velocity and safety thresholds.',
+                    column1: {
+                        title: 'Smart Thresholds',
+                        content: '<p>Dynamic safety stock levels adjust based on velocity, lead times, and demand volatility for each SKU.</p><ul><li>Velocity-based calculations</li><li>Lead time integration</li><li>Demand variability factors</li><li>Auto-adjusting buffers</li></ul>'
+                    },
+                    column2: {
+                        title: 'Proactive Management',
+                        content: '<p>Receive alerts days before stockouts occur, with exact reorder quantities and optimal timing recommendations.</p><ul><li>Early warning system</li><li>Recommended order sizes</li><li>Timing optimization</li><li>Multi-location coordination</li></ul>'
+                    }
+                },
+                'revenue': {
+                    headline: 'Revenue Optimization Engine',
+                    subtext: 'AI identifies untapped profit opportunities through pricing, mix optimization, and strategic inventory decisions.',
+                    column1: {
+                        title: 'Opportunity Discovery',
+                        content: '<p>Analyze pricing gaps, underperforming high-margin items, and inventory mix inefficiencies to surface hidden revenue.</p><ul><li>Price elasticity analysis</li><li>Margin opportunity mapping</li><li>Mix optimization suggestions</li><li>Dead stock identification</li></ul>'
+                    },
+                    column2: {
+                        title: 'Action Plans',
+                        content: '<p>Get specific recommendations on which products to promote, reorder, or discontinue to maximize total revenue.</p><ul><li>Promotion recommendations</li><li>Reorder prioritization</li><li>SKU rationalization</li><li>Shelf space reallocation</li></ul>'
+                    }
+                },
+                'confidence': {
+                    headline: 'AI Prediction Confidence',
+                    subtext: 'Transparent accuracy metrics show exactly how reliable each forecast and recommendation is.',
+                    column1: {
+                        title: 'Trust Through Transparency',
+                        content: '<p>Every prediction includes a confidence score based on data quality, historical accuracy, and external factors.</p><ul><li>Real-time accuracy tracking</li><li>Data quality indicators</li><li>Historical performance</li><li>Uncertainty quantification</li></ul>'
+                    },
+                    column2: {
+                        title: 'Continuous Improvement',
+                        content: '<p>Machine learning models continuously improve as they learn from your specific business patterns and outcomes.</p><ul><li>Adaptive learning</li><li>Pattern recognition</li><li>Business-specific tuning</li><li>Feedback loop integration</li></ul>'
+                    }
+                },
+                'topseller': {
+                    headline: 'Top Seller Analytics',
+                    subtext: 'Deep insights into your best-performing products reveal patterns that drive revenue and customer satisfaction.',
+                    column1: {
+                        title: 'Performance Breakdown',
+                        content: '<p>Understand exactly why certain products sell better: pricing, positioning, timing, or customer demographics.</p><ul><li>Velocity decomposition</li><li>Customer segmentation</li><li>Time-of-day patterns</li><li>Basket analysis</li></ul>'
+                    },
+                    column2: {
+                        title: 'Replication Strategy',
+                        content: '<p>Apply learnings from top sellers to other products: similar strains, comparable price points, or adjacent categories.</p><ul><li>Success pattern identification</li><li>Cross-product insights</li><li>Category expansion</li><li>Portfolio optimization</li></ul>'
+                    }
+                }
+            };
+
+            const insight = insights[insightType];
+            if (!insight) return;
+
+            const modal = document.getElementById('categoryModal');
+            
+            // Set placeholder image
+            const heroSection = document.getElementById('categoryHeroImage');
+            heroSection.innerHTML = `
+                <div style="width: 100%; height: 100%; background: linear-gradient(135deg, #1A1F1A 0%, #0A0A0A 100%); display: flex; align-items: center; justify-content: center; font-size: 120px;">
+                    📊
+                </div>
+            `;
+            
+            // Set content
+            document.getElementById('categoryHeadline').textContent = insight.headline;
+            document.getElementById('categorySubtext').textContent = insight.subtext;
+            document.getElementById('categoryColumn1').innerHTML = `<h3>${insight.column1.title}</h3>${insight.column1.content}`;
+            document.getElementById('categoryColumn2').innerHTML = `<h3>${insight.column2.title}</h3>${insight.column2.content}`;
+            
+            // Show modal
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
         document.addEventListener('DOMContentLoaded', function() {
             const passwordInput = document.getElementById('passwordInput');
             if (passwordInput) {
@@ -3123,6 +3646,26 @@
             if (welcomeVid) {
                 welcomeVid.playbackRate = 0.5;
             }
+
+            // Scroll animations observer
+            const observerOptions = {
+                threshold: 0.15,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, observerOptions);
+
+            // Observe elements with animation classes
+            document.querySelectorAll('.vogue-feature-card, .vogue-stat-box, .vogue-pyramid-row').forEach(el => {
+                observer.observe(el);
+            });
         });
     </script>
 </body>
