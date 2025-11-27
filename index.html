@@ -1083,11 +1083,11 @@
         }
 
         .product-brand {
-            font-size: 11px;
-            font-weight: 600;
-            color: rgba(0, 0, 0, 0.6);
-            text-transform: uppercase;
-            letter-spacing: 1px;
+            font-size: 13px;
+            font-weight: 700;
+            color: rgba(0, 0, 0, 0.7);
+            text-transform: none;
+            letter-spacing: 0.5px;
         }
 
         .product-strain {
@@ -2831,115 +2831,116 @@
         const categoryDetails = {
             'Flower': {
                 headline: 'Premium Flower',
-                subtext: 'Whole-flower cannabis buds featuring the full spectrum of terpenes, cannabinoids, and natural plant compounds.',
+                subtext: 'Whole-flower cannabis featuring the full spectrum of terpenes and cannabinoids.',
                 column1: {
                     title: 'Instant Recognition',
-                    content: '<p>Trakie\'s AI instantly identifies flower products by scanning packaging, eliminating manual strain entry and reducing receive times from 45 minutes to under 2 minutes.</p><ul><li>Automatic strain detection</li><li>THC/CBD content recognition</li><li>Batch verification</li><li>Expiration tracking</li></ul>'
+                    content: '<p>Trakie\'s computer vision instantly identifies flower products by scanning packaging, eliminating manual strain entry and reducing receive times from 45 minutes to under 2 minutes. The AI extracts strain names, THC/CBD content, batch numbers, and expiration dates with 99.9% accuracy, ensuring your inventory data is pristine from the moment products arrive.</p><p>Curated exceptionally by Emerald Dispensary.</p>'
                 },
                 column2: {
                     title: 'Smart Inventory',
-                    content: '<p>Track velocity, predict stockouts, and optimize your flower selection based on customer preferences and sales patterns.</p><ul><li>Velocity analytics per strain</li><li>Restock predictions</li><li>Customer preference data</li><li>Seasonal trend analysis</li></ul>'
+                    content: '<p>Track velocity patterns, predict stockouts before they happen, and optimize your flower selection based on customer preferences and sales data. Our algorithmic forecasting analyzes seasonal trends, customer demographics, and historical patterns to recommend exactly which strains to reorder and when, maximizing revenue while minimizing dead stock.</p>'
                 }
             },
             'Vaporizers': {
                 headline: 'Vaporizer Cartridges',
-                subtext: 'Precision-dosed vape cartridges delivering consistent experiences with advanced hardware and premium extracts.',
+                subtext: 'Precision-dosed cartridges delivering consistent experiences with premium extracts.',
                 column1: {
                     title: 'Device Intelligence',
-                    content: '<p>Automatically catalog hardware specs, battery types, and compatible cartridges while maintaining compliance documentation.</p><ul><li>Hardware compatibility tracking</li><li>Battery management</li><li>Cartridge-device pairing</li><li>Usage analytics</li></ul>'
+                    content: '<p>Automatically catalog hardware specifications, battery types, and compatible cartridges while maintaining full compliance documentation. Trakie recognizes device models, tracks warranty information, and monitors which cartridge formats work with specific hardware, preventing mismatches and customer dissatisfaction.</p><p>Curated exceptionally by Emerald Dispensary.</p>'
                 },
                 column2: {
                     title: 'Extract Analytics',
-                    content: '<p>Monitor extract types, potency profiles, and customer preferences to optimize your vape inventory mix.</p><ul><li>Strain performance tracking</li><li>Potency analytics</li><li>Customer favorites</li><li>Vendor comparisons</li></ul>'
+                    content: '<p>Monitor extract types, potency profiles, and customer preferences to optimize your vape inventory mix. Understand which terpene profiles drive repeat purchases, which potency levels sell fastest, and which vendors deliver the most consistent quality, enabling data-driven decisions that boost both margins and customer satisfaction.</p>'
                 }
             },
             'Pre-Rolls': {
                 headline: 'Pre-Roll Collection',
-                subtext: 'Ready-to-consume joints and blunts offering convenience and consistency for customers seeking immediate use.',
+                subtext: 'Ready-to-consume joints offering convenience and consistency for immediate use.',
                 column1: {
                     title: 'Fast Processing',
-                    content: '<p>Scan multi-packs instantly, automatically calculating individual unit prices and tracking freshness dates.</p><ul><li>Multi-unit recognition</li><li>Individual pricing logic</li><li>Freshness monitoring</li><li>Pack-size optimization</li></ul>'
+                    content: '<p>Scan multi-packs instantly with automatic calculation of individual unit prices and freshness tracking. Trakie recognizes whether you\'re receiving 5-packs, 10-packs, or individual pre-rolls, adjusts pricing accordingly, and alerts you when products are approaching their optimal freshness window.</p><p>Curated exceptionally by Emerald Dispensary.</p>'
                 },
                 column2: {
                     title: 'Format Analytics',
-                    content: '<p>Understand which sizes, strains, and pack configurations drive the highest margins and customer satisfaction.</p><ul><li>Pack size performance</li><li>Strain popularity</li><li>Price point optimization</li><li>Rotation velocity</li></ul>'
+                    content: '<p>Understand which sizes, strains, and pack configurations drive the highest margins and customer satisfaction. Data reveals whether customers prefer traditional joints, infused pre-rolls, or blunts, and which price points maximize both velocity and profitability across different customer segments.</p>'
                 }
             },
             'Edibles': {
                 headline: 'Edible Products',
-                subtext: 'Cannabis-infused foods and beverages delivering precise dosing in familiar, enjoyable formats.',
+                subtext: 'Cannabis-infused foods delivering precise dosing in familiar, enjoyable formats.',
                 column1: {
                     title: 'Dose Tracking',
-                    content: '<p>Monitor exact dosages, allergen information, and ingredient lists while maintaining compliance with labeling requirements.</p><ul><li>Precise dose calculation</li><li>Allergen tracking</li><li>Ingredient monitoring</li><li>Compliance automation</li></ul>'
+                    content: '<p>Monitor exact dosages, allergen information, and ingredient lists while maintaining compliance with all labeling requirements. Trakie automatically flags products with common allergens, tracks CBD-to-THC ratios, and ensures every edible in your inventory meets state regulations for dosing transparency.</p><p>Curated exceptionally by Emerald Dispensary.</p>'
                 },
                 column2: {
                     title: 'Category Insights',
-                    content: '<p>Analyze performance across chocolates, gummies, baked goods, and other formats to optimize your edible mix.</p><ul><li>Format performance data</li><li>Flavor trend analysis</li><li>Price sensitivity metrics</li><li>Seasonal patterns</li></ul>'
+                    content: '<p>Analyze performance across chocolates, gummies, baked goods, and other formats to optimize your edible selection. Discover which flavor profiles resonate with your customer base, which dose levels drive the most consistent sales, and which price points maximize revenue without sacrificing velocity.</p>'
                 }
             },
             'Concentrates': {
                 headline: 'Cannabis Concentrates',
-                subtext: 'High-potency extracts including shatter, wax, live resin, and rosin for experienced consumers.',
+                subtext: 'High-potency extracts including shatter, wax, and live resin for experienced consumers.',
                 column1: {
                     title: 'Extract Intelligence',
-                    content: '<p>Track extraction methods, terpene profiles, and potency levels while managing specialized storage requirements.</p><ul><li>Extraction method tracking</li><li>Terpene profile analysis</li><li>Potency monitoring</li><li>Storage optimization</li></ul>'
+                    content: '<p>Track extraction methods, terpene profiles, and potency levels while managing specialized storage requirements. Trakie differentiates between hydrocarbon extractions, rosin, live resin, and distillate, ensuring proper inventory categorization and helping you communicate quality differences to discerning customers.</p><p>Curated exceptionally by Emerald Dispensary.</p>'
                 },
                 column2: {
                     title: 'Premium Analytics',
-                    content: '<p>Understand which concentrate types, potencies, and price points drive the best margins in your premium category.</p><ul><li>Extract type performance</li><li>Price-potency correlation</li><li>Margin optimization</li><li>Customer segmentation</li></ul>'
+                    content: '<p>Understand which concentrate types, potencies, and price points drive the best margins in your premium category. Data reveals which extraction methods command premium pricing, which terpene profiles justify higher costs, and which vendors consistently deliver the quality your high-end customers demand.</p>'
                 }
             },
             'Beverages': {
                 headline: 'Cannabis Beverages',
-                subtext: 'Fast-acting liquid products offering precise dosing in social, refreshing formats from sodas to seltzers.',
+                subtext: 'Fast-acting liquids offering precise dosing in refreshing, social formats.',
                 column1: {
                     title: 'Quick Processing',
-                    content: '<p>Instantly catalog beverage specs including onset times, dose amounts, and refrigeration requirements.</p><ul><li>Onset time tracking</li><li>Dose verification</li><li>Cold chain monitoring</li><li>Expiration management</li></ul>'
+                    content: '<p>Instantly catalog beverage specifications including onset times, dose amounts, and refrigeration requirements. Trakie tracks cold chain integrity, monitors expiration dates on perishable products, and ensures your beverage inventory remains fresh and properly stored at all times.</p><p>Curated exceptionally by Emerald Dispensary.</p>'
                 },
                 column2: {
                     title: 'Format Strategy',
-                    content: '<p>Analyze which beverage types, flavors, and dose levels resonate with your customer base for optimal selection.</p><ul><li>Format preference data</li><li>Flavor trend analysis</li><li>Dose preference tracking</li><li>Seasonal adjustments</li></ul>'
+                    content: '<p>Analyze which beverage types, flavors, and dose levels resonate with your customer base for optimal selection. Discover whether your customers prefer seltzers, sodas, teas, or coffees, understand which flavor profiles drive repeat purchases, and identify the sweet spot for THC dosing that maximizes both sales velocity and customer satisfaction.</p>'
                 }
             },
             'Tinctures': {
                 headline: 'Cannabis Tinctures',
-                subtext: 'Sublingual drops and oral solutions offering precise dosing control and discreet consumption.',
+                subtext: 'Sublingual solutions offering precise dosing control and discreet consumption.',
                 column1: {
                     title: 'Precise Tracking',
-                    content: '<p>Monitor exact CBD/THC ratios, carrier oil types, and recommended dosing protocols for each tincture.</p><ul><li>Ratio tracking</li><li>Carrier oil documentation</li><li>Dosing protocol storage</li><li>Batch consistency</li></ul>'
+                    content: '<p>Monitor exact CBD-to-THC ratios, carrier oil types, and recommended dosing protocols for each tincture. Trakie documents whether products use MCT oil, hemp seed oil, or other carriers, tracks ratio variations from 1:1 to 20:1 CBD, and maintains detailed batch consistency data.</p><p>Curated exceptionally by Emerald Dispensary.</p>'
                 },
                 column2: {
                     title: 'Medical Analytics',
-                    content: '<p>Track which ratios and formulations work best for different customer needs and medical applications.</p><ul><li>Ratio performance data</li><li>Application tracking</li><li>Patient feedback loops</li><li>Efficacy patterns</li></ul>'
+                    content: '<p>Track which ratios and formulations work best for different customer needs and medical applications. Understand which CBD-dominant products support sleep, which balanced ratios help with anxiety, and which THC-forward tinctures provide effective pain relief, enabling you to make informed recommendations.</p>'
                 }
             },
             'CBD': {
                 headline: 'CBD Products',
-                subtext: 'Non-intoxicating wellness products including topicals, capsules, and isolates for therapeutic use.',
+                subtext: 'Non-intoxicating wellness products including topicals and isolates for therapeutic use.',
                 column1: {
                     title: 'Wellness Intelligence',
-                    content: '<p>Track CBD potencies, application types, and third-party lab results while managing wellness-focused inventory.</p><ul><li>Potency verification</li><li>Application tracking</li><li>Lab result storage</li><li>Wellness categorization</li></ul>'
+                    content: '<p>Track CBD potencies, application types, and third-party lab results while managing wellness-focused inventory. Trakie maintains certificates of analysis, monitors heavy metal testing results, and ensures your CBD products meet the highest purity standards for health-conscious customers.</p><p>Curated exceptionally by Emerald Dispensary.</p>'
                 },
                 column2: {
                     title: 'Market Insights',
-                    content: '<p>Understand which CBD formats and potencies drive adoption among wellness-focused customers.</p><ul><li>Format preference analysis</li><li>Potency optimization</li><li>Customer demographics</li><li>Cross-sell opportunities</li></ul>'
+                    content: '<p>Understand which CBD formats and potencies drive adoption among wellness-focused customers. Data reveals whether your audience prefers topical applications over oral consumption, which potency levels command premium pricing, and which third-party certifications influence purchasing decisions in this quality-sensitive category.</p>'
                 }
             }
         };
 
         const products = [
             {
-                brand: 'Green Leaf Farms',
+                brand: 'Binske',
                 name: 'Blue Dream',
                 strain: 'Hybrid',
+                details: '3.5g Flower',
                 thc: '24.5%',
                 cbd: '0.3%',
                 expDate: '12/2025',
                 quantity: 12,
                 unitCost: 35.00,
                 priceAfterTax: 42.00,
-                images: ['🌿', '🌿', '🌿'],
-                description: 'Blue Dream is a sublime sativa-dominant hybrid that offers a perfectly balanced experience of cerebral elevation and physical tranquility. This exceptional cultivar begins with a gentle euphoric lift that enhances mood and perception, gradually blossoming into a soothing body relaxation that maintains functionality while melting away tension. Blue Dream features an exquisite flavor profile dominated by sweet, ripe blueberry notes complemented by subtle vanilla undertones and a honey-like smoothness on exhale. Its aroma is equally enchanting, with prominent fresh blueberry scents underscored by floral sweetness and earthy notes that become more pronounced when the delicate buds are broken apart. Medical cannabis patients particularly appreciate Blue Dream for its balanced therapeutic effects, effectively addressing anxiety, mild pain, and insomnia while promoting a sense of peaceful wellbeing.',
+                images: ['binske-flower-1.png', 'binske-flower-2.webp', 'binske-flower-3.webp'],
+                description: 'Blue Dream is a sublime sativa-dominant hybrid that offers a perfectly balanced experience of cerebral elevation and physical tranquility. This exceptional cultivar begins with a gentle euphoric lift that enhances mood and perception, gradually blossoming into a soothing body relaxation that maintains functionality while melting away tension. Blue Dream features an exquisite flavor profile dominated by sweet, ripe blueberry notes complemented by subtle vanilla undertones and a honey-like smoothness on exhale. Its aroma is equally enchanting, with prominent fresh blueberry scents underscored by floral sweetness and earthy notes that become more pronounced when the delicate buds are broken apart. Medical cannabis patients particularly appreciate Blue Dream for its balanced therapeutic effects, effectively addressing anxiety, mild pain, and insomnia while promoting a sense of peaceful wellbeing. Curated exceptionally by Emerald Dispensary.',
                 effects: [
                     { icon: '😊', label: 'Happy' },
                     { icon: '🛋️', label: 'Relaxed' },
@@ -2947,17 +2948,18 @@
                 ]
             },
             {
-                brand: 'Green Leaf Farms',
+                brand: 'Hudson Cannabis',
                 name: 'OG Kush',
                 strain: 'Indica',
+                details: 'RSO Vaporizer',
                 thc: '26.8%',
                 cbd: '0.2%',
                 expDate: '01/2026',
                 quantity: 8,
                 unitCost: 42.00,
                 priceAfterTax: 50.40,
-                images: ['🌿', '🌿', '🌿'],
-                description: 'OG Kush is a legendary indica strain that delivers powerful full-body relaxation with a distinctly euphoric cerebral experience. Known for its complex terpene profile, OG Kush presents earthy pine notes layered with subtle citrus undertones and a signature fuel-like aroma that defines West Coast cannabis culture. The high begins with an uplifting mental clarity that gradually transitions into deep physical relaxation, making it ideal for evening use. Dense, resinous buds showcase vibrant green hues with fiery orange pistils and a generous coating of trichomes. Medical patients favor OG Kush for managing chronic pain, stress, and sleep disorders.',
+                images: ['hudson-vaporizer-1.png', 'hudson-vaporizer-1.png', 'hudson-vaporizer-1.png'],
+                description: 'OG Kush is a legendary indica strain that delivers powerful full-body relaxation with a distinctly euphoric cerebral experience. Known for its complex terpene profile, OG Kush presents earthy pine notes layered with subtle citrus undertones and a signature fuel-like aroma that defines West Coast cannabis culture. The high begins with an uplifting mental clarity that gradually transitions into deep physical relaxation, making it ideal for evening use. Dense, resinous buds showcase vibrant green hues with fiery orange pistils and a generous coating of trichomes. Medical patients favor OG Kush for managing chronic pain, stress, and sleep disorders. Curated exceptionally by Emerald Dispensary.',
                 effects: [
                     { icon: '😴', label: 'Sleepy' },
                     { icon: '🛋️', label: 'Relaxed' },
@@ -2965,17 +2967,18 @@
                 ]
             },
             {
-                brand: 'Green Leaf Farms',
+                brand: 'Ayrloom',
                 name: 'Sour Diesel',
                 strain: 'Sativa',
+                details: 'Lemonade Beverage 10mg',
                 thc: '22.3%',
                 cbd: '0.4%',
                 expDate: '12/2025',
                 quantity: 15,
                 unitCost: 32.00,
                 priceAfterTax: 38.40,
-                images: ['🌿', '🌿', '🌿'],
-                description: 'Sour Diesel is an energizing sativa powerhouse renowned for its invigorating cerebral effects and unmistakable diesel-fuel aroma. This strain delivers a fast-acting head high that sparks creativity, enhances focus, and promotes social engagement. The flavor profile combines pungent diesel notes with bright citrus and herbal undertones, creating a sharp, tangy experience that lingers on the palate. Bright green buds with abundant orange hairs produce a stimulating effect perfect for daytime use. Sour Diesel is celebrated among creative professionals and patients seeking relief from fatigue, depression, and lack of appetite without sedation.',
+                images: ['ayrloom-beverage.webp', 'ayrloom-beverage.webp', 'ayrloom-beverage.webp'],
+                description: 'Sour Diesel is an energizing sativa powerhouse renowned for its invigorating cerebral effects and unmistakable diesel-fuel aroma. This strain delivers a fast-acting head high that sparks creativity, enhances focus, and promotes social engagement. The flavor profile combines pungent diesel notes with bright citrus and herbal undertones, creating a sharp, tangy experience that lingers on the palate. Bright green buds with abundant orange hairs produce a stimulating effect perfect for daytime use. Sour Diesel is celebrated among creative professionals and patients seeking relief from fatigue, depression, and lack of appetite without sedation. Curated exceptionally by Emerald Dispensary.',
                 effects: [
                     { icon: '⚡', label: 'Energetic' },
                     { icon: '💡', label: 'Focused' },
@@ -2983,17 +2986,18 @@
                 ]
             },
             {
-                brand: 'Green Leaf Farms',
+                brand: 'Binske',
                 name: 'Purple Haze',
                 strain: 'Sativa',
+                details: '3.5g Flower',
                 thc: '28.1%',
                 cbd: '0.1%',
                 expDate: '01/2026',
                 quantity: 20,
                 unitCost: 28.00,
                 priceAfterTax: 33.60,
-                images: ['🌿', '🌿', '🌿'],
-                description: 'Purple Haze is an iconic sativa that combines potent psychoactive effects with a mesmerizing visual and aromatic experience. Named for its stunning purple-hued buds that shimmer with crystalline trichomes, this strain delivers a powerful cerebral rush that inspires creativity and introspection. The flavor profile features sweet berry notes with earthy undertones and a hint of spice, while the aroma presents a complex bouquet of fresh flowers and wild berries. Purple Haze produces a long-lasting, dreamy euphoria that enhances sensory perception and promotes artistic thinking. Medical users appreciate its efficacy in managing symptoms of depression, chronic stress, and mental fatigue.',
+                images: ['binske-flower-2.webp', 'binske-flower-1.png', 'binske-flower-3.webp'],
+                description: 'Purple Haze is an iconic sativa that combines potent psychoactive effects with a mesmerizing visual and aromatic experience. Named for its stunning purple-hued buds that shimmer with crystalline trichomes, this strain delivers a powerful cerebral rush that inspires creativity and introspection. The flavor profile features sweet berry notes with earthy undertones and a hint of spice, while the aroma presents a complex bouquet of fresh flowers and wild berries. Purple Haze produces a long-lasting, dreamy euphoria that enhances sensory perception and promotes artistic thinking. Medical users appreciate its efficacy in managing symptoms of depression, chronic stress, and mental fatigue. Curated exceptionally by Emerald Dispensary.',
                 effects: [
                     { icon: '🎨', label: 'Creative' },
                     { icon: '😌', label: 'Euphoric' },
@@ -3001,17 +3005,18 @@
                 ]
             },
             {
-                brand: 'Green Leaf Farms',
+                brand: 'Papa & Barkley',
                 name: 'Gelato',
                 strain: 'Hybrid',
+                details: '3:1 CBD Relief Balm',
                 thc: '25.7%',
                 cbd: '0.3%',
                 expDate: '12/2025',
                 quantity: 10,
                 unitCost: 38.00,
                 priceAfterTax: 45.60,
-                images: ['🌿', '🌿', '🌿'],
-                description: 'Gelato is a premium hybrid strain that delivers a perfectly balanced high combining mental clarity with soothing physical relaxation. This dessert-themed cultivar features an exceptional flavor profile reminiscent of sweet sherbet with creamy citrus undertones and hints of fresh berries. Dense, colorful buds display deep purple hues contrasted by bright orange pistils and a generous coating of sticky trichomes. The effects begin with an uplifting cerebral buzz that enhances mood and sociability, followed by a gentle body melt that relieves tension without causing couch-lock. Gelato is highly sought after by both recreational users seeking a sophisticated experience and medical patients managing chronic pain, inflammation, and anxiety.',
+                images: ['papa-barkley-balm-1.webp', 'papa-barkley-balm-2.webp', 'papa-barkley-balm-1.webp'],
+                description: 'Gelato is a premium hybrid strain that delivers a perfectly balanced high combining mental clarity with soothing physical relaxation. This dessert-themed cultivar features an exceptional flavor profile reminiscent of sweet sherbet with creamy citrus undertones and hints of fresh berries. Dense, colorful buds display deep purple hues contrasted by bright orange pistils and a generous coating of sticky trichomes. The effects begin with an uplifting cerebral buzz that enhances mood and sociability, followed by a gentle body melt that relieves tension without causing couch-lock. Gelato is highly sought after by both recreational users seeking a sophisticated experience and medical patients managing chronic pain, inflammation, and anxiety. Curated exceptionally by Emerald Dispensary.',
                 effects: [
                     { icon: '😊', label: 'Happy' },
                     { icon: '🛋️', label: 'Relaxed' },
@@ -3128,15 +3133,14 @@
                 card.innerHTML = `
                     <div class="product-card-header">
                         <div class="product-card-title-left">
-                            <div class="product-brand">${product.brand}</div>
-                            <div class="product-strain">${product.name}</div>
-                            <div class="product-type">${product.strain}</div>
+                            <div class="product-brand">${product.brand} | ${product.name} | ${product.strain}</div>
+                            <div class="product-type">${product.details}</div>
                         </div>
                         <div class="product-quantity">QTY ${product.quantity}</div>
                     </div>
                     
                     <div class="product-card-image-container">
-                        <div class="product-image-main">${product.images[selectedImages[index] || 0]}</div>
+                        <img src="${product.images[selectedImages[index] || 0]}" alt="${product.name}" class="product-image-main" />
                         <div class="thc-overlay">
                             <div class="thc-percentage">${product.thc.replace('%', '')}</div>
                             <div class="thc-label">THC</div>
@@ -3360,8 +3364,14 @@
             const modal = document.getElementById('productModal');
             
             // Populate modal data
-            document.getElementById('modalImage').textContent = product.images[0];
-            document.getElementById('modalCategory').textContent = 'FLOWER';
+            const modalImage = document.getElementById('modalImage');
+            if (product.images[0].includes('.png') || product.images[0].includes('.webp')) {
+                modalImage.innerHTML = `<img src="${product.images[0]}" alt="${product.name}" style="width: 100%; height: 100%; object-fit: contain;">`;
+            } else {
+                modalImage.textContent = product.images[0];
+            }
+            
+            document.getElementById('modalCategory').textContent = product.details.toUpperCase();
             document.getElementById('modalStrain').textContent = product.strain.toUpperCase();
             document.getElementById('modalTitle').textContent = product.name;
             document.getElementById('modalBrand').textContent = `By ${product.brand}`;
@@ -3438,8 +3448,12 @@
                     setTimeout(() => openProductModal(actualIndex), 300);
                 };
                 
+                const imageContent = (product.images[0].includes('.png') || product.images[0].includes('.webp')) 
+                    ? `<img src="${product.images[0]}" alt="${product.name}">`
+                    : product.images[0];
+                
                 card.innerHTML = `
-                    <div class="related-product-image">${product.images[0]}</div>
+                    <div class="related-product-image">${imageContent}</div>
                     <div class="related-product-name">${product.name}</div>
                     <div class="related-product-price">$${product.priceAfterTax.toFixed(2)}</div>
                 `;
@@ -3470,14 +3484,25 @@
             
             if (!category || !details) return;
             
-            // Set hero video/image
+            // Set hero video/image - use real product photos where available
             const heroSection = document.getElementById('categoryHeroImage');
-            heroSection.innerHTML = `
-                <video autoplay loop muted playsinline webkit-playsinline>
-                    <source src="${category.video}" type="video/quicktime">
-                    <source src="${category.video}" type="video/mp4">
-                </video>
-            `;
+            const heroImages = {
+                'Flower': 'binske-flower-1.png',
+                'Vaporizers': 'hudson-vaporizer-1.png',
+                'Beverages': 'ayrloom-beverage.webp',
+                'CBD': 'papa-barkley-balm-1.webp'
+            };
+            
+            if (heroImages[categoryName]) {
+                heroSection.innerHTML = `<img src="${heroImages[categoryName]}" alt="${categoryName}" style="width: 100%; height: 100%; object-fit: cover;">`;
+            } else {
+                heroSection.innerHTML = `
+                    <video autoplay loop muted playsinline webkit-playsinline>
+                        <source src="${category.video}" type="video/quicktime">
+                        <source src="${category.video}" type="video/mp4">
+                    </video>
+                `;
+            }
             
             // Set content
             document.getElementById('categoryHeadline').textContent = details.headline;
