@@ -3294,12 +3294,14 @@
                 bubble.style.setProperty('--delay', index);
                 
                 const video = document.createElement('video');
-                video.autoplay = true;
                 video.loop = true;
                 video.muted = true;
                 video.playsInline = true;
                 video.setAttribute('playsinline', '');
                 video.setAttribute('webkit-playsinline', '');
+                
+                // DO NOT autoplay - only play on hover
+                video.autoplay = false;
                 
                 const source1 = document.createElement('source');
                 source1.src = category.video;
@@ -3312,8 +3314,18 @@
                 video.appendChild(source1);
                 video.appendChild(source2);
                 
+                // Pause video initially
                 video.addEventListener('loadeddata', function() {
-                    video.play().catch(e => console.log('Autoplay prevented'));
+                    video.pause();
+                });
+                
+                // Hover to play functionality
+                bubble.addEventListener('mouseenter', function() {
+                    video.play().catch(e => console.log('Play prevented'));
+                });
+                
+                bubble.addEventListener('mouseleave', function() {
+                    video.pause();
                 });
                 
                 const label = document.createElement('div');
