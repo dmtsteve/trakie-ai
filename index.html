@@ -1408,28 +1408,27 @@
 
         /* POKEMON CARD STYLING - READY FOR 3D/5D */
         .product-card {
-            background: linear-gradient(135deg, rgba(201, 169, 97, 0.15) 0%, rgba(139, 115, 85, 0.15) 100%);
-            border: 3px solid rgba(201, 169, 97, 0.4);
-            border-radius: 24px;
+            background: #FFFFFF;
+            border: 2px solid rgba(201, 169, 97, 0.3);
+            border-radius: 16px;
             overflow: hidden;
-            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+            transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
             position: relative;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
         }
 
         .product-card:hover {
-            transform: translateY(-12px) scale(1.02);
+            transform: translateY(-8px);
             border-color: #C9A961;
-            box-shadow: 0 25px 70px rgba(201, 169, 97, 0.5);
+            box-shadow: 0 12px 40px rgba(201, 169, 97, 0.3);
         }
 
         .product-card-header {
             background: linear-gradient(135deg, #C9A961 0%, #8B7355 100%);
-            padding: 15px 20px;
+            padding: 14px 20px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-bottom: 3px solid rgba(255, 255, 255, 0.3);
         }
 
         .product-card-title-left {
@@ -1438,43 +1437,47 @@
         }
 
         .product-brand {
-            font-size: 13px;
+            font-size: 12px;
             font-weight: 700;
             color: rgba(0, 0, 0, 0.7);
             text-transform: none;
-            letter-spacing: 0.5px;
+            letter-spacing: 0.3px;
+            font-family: 'Outfit', sans-serif;
         }
 
         .product-strain {
-            font-size: 22px;
+            font-size: 20px;
             font-weight: 900;
             color: #000;
             margin-top: 2px;
             letter-spacing: -0.5px;
+            font-family: 'Bodoni Moda', serif;
         }
 
         .product-type {
-            font-size: 10px;
+            font-size: 9px;
             font-weight: 600;
             color: rgba(0, 0, 0, 0.5);
             text-transform: uppercase;
             margin-top: 2px;
+            font-family: 'Outfit', sans-serif;
         }
 
         .product-quantity {
-            background: rgba(0, 0, 0, 0.25);
-            padding: 8px 15px;
+            background: rgba(0, 0, 0, 0.6);
+            padding: 8px 16px;
             border-radius: 20px;
-            font-size: 16px;
-            font-weight: 900;
+            font-size: 14px;
+            font-weight: 700;
             color: #fff;
+            font-family: 'Outfit', sans-serif;
         }
 
         /* IMAGE CONTAINER - READY FOR 3D/5D IMAGES */
         .product-card-image-container {
             position: relative;
-            height: 350px;
-            background: linear-gradient(to bottom, #1a1a1a 0%, #0a0a0a 100%);
+            height: 300px;
+            background: #FFFFFF;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -1488,7 +1491,7 @@
             align-items: center;
             justify-content: center;
             transition: transform 0.3s ease;
-            padding: 20px;
+            padding: 40px;
         }
 
         /* When 3D images are added, they'll fit perfectly here */
@@ -1499,41 +1502,45 @@
             height: auto;
             object-fit: contain;
             transition: transform 0.3s ease;
+            filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.15));
         }
 
-        .product-card:hover .product-image-main {
-            transform: scale(1.1);
+        .product-card:hover .product-image-main img {
+            transform: scale(1.08);
         }
 
         .thc-overlay {
             position: absolute;
-            top: 20px;
-            right: 20px;
-            width: 100px;
-            height: 100px;
-            background: linear-gradient(135deg, #f59e0b, #d97706);
+            top: 16px;
+            right: 16px;
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, #FF9500 0%, #FF6B00 100%);
             border-radius: 50%;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 8px 24px rgba(245, 158, 11, 0.6);
-            border: 4px solid #fbbf24;
-            transform: rotate(-15deg);
+            box-shadow: 0 4px 16px rgba(255, 149, 0, 0.5);
+            border: 3px solid #FFB340;
+            z-index: 10;
         }
 
         .thc-percentage {
-            font-size: 28px;
+            font-size: 22px;
             font-weight: 900;
             color: #000;
             line-height: 1;
+            font-family: 'Outfit', sans-serif;
         }
 
         .thc-label {
-            font-size: 10px;
+            font-size: 9px;
             font-weight: 700;
             color: rgba(0, 0, 0, 0.7);
             text-transform: uppercase;
+            margin-top: 2px;
+            font-family: 'Outfit', sans-serif;
         }
 
         .image-arrow {
@@ -1567,35 +1574,35 @@
         }
 
         .product-price-section {
-            background: rgba(201, 169, 97, 0.2);
-            padding: 20px;
+            background: rgba(0, 0, 0, 0.05);
+            padding: 16px 20px;
             text-align: center;
-            border-top: 3px solid rgba(201, 169, 97, 0.4);
+            border-top: 2px solid rgba(201, 169, 97, 0.2);
         }
 
         .price-label {
-            font-size: 11px;
-            color: #888;
+            font-size: 10px;
+            color: rgba(0, 0, 0, 0.5);
             text-transform: uppercase;
-            margin-bottom: 5px;
+            margin-bottom: 4px;
             font-weight: 600;
             letter-spacing: 1px;
+            font-family: 'Outfit', sans-serif;
         }
 
         .product-price {
             font-family: 'Bodoni Moda', serif;
-            font-size: 40px;
-            font-weight: 900;
-            color: #C9A961;
-            text-shadow: 0 2px 10px rgba(201, 169, 97, 0.5);
+            font-size: 36px;
+            font-weight: 700;
+            color: #000;
         }
 
         .product-card-stats {
-            padding: 20px;
+            padding: 16px 20px;
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 10px 20px;
-            background: rgba(0, 0, 0, 0.3);
+            gap: 12px;
+            background: rgba(0, 0, 0, 0.03);
         }
 
         .stat-row {
@@ -1605,22 +1612,24 @@
         }
 
         .stat-label {
-            color: #888;
+            color: rgba(0, 0, 0, 0.5);
             font-weight: 600;
-            font-size: 11px;
+            font-size: 10px;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 0.5px;
+            font-family: 'Outfit', sans-serif;
         }
 
         .stat-value {
-            color: #fff;
+            color: #000;
             font-weight: 700;
-            font-size: 16px;
+            font-size: 15px;
+            font-family: 'Outfit', sans-serif;
         }
 
         .stat-value.highlight {
             color: #C9A961;
-            font-size: 18px;
+            font-size: 16px;
         }
 
         .smart-move-controls {
