@@ -905,10 +905,153 @@
             min-height: 100vh;
             text-align: center;
             padding: 40px;
+            cursor: pointer;
         }
 
         .processing-screen.active {
             display: flex;
+        }
+
+        .ai-processing-container {
+            max-width: 600px;
+            width: 100%;
+        }
+
+        .ai-processing-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: 48px;
+            font-weight: 700;
+            color: #C9A961;
+            margin-bottom: 60px;
+            letter-spacing: 2px;
+        }
+
+        .neural-network {
+            position: relative;
+            width: 400px;
+            height: 150px;
+            margin: 0 auto 60px;
+        }
+
+        .neural-node {
+            position: absolute;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #C9A961 0%, #8B7355 100%);
+            box-shadow: 0 0 30px rgba(201, 169, 97, 0.6);
+            animation: nodePulse 2s ease-in-out infinite;
+        }
+
+        .neural-node.node-1 {
+            left: 0;
+            top: 45px;
+        }
+
+        .neural-node.node-2 {
+            left: 170px;
+            top: 45px;
+            animation-delay: 0.3s;
+        }
+
+        .neural-node.node-3 {
+            right: 0;
+            top: 45px;
+            animation-delay: 0.6s;
+        }
+
+        .neural-connection {
+            position: absolute;
+            height: 3px;
+            background: linear-gradient(90deg, rgba(201, 169, 97, 0.2) 0%, #C9A961 50%, rgba(201, 169, 97, 0.2) 100%);
+            top: 72px;
+            animation: connectionFlow 2s ease-in-out infinite;
+        }
+
+        .neural-connection.conn-1 {
+            left: 60px;
+            width: 110px;
+        }
+
+        .neural-connection.conn-2 {
+            left: 230px;
+            width: 110px;
+            animation-delay: 0.3s;
+        }
+
+        .neural-connection.conn-3 {
+            left: 60px;
+            width: 280px;
+            top: 30px;
+            transform: rotate(-10deg);
+            animation-delay: 0.6s;
+        }
+
+        @keyframes nodePulse {
+            0%, 100% {
+                transform: scale(1);
+                box-shadow: 0 0 30px rgba(201, 169, 97, 0.6);
+            }
+            50% {
+                transform: scale(1.1);
+                box-shadow: 0 0 50px rgba(201, 169, 97, 0.9);
+            }
+        }
+
+        @keyframes connectionFlow {
+            0%, 100% {
+                opacity: 0.3;
+            }
+            50% {
+                opacity: 1;
+            }
+        }
+
+        .processing-text {
+            font-family: 'Outfit', sans-serif;
+            font-size: 24px;
+            color: #fff;
+            margin-bottom: 16px;
+            animation: textFade 2s ease-in-out infinite;
+        }
+
+        .processing-confidence {
+            font-family: 'Outfit', sans-serif;
+            font-size: 18px;
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 60px;
+        }
+
+        .processing-confidence span {
+            color: #7fb800;
+            font-weight: 700;
+        }
+
+        .click-to-continue {
+            font-family: 'Outfit', sans-serif;
+            font-size: 16px;
+            color: rgba(201, 169, 97, 0.6);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            animation: blink 1.5s ease-in-out infinite;
+        }
+
+        @keyframes textFade {
+            0%, 100% {
+                opacity: 0.7;
+            }
+            50% {
+                opacity: 1;
+            }
+        }
+
+        @keyframes blink {
+            0%, 100% {
+                opacity: 0.4;
+            }
+            50% {
+                opacity: 1;
+            }
         }
 
         .processing-title {
@@ -1127,19 +1270,21 @@
         }
 
         .product-image-main {
-            width: 70%;
-            height: 70%;
-            font-size: 120px;
+            width: 100%;
+            height: 100%;
             display: flex;
             align-items: center;
             justify-content: center;
             transition: transform 0.3s ease;
+            padding: 20px;
         }
 
         /* When 3D images are added, they'll fit perfectly here */
         .product-image-main img {
-            width: 100%;
-            height: 100%;
+            max-width: 100%;
+            max-height: 100%;
+            width: auto;
+            height: auto;
             object-fit: contain;
             transition: transform 0.3s ease;
         }
@@ -1939,6 +2084,241 @@
             }
         }
 
+        /* FULL-PAGE CATEGORY GRID VIEW */
+        .category-grid-view {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: #0A0A0A;
+            z-index: 10001;
+            overflow-y: auto;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .category-grid-view.active {
+            display: block;
+        }
+
+        .category-grid-header {
+            padding: 40px 60px;
+            border-bottom: 1px solid rgba(201, 169, 97, 0.2);
+            display: flex;
+            align-items: center;
+            gap: 40px;
+        }
+
+        .grid-back-btn {
+            background: transparent;
+            border: 2px solid #C9A961;
+            color: #C9A961;
+            padding: 12px 30px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        .grid-back-btn:hover {
+            background: rgba(201, 169, 97, 0.1);
+            transform: translateX(-5px);
+        }
+
+        .grid-category-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: 72px;
+            font-weight: 700;
+            color: #C9A961;
+            margin: 0;
+            letter-spacing: -2px;
+        }
+
+        .category-grid-filters {
+            padding: 40px 60px;
+            display: flex;
+            gap: 40px;
+            border-bottom: 1px solid rgba(201, 169, 97, 0.1);
+        }
+
+        .filter-group {
+            flex: 1;
+        }
+
+        .filter-group label {
+            display: block;
+            font-family: 'Outfit', sans-serif;
+            font-size: 14px;
+            font-weight: 600;
+            color: #C9A961;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .filter-slider {
+            width: 100%;
+            height: 4px;
+            background: rgba(201, 169, 97, 0.2);
+            outline: none;
+            border-radius: 2px;
+        }
+
+        .filter-slider::-webkit-slider-thumb {
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            background: #C9A961;
+            cursor: pointer;
+            border-radius: 50%;
+        }
+
+        .filter-value {
+            display: block;
+            font-family: 'Outfit', sans-serif;
+            font-size: 16px;
+            color: #fff;
+            margin-top: 8px;
+        }
+
+        .filter-select {
+            width: 100%;
+            padding: 12px 16px;
+            background: rgba(201, 169, 97, 0.1);
+            border: 1px solid rgba(201, 169, 97, 0.3);
+            color: #fff;
+            font-family: 'Outfit', sans-serif;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .category-grid-products {
+            padding: 60px;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+        }
+
+        .grid-empty-state {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 100px 40px;
+        }
+
+        .grid-empty-state p {
+            font-family: 'Outfit', sans-serif;
+            font-size: 24px;
+            color: rgba(201, 169, 97, 0.5);
+        }
+
+        /* FULL-PAGE DATA GRAPH VIEW */
+        .data-graph-view {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: #0A0A0A;
+            z-index: 10001;
+            overflow-y: auto;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .data-graph-view.active {
+            display: block;
+        }
+
+        .graph-header {
+            padding: 40px 60px;
+            border-bottom: 1px solid rgba(201, 169, 97, 0.2);
+        }
+
+        .graph-back-btn {
+            background: transparent;
+            border: 2px solid #C9A961;
+            color: #C9A961;
+            padding: 12px 30px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-family: 'Outfit', sans-serif;
+            margin-bottom: 30px;
+        }
+
+        .graph-back-btn:hover {
+            background: rgba(201, 169, 97, 0.1);
+            transform: translateX(-5px);
+        }
+
+        .graph-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: 56px;
+            font-weight: 700;
+            color: #C9A961;
+            margin: 0 0 10px 0;
+            letter-spacing: -1px;
+        }
+
+        .graph-subtitle {
+            font-family: 'Outfit', sans-serif;
+            font-size: 24px;
+            color: rgba(255, 255, 255, 0.7);
+            margin: 0;
+        }
+
+        .graph-container {
+            padding: 60px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .graph-container canvas {
+            width: 100% !important;
+            height: 400px !important;
+        }
+
+        .graph-insights {
+            padding: 40px 60px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .graph-insights h3 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 28px;
+            font-weight: 700;
+            color: #C9A961;
+            margin-bottom: 20px;
+        }
+
+        .insight-list {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .insight-item {
+            font-family: 'Outfit', sans-serif;
+            font-size: 18px;
+            color: #fff;
+            padding: 20px 30px;
+            background: rgba(201, 169, 97, 0.05);
+            border-left: 4px solid #C9A961;
+        }
+
+        @media (max-width: 1024px) {
+            .category-grid-products {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .grid-category-title {
+                font-size: 48px;
+            }
+        }
+
         /* DATA SECTION */
         .data-wrapper {
             padding: 140px 40px 60px;
@@ -2546,9 +2926,23 @@
 
                 <!-- Processing Screen -->
                 <div class="processing-screen" id="processingScreen">
-                    <h2 class="processing-title">AI Processing</h2>
-                    <div class="spinner-large"></div>
-                    <div class="processing-steps" id="processingSteps"></div>
+                    <div class="ai-processing-container">
+                        <div class="ai-processing-title">⚡ PROCESSING WITH AI</div>
+                        
+                        <div class="neural-network">
+                            <div class="neural-node node-1"></div>
+                            <div class="neural-node node-2"></div>
+                            <div class="neural-node node-3"></div>
+                            <div class="neural-connection conn-1"></div>
+                            <div class="neural-connection conn-2"></div>
+                            <div class="neural-connection conn-3"></div>
+                        </div>
+                        
+                        <div class="processing-text" id="processingText">Extracting product data...</div>
+                        <div class="processing-confidence">Confidence: <span id="confidenceValue">99.8%</span></div>
+                        
+                        <div class="click-to-continue">Click anywhere to continue</div>
+                    </div>
                 </div>
 
                 <!-- Results Screen with Pokemon Cards -->
@@ -2600,32 +2994,32 @@
                     <p class="data-subtitle">Algorithmic forecasting. Velocity analytics. Attribution modeling.</p>
                 </div>
                 <div class="dashboard-grid">
-                    <div class="dashboard-card" onclick="showDataInsight('restock')">
+                    <div class="dashboard-card" onclick="openDataGraph('restock')">
                         <div class="card-header">🔮 Restock Alert</div>
                         <div class="card-metric">3 days</div>
                         <div class="card-label">Until Blue Dream stockout</div>
                     </div>
-                    <div class="dashboard-card" onclick="showDataInsight('velocity')">
+                    <div class="dashboard-card" onclick="openDataGraph('velocity')">
                         <div class="card-header">📈 Trend Velocity</div>
                         <div class="card-metric">+127%</div>
                         <div class="card-label">Wedding Cake momentum</div>
                     </div>
-                    <div class="dashboard-card" onclick="showDataInsight('lowstock')">
+                    <div class="dashboard-card" onclick="openDataGraph('lowstock')">
                         <div class="card-header">⚡ Low Stock Alert</div>
                         <div class="card-metric">5 SKUs</div>
                         <div class="card-label">Below safety buffer</div>
                     </div>
-                    <div class="dashboard-card" onclick="showDataInsight('revenue')">
+                    <div class="dashboard-card" onclick="openDataGraph('revenue')">
                         <div class="card-header">💎 Revenue Opportunity</div>
                         <div class="card-metric">$12.4K</div>
                         <div class="card-label">Potential profit gain</div>
                     </div>
-                    <div class="dashboard-card" onclick="showDataInsight('confidence')">
+                    <div class="dashboard-card" onclick="openDataGraph('confidence')">
                         <div class="card-header">🎯 AI Confidence</div>
                         <div class="card-metric">99.8%</div>
                         <div class="card-label">Prediction accuracy</div>
                     </div>
-                    <div class="dashboard-card" onclick="showDataInsight('topseller')">
+                    <div class="dashboard-card" onclick="openDataGraph('topseller')">
                         <div class="card-header">🔥 Top Seller</div>
                         <div class="card-metric">Gorilla Glue</div>
                         <div class="card-label">8.2 units/day velocity</div>
@@ -2812,6 +3206,66 @@
                 <div class="category-cta-section">
                     <button class="category-cta-btn" onclick="closeCategoryModal()">← Back to Menu</button>
                 </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Full-Page Category Grid View -->
+    <div class="category-grid-view" id="categoryGridView">
+        <div class="category-grid-header">
+            <button class="grid-back-btn" onclick="closeCategoryGrid()">← Back</button>
+            <h1 class="grid-category-title" id="gridCategoryTitle">Flower</h1>
+        </div>
+        
+        <div class="category-grid-filters">
+            <div class="filter-group">
+                <label>Price Range</label>
+                <input type="range" min="0" max="100" value="100" class="filter-slider">
+                <span class="filter-value">$0 - $100</span>
+            </div>
+            <div class="filter-group">
+                <label>THC %</label>
+                <input type="range" min="0" max="35" value="35" class="filter-slider">
+                <span class="filter-value">0% - 35%</span>
+            </div>
+            <div class="filter-group">
+                <label>Sort By</label>
+                <select class="filter-select">
+                    <option>Price (Low to High)</option>
+                    <option>Price (High to Low)</option>
+                    <option>THC % (Low to High)</option>
+                    <option>THC % (High to Low)</option>
+                    <option>Name (A-Z)</option>
+                </select>
+            </div>
+        </div>
+        
+        <div class="category-grid-products" id="gridProducts">
+            <!-- Products will be populated here -->
+            <div class="grid-empty-state">
+                <p>Category products will appear here</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Full-Page Data Graph View -->
+    <div class="data-graph-view" id="dataGraphView">
+        <div class="graph-header">
+            <button class="graph-back-btn" onclick="closeDataGraph()">← Back to Dashboard</button>
+            <div class="graph-title-section">
+                <h1 class="graph-title" id="graphTitle">Trend Velocity Analytics</h1>
+                <p class="graph-subtitle" id="graphSubtitle">Wedding Cake momentum +127%</p>
+            </div>
+        </div>
+        
+        <div class="graph-container">
+            <canvas id="trendGraph"></canvas>
+        </div>
+        
+        <div class="graph-insights">
+            <h3>Insights</h3>
+            <div class="insight-list" id="insightList">
+                <!-- Insights will be populated -->
             </div>
         </div>
     </div>
@@ -3054,50 +3508,56 @@
             document.getElementById('receiveLanding').style.display = 'none';
             document.getElementById('qrScreen').classList.add('active');
             
-            setTimeout(() => {
-                document.getElementById('qrScreen').classList.remove('active');
+            // Click to advance from QR screen
+            const qrScreen = document.getElementById('qrScreen');
+            const advanceFromQR = () => {
+                qrScreen.classList.remove('active');
                 document.getElementById('splitScreen').classList.add('active');
+                qrScreen.removeEventListener('click', advanceFromQR);
                 simulatePhotoTaking();
-            }, 8000);
+            };
+            qrScreen.addEventListener('click', advanceFromQR);
         }
 
         function simulatePhotoTaking() {
-            setTimeout(() => {
-                document.getElementById('splitScreen').classList.remove('active');
+            // Click to advance from split screen
+            const splitScreen = document.getElementById('splitScreen');
+            const advanceFromSplit = () => {
+                splitScreen.classList.remove('active');
                 document.getElementById('processingScreen').classList.add('active');
+                splitScreen.removeEventListener('click', advanceFromSplit);
                 startProcessing();
-            }, 10000);
+            };
+            splitScreen.addEventListener('click', advanceFromSplit);
         }
 
         function startProcessing() {
-            const steps = [
-                { title: 'Reading Labels', text: 'OCR extracting text from photos...' },
-                { title: 'Identifying Products', text: 'Matching to catalog database...' },
-                { title: 'Searching Images', text: 'Finding best Google images...' },
-                { title: 'Extracting Details', text: 'THC%, batch numbers, quantities...' },
-                { title: 'Generating Descriptions', text: 'AI creating product descriptions...' },
-                { title: 'Syncing to METRC', text: 'Real-time compliance reporting...' }
+            // Animate processing text
+            const processingTexts = [
+                'Extracting product data...',
+                'Analyzing THC/CBD content...',
+                'Verifying batch information...',
+                'Processing complete!'
             ];
-
-            const container = document.getElementById('processingSteps');
-            container.innerHTML = '';
+            let textIndex = 0;
+            const textElement = document.getElementById('processingText');
             
-            steps.forEach((step, index) => {
-                setTimeout(() => {
-                    const stepDiv = document.createElement('div');
-                    stepDiv.className = 'process-step';
-                    stepDiv.innerHTML = `
-                        <div class="process-step-title">✓ ${step.title}</div>
-                        <div class="process-step-text">${step.text}</div>
-                    `;
-                    container.appendChild(stepDiv);
-                    setTimeout(() => stepDiv.classList.add('active'), 50);
-                }, index * 1500);
-            });
-
-            setTimeout(() => {
-                showResults();
-            }, 10000);
+            const textInterval = setInterval(() => {
+                if (textIndex < processingTexts.length && textElement) {
+                    textElement.textContent = processingTexts[textIndex];
+                    textIndex++;
+                }
+            }, 1000);
+            
+            // Click to advance to results
+            const processingScreen = document.getElementById('processingScreen');
+            const advanceToResults = () => {
+                clearInterval(textInterval);
+                processingScreen.classList.remove('active');
+                processingScreen.removeEventListener('click', advanceToResults);
+                processReceiving();
+            };
+            processingScreen.addEventListener('click', advanceToResults);
         }
 
         function showResults() {
@@ -3334,9 +3794,135 @@
                 
                 bubble.appendChild(video);
                 bubble.appendChild(label);
-                bubble.onclick = () => openCategoryModal(category.name);
+                bubble.onclick = () => openCategoryGrid(category.name);
                 
                 container.appendChild(bubble);
+            });
+        }
+
+        // CATEGORY GRID VIEW FUNCTIONS
+        function openCategoryGrid(categoryName) {
+            const gridView = document.getElementById('categoryGridView');
+            document.getElementById('gridCategoryTitle').textContent = categoryName;
+            gridView.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeCategoryGrid() {
+            const gridView = document.getElementById('categoryGridView');
+            gridView.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        // DATA GRAPH VIEW FUNCTIONS
+        function openDataGraph(insightType) {
+            const graphView = document.getElementById('dataGraphView');
+            
+            const graphTitles = {
+                'restock': 'Predictive Restock Intelligence',
+                'velocity': 'Trend Velocity Analytics',
+                'lowstock': 'Low Stock Monitoring',
+                'revenue': 'Revenue Optimization Engine',
+                'confidence': 'AI Prediction Confidence',
+                'topseller': 'Top Seller Analytics'
+            };
+            
+            const graphSubtitles = {
+                'restock': 'Blue Dream stockout in 3 days',
+                'velocity': 'Wedding Cake momentum +127%',
+                'lowstock': '5 SKUs below safety buffer',
+                'revenue': '$12.4K potential profit gain',
+                'confidence': '99.8% prediction accuracy',
+                'topseller': 'Gorilla Glue 8.2 units/day velocity'
+            };
+            
+            document.getElementById('graphTitle').textContent = graphTitles[insightType] || 'Analytics';
+            document.getElementById('graphSubtitle').textContent = graphSubtitles[insightType] || '';
+            
+            // Populate insights
+            const insightList = document.getElementById('insightList');
+            insightList.innerHTML = `
+                <div class="insight-item">127% velocity increase over past week</div>
+                <div class="insight-item">Restock recommended in 3 days to maintain availability</div>
+                <div class="insight-item">Category leader for Hybrid strains this week</div>
+                <div class="insight-item">Customer preference trending toward higher THC content</div>
+            `;
+            
+            graphView.classList.add('active');
+            document.body.style.overflow = 'hidden';
+            
+            // Draw graph
+            setTimeout(() => drawTrendGraph(), 100);
+        }
+
+        function closeDataGraph() {
+            const graphView = document.getElementById('dataGraphView');
+            graphView.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        function drawTrendGraph() {
+            const canvas = document.getElementById('trendGraph');
+            const ctx = canvas.getContext('2d');
+            
+            // Set canvas size
+            canvas.width = canvas.offsetWidth;
+            canvas.height = 400;
+            
+            const width = canvas.width;
+            const height = canvas.height;
+            
+            // Clear canvas
+            ctx.clearRect(0, 0, width, height);
+            
+            // Draw grid lines (subtle)
+            ctx.strokeStyle = 'rgba(201, 169, 97, 0.1)';
+            ctx.lineWidth = 1;
+            for (let i = 0; i < 5; i++) {
+                const y = (height / 4) * i;
+                ctx.beginPath();
+                ctx.moveTo(0, y);
+                ctx.lineTo(width, y);
+                ctx.stroke();
+            }
+            
+            // Data points
+            const data = [20, 25, 30, 45, 60, 85, 100];
+            const points = [];
+            
+            for (let i = 0; i < data.length; i++) {
+                const x = (width / (data.length - 1)) * i;
+                const y = height - (data[i] / 100) * height;
+                points.push({ x, y });
+            }
+            
+            // Draw gradient fill
+            const gradient = ctx.createLinearGradient(0, 0, 0, height);
+            gradient.addColorStop(0, 'rgba(127, 184, 0, 0.5)');
+            gradient.addColorStop(1, 'rgba(127, 184, 0, 0)');
+            
+            ctx.fillStyle = gradient;
+            ctx.beginPath();
+            ctx.moveTo(points[0].x, height);
+            points.forEach(p => ctx.lineTo(p.x, p.y));
+            ctx.lineTo(points[points.length - 1].x, height);
+            ctx.closePath();
+            ctx.fill();
+            
+            // Draw line
+            ctx.strokeStyle = '#7fb800';
+            ctx.lineWidth = 3;
+            ctx.beginPath();
+            ctx.moveTo(points[0].x, points[0].y);
+            points.forEach(p => ctx.lineTo(p.x, p.y));
+            ctx.stroke();
+            
+            // Draw points
+            points.forEach(p => {
+                ctx.fillStyle = '#C9A961';
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, 6, 0, Math.PI * 2);
+                ctx.fill();
             });
         }
 
