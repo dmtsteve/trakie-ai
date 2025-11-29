@@ -711,6 +711,132 @@
             padding: 40px;
         }
 
+        /* INTRO COMPARISON SCREEN */
+        .intro-comparison {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            text-align: center;
+            padding: 60px 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .intro-title {
+            font-family: 'Bodoni Moda', serif;
+            font-size: 64px;
+            font-weight: 700;
+            color: #C9A961;
+            margin-bottom: 20px;
+            letter-spacing: -1px;
+        }
+
+        .intro-subtitle {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 24px;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 60px;
+            max-width: 700px;
+        }
+
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            width: 100%;
+            max-width: 900px;
+            margin-bottom: 60px;
+        }
+
+        .comparison-column {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(201, 169, 97, 0.2);
+            padding: 40px 30px;
+            border-radius: 12px;
+        }
+
+        .comparison-column.highlight {
+            background: rgba(201, 169, 97, 0.08);
+            border: 2px solid rgba(201, 169, 97, 0.4);
+        }
+
+        .comparison-header {
+            font-family: 'Outfit', sans-serif;
+            font-size: 28px;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 30px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .comparison-header.gold {
+            color: #C9A961;
+        }
+
+        .comparison-steps {
+            text-align: left;
+            margin-bottom: 30px;
+        }
+
+        .comparison-step {
+            font-family: 'Outfit', sans-serif;
+            font-size: 16px;
+            color: rgba(255, 255, 255, 0.7);
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .comparison-step.gold {
+            color: #C9A961;
+            font-weight: 600;
+            border-bottom-color: rgba(201, 169, 97, 0.2);
+        }
+
+        .comparison-time, .comparison-accuracy {
+            font-family: 'Outfit', sans-serif;
+            font-size: 18px;
+            padding: 12px 0;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .comparison-time.gold, .comparison-accuracy.gold {
+            color: #C9A961;
+            font-weight: 700;
+        }
+
+        .intro-cta {
+            background: linear-gradient(135deg, #C9A961 0%, #8B7355 100%);
+            color: #000;
+            font-family: 'Outfit', sans-serif;
+            font-size: 20px;
+            font-weight: 600;
+            padding: 20px 50px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-transform: none;
+            letter-spacing: 0.5px;
+        }
+
+        .intro-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(201, 169, 97, 0.4);
+        }
+
+        .receive-landing {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            text-align: center;
+            padding: 40px;
+        }
+
         .receive-landing-title {
             font-family: 'Bodoni Moda', serif;
             font-size: 72px;
@@ -924,6 +1050,49 @@
             color: #C9A961;
             margin-bottom: 60px;
             letter-spacing: 2px;
+        }
+
+        /* PLAYSTATION LOADING BAR */
+        .playstation-bar-container {
+            position: relative;
+            width: 500px;
+            height: 40px;
+            background: rgba(0, 0, 0, 0.5);
+            border: 2px solid rgba(201, 169, 97, 0.3);
+            border-radius: 20px;
+            overflow: hidden;
+            margin: 0 auto 40px;
+        }
+
+        .playstation-bar-fill {
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, #C9A961 0%, #8B7355 50%, #C9A961 100%);
+            background-size: 200% 100%;
+            animation: shimmer 2s linear infinite;
+            transition: width 0.3s ease;
+            border-radius: 18px;
+        }
+
+        @keyframes shimmer {
+            0% { background-position: -200% 0; }
+            100% { background-position: 200% 0; }
+        }
+
+        .playstation-percentage {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-family: 'Outfit', sans-serif;
+            font-size: 18px;
+            font-weight: 700;
+            color: #fff;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
+            z-index: 10;
         }
 
         .neural-network {
@@ -1169,6 +1338,49 @@
             font-size: 16px;
             font-weight: 700;
             letter-spacing: 0.5px;
+        }
+
+        /* TIME COMPARISON */
+        .time-comparison {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(201, 169, 97, 0.2);
+            border-radius: 12px;
+            padding: 24px 30px;
+            margin: 30px 0;
+            max-width: 500px;
+        }
+
+        .time-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+            font-family: 'Outfit', sans-serif;
+            font-size: 16px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .time-row:last-child {
+            border-bottom: none;
+        }
+
+        .time-row.trakie {
+            color: #C9A961;
+            font-weight: 600;
+        }
+
+        .time-row.savings {
+            color: #7fb800;
+            font-weight: 700;
+            font-size: 18px;
+        }
+
+        .time-label {
+            opacity: 0.8;
+        }
+
+        .time-value {
+            font-weight: 600;
         }
 
         .timer-display {
@@ -2709,6 +2921,26 @@
             .product-card-stats {
                 grid-template-columns: 1fr;
             }
+            .intro-title {
+                font-size: 40px;
+            }
+            .intro-subtitle {
+                font-size: 18px;
+            }
+            .comparison-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            .comparison-column {
+                padding: 30px 20px;
+            }
+            .playstation-bar-container {
+                width: 90%;
+                max-width: 400px;
+            }
+            .time-comparison {
+                max-width: 100%;
+            }
         }
     </style>
 </head>
@@ -2860,8 +3092,48 @@
             <div class="receive-wrapper">
                 <div class="demo-badge">LIVE DEMO</div>
                 
+                <!-- Intro Comparison Screen -->
+                <div class="intro-comparison" id="introComparison">
+                    <h1 class="intro-title">From an Hour to a Minute</h1>
+                    <p class="intro-subtitle">See how Trakie AI processes 5 products in the time it takes to manually enter 1 product</p>
+                    
+                    <div class="comparison-grid">
+                        <div class="comparison-column">
+                            <h3 class="comparison-header">Manual Receiving</h3>
+                            <div class="comparison-steps">
+                                <div class="comparison-step">1. Open product package</div>
+                                <div class="comparison-step">2. Type brand name</div>
+                                <div class="comparison-step">3. Type strain name</div>
+                                <div class="comparison-step">4. Type THC percentage</div>
+                                <div class="comparison-step">5. Enter price</div>
+                                <div class="comparison-step">6. Find batch number</div>
+                                <div class="comparison-step">7. Type quantity</div>
+                                <div class="comparison-step">8. Save to system</div>
+                            </div>
+                            <div class="comparison-time">⏱️ 3-5 minutes per product</div>
+                            <div class="comparison-accuracy">❌ Error-prone</div>
+                        </div>
+                        
+                        <div class="comparison-column highlight">
+                            <h3 class="comparison-header gold">Trakie AI</h3>
+                            <div class="comparison-steps">
+                                <div class="comparison-step">1. Scan QR code</div>
+                                <div class="comparison-step gold">(1 second)</div>
+                                <div class="comparison-step">2. AI processes everything</div>
+                                <div class="comparison-step gold">(2 seconds)</div>
+                                <div class="comparison-step">3. Done!</div>
+                                <div class="comparison-step gold">(45 seconds total)</div>
+                            </div>
+                            <div class="comparison-time gold">⏱️ 45 seconds per product</div>
+                            <div class="comparison-accuracy gold">✅ 99.8% accurate</div>
+                        </div>
+                    </div>
+                    
+                    <button class="intro-cta" onclick="startIntroDemo()">Click to see it in action ›</button>
+                </div>
+                
                 <!-- Landing Screen -->
-                <div class="receive-landing" id="receiveLanding">
+                <div class="receive-landing" id="receiveLanding" style="display: none;">
                     <h1 class="receive-landing-title">Receive Inventory</h1>
                     <h2 class="receive-landing-subtitle">From an Hour to 1 Minute</h2>
                     <div class="early-bird-badge">🔥 21 Foundation Spots • Lock In $369 Forever</div>
@@ -2929,16 +3201,13 @@
                     <div class="ai-processing-container">
                         <div class="ai-processing-title">⚡ PROCESSING WITH AI</div>
                         
-                        <div class="neural-network">
-                            <div class="neural-node node-1"></div>
-                            <div class="neural-node node-2"></div>
-                            <div class="neural-node node-3"></div>
-                            <div class="neural-connection conn-1"></div>
-                            <div class="neural-connection conn-2"></div>
-                            <div class="neural-connection conn-3"></div>
+                        <!-- PlayStation Loading Bar -->
+                        <div class="playstation-bar-container">
+                            <div class="playstation-bar-fill" id="playstationBar"></div>
+                            <div class="playstation-percentage" id="playstationPercentage">0%</div>
                         </div>
                         
-                        <div class="processing-text" id="processingText">Extracting product data...</div>
+                        <div class="processing-text" id="processingText">Scanning labels...</div>
                         <div class="processing-confidence">Confidence: <span id="confidenceValue">99.8%</span></div>
                         
                         <div class="click-to-continue">Click anywhere to continue</div>
@@ -2951,6 +3220,23 @@
                         <div class="results-header">
                             <h2 class="results-title">Receiving Complete!</h2>
                             <div class="completion-badge">5 PRODUCTS PROCESSED</div>
+                            
+                            <!-- Time Comparison -->
+                            <div class="time-comparison">
+                                <div class="time-row">
+                                    <span class="time-label">Manual Time:</span>
+                                    <span class="time-value">15-25 minutes</span>
+                                </div>
+                                <div class="time-row trakie">
+                                    <span class="time-label">Trakie Time:</span>
+                                    <span class="time-value" id="trakieTime">2 min 15 sec</span>
+                                </div>
+                                <div class="time-row savings">
+                                    <span class="time-label">Time Saved:</span>
+                                    <span class="time-value" id="timeSaved">~21 minutes (7x faster)</span>
+                                </div>
+                            </div>
+                            
                             <div class="timer-display" id="timerDisplay">00:00</div>
                             <div class="timer-label">SECONDS</div>
                         </div>
@@ -3503,6 +3789,12 @@
         }
 
         // RECEIVE DEMO FUNCTIONS
+        // DEMO FLOW - Click to Advance
+        function startIntroDemo() {
+            document.getElementById('introComparison').style.display = 'none';
+            document.getElementById('receiveLanding').style.display = 'flex';
+        }
+
         function startReceiving() {
             receiveStartTime = Date.now();
             document.getElementById('receiveLanding').style.display = 'none';
@@ -3532,32 +3824,52 @@
         }
 
         function startProcessing() {
-            // Animate processing text
-            const processingTexts = [
-                'Extracting product data...',
-                'Analyzing THC/CBD content...',
-                'Verifying batch information...',
-                'Processing complete!'
-            ];
-            let textIndex = 0;
+            // Animate loading bar 0-100%
+            const barFill = document.getElementById('playstationBar');
+            const percentage = document.getElementById('playstationPercentage');
             const textElement = document.getElementById('processingText');
             
-            const textInterval = setInterval(() => {
-                if (textIndex < processingTexts.length && textElement) {
-                    textElement.textContent = processingTexts[textIndex];
-                    textIndex++;
+            const processingStages = [
+                { text: 'Scanning labels...', percent: 25 },
+                { text: 'Extracting data...', percent: 50 },
+                { text: 'Analyzing content...', percent: 75 },
+                { text: 'Finalizing...', percent: 100 }
+            ];
+            
+            let currentStage = 0;
+            let currentPercent = 0;
+            
+            const progressInterval = setInterval(() => {
+                if (currentPercent < 100) {
+                    currentPercent += 2;
+                    barFill.style.width = currentPercent + '%';
+                    percentage.textContent = currentPercent + '%';
+                    
+                    // Update text based on stages
+                    for (let i = 0; i < processingStages.length; i++) {
+                        if (currentPercent >= processingStages[i].percent && currentStage === i) {
+                            if (textElement) textElement.textContent = processingStages[i].text;
+                            currentStage++;
+                        }
+                    }
+                } else {
+                    clearInterval(progressInterval);
                 }
-            }, 1000);
+            }, 40); // 100 updates over 4 seconds
             
             // Click to advance to results
             const processingScreen = document.getElementById('processingScreen');
             const advanceToResults = () => {
-                clearInterval(textInterval);
+                clearInterval(progressInterval);
                 processingScreen.classList.remove('active');
                 processingScreen.removeEventListener('click', advanceToResults);
                 processReceiving();
             };
             processingScreen.addEventListener('click', advanceToResults);
+        }
+
+        function processReceiving() {
+            showResults();
         }
 
         function showResults() {
@@ -4144,12 +4456,19 @@
             document.getElementById('processingScreen').classList.remove('active');
             document.getElementById('splitScreen').classList.remove('active');
             document.getElementById('qrScreen').classList.remove('active');
+            document.getElementById('receiveLanding').style.display = 'none';
             
-            // Show landing screen
-            document.getElementById('receiveLanding').style.display = 'flex';
+            // Show intro comparison screen
+            document.getElementById('introComparison').style.display = 'flex';
             
             // Reset complete button
             document.getElementById('completeBtn').classList.remove('show');
+            
+            // Reset loading bar
+            const barFill = document.getElementById('playstationBar');
+            const percentage = document.getElementById('playstationPercentage');
+            if (barFill) barFill.style.width = '0%';
+            if (percentage) percentage.textContent = '0%';
             
             // Scroll to top of receive section
             showSection('receive');
