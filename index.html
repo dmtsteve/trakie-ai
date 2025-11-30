@@ -5077,6 +5077,7 @@
                 });
             }
             
+            gridView.scrollTop = 0; // Scroll to top
             gridView.classList.add('active');
             document.body.style.overflow = 'hidden';
         }
@@ -5305,6 +5306,7 @@
                 const gridView = document.getElementById('categoryGridView');
                 setTimeout(() => {
                     gridView.classList.add('active');
+                    gridView.scrollTop = 0; // Scroll to top
                     document.body.style.overflow = 'hidden'; // Keep locked for grid
                 }, 300);
             } else {
@@ -5447,6 +5449,12 @@
             if (percentage) percentage.textContent = '0%';
             
             // Scroll to top of receive section
+            const receiveSection = document.getElementById('receiveSection');
+            if (receiveSection) {
+                receiveSection.scrollTop = 0;
+            }
+            window.scrollTo(0, 0); // Also scroll page to top
+            
             showSection('receive');
         }
 
