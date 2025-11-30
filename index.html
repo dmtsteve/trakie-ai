@@ -24,11 +24,28 @@
 
         body {
             font-family: 'Outfit', -apple-system, system-ui, sans-serif;
-            background: #000000;
+            background: linear-gradient(180deg, #0D1F0D 0%, #0A150A 50%, #000000 100%);
+            background-attachment: fixed;
             color: #ffffff;
             line-height: 1.6;
             -webkit-font-smoothing: antialiased;
             overflow-x: hidden;
+            position: relative;
+        }
+
+        /* BOTANICAL BACKGROUND OVERLAY */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 1200" opacity="0.03"><path d="M300,600 Q400,400 500,600 T700,600" stroke="%23C9A961" fill="none" stroke-width="2"/><path d="M100,300 Q200,200 300,400 T500,300" stroke="%23C9A961" fill="none" stroke-width="1.5"/><path d="M700,800 Q800,600 900,800 T1100,800" stroke="%23C9A961" fill="none" stroke-width="2"/></svg>');
+            background-size: cover;
+            background-position: center;
+            pointer-events: none;
+            z-index: 0;
         }
 
         /* Welcome Screen */
@@ -190,17 +207,32 @@
             top: 0;
             left: 0;
             right: 0;
-            background: rgba(0, 0, 0, 0.92);
-            backdrop-filter: blur(20px);
-            border-bottom: 1px solid rgba(201, 169, 97, 0.25);
+            background: rgba(13, 31, 13, 0.7);
+            backdrop-filter: blur(24px) saturate(180%);
+            -webkit-backdrop-filter: blur(24px) saturate(180%);
+            border-bottom: 1px solid rgba(201, 169, 97, 0.2);
+            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.1);
             z-index: 100;
             padding: 22px 60px;
-            transition: all 0.3s ease;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            animation: slideDown 1.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        @keyframes slideDown {
+            from {
+                transform: translateY(-100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
         }
 
         .nav:hover {
-            background: rgba(0, 0, 0, 0.96);
+            background: rgba(13, 31, 13, 0.85);
             border-bottom-color: rgba(201, 169, 97, 0.4);
+            box-shadow: 0 8px 32px rgba(201, 169, 97, 0.1);
         }
 
         .nav-content {
@@ -312,6 +344,24 @@
             to { opacity: 1; }
         }
 
+        @keyframes productFloat {
+            0%, 100% { 
+                transform: translateY(0px) scale(1);
+            }
+            50% { 
+                transform: translateY(-8px) scale(1);
+            }
+        }
+
+        @keyframes shimmerBorder {
+            0%, 100% {
+                box-shadow: 0 0 20px rgba(201, 169, 97, 0.1);
+            }
+            50% {
+                box-shadow: 0 0 30px rgba(201, 169, 97, 0.2);
+            }
+        }
+
         /* HERO */
         .vogue-hero {
             min-height: 100vh;
@@ -319,8 +369,29 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            background: linear-gradient(180deg, #0A0A0A 0%, #1A1F1A 100%);
+            background: linear-gradient(180deg, #0D1F0D 0%, #0A150A 50%, #000000 100%);
             padding-top: 130px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .vogue-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" opacity="0.05"><ellipse cx="200" cy="400" rx="150" ry="200" fill="none" stroke="%23C9A961" stroke-width="1"/><path d="M 400,200 Q 500,100 600,200 T 800,200" stroke="%23C9A961" fill="none" stroke-width="1.5"/><circle cx="900" cy="600" r="120" fill="none" stroke="%23C9A961" stroke-width="1"/></svg>');
+            background-size: cover;
+            background-position: center;
+            pointer-events: none;
+            animation: subtleFloat 60s ease-in-out infinite;
+        }
+
+        @keyframes subtleFloat {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(2deg); }
         }
 
         .vogue-hero-title {
@@ -331,7 +402,15 @@
             line-height: 0.9;
             text-align: center;
             opacity: 0;
-            animation: fadeUp 1.2s ease forwards;
+            transform: translateY(60px) scale(0.95);
+            animation: primaryHeroEnter 1.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+        }
+
+        @keyframes primaryHeroEnter {
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
         }
 
         .vogue-hero-subtitle {
@@ -340,12 +419,20 @@
             font-weight: 700;
             letter-spacing: -3px;
             opacity: 0;
-            animation: fadeUp 1.4s ease 0.2s forwards;
+            transform: translateY(40px);
+            animation: secondaryHeroEnter 1.5s cubic-bezier(0.4, 0, 0.2, 1) 0.3s forwards;
             background: linear-gradient(135deg, #C9A961 0%, #8B7355 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
             margin-top: -10px;
+        }
+
+        @keyframes secondaryHeroEnter {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .vogue-hero-tagline {
@@ -356,7 +443,15 @@
             color: #8B7355;
             margin-top: 40px;
             opacity: 0;
-            animation: fadeUp 1.6s ease 0.4s forwards;
+            transform: translateY(20px);
+            animation: tertiaryHeroEnter 1.2s ease 0.6s forwards;
+        }
+
+        @keyframes tertiaryHeroEnter {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .vogue-hero-tagline span {
@@ -397,19 +492,31 @@
         }
 
         .vogue-feature-card {
-            background: linear-gradient(135deg, #1A1F1A 0%, #0F1410 100%);
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(16px) saturate(180%);
+            -webkit-backdrop-filter: blur(16px) saturate(180%);
             border: 1px solid rgba(201, 169, 97, 0.2);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
             padding: 50px 40px;
             width: 380px;
             opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.165, 0.84, 0.44, 1);
+            transform: translateY(40px);
+            animation: cardFadeUp 1.0s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+            animation-delay: calc(var(--delay) * 0.15s);
+        }
+
+        @keyframes cardFadeUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .vogue-feature-card:hover {
             transform: translateY(-10px);
             border-color: rgba(201, 169, 97, 0.5);
-            box-shadow: 0 20px 40px rgba(201, 169, 97, 0.15);
+            box-shadow: 0 20px 40px rgba(201, 169, 97, 0.2), 0 0 0 1px rgba(201, 169, 97, 0.1) inset;
+            background: rgba(255, 255, 255, 0.06);
         }
 
         .vogue-feature-icon {
@@ -449,18 +556,31 @@
         }
 
         .vogue-stat-box {
-            background: linear-gradient(135deg, #1A1F1A 0%, #0F1410 100%);
+            background: rgba(255, 255, 255, 0.02);
+            backdrop-filter: blur(16px) saturate(180%);
+            -webkit-backdrop-filter: blur(16px) saturate(180%);
             padding: 60px;
             text-align: center;
-            border: 1px solid rgba(201, 169, 97, 0.15);
+            border: 1px solid rgba(201, 169, 97, 0.2);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
             opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.165, 0.84, 0.44, 1), border-color 0.3s ease;
+            transform: translateY(40px);
+            animation: statBoxFadeUp 1.0s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+            animation-delay: calc(var(--delay) * 0.1s);
+        }
+
+        @keyframes statBoxFadeUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .vogue-stat-box:hover {
-            border-color: rgba(201, 169, 97, 0.4);
-            transform: translateY(-5px);
+            border-color: rgba(201, 169, 97, 0.5);
+            transform: translateY(-8px);
+            box-shadow: 0 16px 48px rgba(201, 169, 97, 0.15);
+            background: rgba(255, 255, 255, 0.04);
         }
 
         .vogue-stat-number {
@@ -518,22 +638,38 @@
         }
 
         .vogue-demo-button {
-            background: transparent;
+            background: rgba(201, 169, 97, 0.1);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
             color: #C9A961;
-            border: 1px solid #C9A961;
+            border: 1px solid rgba(201, 169, 97, 0.4);
+            box-shadow: 0 8px 32px rgba(201, 169, 97, 0.1), 0 0 0 0 rgba(201, 169, 97, 0.4);
             padding: 25px 60px;
             font-size: 14px;
             letter-spacing: 3px;
             text-transform: uppercase;
             cursor: pointer;
-            transition: all 0.4s ease;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             font-weight: 400;
+            animation: gentlePulse 3s ease-in-out infinite;
+        }
+
+        @keyframes gentlePulse {
+            0%, 100% {
+                box-shadow: 0 8px 32px rgba(201, 169, 97, 0.1), 0 0 0 0 rgba(201, 169, 97, 0.4);
+            }
+            50% {
+                box-shadow: 0 8px 32px rgba(201, 169, 97, 0.2), 0 0 0 8px rgba(201, 169, 97, 0);
+            }
         }
 
         .vogue-demo-button:hover {
-            background: #C9A961;
+            background: rgba(201, 169, 97, 0.9);
             color: #0A0A0A;
-            transform: scale(1.05);
+            transform: translateY(-4px);
+            border-color: #C9A961;
+            box-shadow: 0 16px 48px rgba(201, 169, 97, 0.3);
+            animation: none;
         }
 
         /* BUBBLES */
@@ -1412,15 +1548,15 @@
             border: 2px solid rgba(201, 169, 97, 0.3);
             border-radius: 16px;
             overflow: hidden;
-            transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             position: relative;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1), 0 0 0 0 rgba(201, 169, 97, 0);
         }
 
         .product-card:hover {
-            transform: translateY(-8px);
+            transform: translateY(-12px);
             border-color: #C9A961;
-            box-shadow: 0 12px 40px rgba(201, 169, 97, 0.3);
+            box-shadow: 0 20px 60px rgba(201, 169, 97, 0.25), 0 0 0 1px rgba(201, 169, 97, 0.2) inset;
         }
 
         .product-card-header {
@@ -1503,10 +1639,12 @@
             object-fit: contain;
             transition: transform 0.3s ease;
             filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.15));
+            animation: productFloat 4s ease-in-out infinite;
         }
 
         .product-card:hover .product-image-main img {
             transform: scale(1.08);
+            animation-play-state: paused;
         }
 
         .thc-overlay {
@@ -2664,19 +2802,23 @@
         }
 
         .pricing-card {
-            background: linear-gradient(135deg, #1A1F1A 0%, #0F1410 100%);
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(20px) saturate(180%);
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
             border: 2px solid rgba(201, 169, 97, 0.3);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
             padding: 50px 40px;
             text-align: center;
             max-width: 600px;
             margin: 0 auto;
-            transition: all 0.4s ease;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .pricing-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 20px 60px rgba(201, 169, 97, 0.3);
+            transform: translateY(-12px);
+            box-shadow: 0 24px 72px rgba(201, 169, 97, 0.3), 0 0 0 1px rgba(201, 169, 97, 0.2) inset;
             border-color: #C9A961;
+            background: rgba(255, 255, 255, 0.05);
         }
 
         .popular-badge {
@@ -3688,7 +3830,7 @@
                 quantity: 12,
                 unitCost: 35.00,
                 priceAfterTax: 42.00,
-                images: ['binske-flower-1.png', 'binske-flower-2.webp', 'binske-flower-3.webp'],
+                images: ['https://raw.githubusercontent.com/dmtsteve/trakie-ai/main/product-photos/flower8.avif', 'https://raw.githubusercontent.com/dmtsteve/trakie-ai/main/product-photos/flower8.avif', 'https://raw.githubusercontent.com/dmtsteve/trakie-ai/main/product-photos/flower8.avif'],
                 description: 'Blue Dream is a sublime sativa-dominant hybrid that offers a perfectly balanced experience of cerebral elevation and physical tranquility. This exceptional cultivar begins with a gentle euphoric lift that enhances mood and perception, gradually blossoming into a soothing body relaxation that maintains functionality while melting away tension. Blue Dream features an exquisite flavor profile dominated by sweet, ripe blueberry notes complemented by subtle vanilla undertones and a honey-like smoothness on exhale. Its aroma is equally enchanting, with prominent fresh blueberry scents underscored by floral sweetness and earthy notes that become more pronounced when the delicate buds are broken apart. Medical cannabis patients particularly appreciate Blue Dream for its balanced therapeutic effects, effectively addressing anxiety, mild pain, and insomnia while promoting a sense of peaceful wellbeing. Curated exceptionally by Emerald Dispensary.',
                 effects: [
                     { icon: '😊', label: 'Happy' },
@@ -3707,7 +3849,7 @@
                 quantity: 8,
                 unitCost: 42.00,
                 priceAfterTax: 50.40,
-                images: ['hudson-vaporizer-1.png', 'hudson-vaporizer-1.png', 'hudson-vaporizer-1.png'],
+                images: ['https://raw.githubusercontent.com/dmtsteve/trakie-ai/main/product-photos/vape3.avif', 'https://raw.githubusercontent.com/dmtsteve/trakie-ai/main/product-photos/vape4.avif', 'https://raw.githubusercontent.com/dmtsteve/trakie-ai/main/product-photos/vape5.avif'],
                 description: 'OG Kush is a legendary indica strain that delivers powerful full-body relaxation with a distinctly euphoric cerebral experience. Known for its complex terpene profile, OG Kush presents earthy pine notes layered with subtle citrus undertones and a signature fuel-like aroma that defines West Coast cannabis culture. The high begins with an uplifting mental clarity that gradually transitions into deep physical relaxation, making it ideal for evening use. Dense, resinous buds showcase vibrant green hues with fiery orange pistils and a generous coating of trichomes. Medical patients favor OG Kush for managing chronic pain, stress, and sleep disorders. Curated exceptionally by Emerald Dispensary.',
                 effects: [
                     { icon: '😴', label: 'Sleepy' },
@@ -3726,7 +3868,7 @@
                 quantity: 15,
                 unitCost: 32.00,
                 priceAfterTax: 38.40,
-                images: ['ayrloom-beverage.webp', 'ayrloom-beverage.webp', 'ayrloom-beverage.webp'],
+                images: ['https://raw.githubusercontent.com/dmtsteve/trakie-ai/main/product-photos/cart2.avif', 'https://raw.githubusercontent.com/dmtsteve/trakie-ai/main/product-photos/cart3.avif', 'https://raw.githubusercontent.com/dmtsteve/trakie-ai/main/product-photos/cart4.avif'],
                 description: 'Sour Diesel is an energizing sativa powerhouse renowned for its invigorating cerebral effects and unmistakable diesel-fuel aroma. This strain delivers a fast-acting head high that sparks creativity, enhances focus, and promotes social engagement. The flavor profile combines pungent diesel notes with bright citrus and herbal undertones, creating a sharp, tangy experience that lingers on the palate. Bright green buds with abundant orange hairs produce a stimulating effect perfect for daytime use. Sour Diesel is celebrated among creative professionals and patients seeking relief from fatigue, depression, and lack of appetite without sedation. Curated exceptionally by Emerald Dispensary.',
                 effects: [
                     { icon: '⚡', label: 'Energetic' },
@@ -3745,7 +3887,7 @@
                 quantity: 20,
                 unitCost: 28.00,
                 priceAfterTax: 33.60,
-                images: ['binske-flower-2.webp', 'binske-flower-1.png', 'binske-flower-3.webp'],
+                images: ['https://raw.githubusercontent.com/dmtsteve/trakie-ai/main/product-photos/preroll3.avif', 'https://raw.githubusercontent.com/dmtsteve/trakie-ai/main/product-photos/preroll4.avif', 'https://raw.githubusercontent.com/dmtsteve/trakie-ai/main/product-photos/preroll5.avif'],
                 description: 'Purple Haze is an iconic sativa that combines potent psychoactive effects with a mesmerizing visual and aromatic experience. Named for its stunning purple-hued buds that shimmer with crystalline trichomes, this strain delivers a powerful cerebral rush that inspires creativity and introspection. The flavor profile features sweet berry notes with earthy undertones and a hint of spice, while the aroma presents a complex bouquet of fresh flowers and wild berries. Purple Haze produces a long-lasting, dreamy euphoria that enhances sensory perception and promotes artistic thinking. Medical users appreciate its efficacy in managing symptoms of depression, chronic stress, and mental fatigue. Curated exceptionally by Emerald Dispensary.',
                 effects: [
                     { icon: '🎨', label: 'Creative' },
@@ -3764,7 +3906,7 @@
                 quantity: 10,
                 unitCost: 38.00,
                 priceAfterTax: 45.60,
-                images: ['papa-barkley-balm-1.webp', 'papa-barkley-balm-2.webp', 'papa-barkley-balm-1.webp'],
+                images: ['https://raw.githubusercontent.com/dmtsteve/trakie-ai/main/product-photos/vape7.avif', 'https://raw.githubusercontent.com/dmtsteve/trakie-ai/main/product-photos/vape8.avif', 'https://raw.githubusercontent.com/dmtsteve/trakie-ai/main/product-photos/cartfernway.avif'],
                 description: 'Gelato is a premium hybrid strain that delivers a perfectly balanced high combining mental clarity with soothing physical relaxation. This dessert-themed cultivar features an exceptional flavor profile reminiscent of sweet sherbet with creamy citrus undertones and hints of fresh berries. Dense, colorful buds display deep purple hues contrasted by bright orange pistils and a generous coating of sticky trichomes. The effects begin with an uplifting cerebral buzz that enhances mood and sociability, followed by a gentle body melt that relieves tension without causing couch-lock. Gelato is highly sought after by both recreational users seeking a sophisticated experience and medical patients managing chronic pain, inflammation, and anxiety. Curated exceptionally by Emerald Dispensary.',
                 effects: [
                     { icon: '😊', label: 'Happy' },
@@ -3921,7 +4063,9 @@
                     </div>
                     
                     <div class="product-card-image-container">
-                        <img src="${product.images[selectedImages[index] || 0]}" alt="${product.name}" class="product-image-main" />
+                        <div class="product-image-main">
+                            <img src="${product.images[selectedImages[index] || 0]}" alt="${product.name}" />
+                        </div>
                         <div class="thc-overlay">
                             <div class="thc-percentage">${product.thc.replace('%', '')}</div>
                             <div class="thc-label">THC</div>
