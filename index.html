@@ -2572,6 +2572,78 @@
             color: rgba(201, 169, 97, 0.5);
         }
 
+        .grid-product-card {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(16px) saturate(180%);
+            -webkit-backdrop-filter: blur(16px) saturate(180%);
+            border: 2px solid rgba(201, 169, 97, 0.2);
+            border-radius: 16px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            opacity: 0;
+            transform: translateY(30px);
+            animation: gridCardFadeUp 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+            animation-delay: calc(var(--delay) * 0.1s);
+        }
+
+        @keyframes gridCardFadeUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .grid-product-card:hover {
+            transform: translateY(-8px);
+            border-color: #C9A961;
+            box-shadow: 0 16px 48px rgba(201, 169, 97, 0.2);
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .grid-product-image {
+            width: 100%;
+            height: 250px;
+            background: rgba(255, 255, 255, 0.02);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            overflow: hidden;
+        }
+
+        .grid-product-image img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.2));
+            transition: transform 0.3s ease;
+        }
+
+        .grid-product-card:hover .grid-product-image img {
+            transform: scale(1.08);
+        }
+
+        .grid-product-info {
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.3);
+        }
+
+        .grid-product-info h3 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 18px;
+            font-weight: 600;
+            color: #fff;
+            margin-bottom: 8px;
+        }
+
+        .grid-product-price {
+            font-family: 'Bodoni Moda', serif;
+            font-size: 24px;
+            font-weight: 700;
+            color: #C9A961;
+        }
+
         /* FULL-PAGE DATA GRAPH VIEW */
         .data-graph-view {
             display: none;
@@ -4268,7 +4340,74 @@
         // CATEGORY GRID VIEW FUNCTIONS
         function openCategoryGrid(categoryName) {
             const gridView = document.getElementById('categoryGridView');
+            const productsContainer = document.getElementById('gridProducts');
             document.getElementById('gridCategoryTitle').textContent = categoryName;
+            
+            // Map categories to GitHub product photos
+            const categoryPhotos = {
+                'Flower': [
+                    'https://raw.githubusercontent.com/dmtsteve/trakie-ai/main/product-photos/flower8.avif'
+                ],
+                'Vaporizers': [
+                    'https://raw.githubusercontent.com/dmtsteve/trakie-ai/main/product-photos/vape3.avif',
+                    'https://raw.githubusercontent.com/dmtsteve/trakie-ai/main/product-photos/vape4.avif',
+                    'https://raw.githubusercontent.com/dmtsteve/trakie-ai/main/product-photos/vape5.avif',
+                    'https://raw.githubusercontent.com/dmtsteve/trakie-ai/main/product-photos/vape7.avif',
+                    'https://raw.githubusercontent.com/dmtsteve/trakie-ai/main/product-photos/vape8.avif'
+                ],
+                'Pre-Rolls': [
+                    'https://raw.githubusercontent.com/dmtsteve/trakie-ai/main/product-photos/preroll3.avif',
+                    'https://raw.githubusercontent.com/dmtsteve/trakie-ai/main/product-photos/preroll4.avif',
+                    'https://raw.githubusercontent.com/dmtsteve/trakie-ai/main/product-photos/preroll5.avif',
+                    'https://raw.githubusercontent.com/dmtsteve/trakie-ai/main/product-photos/preroll6.avif',
+                    'https://raw.githubusercontent.com/dmtsteve/trakie-ai/main/product-photos/preroll7.avif',
+                    'https://raw.githubusercontent.com/dmtsteve/trakie-ai/main/product-photos/preroll8.avif'
+                ],
+                'Edibles': [
+                    'https://raw.githubusercontent.com/dmtsteve/trakie-ai/main/product-photos/cart2.avif',
+                    'https://raw.githubusercontent.com/dmtsteve/trakie-ai/main/product-photos/cart3.avif',
+                    'https://raw.githubusercontent.com/dmtsteve/trakie-ai/main/product-photos/cart4.avif'
+                ],
+                'Concentrates': [
+                    'https://raw.githubusercontent.com/dmtsteve/trakie-ai/main/product-photos/cartfernway.avif'
+                ],
+                'Beverages': [
+                    'https://raw.githubusercontent.com/dmtsteve/trakie-ai/main/product-photos/cart2.avif'
+                ],
+                'Tinctures': [
+                    'https://raw.githubusercontent.com/dmtsteve/trakie-ai/main/product-photos/cart3.avif'
+                ],
+                'CBD': [
+                    'https://raw.githubusercontent.com/dmtsteve/trakie-ai/main/product-photos/cart4.avif'
+                ]
+            };
+            
+            // Get photos for this category
+            const photos = categoryPhotos[categoryName] || [];
+            
+            // Populate products grid with real photos
+            productsContainer.innerHTML = '';
+            
+            if (photos.length === 0) {
+                productsContainer.innerHTML = '<div class="grid-empty-state"><p>No products available in this category</p></div>';
+            } else {
+                photos.forEach((photoUrl, index) => {
+                    const productCard = document.createElement('div');
+                    productCard.className = 'grid-product-card';
+                    productCard.style.setProperty('--delay', index);
+                    productCard.innerHTML = `
+                        <div class="grid-product-image">
+                            <img src="${photoUrl}" alt="${categoryName} Product ${index + 1}" loading="lazy">
+                        </div>
+                        <div class="grid-product-info">
+                            <h3>${categoryName} Product ${index + 1}</h3>
+                            <p class="grid-product-price">$${(25 + Math.random() * 50).toFixed(2)}</p>
+                        </div>
+                    `;
+                    productsContainer.appendChild(productCard);
+                });
+            }
+            
             gridView.classList.add('active');
             document.body.style.overflow = 'hidden';
         }
@@ -4428,7 +4567,7 @@
             
             // Populate modal data
             const modalImage = document.getElementById('modalImage');
-            if (product.images[0].includes('.png') || product.images[0].includes('.webp')) {
+            if (product.images[0].includes('.png') || product.images[0].includes('.webp') || product.images[0].includes('.avif') || product.images[0].includes('.jpg') || product.images[0].includes('.jpeg')) {
                 modalImage.innerHTML = `<img src="${product.images[0]}" alt="${product.name}" style="width: 100%; height: 100%; object-fit: contain;">`;
             } else {
                 modalImage.textContent = product.images[0];
@@ -4511,7 +4650,7 @@
                     setTimeout(() => openProductModal(actualIndex), 300);
                 };
                 
-                const imageContent = (product.images[0].includes('.png') || product.images[0].includes('.webp')) 
+                const imageContent = (product.images[0].includes('.png') || product.images[0].includes('.webp') || product.images[0].includes('.avif') || product.images[0].includes('.jpg') || product.images[0].includes('.jpeg')) 
                     ? `<img src="${product.images[0]}" alt="${product.name}">`
                     : product.images[0];
                 
