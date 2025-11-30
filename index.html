@@ -2775,92 +2775,401 @@
         }
 
         /* DATA SECTION */
-        .data-wrapper {
-            padding: 140px 40px 60px;
+        /* SONY-STYLE DATA DASHBOARD */
+        .sony-dashboard {
+            padding: 140px 60px 80px;
             min-height: 100vh;
-            background: linear-gradient(180deg, #0A0A0A 0%, #1A1F1A 100%);
+            background: #000000;
+            font-family: 'Outfit', sans-serif;
         }
 
-        .data-header {
-            text-align: center;
-            margin-bottom: 50px;
+        .sony-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 60px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #333;
         }
 
-        .data-title {
-            font-family: 'Bodoni Moda', serif;
-            font-size: 56px;
-            font-weight: 400;
-            font-style: italic;
-            color: #C9A961;
-            margin-bottom: 15px;
-            letter-spacing: -1px;
+        .sony-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: 48px;
+            font-weight: 700;
+            color: #FFFFFF;
+            letter-spacing: 4px;
+            text-transform: uppercase;
         }
 
-        .data-subtitle {
-            font-family: 'Cormorant Garamond', serif;
-            color: #8B7355;
-            font-size: 18px;
-            font-weight: 300;
+        .sony-date {
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            color: #888;
             letter-spacing: 1px;
         }
 
-        .dashboard-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 25px;
-            max-width: 1200px;
-            margin: 0 auto;
+        .sony-section {
+            margin-bottom: 60px;
         }
 
-        .dashboard-card {
-            background: linear-gradient(135deg, #1A1F1A 0%, #0F1410 100%);
-            border: 1px solid rgba(201, 169, 97, 0.2);
-            padding: 30px;
-            transition: all 0.4s ease;
-            position: relative;
-            overflow: hidden;
-            cursor: pointer;
-        }
-
-        .dashboard-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 3px;
-            background: linear-gradient(90deg, #C9A961, #8B7355);
-        }
-
-        .dashboard-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 15px 45px rgba(201, 169, 97, 0.25);
-            border-color: #C9A961;
-        }
-
-        .card-header {
-            font-size: 18px;
-            font-weight: 600;
-            color: #C9A961;
-            margin-bottom: 20px;
+        .sony-section-header {
             display: flex;
+            justify-content: space-between;
             align-items: center;
-            gap: 10px;
+            margin-bottom: 20px;
+            padding: 12px 0;
+            border-bottom: 1px solid #222;
         }
 
-        .card-metric {
-            font-family: 'Bodoni Moda', serif;
-            font-size: 40px;
+        .sony-section-label {
+            font-family: 'Outfit', sans-serif;
+            font-size: 14px;
+            font-weight: 700;
+            color: #FFF;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .sony-section-count {
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+            color: #888;
+            letter-spacing: 1px;
+        }
+
+        /* STOCKOUT CARDS */
+        .sony-stockout-card {
+            background: #0A0A0A;
+            border: 1px solid #222;
+            border-left: 4px solid #666;
+            padding: 24px;
+            margin-bottom: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .sony-stockout-card:hover {
+            border-left-color: #FFF;
+            background: #111;
+        }
+
+        .sony-stockout-card.critical {
+            border-left-color: #FF3B3B;
+        }
+
+        .sony-stockout-card.warning {
+            border-left-color: #FFB340;
+        }
+
+        .stockout-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .stockout-product {
+            font-family: 'Outfit', sans-serif;
+            font-size: 20px;
+            font-weight: 700;
+            color: #FFF;
+            letter-spacing: 1px;
+        }
+
+        .stockout-timer {
+            font-family: 'Courier New', monospace;
+            font-size: 18px;
+            font-weight: 700;
+            color: #FF3B3B;
+            letter-spacing: 1px;
+        }
+
+        .sony-stockout-card.warning .stockout-timer {
+            color: #FFB340;
+        }
+
+        .stockout-details {
+            margin-bottom: 20px;
+        }
+
+        .stockout-velocity {
+            font-family: 'Courier New', monospace;
+            font-size: 13px;
+            color: #888;
+            letter-spacing: 0.5px;
+        }
+
+        .stockout-revenue {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            margin-bottom: 20px;
+            padding: 16px;
+            background: #000;
+            border: 1px solid #1A1A1A;
+        }
+
+        .revenue-item {
+            text-align: center;
+        }
+
+        .revenue-label {
+            font-family: 'Outfit', sans-serif;
+            font-size: 10px;
+            font-weight: 600;
+            color: #666;
+            letter-spacing: 1px;
+            margin-bottom: 6px;
+            text-transform: uppercase;
+        }
+
+        .revenue-value {
+            font-family: 'Courier New', monospace;
+            font-size: 24px;
+            font-weight: 700;
+            color: #FF3B3B;
+            letter-spacing: -0.5px;
+        }
+
+        .stockout-action {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .restock-info {
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+            color: #666;
+        }
+
+        /* SONY BUTTONS */
+        .sony-btn {
+            font-family: 'Outfit', sans-serif;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            padding: 12px 24px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            background: #FFF;
+            color: #000;
+        }
+
+        .sony-btn:hover {
+            background: #C9A961;
+            color: #000;
+        }
+
+        .sony-btn.secondary {
+            background: #1A1A1A;
+            color: #FFF;
+            border: 1px solid #333;
+        }
+
+        .sony-btn.secondary:hover {
+            background: #333;
+            border-color: #666;
+        }
+
+        .sony-btn-small {
+            font-family: 'Outfit', sans-serif;
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            padding: 8px 16px;
+            border: none;
+            cursor: pointer;
+            background: #FFF;
+            color: #000;
+            transition: all 0.2s ease;
+        }
+
+        .sony-btn-small:hover {
+            background: #C9A961;
+        }
+
+        .sony-btn-small.secondary {
+            background: #1A1A1A;
+            color: #888;
+            border: 1px solid #333;
+        }
+
+        .sony-btn-small.secondary:hover {
+            background: #333;
+            color: #FFF;
+        }
+
+        /* SONY TABLE */
+        .sony-table {
+            background: #0A0A0A;
+            border: 1px solid #222;
+        }
+
+        .sony-table-header {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 16px;
+            padding: 16px 24px;
+            background: #000;
+            border-bottom: 1px solid #333;
+        }
+
+        .sony-table-header > div {
+            font-family: 'Outfit', sans-serif;
+            font-size: 11px;
+            font-weight: 700;
+            color: #666;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .sony-table-row {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 16px;
+            padding: 20px 24px;
+            border-bottom: 1px solid #1A1A1A;
+            border-left: 4px solid transparent;
+            transition: all 0.2s ease;
+        }
+
+        .sony-table-row:hover {
+            background: #111;
+            border-left-color: #FFF;
+        }
+
+        .sony-table-row.critical {
+            border-left-color: #FF3B3B;
+        }
+
+        .sony-table-row.warning {
+            border-left-color: #FFB340;
+        }
+
+        .sony-table-row.healthy {
+            border-left-color: #4CAF50;
+        }
+
+        .col-product {
+            font-family: 'Outfit', sans-serif;
+            font-size: 14px;
+            font-weight: 600;
+            color: #FFF;
+            letter-spacing: 0.5px;
+        }
+
+        .col-revenue {
+            font-family: 'Courier New', monospace;
+            font-size: 16px;
             font-weight: 700;
             color: #C9A961;
-            margin-bottom: 10px;
         }
 
-        .card-label {
-            font-family: 'Cormorant Garamond', serif;
-            color: #8B7355;
-            font-size: 15px;
-            font-weight: 300;
+        .col-stock {
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            color: #888;
+        }
+
+        .sony-table-row.critical .col-stock {
+            color: #FF3B3B;
+            font-weight: 700;
+        }
+
+        .sony-table-row.warning .col-stock {
+            color: #FFB340;
+        }
+
+        .sony-table-row.healthy .col-stock {
+            color: #4CAF50;
+        }
+
+        /* OPPORTUNITIES */
+        .sony-opportunity-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 24px;
+        }
+
+        .opportunity-card {
+            background: #0A0A0A;
+            border: 1px solid #222;
+            border-left: 4px solid #C9A961;
+            padding: 32px;
+            transition: all 0.3s ease;
+        }
+
+        .opportunity-card:hover {
+            background: #111;
+            border-left-color: #FFF;
+        }
+
+        .opportunity-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: 14px;
+            font-weight: 700;
+            color: #888;
+            letter-spacing: 2px;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+        }
+
+        .opportunity-value {
+            font-family: 'Courier New', monospace;
+            font-size: 48px;
+            font-weight: 700;
+            color: #C9A961;
+            margin-bottom: 12px;
+            letter-spacing: -1px;
+        }
+
+        .opportunity-desc {
+            font-family: 'Outfit', sans-serif;
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 24px;
+            line-height: 1.6;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .sony-dashboard {
+                padding: 100px 20px 60px;
+            }
+
+            .sony-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 12px;
+            }
+
+            .sony-title {
+                font-size: 32px;
+            }
+
+            .stockout-revenue {
+                grid-template-columns: 1fr;
+                gap: 12px;
+            }
+
+            .sony-table-header,
+            .sony-table-row {
+                grid-template-columns: 1fr;
+                gap: 8px;
+            }
+
+            .sony-opportunity-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .stockout-action {
+                flex-direction: column;
+                align-items: stretch;
+            }
         }
 
         /* PRICING */
@@ -3521,41 +3830,181 @@
 
         <!-- Data Section -->
         <div class="page-section" id="dataSection">
-            <div class="data-wrapper">
-                <div class="data-header">
-                    <h1 class="data-title">Operations Dashboard</h1>
-                    <p class="data-subtitle">Algorithmic forecasting. Velocity analytics. Attribution modeling.</p>
+            <div class="sony-dashboard">
+                <div class="sony-header">
+                    <h1 class="sony-title">OPERATIONS</h1>
+                    <div class="sony-date" id="currentDate"></div>
                 </div>
-                <div class="dashboard-grid">
-                    <div class="dashboard-card" onclick="openDataGraph('restock')">
-                        <div class="card-header">🔮 Restock Alert</div>
-                        <div class="card-metric">3 days</div>
-                        <div class="card-label">Until Blue Dream stockout</div>
+
+                <!-- CRITICAL: STOCKOUTS -->
+                <div class="sony-section">
+                    <div class="sony-section-header">
+                        <div class="sony-section-label">CRITICAL STOCKOUTS</div>
+                        <div class="sony-section-count">3 PRODUCTS</div>
                     </div>
-                    <div class="dashboard-card" onclick="openDataGraph('velocity')">
-                        <div class="card-header">📈 Trend Velocity</div>
-                        <div class="card-metric">+127%</div>
-                        <div class="card-label">Wedding Cake momentum</div>
+                    
+                    <div class="sony-stockout-card critical">
+                        <div class="stockout-header">
+                            <div class="stockout-product">BLUE DREAM</div>
+                            <div class="stockout-timer">3 DAYS</div>
+                        </div>
+                        <div class="stockout-details">
+                            <div class="stockout-velocity">8.4 units/day • 12 units remaining</div>
+                        </div>
+                        <div class="stockout-revenue">
+                            <div class="revenue-item">
+                                <div class="revenue-label">DAILY LOSS</div>
+                                <div class="revenue-value">$336</div>
+                            </div>
+                            <div class="revenue-item">
+                                <div class="revenue-label">WEEKLY LOSS</div>
+                                <div class="revenue-value">$2,352</div>
+                            </div>
+                            <div class="revenue-item">
+                                <div class="revenue-label">MONTHLY LOSS</div>
+                                <div class="revenue-value">$10,080</div>
+                            </div>
+                        </div>
+                        <div class="stockout-action">
+                            <button class="sony-btn primary">REORDER NOW</button>
+                            <div class="restock-info">Restock: 50 units @ $35 = $1,750</div>
+                        </div>
                     </div>
-                    <div class="dashboard-card" onclick="openDataGraph('lowstock')">
-                        <div class="card-header">⚡ Low Stock Alert</div>
-                        <div class="card-metric">5 SKUs</div>
-                        <div class="card-label">Below safety buffer</div>
+
+                    <div class="sony-stockout-card warning">
+                        <div class="stockout-header">
+                            <div class="stockout-product">LIGHTERS</div>
+                            <div class="stockout-timer">21 DAYS</div>
+                        </div>
+                        <div class="stockout-details">
+                            <div class="stockout-velocity">8 units/day • 168 units remaining</div>
+                        </div>
+                        <div class="stockout-revenue">
+                            <div class="revenue-item">
+                                <div class="revenue-label">DAILY LOSS</div>
+                                <div class="revenue-value">$20</div>
+                            </div>
+                            <div class="revenue-item">
+                                <div class="revenue-label">WEEKLY LOSS</div>
+                                <div class="revenue-value">$140</div>
+                            </div>
+                            <div class="revenue-item">
+                                <div class="revenue-label">MONTHLY LOSS</div>
+                                <div class="revenue-value">$600</div>
+                            </div>
+                        </div>
+                        <div class="stockout-action">
+                            <button class="sony-btn secondary">SCHEDULE REORDER</button>
+                            <div class="restock-info">Restock: 500 units @ $0.75 = $375</div>
+                        </div>
                     </div>
-                    <div class="dashboard-card" onclick="openDataGraph('revenue')">
-                        <div class="card-header">💎 Revenue Opportunity</div>
-                        <div class="card-metric">$12.4K</div>
-                        <div class="card-label">Potential profit gain</div>
+
+                    <div class="sony-stockout-card warning">
+                        <div class="stockout-header">
+                            <div class="stockout-product">SOUR DIESEL</div>
+                            <div class="stockout-timer">5 DAYS</div>
+                        </div>
+                        <div class="stockout-details">
+                            <div class="stockout-velocity">6.2 units/day • 31 units remaining</div>
+                        </div>
+                        <div class="stockout-revenue">
+                            <div class="revenue-item">
+                                <div class="revenue-label">DAILY LOSS</div>
+                                <div class="revenue-value">$238</div>
+                            </div>
+                            <div class="revenue-item">
+                                <div class="revenue-label">WEEKLY LOSS</div>
+                                <div class="revenue-value">$1,666</div>
+                            </div>
+                            <div class="revenue-item">
+                                <div class="revenue-label">MONTHLY LOSS</div>
+                                <div class="revenue-value">$7,140</div>
+                            </div>
+                        </div>
+                        <div class="stockout-action">
+                            <button class="sony-btn primary">REORDER NOW</button>
+                            <div class="restock-info">Restock: 40 units @ $32 = $1,280</div>
+                        </div>
                     </div>
-                    <div class="dashboard-card" onclick="openDataGraph('confidence')">
-                        <div class="card-header">🎯 AI Confidence</div>
-                        <div class="card-metric">99.8%</div>
-                        <div class="card-label">Prediction accuracy</div>
+                </div>
+
+                <!-- BEST SELLERS (LOW STOCK) -->
+                <div class="sony-section">
+                    <div class="sony-section-header">
+                        <div class="sony-section-label">TOP REVENUE • LOW STOCK</div>
+                        <div class="sony-section-count">5 PRODUCTS</div>
                     </div>
-                    <div class="dashboard-card" onclick="openDataGraph('topseller')">
-                        <div class="card-header">🔥 Top Seller</div>
-                        <div class="card-metric">Gorilla Glue</div>
-                        <div class="card-label">8.2 units/day velocity</div>
+                    
+                    <div class="sony-table">
+                        <div class="sony-table-header">
+                            <div class="col-product">PRODUCT</div>
+                            <div class="col-revenue">MONTHLY REVENUE</div>
+                            <div class="col-stock">STOCK STATUS</div>
+                            <div class="col-action">ACTION</div>
+                        </div>
+                        <div class="sony-table-row critical">
+                            <div class="col-product">BLUE DREAM</div>
+                            <div class="col-revenue">$8,400</div>
+                            <div class="col-stock">3 DAYS</div>
+                            <div class="col-action">
+                                <button class="sony-btn-small">REORDER</button>
+                            </div>
+                        </div>
+                        <div class="sony-table-row warning">
+                            <div class="col-product">SOUR DIESEL</div>
+                            <div class="col-revenue">$7,140</div>
+                            <div class="col-stock">5 DAYS</div>
+                            <div class="col-action">
+                                <button class="sony-btn-small">REORDER</button>
+                            </div>
+                        </div>
+                        <div class="sony-table-row healthy">
+                            <div class="col-product">OG KUSH</div>
+                            <div class="col-revenue">$6,200</div>
+                            <div class="col-stock">14 DAYS</div>
+                            <div class="col-action">
+                                <button class="sony-btn-small secondary">SCHEDULE</button>
+                            </div>
+                        </div>
+                        <div class="sony-table-row healthy">
+                            <div class="col-product">WEDDING CAKE</div>
+                            <div class="col-revenue">$5,800</div>
+                            <div class="col-stock">21 DAYS</div>
+                            <div class="col-action">
+                                <button class="sony-btn-small secondary">SCHEDULE</button>
+                            </div>
+                        </div>
+                        <div class="sony-table-row healthy">
+                            <div class="col-product">GELATO</div>
+                            <div class="col-revenue">$4,200</div>
+                            <div class="col-stock">18 DAYS</div>
+                            <div class="col-action">
+                                <button class="sony-btn-small secondary">SCHEDULE</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- OPPORTUNITIES -->
+                <div class="sony-section">
+                    <div class="sony-section-header">
+                        <div class="sony-section-label">REVENUE OPPORTUNITIES</div>
+                        <div class="sony-section-count">$24,820 POTENTIAL</div>
+                    </div>
+                    
+                    <div class="sony-opportunity-grid">
+                        <div class="opportunity-card">
+                            <div class="opportunity-title">RESTOCK HIGH PERFORMERS</div>
+                            <div class="opportunity-value">$17,920</div>
+                            <div class="opportunity-desc">3 products will stockout in 5 days</div>
+                            <button class="sony-btn secondary">VIEW DETAILS</button>
+                        </div>
+                        <div class="opportunity-card">
+                            <div class="opportunity-title">CLEAR DEAD STOCK</div>
+                            <div class="opportunity-value">$6,900</div>
+                            <div class="opportunity-desc">Free up cash from 8 slow movers</div>
+                            <button class="sony-btn secondary">CREATE SALE</button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -4239,6 +4688,7 @@
         let receiveStartTime;
         let selectedImages = {};
         let selectedProducts = new Set();
+        let modalOpenedFrom = null; // Track where modal was opened from
 
         function attemptLogin() {
             const passwordInput = document.getElementById('passwordInput');
@@ -4606,8 +5056,11 @@
                     productCard.className = 'grid-product-card';
                     productCard.style.setProperty('--delay', i);
                     productCard.onclick = () => {
-                        closeCategoryGrid();
-                        setTimeout(() => openProductModal(productIndex), 300);
+                        const gridView = document.getElementById('categoryGridView');
+                        gridView.classList.remove('active'); // Hide grid
+                        setTimeout(() => {
+                            openProductModal(productIndex, 'grid'); // Open modal, remember we came from grid
+                        }, 300);
                     };
                     productCard.innerHTML = `
                         <div class="grid-product-image">
@@ -4777,7 +5230,8 @@
         }
 
         // PRODUCT MODAL FUNCTIONS
-        function openProductModal(productIndex) {
+        function openProductModal(productIndex, openedFrom = 'demo') {
+            modalOpenedFrom = openedFrom; // Track origin
             const product = products[productIndex];
             const modal = document.getElementById('productModal');
             
@@ -4845,7 +5299,20 @@
         function closeProductModal() {
             const modal = document.getElementById('productModal');
             modal.classList.remove('active');
-            document.body.style.overflow = 'auto';
+            
+            // If modal was opened from grid, reopen the grid
+            if (modalOpenedFrom === 'grid') {
+                const gridView = document.getElementById('categoryGridView');
+                setTimeout(() => {
+                    gridView.classList.add('active');
+                    document.body.style.overflow = 'hidden'; // Keep locked for grid
+                }, 300);
+            } else {
+                // Opened from demo, close normally
+                document.body.style.overflow = 'auto';
+            }
+            
+            modalOpenedFrom = null; // Reset
         }
 
         function renderRelatedProducts(excludeIndex) {
@@ -4862,8 +5329,9 @@
                 card.className = 'related-product-card';
                 const actualIndex = products.indexOf(product);
                 card.onclick = () => {
+                    const currentOrigin = modalOpenedFrom; // Preserve origin
                     closeProductModal();
-                    setTimeout(() => openProductModal(actualIndex), 300);
+                    setTimeout(() => openProductModal(actualIndex, currentOrigin), 300);
                 };
                 
                 const imageContent = (product.images[0].includes('.png') || product.images[0].includes('.webp') || product.images[0].includes('.avif') || product.images[0].includes('.jpg') || product.images[0].includes('.jpeg')) 
@@ -5116,6 +5584,21 @@
             document.querySelectorAll('.vogue-feature-card, .vogue-stat-box, .vogue-pyramid-row').forEach(el => {
                 observer.observe(el);
             });
+
+            // Initialize Sony dashboard date
+            const dateElement = document.getElementById('currentDate');
+            if (dateElement) {
+                const now = new Date();
+                const options = { 
+                    weekday: 'short', 
+                    year: 'numeric', 
+                    month: 'short', 
+                    day: 'numeric',
+                    hour: '2-digit',
+                    minute: '2-digit'
+                };
+                dateElement.textContent = now.toLocaleDateString('en-US', options).toUpperCase();
+            }
         });
     </script>
 </body>
