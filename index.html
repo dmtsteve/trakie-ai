@@ -4239,6 +4239,7 @@
         let receiveStartTime;
         let selectedImages = {};
         let selectedProducts = new Set();
+        let modalOpenedFrom = null; // Track where modal was opened from
 
         function attemptLogin() {
             const passwordInput = document.getElementById('passwordInput');
@@ -4606,8 +4607,7 @@
                     productCard.className = 'grid-product-card';
                     productCard.style.setProperty('--delay', i);
                     productCard.onclick = () => {
-                        closeCategoryGrid();
-                        setTimeout(() => openProductModal(productIndex), 300);
+                        openProductModal(productIndex, 'grid'); // Pass 'grid' as origin
                     };
                     productCard.innerHTML = `
                         <div class="grid-product-image">
@@ -4777,7 +4777,8 @@
         }
 
         // PRODUCT MODAL FUNCTIONS
-        function openProductModal(productIndex) {
+        function openProductModal(productIndex, openedFrom = 'demo') {
+            modalOpenedFrom = openedFrom; // Track origin
             const product = products[productIndex];
             const modal = document.getElementById('productModal');
             
@@ -4845,7 +4846,22 @@
         function closeProductModal() {
             const modal = document.getElementById('productModal');
             modal.classList.remove('active');
-            document.body.style.overflow = 'auto';
+            
+            // If modal was opened from grid, keep grid open
+            if (modalOpenedFrom === 'grid') {
+                // Grid stays open, just unlock scroll for the grid
+                const gridView = document.getElementById('categoryGridView');
+                if (gridView && gridView.classList.contains('active')) {
+                    document.body.style.overflow = 'hidden'; // Keep locked for grid
+                } else {
+                    document.body.style.overflow = 'auto';
+                }
+            } else {
+                // Opened from demo, close normally
+                document.body.style.overflow = 'auto';
+            }
+            
+            modalOpenedFrom = null; // Reset
         }
 
         function renderRelatedProducts(excludeIndex) {
@@ -4862,8 +4878,9 @@
                 card.className = 'related-product-card';
                 const actualIndex = products.indexOf(product);
                 card.onclick = () => {
+                    const currentOrigin = modalOpenedFrom; // Preserve origin
                     closeProductModal();
-                    setTimeout(() => openProductModal(actualIndex), 300);
+                    setTimeout(() => openProductModal(actualIndex, currentOrigin), 300);
                 };
                 
                 const imageContent = (product.images[0].includes('.png') || product.images[0].includes('.webp') || product.images[0].includes('.avif') || product.images[0].includes('.jpg') || product.images[0].includes('.jpeg')) 
