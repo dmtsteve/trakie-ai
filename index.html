@@ -1777,10 +1777,11 @@
     </style>
 </head>
 <body>
-    <!-- Welcome Screen with bubble effect -->
+    <!-- Welcome Screen with WIZARD VIDEO and bubble effect -->
     <div class="welcome-screen" id="welcomeScreen">
         <video id="welcomeVideo" autoplay loop muted playsinline webkit-playsinline preload="auto">
-            <source src="welcome0.mp4" type="video/mp4">
+            <source src="wizard.mp4" type="video/mp4">
+            <source src="welcome.mp4" type="video/mp4">
         </video>
         
         <div class="spotlight-overlay"></div>
@@ -1929,12 +1930,321 @@
             </div>
         </div>
 
-        <!-- ALL OTHER SECTIONS REMAIN THE SAME -->
-        <!-- Receive, Bubbles, Data, Pricing, Contact sections continue here unchanged -->
+        <!-- Receive Section -->
+        <div class="page-section" id="receiveSection">
+            <div class="demo-badge">LIVE DEMO</div>
+            
+            <!-- Landing Screen -->
+            <div class="receive-landing" id="receiveLanding">
+                <h1 class="receive-landing-title">Receive Inventory</h1>
+                <h2 class="receive-landing-subtitle">From an Hour to 1 Minute</h2>
+                <div class="early-bird-badge">🔥 21 Foundation Spots • Lock In $369 Forever</div>
+                <button class="start-receive-btn" onclick="startReceiving()">
+                    <span>⚡</span>
+                    <span>Experience Trakie AI Instant Receiving</span>
+                </button>
+            </div>
+
+            <!-- QR Code Screen with camera0.mov -->
+            <div class="qr-screen" id="qrScreen">
+                <div class="qr-video-container">
+                    <video autoplay loop muted playsinline webkit-playsinline preload="auto">
+                        <source src="camera0.mp4" type="video/mp4">
+                    </video>
+                </div>
+            </div>
+
+            <!-- Split Screen -->
+            <div class="split-screen" id="splitScreen">
+                <div class="split-left">
+                    <h3 class="section-title">📄 Digital Invoice</h3>
+                    <div class="mock-invoice">
+                        <div class="invoice-header">
+                            <div class="invoice-row">
+                                <strong>Vendor:</strong>
+                                <span>Green Leaf Supply Co.</span>
+                            </div>
+                            <div class="invoice-row">
+                                <strong>Invoice #:</strong>
+                                <span>INV-2025-1115</span>
+                            </div>
+                            <div class="invoice-row">
+                                <strong>Date:</strong>
+                                <span>Nov 17, 2025</span>
+                            </div>
+                        </div>
+                        <div class="invoice-items">
+                            <div class="invoice-item">Green Leaf Farms | Blue Dream | Hybrid - 12 units</div>
+                            <div class="invoice-item">Green Leaf Farms | OG Kush | Indica - 8 units</div>
+                            <div class="invoice-item">Green Leaf Farms | Sour Diesel | Sativa - 15 units</div>
+                            <div class="invoice-item">Green Leaf Farms | Purple Haze | Sativa - 20 units</div>
+                            <div class="invoice-item">Green Leaf Farms | Gelato | Hybrid - 10 units</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="split-right">
+                    <h3 class="section-title">📸 AI Scanning</h3>
+                    <div class="iphone-mockup">
+                        <div class="iphone-notch"></div>
+                        <div class="iphone-screen" id="iphoneScreen">
+                            <video autoplay loop muted playsinline webkit-playsinline style="width: 100%; height: 100%; object-fit: cover;">
+                                <source src="camera.mp4" type="video/mp4">
+                            </video>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Processing Screen -->
+            <div class="processing-screen" id="processingScreen">
+                <h2 class="processing-title">
+                    <video class="trakie-logo-processing" autoplay loop muted playsinline webkit-playsinline>
+                        <source src="trakielogo.mp4" type="video/mp4">    
+                    </video>
+                    <span>AI Processing</span>
+                </h2>
+                <div class="spinner-large"></div>
+                <div class="processing-steps" id="processingSteps"></div>
+            </div>
+
+            <!-- Results Screen -->
+            <div class="results-screen" id="resultsScreen">
+                <div class="results-left">
+                    <div class="results-header">
+                        <h2 class="results-title">Receiving Complete!</h2>
+                        <div class="completion-badge">5 PRODUCTS PROCESSED</div>
+                        <div class="timer-display" id="timerDisplay">00:00</div>
+                        <div class="timer-label">SECONDS</div>
+                    </div>
+                    <div class="product-cards" id="productCards"></div>
+                </div>
+
+                <div class="results-right">
+                    <h3 class="controls-title">Smart Move to Sales</h3>
+                    <div id="smartMoveControls"></div>
+                    <div class="completion-actions">
+                        <button class="complete-btn" id="completeBtn" onclick="resetReceiving()">← Start New Delivery</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bubbles Section -->
+        <div class="page-section" id="bubblesSection">
+            <div class="bubbles-wrapper">
+                <div class="bubbles-header">
+                    <h1 class="bubbles-title">Intelligent Inventory</h1>
+                    <p class="bubbles-subtitle">AI-curated selections for the modern customer</p>
+                    
+                    <div class="bubbles-tabs">
+                        <div class="bubble-tab active" onclick="switchBubbleTab('explore')">Explore</div>
+                        <div class="bubble-tab" onclick="switchBubbleTab('bestsellers')">Best Sellers</div>
+                        <div class="bubble-tab" onclick="switchBubbleTab('rush')">In a Rush</div>
+                    </div>
+                </div>
+                <div class="bubbles-container" id="bubblesContainer"></div>
+            </div>
+        </div>
+
+        <!-- Data Section -->
+        <div class="page-section" id="dataSection">
+            <div class="data-wrapper">
+                <div class="data-header">
+                    <h1 class="data-title">Operations Dashboard</h1>
+                    <p class="data-subtitle">Algorithmic forecasting. Velocity analytics. Attribution modeling.</p>
+                </div>
+                <div class="dashboard-grid">
+                    <div class="dashboard-card">
+                        <div class="card-header">🔮 Restock Alert</div>
+                        <div class="card-metric">3 days</div>
+                        <div class="card-label">Until Blue Dream stockout</div>
+                    </div>
+                    <div class="dashboard-card">
+                        <div class="card-header">📈 Trend Velocity</div>
+                        <div class="card-metric">+127%</div>
+                        <div class="card-label">Wedding Cake momentum</div>
+                    </div>
+                    <div class="dashboard-card">
+                        <div class="card-header">⚡ Low Stock Alert</div>
+                        <div class="card-metric">5 SKUs</div>
+                        <div class="card-label">Below safety buffer</div>
+                    </div>
+                    <div class="dashboard-card">
+                        <div class="card-header">💎 Revenue Opportunity</div>
+                        <div class="card-metric">$12.4K</div>
+                        <div class="card-label">Potential profit gain</div>
+                    </div>
+                    <div class="dashboard-card">
+                        <div class="card-header">🎯 AI Confidence</div>
+                        <div class="card-metric">99.8%</div>
+                        <div class="card-label">Prediction accuracy</div>
+                    </div>
+                    <div class="dashboard-card">
+                        <div class="card-header">🔥 Top Seller</div>
+                        <div class="card-metric">Gorilla Glue</div>
+                        <div class="card-label">8.2 units/day velocity</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pricing Section -->
+        <div class="page-section" id="pricingSection">
+            <section class="pricing">
+                <div class="pricing-header">
+                    <h2 class="pricing-title">Foundation Pricing</h2>
+                    <p class="pricing-subtitle">First 21 customers lock in $369/month forever</p>
+                    <p class="pricing-note">After 21 spots filled → Price increases to $499/month</p>
+                </div>
+                
+                <div class="pricing-card">
+                    <div class="popular-badge">⚡ FOUNDATION RATE</div>
+                    <h3 class="plan-name">First 21 Customers Only</h3>
+                    
+                    <div class="price-comparison">
+                        <div class="plan-price">$369</div>
+                        <div class="original-price">Regular price: $499/month</div>
+                        <p class="plan-period">per month, per location</p>
+                    </div>
+                    
+                    <div class="lifetime-lock">
+                        🔒 Lifetime Price Lock - You'll never pay more, even when we raise prices
+                    </div>
+                    
+                    <ul class="features">
+                        <li>Single location, unlimited products</li>
+                        <li>AI instant recognition (50,000+ SKUs trained)</li>
+                        <li>3D interactive product menus</li>
+                        <li>Predictive restocking intelligence</li>
+                        <li>AI budtender assistant</li>
+                        <li>Sample tracking & attribution</li>
+                        <li>Full METRC integration</li>
+                        <li>Automated budget management</li>
+                        <li>Priority support</li>
+                        <li>Save $1,560/year vs regular price</li>
+                    </ul>
+                    
+                    <button class="plan-btn" onclick="showSection('contact')">Claim Your Foundation Spot</button>
+                </div>
+            </section>
+        </div>
+
+<!-- Contact Section -->
+<div class="page-section" id="contactSection">
+    <section class="contact-section">
+        <!-- ADD VIDEO HERE -->
+        <video class="contact-bg-video" autoplay muted loop playsinline>
+            <source src="trakielogo.mp4" type="video/mp4">
+        </video>
         
+        <div class="contact-wrapper">
+            <h2 class="contact-title">Get in Touch</h2>
+                    <p class="contact-subtitle">Ready to transform your dispensary operations?</p>
+                    <form id="contactForm" onsubmit="handleContactSubmit(event)">
+                        <div class="form-group">
+                            <label class="form-label">Name *</label>
+                            <input type="text" class="form-input" required placeholder="Your name">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Email *</label>
+                            <input type="email" class="form-input" required placeholder="your@email.com">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Dispensary Name</label>
+                            <input type="text" class="form-input" placeholder="Your dispensary">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Message *</label>
+                            <textarea class="form-textarea" required placeholder="Tell us about your needs..."></textarea>
+                        </div>
+                        <button type="submit" class="form-submit">Send Message</button>
+                    </form>
+                </div>
+            </section>
+        </div>
     </div>
 
     <script>
+        // ===== GLOBAL STATE =====
+        const categories = [
+            { name: 'Flower', icon: '🌿', video: 'flower.mp4' },
+            { name: 'Vaporizers', icon: '💨', video: 'vape.mp4' },
+            { name: 'Pre-Rolls', icon: '🚬', video: 'preroll.mp4' },
+            { name: 'Edibles', icon: '🍫', video: 'edible.mp4' },
+            { name: 'Concentrates', icon: '💎', video: 'concentrate.mp4' },
+            { name: 'Beverages', icon: '🥤', video: 'bev.mp4' },
+            { name: 'Tinctures', icon: '🧴', video: 'tincture.mp4' },
+            { name: 'CBD', icon: '🟢', video: 'balm.mp4' }
+        ];
+
+        const products = [
+            {
+                brand: 'Green Leaf Farms',
+                name: 'Blue Dream',
+                strain: 'Hybrid',
+                thc: '24.5%',
+                cbd: '0.3%',
+                expDate: '12/2025',
+                quantity: 12,
+                unitCost: 35.00,
+                priceAfterTax: 42.00,
+                images: ['🌿', '🌿', '🌿']
+            },
+            {
+                brand: 'Green Leaf Farms',
+                name: 'OG Kush',
+                strain: 'Indica',
+                thc: '26.8%',
+                cbd: '0.2%',
+                expDate: '01/2026',
+                quantity: 8,
+                unitCost: 42.00,
+                priceAfterTax: 50.40,
+                images: ['🌿', '🌿', '🌿']
+            },
+            {
+                brand: 'Green Leaf Farms',
+                name: 'Sour Diesel',
+                strain: 'Sativa',
+                thc: '22.3%',
+                cbd: '0.4%',
+                expDate: '12/2025',
+                quantity: 15,
+                unitCost: 32.00,
+                priceAfterTax: 38.40,
+                images: ['🌿', '🌿', '🌿']
+            },
+            {
+                brand: 'Green Leaf Farms',
+                name: 'Purple Haze',
+                strain: 'Sativa',
+                thc: '28.1%',
+                cbd: '0.1%',
+                expDate: '01/2026',
+                quantity: 20,
+                unitCost: 28.00,
+                priceAfterTax: 33.60,
+                images: ['🌿', '🌿', '🌿']
+            },
+            {
+                brand: 'Green Leaf Farms',
+                name: 'Gelato',
+                strain: 'Hybrid',
+                thc: '25.7%',
+                cbd: '0.3%',
+                expDate: '12/2025',
+                quantity: 10,
+                unitCost: 38.00,
+                priceAfterTax: 45.60,
+                images: ['🌿', '🌿', '🌿']
+            }
+        ];
+
+        let receiveStartTime;
+        let selectedImages = {};
+        let selectedProducts = new Set();
+
         // ===== BUBBLE SPOTLIGHT EFFECT =====
         document.addEventListener('DOMContentLoaded', function() {
             const welcomeScreen = document.getElementById('welcomeScreen');
@@ -2010,6 +2320,298 @@
             }
         }
 
+        // ===== RECEIVE PAGE FUNCTIONS =====
+        function startReceiving() {
+            receiveStartTime = Date.now();
+            document.getElementById('receiveLanding').style.display = 'none';
+            document.getElementById('qrScreen').classList.add('active');
+            
+            setTimeout(() => {
+                document.getElementById('qrScreen').classList.remove('active');
+                document.getElementById('splitScreen').classList.add('active');
+                simulatePhotoTaking();
+            }, 8000);
+        }
+
+        function simulatePhotoTaking() {
+            setTimeout(() => {
+                document.getElementById('splitScreen').classList.remove('active');
+                document.getElementById('processingScreen').classList.add('active');
+                startProcessing();
+            }, 10000);
+        }
+
+        function startProcessing() {
+            const steps = [
+                { title: 'Reading Labels', text: 'OCR extracting text from photos...' },
+                { title: 'Identifying Products', text: 'Matching to catalog database...' },
+                { title: 'Searching Images', text: 'Finding best Google images...' },
+                { title: 'Extracting Details', text: 'THC%, batch numbers, quantities...' },
+                { title: 'Generating Descriptions', text: 'AI creating product descriptions...' },
+                { title: 'Syncing to METRC', text: 'Real-time compliance reporting...' }
+            ];
+
+            const container = document.getElementById('processingSteps');
+            container.innerHTML = '';
+            
+            steps.forEach((step, index) => {
+                setTimeout(() => {
+                    const stepDiv = document.createElement('div');
+                    stepDiv.className = 'process-step';
+                    stepDiv.innerHTML = `
+                        <div class="process-step-title">✓ ${step.title}</div>
+                        <div class="process-step-text">${step.text}</div>
+                    `;
+                    container.appendChild(stepDiv);
+                    setTimeout(() => stepDiv.classList.add('active'), 50);
+                }, index * 1500);
+            });
+
+            setTimeout(() => {
+                showResults();
+            }, 10000);
+        }
+
+        function showResults() {
+            const elapsedTime = Math.floor((Date.now() - receiveStartTime) / 1000);
+            document.getElementById('processingScreen').classList.remove('active');
+            document.getElementById('resultsScreen').classList.add('active');
+            
+            let currentTime = 0;
+            const timerInterval = setInterval(() => {
+                if (currentTime >= elapsedTime) {
+                    clearInterval(timerInterval);
+                    document.getElementById('timerDisplay').textContent = `00:${elapsedTime.toString().padStart(2, '0')}`;
+                } else {
+                    currentTime++;
+                    document.getElementById('timerDisplay').textContent = `00:${currentTime.toString().padStart(2, '0')}`;
+                }
+            }, 30);
+            
+            renderProductCards();
+            renderSmartMoveControls();
+        }
+
+        function renderProductCards() {
+            const container = document.getElementById('productCards');
+            container.innerHTML = '';
+            
+            products.forEach((product, index) => {
+                const card = document.createElement('div');
+                card.className = 'product-card';
+                card.innerHTML = `
+                    <div class="product-card-header">
+                        <div class="product-card-title-left">
+                            <div class="product-brand">${product.brand}</div>
+                            <div class="product-strain">${product.name}</div>
+                            <div class="product-type">${product.strain}</div>
+                        </div>
+                        <div class="product-quantity">QTY ${product.quantity}</div>
+                    </div>
+                    
+                    <div class="product-card-image-container">
+                        <div class="product-image-main">${product.images[selectedImages[index] || 0]}</div>
+                        <div class="thc-overlay">
+                            <div class="thc-percentage">${product.thc.replace('%', '')}</div>
+                            <div class="thc-label">THC</div>
+                        </div>
+                        <button class="image-arrow left" onclick="previousImage(${index})">‹</button>
+                        <button class="image-arrow right" onclick="nextImage(${index})">›</button>
+                        <div class="image-nav">
+                            ${product.images.map((_, i) => `<div class="image-nav-dot ${(selectedImages[index] || 0) === i ? 'active' : ''}" onclick="selectImage(${index}, ${i})"></div>`).join('')}
+                        </div>
+                    </div>
+                    
+                    <div class="product-price-section">
+                        <div class="price-label">Price (After Tax)</div>
+                        <div class="product-price">$${product.priceAfterTax.toFixed(2)}</div>
+                        <div class="price-note">per unit</div>
+                    </div>
+                    
+                    <div class="product-card-stats">
+                        <div class="stat-row">
+                            <span class="stat-label">CBD</span>
+                            <span class="stat-value">${product.cbd}</span>
+                        </div>
+                        <div class="stat-row">
+                            <span class="stat-label">Exp Date</span>
+                            <span class="stat-value">${product.expDate}</span>
+                        </div>
+                        <div class="stat-row" style="grid-column: 1 / -1;">
+                            <span class="stat-label">Total Value</span>
+                            <span class="stat-value highlight">$${(product.quantity * product.unitCost).toFixed(2)}</span>
+                        </div>
+                    </div>
+                `;
+                container.appendChild(card);
+                
+                if (!selectedImages[index]) {
+                    selectedImages[index] = 0;
+                }
+            });
+        }
+
+        function selectImage(productIndex, imageIndex) {
+            selectedImages[productIndex] = imageIndex;
+            renderProductCards();
+        }
+
+        function previousImage(productIndex) {
+            const currentIndex = selectedImages[productIndex] || 0;
+            const newIndex = currentIndex === 0 ? products[productIndex].images.length - 1 : currentIndex - 1;
+            selectImage(productIndex, newIndex);
+        }
+
+        function nextImage(productIndex) {
+            const currentIndex = selectedImages[productIndex] || 0;
+            const newIndex = (currentIndex + 1) % products[productIndex].images.length;
+            selectImage(productIndex, newIndex);
+        }
+
+        function renderSmartMoveControls() {
+            const container = document.getElementById('smartMoveControls');
+            container.innerHTML = '';
+            
+            products.forEach((product, index) => {
+                const group = document.createElement('div');
+                group.className = 'move-button-group';
+                group.id = `moveGroup${index}`;
+                group.innerHTML = `
+                    <div class="move-product-name">${product.name}</div>
+                    <div class="move-buttons">
+                        <button class="move-btn" onclick="toggleProductSelection(${index}, 5)" data-amount="5">
+                            Select 5
+                        </button>
+                        <button class="move-btn" onclick="toggleProductSelection(${index}, 10)" data-amount="10">
+                            Select 10
+                        </button>
+                    </div>
+                `;
+                container.appendChild(group);
+            });
+        }
+
+        function toggleProductSelection(productIndex, amount) {
+            const group = document.getElementById(`moveGroup${productIndex}`);
+            const buttons = group.querySelectorAll('.move-btn');
+            const clickedButton = Array.from(buttons).find(btn => btn.getAttribute('data-amount') == amount);
+            
+            if (selectedProducts.has(productIndex)) {
+                selectedProducts.delete(productIndex);
+                buttons.forEach(btn => btn.classList.remove('selected'));
+                group.classList.remove('selected');
+            } else {
+                selectedProducts.add(productIndex);
+                clickedButton.classList.add('selected');
+                group.classList.add('selected');
+            }
+            
+            updateMoveAllButton();
+        }
+
+        function updateMoveAllButton() {
+            const container = document.getElementById('smartMoveControls');
+            let moveAllBtn = document.getElementById('moveAllBtn');
+            
+            if (selectedProducts.size > 0) {
+                if (!moveAllBtn) {
+                    moveAllBtn = document.createElement('button');
+                    moveAllBtn.id = 'moveAllBtn';
+                    moveAllBtn.className = 'move-all-btn';
+                    moveAllBtn.onclick = moveAllSelected;
+                    container.appendChild(moveAllBtn);
+                }
+                moveAllBtn.textContent = `Move ${selectedProducts.size} Product${selectedProducts.size > 1 ? 's' : ''} to Sales Floor`;
+            } else {
+                if (moveAllBtn) moveAllBtn.remove();
+            }
+        }
+
+        function moveAllSelected() {
+            if (selectedProducts.size === 0) return;
+            
+            alert(`✅ Moved ${selectedProducts.size} product${selectedProducts.size > 1 ? 's' : ''} to sales floor!`);
+            
+            selectedProducts.clear();
+            document.getElementById('moveAllBtn').remove();
+            
+            document.getElementById('completeBtn').classList.add('show');
+        }
+
+        function resetReceiving() {
+            selectedImages = {};
+            selectedProducts.clear();
+            document.getElementById('resultsScreen').classList.remove('active');
+            document.getElementById('receiveLanding').style.display = 'flex';
+            document.getElementById('qrScreen').classList.remove('active');
+            document.getElementById('splitScreen').classList.remove('active');
+            document.getElementById('processingScreen').classList.remove('active');
+            document.getElementById('completeBtn').classList.remove('show');
+        }
+
+        // ===== BUBBLES FUNCTIONS =====
+        function initBubbles(tab = 'explore') {
+            const container = document.getElementById('bubblesContainer');
+            if (!container) return;
+            
+            container.innerHTML = '';
+            
+            let displayCategories = categories;
+            
+            if (tab === 'bestsellers') {
+                displayCategories = categories.slice(0, 4);
+            } else if (tab === 'rush') {
+                displayCategories = categories.slice(0, 3);
+            }
+            
+            displayCategories.forEach((category) => {
+                const bubble = document.createElement('div');
+                bubble.className = 'bubble';
+                bubble.setAttribute('data-category', category.name);
+                
+                const video = document.createElement('video');
+                video.autoplay = true;
+                video.loop = true;
+                video.muted = true;
+                video.playsInline = true;
+                video.setAttribute('playsinline', '');
+                video.setAttribute('webkit-playsinline', '');
+                
+                const source = document.createElement('source');
+                source.src = category.video;
+                source.type = 'video/mp4';
+                
+                video.appendChild(source);
+                
+                video.addEventListener('loadeddata', function() {
+                    video.play().catch(e => console.log('Autoplay prevented'));
+                });
+                
+                const label = document.createElement('div');
+                label.className = 'bubble-label';
+                label.textContent = category.name;
+                
+                bubble.appendChild(video);
+                bubble.appendChild(label);
+                bubble.onclick = () => alert(`${category.name} products coming soon!`);
+                
+                container.appendChild(bubble);
+            });
+        }
+
+        function switchBubbleTab(tab) {
+            document.querySelectorAll('.bubble-tab').forEach(t => t.classList.remove('active'));
+            event.target.classList.add('active');
+            initBubbles(tab);
+        }
+
+        // ===== CONTACT FORM =====
+        function handleContactSubmit(e) {
+            e.preventDefault();
+            alert('Thank you for your interest! We\'ll be in touch within 24 hours.');
+            e.target.reset();
+        }
+
         // ===== NAVIGATION FUNCTIONS =====
         function showSection(sectionName) {
             document.querySelectorAll('.page-section').forEach(s => s.classList.remove('active'));
@@ -2017,6 +2619,11 @@
             if (section) {
                 section.classList.add('active');
             }
+            
+            if (sectionName === 'bubbles') {
+                setTimeout(() => initBubbles('explore'), 100);
+            }
+            
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
