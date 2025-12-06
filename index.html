@@ -66,112 +66,158 @@
             overflow: hidden;
         }
 
-        .stats-ticker {
-            position: fixed !important;
-            top: 0 !important;
-            left: 0 !important;
-            right: 0 !important;
-            width: 100vw !important;
-            overflow: hidden;
-            z-index: 99999 !important;
-            background: rgba(0, 0, 0, 0.95);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid rgba(201, 169, 97, 0.2);
-            padding: 10px 0;
-            margin: 0 !important;
-        }
-
-        .ticker-content {
-            display: flex;
-            gap: 40px;
-            animation: scroll 25s linear infinite;
-            white-space: nowrap;
-        }
-
-        .ticker-content span {
-            font-size: 13px;
-            color: rgba(255, 255, 255, 0.8);
-            font-weight: 500;
-        }
-
-        .ticker-dot {
-            color: #C9A961;
-        }
-
-        @keyframes scroll {
-            from { transform: translateX(0); }
-            to { transform: translateX(-50%); }
-        }
-
-        .gradient-accent {
-            width: 200px;
-            height: 2px;
-            background: linear-gradient(90deg, #C9A961 0%, #8B7355 50%, #C9A961 100%);
-            margin-bottom: 20px;
-            opacity: 0;
-            animation: fadeIn 1s ease 0.9s forwards;
-        }
-
-        .welcome-subtitle {
-            font-size: 18px;
-            color: #ccc;
-            margin-bottom: 10px;
-            font-weight: 400;
-            opacity: 0;
-            animation: fadeIn 1s ease 1.1s forwards;
-        }
-        
-        .welcome-screen > * {
-            position: relative;
+        /* PARTICLE CANVAS */
+        #particleCanvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
             z-index: 1;
         }
 
-        .welcome-screen.hide {
-            display: none;
+        /* ANIMATED ORB */
+        .trakie-orb {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background: radial-gradient(
+                circle at 30% 30%,
+                #E5C78A,
+                #C9A961,
+                #8A733A
+            );
+            box-shadow: 
+                0 0 60px rgba(201, 169, 97, 0.6),
+                0 0 120px rgba(201, 169, 97, 0.3),
+                inset 0 0 40px rgba(255, 255, 255, 0.2);
+            position: absolute;
+            z-index: 2;
+            opacity: 0;
+            transform: scale(0) rotate(0deg);
+            animation: orbEnter 1s cubic-bezier(0.68, -0.55, 0.265, 1.55) 0.3s forwards,
+                       orbFloat 0.5s ease-in-out 1.3s 1,
+                       orbFadeOut 0.4s ease 1.4s forwards;
         }
 
-        .title {
-            font-size: 64px;
-            font-weight: 700;
-            margin-bottom: 10px;
+        @keyframes orbEnter {
+            0% { 
+                opacity: 0;
+                transform: scale(0) rotate(0deg);
+            }
+            70% {
+                opacity: 1;
+                transform: scale(1.1) rotate(360deg);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1) rotate(360deg);
+            }
+        }
+
+        @keyframes orbFloat {
+            0%, 100% { transform: translateY(0px) rotate(360deg) scale(1); }
+            50% { transform: translateY(-10px) rotate(370deg) scale(1.05); }
+        }
+
+        @keyframes orbFadeOut {
+            to {
+                opacity: 0;
+                transform: scale(0.5) rotate(720deg);
+            }
+        }
+
+        /* WELCOME CONTENT */
+        .welcome-content {
+            position: relative;
+            z-index: 3;
+            text-align: center;
             opacity: 0;
-            animation: fadeIn 1s ease 0.7s forwards;
-            letter-spacing: -1px;
+            animation: contentFadeIn 0.6s ease 1.5s forwards;
+        }
+
+        @keyframes contentFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .trakie-wordmark {
+            font-size: 72px;
+            font-weight: 300;
+            margin-bottom: 15px;
+            color: #FFFFFF;
+            letter-spacing: 8px;
+            font-family: 'Outfit', sans-serif;
+            animation: breathe 4s ease-in-out infinite;
+        }
+
+        @keyframes breathe {
+            0%, 100% { opacity: 0.9; }
+            50% { opacity: 1; }
+        }
+
+        .trakie-tagline {
+            font-size: 20px;
+            color: #C9A961;
+            margin-bottom: 50px;
+            font-weight: 400;
+            letter-spacing: 1px;
+        }
+
+        .welcome-screen.hide {
+            animation: screenFadeOut 0.6s ease forwards;
+        }
+
+        @keyframes screenFadeOut {
+            to {
+                opacity: 0;
+                transform: scale(0.95);
+            }
         }
 
         .login-box {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(201, 169, 97, 0.2);
+            background: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(201, 169, 97, 0.3);
             border-radius: 16px;
-            padding: 25px 30px;
-            opacity: 0;
-            animation: fadeIn 1s ease 1.5s forwards;
+            padding: 30px 40px;
+            max-width: 400px;
+            margin: 0 auto;
         }
 
         .password-input {
-            width: 300px;
-            padding: 15px 20px;
-            background: rgba(255, 255, 255, 0.1);
+            width: 100%;
+            padding: 16px 20px;
+            background: rgba(255, 255, 255, 0.05);
             border: 1px solid rgba(201, 169, 97, 0.3);
             border-radius: 12px;
             color: white;
             font-size: 16px;
-            margin-bottom: 15px;
+            margin-bottom: 16px;
             font-family: 'Outfit', sans-serif;
+            transition: all 0.3s ease;
         }
 
         .password-input::placeholder {
-            color: rgba(255, 255, 255, 0.5);
+            color: rgba(255, 255, 255, 0.4);
         }
 
         .password-input:focus {
             outline: none;
             border-color: #C9A961;
+            background: rgba(255, 255, 255, 0.08);
+            box-shadow: 0 0 20px rgba(201, 169, 97, 0.2);
         }
 
         .login-btn {
             width: 100%;
-            padding: 15px;
+            padding: 16px;
             background: linear-gradient(135deg, #C9A961 0%, #8B7355 100%);
             color: #000;
             border: none;
@@ -179,18 +225,30 @@
             font-size: 16px;
             font-weight: 600;
             cursor: pointer;
-            transition: all 0.3s;
+            transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            letter-spacing: 1px;
         }
 
         .login-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(201, 169, 97, 0.4);
+            transform: translateY(-2px) scale(1.02);
+            box-shadow: 0 10px 30px rgba(201, 169, 97, 0.5);
+        }
+
+        .login-btn:active {
+            transform: translateY(0) scale(0.98);
         }
 
         .error {
             color: #ef4444;
             font-size: 14px;
-            margin-top: 10px;
+            margin-top: 12px;
+            animation: shake 0.5s ease;
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-10px); }
+            75% { transform: translateX(10px); }
         }
 
         .main-site {
@@ -2736,8 +2794,8 @@
         .sony-dashboard {
             padding: 140px 60px 80px;
             min-height: 100vh;
-            background: #000000;
-            font-family: 'Outfit', sans-serif;
+            background: #F2F2F7;
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', sans-serif;
         }
 
         .sony-header {
@@ -2746,23 +2804,23 @@
             align-items: center;
             margin-bottom: 60px;
             padding-bottom: 20px;
-            border-bottom: 2px solid #333;
+            border-bottom: none;
         }
 
         .sony-title {
-            font-family: 'Outfit', sans-serif;
-            font-size: 48px;
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', sans-serif;
+            font-size: 40px;
             font-weight: 700;
-            color: #FFFFFF;
-            letter-spacing: 4px;
-            text-transform: uppercase;
+            color: #000000;
+            letter-spacing: -1px;
+            text-transform: none;
         }
 
         .sony-date {
-            font-family: 'Courier New', monospace;
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Segoe UI', sans-serif;
             font-size: 14px;
-            color: #888;
-            letter-spacing: 1px;
+            color: #8E8E93;
+            letter-spacing: 0;
         }
 
         .sony-section {
@@ -2775,23 +2833,23 @@
             align-items: center;
             margin-bottom: 20px;
             padding: 12px 0;
-            border-bottom: 1px solid #222;
+            border-bottom: none;
         }
 
         .sony-section-label {
-            font-family: 'Outfit', sans-serif;
-            font-size: 14px;
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', sans-serif;
+            font-size: 28px;
             font-weight: 700;
-            color: #FFF;
-            letter-spacing: 2px;
-            text-transform: uppercase;
+            color: #000000;
+            letter-spacing: -0.5px;
+            text-transform: none;
         }
 
         .sony-section-count {
-            font-family: 'Courier New', monospace;
-            font-size: 12px;
-            color: #888;
-            letter-spacing: 1px;
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Segoe UI', sans-serif;
+            font-size: 14px;
+            color: #8E8E93;
+            letter-spacing: 0;
         }
 
         /* STOCKOUT CARDS */
@@ -3092,527 +3150,225 @@
             line-height: 1.6;
         }
 
-        /* PREDICTIVE RESTOCKING CARDS */
-        .predictive-grid {
+        /* APPLE HEALTH STYLE DASHBOARD */
+        .apple-health-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 30px;
-            margin-top: 20px;
+            margin-top: 30px;
         }
 
-        .predictive-card {
-            background: linear-gradient(145deg, #0D0D0D 0%, #1A1A1A 100%);
-            border: 1px solid #222;
-            border-radius: 12px;
+        .health-card {
+            background: #FFFFFF;
+            border-radius: 20px;
+            padding: 32px 24px;
+            text-align: center;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+        }
+
+        .health-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+        }
+
+        .health-card.dud {
+            background: #FAFAFA;
+            opacity: 0.9;
+        }
+
+        .health-card-image {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 20px;
+            border-radius: 60px;
             overflow: hidden;
-            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+            background: #F5F5F5;
         }
 
-        .predictive-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
-            border-color: #444;
-        }
-
-        .predictive-card.critical {
-            border-left: 4px solid #FF3B3B;
-        }
-
-        .predictive-card.warning {
-            border-left: 4px solid #FFB340;
-        }
-
-        .predictive-card.healthy {
-            border-left: 4px solid #4CAF50;
-        }
-
-        .predictive-image-container {
-            position: relative;
-            width: 100%;
-            height: 240px;
-            background: #000;
-            overflow: hidden;
-        }
-
-        .predictive-product-image {
+        .health-product-img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: transform 0.6s ease;
         }
 
-        .predictive-card:hover .predictive-product-image {
-            transform: scale(1.05);
+        .health-rank {
+            font-size: 32px;
+            margin-bottom: 12px;
         }
 
-        .predictive-urgency-badge {
-            position: absolute;
-            top: 16px;
-            right: 16px;
-            padding: 8px 16px;
-            background: rgba(255, 59, 59, 0.95);
-            color: #FFF;
-            font-family: 'Courier New', monospace;
-            font-size: 11px;
-            font-weight: 700;
-            letter-spacing: 1px;
-            border-radius: 4px;
-            backdrop-filter: blur(10px);
+        .health-product-name {
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', sans-serif;
+            font-size: 22px;
+            font-weight: 600;
+            color: #000000;
+            margin-bottom: 24px;
+            letter-spacing: -0.3px;
         }
 
-        .predictive-urgency-badge.warning {
-            background: rgba(255, 179, 64, 0.95);
-            color: #000;
+        /* ACTIVITY RINGS */
+        .health-ring-container {
+            position: relative;
+            width: 200px;
+            height: 200px;
+            margin: 0 auto 24px;
         }
 
-        .predictive-urgency-badge.healthy {
-            background: rgba(76, 175, 80, 0.95);
-            color: #FFF;
-        }
-
-        .predictive-content {
-            padding: 24px;
-        }
-
-        .predictive-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            margin-bottom: 20px;
-        }
-
-        .predictive-product-name {
-            font-family: 'Outfit', sans-serif;
-            font-size: 24px;
-            font-weight: 700;
-            color: #FFF;
-            letter-spacing: 0.5px;
-        }
-
-        .predictive-countdown {
-            text-align: right;
-        }
-
-        .countdown-number {
-            font-family: 'Courier New', monospace;
-            font-size: 42px;
-            font-weight: 700;
-            color: #FF3B3B;
-            line-height: 1;
-            letter-spacing: -1px;
-        }
-
-        .predictive-countdown.warning .countdown-number {
-            color: #FFB340;
-        }
-
-        .predictive-countdown.healthy .countdown-number {
-            color: #4CAF50;
-        }
-
-        .countdown-label {
-            font-family: 'Courier New', monospace;
-            font-size: 11px;
-            color: #666;
-            letter-spacing: 1px;
-            margin-top: 4px;
-        }
-
-        .predictive-timeline {
-            margin-bottom: 20px;
-        }
-
-        .timeline-bar {
+        .health-ring {
             width: 100%;
-            height: 8px;
-            background: #1A1A1A;
-            border-radius: 4px;
-            overflow: hidden;
-            margin-bottom: 8px;
-        }
-
-        .timeline-fill {
             height: 100%;
-            background: linear-gradient(90deg, #FF3B3B 0%, #FF6B6B 100%);
-            transition: width 0.8s ease;
+            transform: rotate(0deg);
         }
 
-        .timeline-fill.warning {
-            background: linear-gradient(90deg, #FFB340 0%, #FFC870 100%);
+        .health-ring-progress {
+            transition: stroke-dashoffset 1.5s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        .timeline-fill.healthy {
-            background: linear-gradient(90deg, #4CAF50 0%, #66BB6A 100%);
-        }
-
-        .timeline-labels {
-            display: flex;
-            justify-content: space-between;
-            font-family: 'Courier New', monospace;
-            font-size: 10px;
-            color: #666;
-            letter-spacing: 0.5px;
-        }
-
-        .timeline-stockout {
-            color: #FF3B3B;
-        }
-
-        .predictive-stats {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 16px;
-            margin-bottom: 20px;
-            padding: 16px;
-            background: #0A0A0A;
-            border-radius: 8px;
-        }
-
-        .stat-item {
+        .health-ring-center {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
             text-align: center;
         }
 
-        .stat-label {
-            display: block;
-            font-family: 'Outfit', sans-serif;
-            font-size: 10px;
-            color: #666;
-            letter-spacing: 1px;
-            margin-bottom: 6px;
-            text-transform: uppercase;
-        }
-
-        .stat-value {
-            display: block;
-            font-family: 'Courier New', monospace;
-            font-size: 16px;
+        .health-ring-number {
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', sans-serif;
+            font-size: 56px;
             font-weight: 700;
-            color: #FFF;
-            letter-spacing: -0.5px;
-        }
-
-        .revenue-impact {
-            margin-bottom: 20px;
-            padding: 20px;
-            background: linear-gradient(135deg, #1A0A0A 0%, #0A0A0A 100%);
-            border: 1px solid #2A1A1A;
-            border-radius: 8px;
-        }
-
-        .impact-big {
-            margin-bottom: 12px;
-        }
-
-        .impact-label {
-            font-family: 'Outfit', sans-serif;
-            font-size: 11px;
-            color: #888;
-            letter-spacing: 1.5px;
-            margin-bottom: 8px;
-            text-transform: uppercase;
-        }
-
-        .impact-value {
-            font-family: 'Bodoni Moda', serif;
-            font-size: 48px;
-            font-weight: 700;
-            color: #FF3B3B;
-            letter-spacing: -1px;
+            color: #000000;
             line-height: 1;
-        }
-
-        .impact-breakdown {
-            display: flex;
-            gap: 12px;
-            align-items: center;
-            font-family: 'Courier New', monospace;
-            font-size: 12px;
-            color: #666;
-        }
-
-        .predictive-order-info {
-            margin-bottom: 20px;
-            padding: 16px;
-            background: #0A0A0A;
-            border-radius: 8px;
-        }
-
-        .order-recommendation,
-        .order-deadline {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            margin-bottom: 10px;
-            font-family: 'Outfit', sans-serif;
-            font-size: 13px;
-            color: #AAA;
-        }
-
-        .order-deadline {
-            margin-bottom: 0;
-        }
-
-        .order-icon,
-        .deadline-icon {
-            font-size: 18px;
-        }
-
-        .deadline-text {
-            font-family: 'Courier New', monospace;
-            font-weight: 700;
-            color: #C9A961;
-        }
-
-        .predictive-action-btn {
-            width: 100%;
-            padding: 16px;
-            font-family: 'Outfit', sans-serif;
-            font-size: 14px;
-            font-weight: 700;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            background: #FF3B3B;
-            color: #FFF;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .predictive-action-btn:hover {
-            background: #FF5555;
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(255, 59, 59, 0.4);
-        }
-
-        .predictive-action-btn.warning {
-            background: #FFB340;
-            color: #000;
-        }
-
-        .predictive-action-btn.warning:hover {
-            background: #FFC870;
-            box-shadow: 0 8px 20px rgba(255, 179, 64, 0.4);
-        }
-
-        .predictive-action-btn.healthy {
-            background: #4CAF50;
-        }
-
-        .predictive-action-btn.healthy:hover {
-            background: #66BB6A;
-            box-shadow: 0 8px 20px rgba(76, 175, 80, 0.4);
-        }
-
-        /* SAMPLE ATTRIBUTION */
-        .sample-champions-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 24px;
-            margin-top: 20px;
-        }
-
-        .sample-card {
-            background: linear-gradient(145deg, #0D0D0D 0%, #1A1A1A 100%);
-            border: 1px solid #222;
-            border-radius: 12px;
-            padding: 28px;
-            transition: all 0.4s ease;
-            position: relative;
-        }
-
-        .sample-card:hover {
-            transform: translateY(-6px);
-            box-shadow: 0 16px 48px rgba(0, 0, 0, 0.5);
-            border-color: #444;
-        }
-
-        .sample-card.champion {
-            border: 2px solid #C9A961;
-            background: linear-gradient(145deg, #1A1510 0%, #0D0A08 100%);
-        }
-
-        .sample-card.dud {
-            border: 1px solid #3A1010;
-            background: linear-gradient(145deg, #1A0A0A 0%, #0D0505 100%);
-        }
-
-        .sample-rank {
-            font-size: 24px;
-            margin-bottom: 12px;
-        }
-
-        .sample-brand {
-            font-family: 'Outfit', sans-serif;
-            font-size: 22px;
-            font-weight: 700;
-            color: #FFF;
-            margin-bottom: 16px;
-            letter-spacing: 0.5px;
-        }
-
-        .sample-roi-big {
-            font-family: 'Bodoni Moda', serif;
-            font-size: 64px;
-            font-weight: 700;
-            color: #C9A961;
-            line-height: 1;
-            margin-bottom: 8px;
             letter-spacing: -2px;
         }
 
-        .sample-roi-big.dud {
-            color: #FF3B3B;
-        }
-
-        .sample-roi-label {
-            font-family: 'Courier New', monospace;
-            font-size: 11px;
-            color: #666;
-            letter-spacing: 1px;
-            margin-bottom: 24px;
-        }
-
-        .sample-stats-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 16px;
-            margin-bottom: 24px;
-        }
-
-        .sample-stat {
-            text-align: center;
-            padding: 12px;
-            background: #0A0A0A;
-            border-radius: 6px;
-        }
-
-        .sample-stat-value {
-            font-family: 'Courier New', monospace;
-            font-size: 20px;
-            font-weight: 700;
-            color: #FFF;
-            margin-bottom: 4px;
-        }
-
-        .sample-stat-label {
-            font-family: 'Outfit', sans-serif;
-            font-size: 10px;
-            color: #666;
-            letter-spacing: 0.5px;
+        .health-ring-label {
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Segoe UI', sans-serif;
+            font-size: 13px;
+            font-weight: 500;
+            color: #8E8E93;
             text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-top: 4px;
         }
 
-        .sample-conversion {
+        .health-context {
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Segoe UI', sans-serif;
+            font-size: 15px;
+            font-weight: 400;
+            color: #8E8E93;
             margin-bottom: 24px;
         }
 
-        .conversion-bar {
+        .health-action-btn {
             width: 100%;
-            height: 8px;
-            background: #1A1A1A;
-            border-radius: 4px;
-            overflow: hidden;
-            margin-bottom: 8px;
+            padding: 14px 24px;
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Segoe UI', sans-serif;
+            font-size: 16px;
+            font-weight: 600;
+            background: #FF3B3B;
+            color: #FFFFFF;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            letter-spacing: -0.2px;
         }
 
-        .conversion-fill {
-            height: 100%;
-            background: linear-gradient(90deg, #C9A961 0%, #E5C78A 100%);
-            transition: width 1s ease;
+        .health-action-btn:hover {
+            background: #FF5555;
+            transform: scale(1.02);
         }
 
-        .conversion-fill.dud {
-            background: linear-gradient(90deg, #FF3B3B 0%, #FF6B6B 100%);
+        .health-action-btn:active {
+            transform: scale(0.98);
         }
 
-        .conversion-label {
-            font-family: 'Courier New', monospace;
-            font-size: 11px;
-            color: #888;
-            letter-spacing: 0.5px;
+        .health-action-btn.warning {
+            background: #FFB340;
+            color: #000000;
         }
 
-        .sample-timeline-mini {
-            display: flex;
-            gap: 8px;
-            align-items: flex-end;
-            height: 60px;
+        .health-action-btn.warning:hover {
+            background: #FFC870;
         }
 
-        .mini-bar {
-            flex: 1;
-            background: linear-gradient(180deg, #C9A961 0%, #8A733A 100%);
-            border-radius: 2px;
-            transition: height 0.8s ease;
+        .health-action-btn.healthy {
+            background: #4CAF50;
+            color: #FFFFFF;
         }
 
-        .sample-warning {
-            padding: 12px;
-            background: rgba(255, 59, 59, 0.1);
-            border: 1px solid rgba(255, 59, 59, 0.3);
-            border-radius: 6px;
-            text-align: center;
-            font-family: 'Outfit', sans-serif;
-            font-size: 12px;
-            color: #FF6B6B;
-            margin-top: 16px;
+        .health-action-btn.healthy:hover {
+            background: #66BB6A;
         }
 
-        /* PRODUCT GRAVEYARD */
-        .graveyard-list {
+        .health-action-btn.gold {
+            background: #C9A961;
+            color: #000000;
+        }
+
+        .health-action-btn.gold:hover {
+            background: #E5C78A;
+        }
+
+        .health-action-btn.dud {
+            background: #E5E5EA;
+            color: #8E8E93;
+        }
+
+        .health-action-btn.dud:hover {
+            background: #D1D1D6;
+        }
+
+        /* MINIMAL GRAVEYARD */
+        .graveyard-minimal {
             margin-top: 20px;
         }
 
-        .graveyard-item {
+        .graveyard-minimal-item {
             display: flex;
-            gap: 20px;
+            align-items: center;
+            gap: 16px;
             padding: 20px;
-            margin-bottom: 16px;
-            background: linear-gradient(145deg, #0A0A0A 0%, #151515 100%);
-            border: 1px solid #222;
-            border-left: 4px solid #444;
-            border-radius: 8px;
-            transition: all 0.3s ease;
+            margin-bottom: 12px;
+            background: #FFFFFF;
+            border-radius: 12px;
+            transition: all 0.2s ease;
         }
 
-        .graveyard-item:hover {
-            background: #111;
-            border-left-color: #666;
+        .graveyard-minimal-item:hover {
+            background: #F5F5F5;
+            transform: translateX(4px);
         }
 
-        .graveyard-icon {
-            font-size: 32px;
-            opacity: 0.6;
+        .graveyard-minimal-icon {
+            font-size: 28px;
+            opacity: 0.5;
         }
 
-        .graveyard-content {
+        .graveyard-minimal-content {
             flex: 1;
         }
 
-        .graveyard-product {
-            font-family: 'Outfit', sans-serif;
-            font-size: 18px;
-            font-weight: 700;
-            color: #AAA;
-            margin-bottom: 8px;
-            letter-spacing: 0.5px;
+        .graveyard-minimal-name {
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Segoe UI', sans-serif;
+            font-size: 16px;
+            font-weight: 600;
+            color: #000000;
+            margin-bottom: 4px;
         }
 
-        .graveyard-reason {
-            font-family: 'Outfit', sans-serif;
+        .graveyard-minimal-reason {
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Segoe UI', sans-serif;
             font-size: 14px;
-            color: #666;
-            margin-bottom: 8px;
+            color: #8E8E93;
         }
 
-        .graveyard-stats {
-            display: flex;
-            gap: 12px;
-            align-items: center;
-            font-family: 'Courier New', monospace;
-            font-size: 11px;
-            color: #555;
+        .graveyard-minimal-loss {
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', sans-serif;
+            font-size: 18px;
+            font-weight: 600;
+            color: #FF3B3B;
+            letter-spacing: -0.3px;
         }
 
         /* RESPONSIVE */
@@ -3631,38 +3387,38 @@
                 font-size: 32px;
             }
 
-            .predictive-grid {
+            .apple-health-grid {
                 grid-template-columns: 1fr;
                 gap: 20px;
             }
 
-            .predictive-image-container {
-                height: 200px;
+            .health-card-image {
+                width: 100px;
+                height: 100px;
+                border-radius: 50px;
             }
 
-            .predictive-product-name {
+            .health-ring-container {
+                width: 180px;
+                height: 180px;
+            }
+
+            .health-ring-number {
+                font-size: 48px;
+            }
+
+            .health-product-name {
                 font-size: 20px;
             }
 
-            .countdown-number {
-                font-size: 36px;
+            .graveyard-minimal-item {
+                flex-direction: column;
+                align-items: flex-start;
+                text-align: left;
             }
 
-            .predictive-stats {
-                grid-template-columns: 1fr;
-                gap: 12px;
-            }
-
-            .impact-value {
-                font-size: 36px;
-            }
-
-            .sample-champions-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .sample-roi-big {
-                font-size: 48px;
+            .graveyard-minimal-loss {
+                align-self: flex-start;
             }
 
             .stockout-revenue {
@@ -4017,41 +3773,22 @@
 <body>
     <!-- Welcome Screen -->
     <div class="welcome-screen" id="welcomeScreen">
-        <video id="welcomeVideo" autoplay loop muted playsinline webkit-playsinline preload="auto" style="position: absolute; top: -20%; left: 0; width: 100%; height: 120%; object-fit: cover; opacity: 0.4; filter: blur(2px); z-index: 0;">
-            <source src="welcome0.mov" type="video/quicktime">
-            <source src="welcome0.mov" type="video/mp4">
-        </video>
+        <!-- Particle Background -->
+        <canvas id="particleCanvas"></canvas>
         
-        <div class="stats-ticker">
-            <div class="ticker-content">
-                <span>The AI layer NY dispensaries need</span>
-                <span class="ticker-dot">•</span>
-                <span>100% METRC Compliant</span>
-                <span class="ticker-dot">•</span>
-                <span>10x faster receiving</span>
-                <span class="ticker-dot">•</span>
-                <span>Zero guesswork</span>
-                <span class="ticker-dot">•</span>
-                <span>The AI layer NY dispensaries need</span>
-                <span class="ticker-dot">•</span>
-                <span>100% METRC Compliant</span>
-                <span class="ticker-dot">•</span>
-                <span>10x faster receiving</span>
-                <span class="ticker-dot">•</span>
-                <span>Zero guesswork</span>
+        <!-- Animated Orb -->
+        <div class="trakie-orb" id="trakieOrb"></div>
+        
+        <!-- Content (appears after orb animation) -->
+        <div class="welcome-content" id="welcomeContent">
+            <h1 class="trakie-wordmark">trakie.ai</h1>
+            <p class="trakie-tagline">Automate Receiving. Predict Demand.</p>
+            
+            <div class="login-box">
+                <input type="password" class="password-input" id="passwordInput" placeholder="Enter Password" autocomplete="off">
+                <button class="login-btn" onclick="attemptLogin()">Access Platform</button>
+                <div class="error" id="errorMsg"></div>
             </div>
-        </div>
-        
-        <div class="gradient-accent"></div>
-        
-        <h1 class="title">Automate Receiving. Predict Demand. Accelerate Sales.</h1>
-        
-        <p class="welcome-subtitle">The future of cannabis retail operations.<br>Purpose-built for dispensaries at scale.</p>
-        
-        <div class="login-box">
-            <input type="password" class="password-input" id="passwordInput" placeholder="Enter Password" autocomplete="off">
-            <button class="login-btn" onclick="attemptLogin()">Access Platform</button>
-            <div class="error" id="errorMsg"></div>
         </div>
     </div>
 
@@ -4353,210 +4090,97 @@
                 <!-- CRITICAL: RESTOCKS WITH PHOTOS -->
                 <div class="sony-section">
                     <div class="sony-section-header">
-                        <div class="sony-section-label">🔴 CRITICAL RESTOCKS</div>
+                        <div class="sony-section-label">CRITICAL RESTOCKS</div>
                         <div class="sony-section-count">3 PRODUCTS</div>
                     </div>
                     
-                    <div class="predictive-grid">
-                        <!-- Product 1: Blue Dream -->
-                        <div class="predictive-card critical">
-                            <div class="predictive-image-container">
-                                <img src="flower8.avif" alt="Blue Dream" class="predictive-product-image">
-                                <div class="predictive-urgency-badge">URGENT</div>
+                    <div class="apple-health-grid">
+                    <div class="apple-health-grid">
+                        <!-- Product 1: Blue Dream - CRITICAL -->
+                        <div class="health-card">
+                            <div class="health-card-image">
+                                <img src="flower8.avif" alt="Blue Dream" class="health-product-img">
                             </div>
-                            <div class="predictive-content">
-                                <div class="predictive-header">
-                                    <h3 class="predictive-product-name">Blue Dream</h3>
-                                    <div class="predictive-countdown">
-                                        <div class="countdown-number">3</div>
-                                        <div class="countdown-label">DAYS</div>
-                                    </div>
+                            
+                            <h3 class="health-product-name">Blue Dream</h3>
+                            
+                            <div class="health-ring-container">
+                                <svg class="health-ring" viewBox="0 0 200 200">
+                                    <!-- Background ring -->
+                                    <circle cx="100" cy="100" r="85" fill="none" stroke="#2A2A2A" stroke-width="12"/>
+                                    <!-- Progress ring (critical - red) -->
+                                    <circle cx="100" cy="100" r="85" fill="none" stroke="#FF3B3B" stroke-width="12" 
+                                            stroke-dasharray="534" stroke-dashoffset="454" 
+                                            stroke-linecap="round" transform="rotate(-90 100 100)"
+                                            class="health-ring-progress"/>
+                                </svg>
+                                <div class="health-ring-center">
+                                    <div class="health-ring-number">3</div>
+                                    <div class="health-ring-label">DAYS</div>
                                 </div>
-                                
-                                <div class="predictive-timeline">
-                                    <div class="timeline-bar">
-                                        <div class="timeline-fill critical" style="width: 15%"></div>
-                                    </div>
-                                    <div class="timeline-labels">
-                                        <span class="timeline-today">TODAY</span>
-                                        <span class="timeline-stockout">DEC 5 - STOCKOUT</span>
-                                    </div>
-                                </div>
-                                
-                                <div class="predictive-stats">
-                                    <div class="stat-item">
-                                        <span class="stat-label">VELOCITY</span>
-                                        <span class="stat-value">8.4/day</span>
-                                    </div>
-                                    <div class="stat-item">
-                                        <span class="stat-label">REMAINING</span>
-                                        <span class="stat-value">12 units</span>
-                                    </div>
-                                    <div class="stat-item">
-                                        <span class="stat-label">LEAD TIME</span>
-                                        <span class="stat-value">2 days</span>
-                                    </div>
-                                </div>
-                                
-                                <div class="revenue-impact">
-                                    <div class="impact-big">
-                                        <div class="impact-label">MONTHLY REVENUE AT RISK</div>
-                                        <div class="impact-value">$10,080</div>
-                                    </div>
-                                    <div class="impact-breakdown">
-                                        <span>$336/day</span>
-                                        <span>•</span>
-                                        <span>$2,352/week</span>
-                                    </div>
-                                </div>
-                                
-                                <div class="predictive-order-info">
-                                    <div class="order-recommendation">
-                                        <span class="order-icon">📦</span>
-                                        <span class="order-text">Order 50 units @ $35 = $1,750</span>
-                                    </div>
-                                    <div class="order-deadline">
-                                        <span class="deadline-icon">🎯</span>
-                                        <span class="deadline-text">ORDER BY: December 3, 2PM</span>
-                                    </div>
-                                </div>
-                                
-                                <button class="predictive-action-btn critical">ORDER NOW</button>
                             </div>
+                            
+                            <div class="health-context">$10,080 at risk</div>
+                            
+                            <button class="health-action-btn">Order Now</button>
                         </div>
 
-                        <!-- Product 2: Sour Diesel -->
-                        <div class="predictive-card warning">
-                            <div class="predictive-image-container">
-                                <img src="flower8.avif" alt="Sour Diesel" class="predictive-product-image">
-                                <div class="predictive-urgency-badge warning">WARNING</div>
+                        <!-- Product 2: Sour Diesel - WARNING -->
+                        <div class="health-card">
+                            <div class="health-card-image">
+                                <img src="flower8.avif" alt="Sour Diesel" class="health-product-img">
                             </div>
-                            <div class="predictive-content">
-                                <div class="predictive-header">
-                                    <h3 class="predictive-product-name">Sour Diesel</h3>
-                                    <div class="predictive-countdown warning">
-                                        <div class="countdown-number">5</div>
-                                        <div class="countdown-label">DAYS</div>
-                                    </div>
+                            
+                            <h3 class="health-product-name">Sour Diesel</h3>
+                            
+                            <div class="health-ring-container">
+                                <svg class="health-ring" viewBox="0 0 200 200">
+                                    <!-- Background ring -->
+                                    <circle cx="100" cy="100" r="85" fill="none" stroke="#2A2A2A" stroke-width="12"/>
+                                    <!-- Progress ring (warning - orange) -->
+                                    <circle cx="100" cy="100" r="85" fill="none" stroke="#FFB340" stroke-width="12" 
+                                            stroke-dasharray="534" stroke-dashoffset="347" 
+                                            stroke-linecap="round" transform="rotate(-90 100 100)"
+                                            class="health-ring-progress"/>
+                                </svg>
+                                <div class="health-ring-center">
+                                    <div class="health-ring-number">5</div>
+                                    <div class="health-ring-label">DAYS</div>
                                 </div>
-                                
-                                <div class="predictive-timeline">
-                                    <div class="timeline-bar">
-                                        <div class="timeline-fill warning" style="width: 35%"></div>
-                                    </div>
-                                    <div class="timeline-labels">
-                                        <span class="timeline-today">TODAY</span>
-                                        <span class="timeline-stockout">DEC 7 - STOCKOUT</span>
-                                    </div>
-                                </div>
-                                
-                                <div class="predictive-stats">
-                                    <div class="stat-item">
-                                        <span class="stat-label">VELOCITY</span>
-                                        <span class="stat-value">6.2/day</span>
-                                    </div>
-                                    <div class="stat-item">
-                                        <span class="stat-label">REMAINING</span>
-                                        <span class="stat-value">31 units</span>
-                                    </div>
-                                    <div class="stat-item">
-                                        <span class="stat-label">LEAD TIME</span>
-                                        <span class="stat-value">2 days</span>
-                                    </div>
-                                </div>
-                                
-                                <div class="revenue-impact">
-                                    <div class="impact-big">
-                                        <div class="impact-label">MONTHLY REVENUE AT RISK</div>
-                                        <div class="impact-value">$7,140</div>
-                                    </div>
-                                    <div class="impact-breakdown">
-                                        <span>$238/day</span>
-                                        <span>•</span>
-                                        <span>$1,666/week</span>
-                                    </div>
-                                </div>
-                                
-                                <div class="predictive-order-info">
-                                    <div class="order-recommendation">
-                                        <span class="order-icon">📦</span>
-                                        <span class="order-text">Order 40 units @ $32 = $1,280</span>
-                                    </div>
-                                    <div class="order-deadline">
-                                        <span class="deadline-icon">🎯</span>
-                                        <span class="deadline-text">ORDER BY: December 5, 5PM</span>
-                                    </div>
-                                </div>
-                                
-                                <button class="predictive-action-btn warning">ORDER NOW</button>
                             </div>
+                            
+                            <div class="health-context">$7,140 at risk</div>
+                            
+                            <button class="health-action-btn warning">Order Now</button>
                         </div>
 
-                        <!-- Product 3: Lighters -->
-                        <div class="predictive-card healthy">
-                            <div class="predictive-image-container">
-                                <img src="vape3.avif" alt="Lighters" class="predictive-product-image">
-                                <div class="predictive-urgency-badge healthy">PLAN AHEAD</div>
+                        <!-- Product 3: Lighters - HEALTHY -->
+                        <div class="health-card">
+                            <div class="health-card-image">
+                                <img src="vape3.avif" alt="Lighters" class="health-product-img">
                             </div>
-                            <div class="predictive-content">
-                                <div class="predictive-header">
-                                    <h3 class="predictive-product-name">Lighters</h3>
-                                    <div class="predictive-countdown healthy">
-                                        <div class="countdown-number">21</div>
-                                        <div class="countdown-label">DAYS</div>
-                                    </div>
+                            
+                            <h3 class="health-product-name">Lighters</h3>
+                            
+                            <div class="health-ring-container">
+                                <svg class="health-ring" viewBox="0 0 200 200">
+                                    <!-- Background ring -->
+                                    <circle cx="100" cy="100" r="85" fill="none" stroke="#2A2A2A" stroke-width="12"/>
+                                    <!-- Progress ring (healthy - green) -->
+                                    <circle cx="100" cy="100" r="85" fill="none" stroke="#4CAF50" stroke-width="12" 
+                                            stroke-dasharray="534" stroke-dashoffset="133" 
+                                            stroke-linecap="round" transform="rotate(-90 100 100)"
+                                            class="health-ring-progress"/>
+                                </svg>
+                                <div class="health-ring-center">
+                                    <div class="health-ring-number">21</div>
+                                    <div class="health-ring-label">DAYS</div>
                                 </div>
-                                
-                                <div class="predictive-timeline">
-                                    <div class="timeline-bar">
-                                        <div class="timeline-fill healthy" style="width: 75%"></div>
-                                    </div>
-                                    <div class="timeline-labels">
-                                        <span class="timeline-today">TODAY</span>
-                                        <span class="timeline-stockout">DEC 23 - STOCKOUT</span>
-                                    </div>
-                                </div>
-                                
-                                <div class="predictive-stats">
-                                    <div class="stat-item">
-                                        <span class="stat-label">VELOCITY</span>
-                                        <span class="stat-value">8/day</span>
-                                    </div>
-                                    <div class="stat-item">
-                                        <span class="stat-label">REMAINING</span>
-                                        <span class="stat-value">168 units</span>
-                                    </div>
-                                    <div class="stat-item">
-                                        <span class="stat-label">LEAD TIME</span>
-                                        <span class="stat-value">1 day</span>
-                                    </div>
-                                </div>
-                                
-                                <div class="revenue-impact">
-                                    <div class="impact-big">
-                                        <div class="impact-label">MONTHLY REVENUE AT RISK</div>
-                                        <div class="impact-value">$600</div>
-                                    </div>
-                                    <div class="impact-breakdown">
-                                        <span>$20/day</span>
-                                        <span>•</span>
-                                        <span>$140/week</span>
-                                    </div>
-                                </div>
-                                
-                                <div class="predictive-order-info">
-                                    <div class="order-recommendation">
-                                        <span class="order-icon">📦</span>
-                                        <span class="order-text">Order 500 units @ $0.75 = $375</span>
-                                    </div>
-                                    <div class="order-deadline">
-                                        <span class="deadline-icon">🎯</span>
-                                        <span class="deadline-text">ORDER BY: December 22, 12PM</span>
-                                    </div>
-                                </div>
-                                
-                                <button class="predictive-action-btn healthy">SCHEDULE ORDER</button>
                             </div>
+                            
+                            <div class="health-context">$600 at risk</div>
+                            
+                            <button class="health-action-btn healthy">Schedule</button>
                         </div>
                     </div>
                 </div>
@@ -4564,109 +4188,81 @@
                 <!-- SAMPLE ATTRIBUTION -->
                 <div class="sony-section">
                     <div class="sony-section-header">
-                        <div class="sony-section-label">🏆 SAMPLE CHAMPIONS</div>
+                        <div class="sony-section-label">SAMPLE CHAMPIONS</div>
                         <div class="sony-section-count">ROI TRACKING</div>
                     </div>
                     
-                    <div class="sample-champions-grid">
+                    <div class="apple-health-grid">
                         <!-- Heavy Hitters -->
-                        <div class="sample-card champion">
-                            <div class="sample-rank">🥇 #1</div>
-                            <h3 class="sample-brand">Heavy Hitters</h3>
-                            <div class="sample-roi-big">$84</div>
-                            <div class="sample-roi-label">ROI per sample</div>
+                        <div class="health-card">
+                            <div class="health-rank">🥇</div>
+                            <h3 class="health-product-name">Heavy Hitters</h3>
                             
-                            <div class="sample-stats-grid">
-                                <div class="sample-stat">
-                                    <div class="sample-stat-value">50</div>
-                                    <div class="sample-stat-label">Samples Given</div>
-                                </div>
-                                <div class="sample-stat">
-                                    <div class="sample-stat-value">$4,200</div>
-                                    <div class="sample-stat-label">Sales Generated</div>
+                            <div class="health-ring-container">
+                                <svg class="health-ring" viewBox="0 0 200 200">
+                                    <circle cx="100" cy="100" r="85" fill="none" stroke="#2A2A2A" stroke-width="12"/>
+                                    <circle cx="100" cy="100" r="85" fill="none" stroke="#C9A961" stroke-width="12" 
+                                            stroke-dasharray="534" stroke-dashoffset="69" 
+                                            stroke-linecap="round" transform="rotate(-90 100 100)"
+                                            class="health-ring-progress"/>
+                                </svg>
+                                <div class="health-ring-center">
+                                    <div class="health-ring-number">$84</div>
+                                    <div class="health-ring-label">ROI</div>
                                 </div>
                             </div>
                             
-                            <div class="sample-conversion">
-                                <div class="conversion-bar">
-                                    <div class="conversion-fill" style="width: 87%"></div>
-                                </div>
-                                <div class="conversion-label">87% uptake rate</div>
-                            </div>
+                            <div class="health-context">87% conversion rate</div>
                             
-                            <div class="sample-timeline-mini">
-                                <div class="mini-bar" style="height: 40%"></div>
-                                <div class="mini-bar" style="height: 65%"></div>
-                                <div class="mini-bar" style="height: 85%"></div>
-                                <div class="mini-bar" style="height: 100%"></div>
-                                <div class="mini-bar" style="height: 92%"></div>
-                                <div class="mini-bar" style="height: 87%"></div>
-                            </div>
+                            <button class="health-action-btn gold">View Details</button>
                         </div>
 
                         <!-- Jaunty -->
-                        <div class="sample-card">
-                            <div class="sample-rank">🥈 #2</div>
-                            <h3 class="sample-brand">Jaunty</h3>
-                            <div class="sample-roi-big">$72</div>
-                            <div class="sample-roi-label">ROI per sample</div>
+                        <div class="health-card">
+                            <div class="health-rank">🥈</div>
+                            <h3 class="health-product-name">Jaunty</h3>
                             
-                            <div class="sample-stats-grid">
-                                <div class="sample-stat">
-                                    <div class="sample-stat-value">38</div>
-                                    <div class="sample-stat-label">Samples Given</div>
-                                </div>
-                                <div class="sample-stat">
-                                    <div class="sample-stat-value">$2,736</div>
-                                    <div class="sample-stat-label">Sales Generated</div>
+                            <div class="health-ring-container">
+                                <svg class="health-ring" viewBox="0 0 200 200">
+                                    <circle cx="100" cy="100" r="85" fill="none" stroke="#2A2A2A" stroke-width="12"/>
+                                    <circle cx="100" cy="100" r="85" fill="none" stroke="#C9A961" stroke-width="12" 
+                                            stroke-dasharray="534" stroke-dashoffset="154" 
+                                            stroke-linecap="round" transform="rotate(-90 100 100)"
+                                            class="health-ring-progress"/>
+                                </svg>
+                                <div class="health-ring-center">
+                                    <div class="health-ring-number">$72</div>
+                                    <div class="health-ring-label">ROI</div>
                                 </div>
                             </div>
                             
-                            <div class="sample-conversion">
-                                <div class="conversion-bar">
-                                    <div class="conversion-fill" style="width: 71%"></div>
-                                </div>
-                                <div class="conversion-label">71% uptake rate</div>
-                            </div>
+                            <div class="health-context">71% conversion rate</div>
                             
-                            <div class="sample-timeline-mini">
-                                <div class="mini-bar" style="height: 35%"></div>
-                                <div class="mini-bar" style="height: 50%"></div>
-                                <div class="mini-bar" style="height: 68%"></div>
-                                <div class="mini-bar" style="height: 82%"></div>
-                                <div class="mini-bar" style="height: 71%"></div>
-                                <div class="mini-bar" style="height: 76%"></div>
-                            </div>
+                            <button class="health-action-btn gold">View Details</button>
                         </div>
 
                         <!-- Generic Brand (DUD) -->
-                        <div class="sample-card dud">
-                            <div class="sample-rank">📉 #8</div>
-                            <h3 class="sample-brand">Generic Brand</h3>
-                            <div class="sample-roi-big dud">$6</div>
-                            <div class="sample-roi-label">ROI per sample</div>
+                        <div class="health-card dud">
+                            <div class="health-rank">📉</div>
+                            <h3 class="health-product-name">Generic Brand</h3>
                             
-                            <div class="sample-stats-grid">
-                                <div class="sample-stat">
-                                    <div class="sample-stat-value">30</div>
-                                    <div class="sample-stat-label">Samples Given</div>
-                                </div>
-                                <div class="sample-stat">
-                                    <div class="sample-stat-value">$180</div>
-                                    <div class="sample-stat-label">Sales Generated</div>
+                            <div class="health-ring-container">
+                                <svg class="health-ring" viewBox="0 0 200 200">
+                                    <circle cx="100" cy="100" r="85" fill="none" stroke="#2A2A2A" stroke-width="12"/>
+                                    <circle cx="100" cy="100" r="85" fill="none" stroke="#FF3B3B" stroke-width="12" 
+                                            stroke-dasharray="534" stroke-dashoffset="470" 
+                                            stroke-linecap="round" transform="rotate(-90 100 100)"
+                                            class="health-ring-progress"/>
+                                </svg>
+                                <div class="health-ring-center">
+                                    <div class="health-ring-number">$6</div>
+                                    <div class="health-ring-label">ROI</div>
                                 </div>
                             </div>
                             
-                            <div class="sample-conversion">
-                                <div class="conversion-bar">
-                                    <div class="conversion-fill dud" style="width: 12%"></div>
-                                </div>
-                                <div class="conversion-label">12% uptake rate</div>
-                            </div>
+                            <div class="health-context">Stop wasting samples</div>
                             
-                            <div class="sample-warning">
-                                ⚠️ Stop wasting samples here
-                            </div>
+                            <button class="health-action-btn dud">Review</button>
                         </div>
                     </div>
                 </div>
@@ -4674,61 +4270,45 @@
                 <!-- PRODUCT GRAVEYARD -->
                 <div class="sony-section">
                     <div class="sony-section-header">
-                        <div class="sony-section-label">⚫ PRODUCT GRAVEYARD</div>
+                        <div class="sony-section-label">PRODUCT GRAVEYARD</div>
                         <div class="sony-section-count">LEARN FROM FAILURES</div>
                     </div>
                     
-                    <div class="graveyard-list">
-                        <div class="graveyard-item">
-                            <div class="graveyard-icon">💀</div>
-                            <div class="graveyard-content">
-                                <h4 class="graveyard-product">Cookie Crumbles</h4>
-                                <div class="graveyard-reason">Vendor bankrupt • Last sold: Sept 2025</div>
-                                <div class="graveyard-stats">
-                                    <span>$2,400 lost revenue</span>
-                                    <span>•</span>
-                                    <span>15 units wrote off</span>
-                                </div>
+                    <div class="graveyard-minimal">
+                        <div class="graveyard-minimal-item">
+                            <div class="graveyard-minimal-icon">💀</div>
+                            <div class="graveyard-minimal-content">
+                                <div class="graveyard-minimal-name">Cookie Crumbles</div>
+                                <div class="graveyard-minimal-reason">Vendor bankrupt</div>
                             </div>
+                            <div class="graveyard-minimal-loss">-$2,400</div>
                         </div>
 
-                        <div class="graveyard-item">
-                            <div class="graveyard-icon">💀</div>
-                            <div class="graveyard-content">
-                                <h4 class="graveyard-product">Mango Haze</h4>
-                                <div class="graveyard-reason">Never sold • Aged 6 months</div>
-                                <div class="graveyard-stats">
-                                    <span>$1,800 cash tied up</span>
-                                    <span>•</span>
-                                    <span>Bad purchasing decision</span>
-                                </div>
+                        <div class="graveyard-minimal-item">
+                            <div class="graveyard-minimal-icon">💀</div>
+                            <div class="graveyard-minimal-content">
+                                <div class="graveyard-minimal-name">Mango Haze</div>
+                                <div class="graveyard-minimal-reason">Never sold, aged 6 months</div>
                             </div>
+                            <div class="graveyard-minimal-loss">-$1,800</div>
                         </div>
 
-                        <div class="graveyard-item">
-                            <div class="graveyard-icon">💀</div>
-                            <div class="graveyard-content">
-                                <h4 class="graveyard-product">CBD Tincture</h4>
-                                <div class="graveyard-reason">Margin too low (8%)</div>
-                                <div class="graveyard-stats">
-                                    <span>$600/mo revenue but only $48 profit</span>
-                                    <span>•</span>
-                                    <span>Not worth shelf space</span>
-                                </div>
+                        <div class="graveyard-minimal-item">
+                            <div class="graveyard-minimal-icon">💀</div>
+                            <div class="graveyard-minimal-content">
+                                <div class="graveyard-minimal-name">CBD Tincture</div>
+                                <div class="graveyard-minimal-reason">Margin too low</div>
                             </div>
+                            <div class="graveyard-minimal-loss">-$48</div>
                         </div>
 
-                        <div class="graveyard-item">
-                            <div class="graveyard-icon">💀</div>
-                            <div class="graveyard-content">
-                                <h4 class="graveyard-product">Mystery Brand Vape</h4>
-                                <div class="graveyard-reason">Quality complaints • 23% return rate</div>
-                                <div class="graveyard-stats">
-                                    <span>Hurt store reputation</span>
-                                    <span>•</span>
-                                    <span>Customer trust damaged</span>
-                                </div>
+                        <div class="graveyard-minimal-item">
+                            <div class="graveyard-minimal-icon">💀</div>
+                            <div class="graveyard-minimal-content">
+                                <div class="graveyard-minimal-name">Mystery Brand Vape</div>
+                                <div class="graveyard-minimal-reason">Quality complaints</div>
                             </div>
+                            <div class="graveyard-minimal-loss">Damaged reputation</div>
                         </div>
                     </div>
                 </div>
@@ -4978,6 +4558,69 @@
     </div>
 
     <script>
+        // PARTICLE ANIMATION FOR WELCOME SCREEN
+        (function() {
+            const canvas = document.getElementById('particleCanvas');
+            if (!canvas) return;
+            
+            const ctx = canvas.getContext('2d');
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+
+            const particles = [];
+            const particleCount = 50;
+
+            class Particle {
+                constructor() {
+                    this.x = Math.random() * canvas.width;
+                    this.y = Math.random() * canvas.height;
+                    this.size = Math.random() * 2 + 1;
+                    this.speedX = Math.random() * 0.5 - 0.25;
+                    this.speedY = Math.random() * 0.5 - 0.25;
+                    this.opacity = Math.random() * 0.5 + 0.2;
+                }
+
+                update() {
+                    this.x += this.speedX;
+                    this.y += this.speedY;
+
+                    if (this.x > canvas.width) this.x = 0;
+                    if (this.x < 0) this.x = canvas.width;
+                    if (this.y > canvas.height) this.y = 0;
+                    if (this.y < 0) this.y = canvas.height;
+                }
+
+                draw() {
+                    ctx.fillStyle = `rgba(201, 169, 97, ${this.opacity})`;
+                    ctx.beginPath();
+                    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                    ctx.fill();
+                }
+            }
+
+            for (let i = 0; i < particleCount; i++) {
+                particles.push(new Particle());
+            }
+
+            function animate() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                
+                particles.forEach(particle => {
+                    particle.update();
+                    particle.draw();
+                });
+
+                requestAnimationFrame(animate);
+            }
+
+            animate();
+
+            window.addEventListener('resize', () => {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+            });
+        })();
+
         const categories = [
             { name: 'Flower', icon: '🌿', video: 'flower.mov' },
             { name: 'Vaporizers', icon: '💨', video: 'vape.MOV' },
