@@ -223,11 +223,76 @@
 
         .vogue-hero-tagline {
             font-family: 'Outfit', sans-serif;
-            font-size: 14px;
-            letter-spacing: 4px;
-            color: rgba(201, 169, 97, 0.8);
+            font-size: 20px;
+            letter-spacing: 3px;
+            color: rgba(201, 169, 97, 0.9);
             text-transform: uppercase;
             margin-bottom: 60px;
+            font-weight: 500;
+        }
+
+        /* Page Sections */
+        .page-section {
+            display: none;
+            min-height: 100vh;
+        }
+
+        .page-section.active {
+            display: block;
+        }
+
+        /* Demo Preview at Top */
+        .demo-preview-top {
+            padding: 80px 60px;
+            background: linear-gradient(180deg, rgba(201, 169, 97, 0.05) 0%, #0A150A 100%);
+            text-align: center;
+            border-top: 2px solid rgba(201, 169, 97, 0.2);
+            border-bottom: 2px solid rgba(201, 169, 97, 0.2);
+        }
+
+        .demo-preview-title {
+            font-family: 'Bodoni Moda', serif;
+            font-size: 56px;
+            font-weight: 300;
+            margin-bottom: 20px;
+            color: #ffffff;
+        }
+
+        .demo-preview-subtitle {
+            font-size: 28px;
+            color: #C9A961;
+            margin-bottom: 20px;
+            font-weight: 500;
+        }
+
+        .demo-preview-description {
+            font-size: 20px;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 40px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .demo-preview-button {
+            display: inline-block;
+            padding: 20px 60px;
+            background: linear-gradient(135deg, #C9A961 0%, #8B7355 100%);
+            color: #0A0A0A;
+            text-decoration: none;
+            font-size: 20px;
+            font-weight: 600;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+            letter-spacing: 1px;
+            margin-top: 20px;
+            cursor: pointer;
+            border: none;
+        }
+
+        .demo-preview-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(201, 169, 97, 0.4);
         }
 
         /* Value Section */
@@ -519,143 +584,293 @@
         <!-- Navigation -->
         <nav class="nav">
             <div class="nav-content">
-                <div class="nav-logo" onclick="scrollToTop()">
+                <div class="nav-logo" onclick="showSection('home')">
                     <img src="trakie-logo-dark.png" alt="Trakie.ai" class="nav-logo-img">
                 </div>
                 <div class="nav-links">
-                    <a onclick="scrollToSection('home')">Home</a>
-                    <a onclick="scrollToSection('value')">Value</a>
-                    <a onclick="scrollToSection('demo')">Demo</a>
-                    <a onclick="scrollToSection('features')">Features</a>
-                    <a onclick="scrollToSection('pricing')">Pricing</a>
-                    <a onclick="scrollToSection('contact')">Contact</a>
+                    <a onclick="showSection('home')">Home</a>
+                    <a onclick="showSection('receive')">Receive Demo</a>
+                    <a onclick="showSection('bubbles')">Intelligent Inventory</a>
+                    <a onclick="showSection('data')">Data</a>
+                    <a onclick="showSection('pricing')">Pricing</a>
+                    <a onclick="showSection('contact')">Contact</a>
                 </div>
-                <a href="#" onclick="scrollToSection('demo')" class="nav-cta">Get Started</a>
+                <a href="#" onclick="showSection('receive')" class="nav-cta">Get Started</a>
             </div>
         </nav>
 
-        <!-- Hero Section -->
-        <section class="vogue-hero" id="home">
-            <h1 class="vogue-hero-title">CANNABIS RETAIL</h1>
-            <h2 class="vogue-hero-subtitle">INTELLIGENCE</h2>
-            <p class="vogue-hero-tagline">
-                INSTANT INVENTORY RECOGNITION • PREDICTIVE RESTOCKING • AUTOMATED COMPLIANCE
-            </p>
-        </section>
+        <!-- HOME SECTION -->
+        <div class="page-section active" id="homeSection">
+            <!-- Hero Section -->
+            <section class="vogue-hero">
+                <h1 class="vogue-hero-title">CANNABIS RETAIL</h1>
+                <h2 class="vogue-hero-subtitle">INTELLIGENCE</h2>
+                <p class="vogue-hero-tagline">
+                    INSTANT INVENTORY MAGIC ✨ PREDICTIVE RESTOCKING 📊 COMPLIANCE ON AUTOPILOT 🛡️
+                </p>
+            </section>
 
-        <!-- Value Section -->
-        <section class="value-section" id="value">
-            <div class="value-header">
-                <h2 class="value-title">Built for Dispensary Success</h2>
-                <p class="value-subtitle">Stop wasting time on manual inventory. Start growing your business.</p>
-            </div>
-            
-            <div class="value-grid">
-                <!-- Save Time -->
-                <div class="value-card">
-                    <div class="value-icon">⏱️</div>
-                    <div class="value-big-number">7 Hours</div>
-                    <h3 class="value-card-title">Saved Daily</h3>
-                    <ul class="value-card-list">
-                        <li>45-second product processing</li>
-                        <li>Instant QR & label scanning</li>
-                        <li>Zero manual data entry</li>
-                        <li>Bulk receiving in minutes</li>
-                    </ul>
-                </div>
-                
-                <!-- Save Money -->
-                <div class="value-card">
-                    <div class="value-icon">💰</div>
-                    <div class="value-big-number">$3,847</div>
-                    <h3 class="value-card-title">Monthly Savings</h3>
-                    <ul class="value-card-list">
-                        <li>60% reduction in labor costs</li>
-                        <li>Eliminate costly errors</li>
-                        <li>Prevent compliance fines</li>
-                        <li>Optimize inventory levels</li>
-                    </ul>
-                </div>
-                
-                <!-- Make Revenue -->
-                <div class="value-card">
-                    <div class="value-icon">📈</div>
-                    <div class="value-big-number">23%</div>
-                    <h3 class="value-card-title">Revenue Growth</h3>
-                    <ul class="value-card-list">
-                        <li>Never run out of bestsellers</li>
-                        <li>Interactive 3D menus boost sales</li>
-                        <li>Data-driven restock alerts</li>
-                        <li>Increase basket size with AI</li>
-                    </ul>
-                </div>
-            </div>
-        </section>
+            <!-- Demo Preview at Top -->
+            <section class="demo-preview-top">
+                <h2 class="demo-preview-title">See Trakie in Action</h2>
+                <p class="demo-preview-subtitle">Watch us process 5 products in 45 seconds</p>
+                <p class="demo-preview-description">
+                    What takes 15-25 minutes with manual entry, Trakie does in under a minute.
+                </p>
+                <button class="demo-preview-button" onclick="showSection('receive')">🚀 START LIVE DEMO</button>
+            </section>
 
-        <!-- Demo Section -->
-        <section class="demo-section" id="demo">
-            <h2 class="demo-preview-title">See Trakie in Action</h2>
-            <p class="demo-preview-subtitle">Watch us process 5 products in 45 seconds</p>
-            <p class="demo-preview-description">
-                What takes 15-25 minutes with manual entry, Trakie does in under a minute. 
-                Experience the speed that's changing cannabis retail.
-            </p>
-            <a href="#" class="demo-cta" onclick="startDemo()">Start Live Demo</a>
-        </section>
+            <!-- Value Section -->
+            <section class="value-section">
+                <div class="value-header">
+                    <h2 class="value-title">Built for Dispensary Success</h2>
+                    <p class="value-subtitle">Stop wasting time on manual inventory. Start growing your business.</p>
+                </div>
+                
+                <div class="value-grid">
+                    <!-- Save Time -->
+                    <div class="value-card">
+                        <div class="value-icon">⏱️</div>
+                        <div class="value-big-number">4 Hours</div>
+                        <h3 class="value-card-title">Saved Daily</h3>
+                        <ul class="value-card-list">
+                            <li>45-second product processing</li>
+                            <li>Instant QR & label scanning</li>
+                            <li>Zero manual data entry</li>
+                            <li>Bulk receiving in minutes</li>
+                        </ul>
+                    </div>
+                    
+                    <!-- Save Money -->
+                    <div class="value-card">
+                        <div class="value-icon">💰</div>
+                        <div class="value-big-number">$7,700</div>
+                        <h3 class="value-card-title">Monthly Savings</h3>
+                        <ul class="value-card-list">
+                            <li>60% reduction in labor costs</li>
+                            <li>Eliminate costly errors</li>
+                            <li>Prevent compliance fines</li>
+                            <li>Optimize inventory levels</li>
+                        </ul>
+                    </div>
+                    
+                    <!-- Make Revenue -->
+                    <div class="value-card">
+                        <div class="value-icon">📈</div>
+                        <div class="value-big-number">23%</div>
+                        <h3 class="value-card-title">Revenue Growth</h3>
+                        <ul class="value-card-list">
+                            <li>Never run out of bestsellers</li>
+                            <li>Interactive 3D menus boost sales</li>
+                            <li>Data-driven restock alerts</li>
+                            <li>Increase basket size with AI</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
 
-        <!-- Features Section -->
-        <section class="features-section" id="features">
-            <h2 class="features-title">Why Dispensaries Choose Trakie</h2>
-            <div class="features-grid">
-                <div class="feature-item">
-                    <div class="feature-icon-wrapper">📷</div>
-                    <div class="feature-content">
-                        <h3 class="feature-title">Instant Receiving</h3>
-                        <p class="feature-description">
-                            Point your phone at any product and watch Trakie instantly extract 
-                            all information - THC%, batch numbers, expiration dates, and more.
-                        </p>
-                        <span class="feature-metric">7x faster than Dutchie</span>
+            <!-- Features Section -->
+            <section class="features-section">
+                <h2 class="features-title">Why Dispensaries Choose Trakie</h2>
+                <div class="features-grid">
+                    <div class="feature-item">
+                        <div class="feature-icon-wrapper">📷</div>
+                        <div class="feature-content">
+                            <h3 class="feature-title">Instant Receiving</h3>
+                            <p class="feature-description">
+                                Point your phone at any product and watch Trakie instantly extract 
+                                all information - THC%, batch numbers, expiration dates, and more.
+                            </p>
+                            <span class="feature-metric">7x faster than Dutchie</span>
+                        </div>
+                    </div>
+                    
+                    <div class="feature-item">
+                        <div class="feature-icon-wrapper">📊</div>
+                        <div class="feature-content">
+                            <h3 class="feature-title">Predictive Analytics</h3>
+                            <p class="feature-description">
+                                AI predicts sellout times and automatically suggests reorders before 
+                                you run out. Never lose a sale to stockouts again.
+                            </p>
+                            <span class="feature-metric">Prevent $10K+ monthly losses</span>
+                        </div>
+                    </div>
+                    
+                    <div class="feature-item">
+                        <div class="feature-icon-wrapper">🎯</div>
+                        <div class="feature-content">
+                            <h3 class="feature-title">3D Interactive Menus</h3>
+                            <p class="feature-description">
+                                Replace boring text menus with interactive 3D product displays that 
+                                customers love. Watch average basket size increase.
+                            </p>
+                            <span class="feature-metric">32% higher basket value</span>
+                        </div>
+                    </div>
+                    
+                    <div class="feature-item">
+                        <div class="feature-icon-wrapper">🛡️</div>
+                        <div class="feature-content">
+                            <h3 class="feature-title">100% METRC Compliant</h3>
+                            <p class="feature-description">
+                                Automatic compliance reporting built-in. Never worry about 
+                                state audits or regulatory fines again.
+                            </p>
+                            <span class="feature-metric">Zero compliance violations</span>
+                        </div>
                     </div>
                 </div>
-                
-                <div class="feature-item">
-                    <div class="feature-icon-wrapper">📊</div>
-                    <div class="feature-content">
-                        <h3 class="feature-title">Predictive Analytics</h3>
-                        <p class="feature-description">
-                            AI predicts sellout times and automatically suggests reorders before 
-                            you run out. Never lose a sale to stockouts again.
+            </section>
+        </div>
+
+        <!-- RECEIVE DEMO SECTION -->
+        <div class="page-section" id="receiveSection">
+            <div style="padding: 140px 60px; background: linear-gradient(180deg, #0A0A0A 0%, #0D1F0D 100%); min-height: 100vh;">
+                <h1 style="font-family: 'Bodoni Moda', serif; font-size: 80px; text-align: center; margin-bottom: 40px; color: #C9A961;">
+                    INSTANT RECEIVING DEMO
+                </h1>
+                <div style="max-width: 800px; margin: 0 auto; text-align: center;">
+                    <p style="font-size: 24px; color: rgba(255,255,255,0.8); margin-bottom: 40px;">
+                        Watch Trakie process cannabis products 7x faster than any other system
+                    </p>
+                    <div style="background: rgba(0,0,0,0.5); padding: 60px; border-radius: 12px; border: 2px solid rgba(201, 169, 97, 0.3);">
+                        <div style="font-size: 100px; margin-bottom: 30px;">📷</div>
+                        <h2 style="font-size: 32px; margin-bottom: 20px; color: #C9A961;">Demo Ready!</h2>
+                        <p style="font-size: 18px; color: rgba(255,255,255,0.7); margin-bottom: 30px;">
+                            Click below to start scanning products with your camera
                         </p>
-                        <span class="feature-metric">Prevent $10K+ monthly losses</span>
-                    </div>
-                </div>
-                
-                <div class="feature-item">
-                    <div class="feature-icon-wrapper">🎯</div>
-                    <div class="feature-content">
-                        <h3 class="feature-title">3D Interactive Menus</h3>
-                        <p class="feature-description">
-                            Replace boring text menus with interactive 3D product displays that 
-                            customers love. Watch average basket size increase.
-                        </p>
-                        <span class="feature-metric">32% higher basket value</span>
-                    </div>
-                </div>
-                
-                <div class="feature-item">
-                    <div class="feature-icon-wrapper">🛡️</div>
-                    <div class="feature-content">
-                        <h3 class="feature-title">100% METRC Compliant</h3>
-                        <p class="feature-description">
-                            Automatic compliance reporting built-in. Never worry about 
-                            state audits or regulatory fines again.
-                        </p>
-                        <span class="feature-metric">Zero compliance violations</span>
+                        <button onclick="alert('Camera demo would activate here!')" style="padding: 20px 50px; background: linear-gradient(135deg, #C9A961 0%, #8B7355 100%); color: #0A0A0A; border: none; border-radius: 4px; font-size: 18px; font-weight: 600; cursor: pointer;">
+                            Start Camera Demo
+                        </button>
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
+
+        <!-- INTELLIGENT INVENTORY (BUBBLES) SECTION -->
+        <div class="page-section" id="bubblesSection">
+            <div style="padding: 140px 60px; background: linear-gradient(180deg, #0A0A0A 0%, #0D1F0D 100%); min-height: 100vh;">
+                <h1 style="font-family: 'Bodoni Moda', serif; font-size: 80px; text-align: center; margin-bottom: 40px; color: #C9A961;">
+                    INTELLIGENT INVENTORY
+                </h1>
+                <div style="max-width: 1200px; margin: 0 auto;">
+                    <p style="font-size: 24px; color: rgba(255,255,255,0.8); margin-bottom: 60px; text-align: center;">
+                        Revolutionary 3D bubble interface that makes inventory management intuitive
+                    </p>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px;">
+                        <div style="background: rgba(201, 169, 97, 0.1); padding: 40px; border-radius: 12px; border: 2px solid rgba(201, 169, 97, 0.3); text-align: center;">
+                            <div style="font-size: 60px; margin-bottom: 20px;">🫧</div>
+                            <h3 style="font-size: 24px; margin-bottom: 15px; color: #C9A961;">3D Bubble View</h3>
+                            <p style="color: rgba(255,255,255,0.7);">See your entire inventory as interactive 3D bubbles</p>
+                        </div>
+                        <div style="background: rgba(201, 169, 97, 0.1); padding: 40px; border-radius: 12px; border: 2px solid rgba(201, 169, 97, 0.3); text-align: center;">
+                            <div style="font-size: 60px; margin-bottom: 20px;">🎯</div>
+                            <h3 style="font-size: 24px; margin-bottom: 15px; color: #C9A961;">Smart Categorization</h3>
+                            <p style="color: rgba(255,255,255,0.7);">Products automatically organize by type, potency, and popularity</p>
+                        </div>
+                        <div style="background: rgba(201, 169, 97, 0.1); padding: 40px; border-radius: 12px; border: 2px solid rgba(201, 169, 97, 0.3); text-align: center;">
+                            <div style="font-size: 60px; margin-bottom: 20px;">⚡</div>
+                            <h3 style="font-size: 24px; margin-bottom: 15px; color: #C9A961;">Real-Time Updates</h3>
+                            <p style="color: rgba(255,255,255,0.7);">Watch bubbles grow and shrink with live sales data</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- DATA SECTION -->
+        <div class="page-section" id="dataSection">
+            <div style="padding: 140px 60px; background: linear-gradient(180deg, #0A0A0A 0%, #0D1F0D 100%); min-height: 100vh;">
+                <h1 style="font-family: 'Bodoni Moda', serif; font-size: 80px; text-align: center; margin-bottom: 40px; color: #C9A961;">
+                    DATA ANALYTICS
+                </h1>
+                <div style="max-width: 1000px; margin: 0 auto;">
+                    <p style="font-size: 24px; color: rgba(255,255,255,0.8); margin-bottom: 60px; text-align: center;">
+                        Powerful insights that drive revenue and reduce costs
+                    </p>
+                    <div style="background: rgba(0,0,0,0.5); padding: 60px; border-radius: 12px; border: 2px solid rgba(201, 169, 97, 0.3);">
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px;">
+                            <div>
+                                <h3 style="font-size: 28px; color: #C9A961; margin-bottom: 20px;">📈 Sales Analytics</h3>
+                                <ul style="list-style: none; padding: 0;">
+                                    <li style="padding: 10px 0; color: rgba(255,255,255,0.8);">✓ Best seller predictions</li>
+                                    <li style="padding: 10px 0; color: rgba(255,255,255,0.8);">✓ Optimal pricing suggestions</li>
+                                    <li style="padding: 10px 0; color: rgba(255,255,255,0.8);">✓ Customer preference tracking</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h3 style="font-size: 28px; color: #C9A961; margin-bottom: 20px;">🎯 Inventory Optimization</h3>
+                                <ul style="list-style: none; padding: 0;">
+                                    <li style="padding: 10px 0; color: rgba(255,255,255,0.8);">✓ Automated reorder points</li>
+                                    <li style="padding: 10px 0; color: rgba(255,255,255,0.8);">✓ Expiration date tracking</li>
+                                    <li style="padding: 10px 0; color: rgba(255,255,255,0.8);">✓ Vendor performance metrics</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- PRICING SECTION -->
+        <div class="page-section" id="pricingSection">
+            <div style="padding: 140px 60px; background: linear-gradient(180deg, #0A0A0A 0%, #0D1F0D 100%); min-height: 100vh;">
+                <h1 style="font-family: 'Bodoni Moda', serif; font-size: 80px; text-align: center; margin-bottom: 40px; color: #C9A961;">
+                    PRESALE PRICING
+                </h1>
+                <div style="max-width: 1200px; margin: 0 auto;">
+                    <p style="font-size: 24px; color: rgba(255,255,255,0.8); margin-bottom: 60px; text-align: center;">
+                        Lock in founder pricing before we 3x the price
+                    </p>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px; max-width: 900px; margin: 0 auto;">
+                        <div style="background: rgba(201, 169, 97, 0.05); padding: 50px; border-radius: 12px; border: 2px solid rgba(201, 169, 97, 0.2); text-align: center;">
+                            <h3 style="font-size: 24px; color: rgba(255,255,255,0.5); margin-bottom: 20px;">Regular Price</h3>
+                            <div style="font-size: 48px; color: rgba(255,255,255,0.3); text-decoration: line-through;">$999</div>
+                            <p style="color: rgba(255,255,255,0.3); margin-top: 10px;">per month</p>
+                        </div>
+                        <div style="background: linear-gradient(135deg, rgba(201, 169, 97, 0.1) 0%, rgba(139, 115, 85, 0.1) 100%); padding: 50px; border-radius: 12px; border: 2px solid #C9A961; text-align: center; position: relative;">
+                            <div style="position: absolute; top: -15px; right: 20px; background: #C9A961; color: #0A0A0A; padding: 5px 20px; border-radius: 4px; font-weight: 600;">70% OFF</div>
+                            <h3 style="font-size: 24px; color: #C9A961; margin-bottom: 20px;">Founder Price</h3>
+                            <div style="font-size: 48px; color: #C9A961; font-weight: 700;">$299</div>
+                            <p style="color: rgba(255,255,255,0.8); margin-top: 10px;">per month (limited time)</p>
+                        </div>
+                    </div>
+                    <div style="text-align: center; margin-top: 60px;">
+                        <button onclick="alert('Contact form would open here!')" style="padding: 20px 60px; background: linear-gradient(135deg, #C9A961 0%, #8B7355 100%); color: #0A0A0A; border: none; border-radius: 4px; font-size: 20px; font-weight: 600; cursor: pointer;">
+                            Secure Your Spot Now
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- CONTACT SECTION -->
+        <div class="page-section" id="contactSection">
+            <div style="padding: 140px 60px; background: linear-gradient(180deg, #0A0A0A 0%, #0D1F0D 100%); min-height: 100vh;">
+                <h1 style="font-family: 'Bodoni Moda', serif; font-size: 80px; text-align: center; margin-bottom: 40px; color: #C9A961;">
+                    LET'S TALK
+                </h1>
+                <div style="max-width: 600px; margin: 0 auto;">
+                    <p style="font-size: 24px; color: rgba(255,255,255,0.8); margin-bottom: 60px; text-align: center;">
+                        Ready to transform your dispensary?
+                    </p>
+                    <div style="background: rgba(0,0,0,0.5); padding: 60px; border-radius: 12px; border: 2px solid rgba(201, 169, 97, 0.3); text-align: center;">
+                        <div style="font-size: 80px; margin-bottom: 30px;">📧</div>
+                        <h2 style="font-size: 32px; margin-bottom: 20px; color: #C9A961;">Get in Touch</h2>
+                        <p style="font-size: 20px; color: rgba(255,255,255,0.8); margin-bottom: 20px;">
+                            Email: founders@trakie.ai
+                        </p>
+                        <p style="font-size: 20px; color: rgba(255,255,255,0.8); margin-bottom: 40px;">
+                            Phone: 1-800-TRAKIE-AI
+                        </p>
+                        <button onclick="alert('Contact form would open here!')" style="padding: 20px 50px; background: linear-gradient(135deg, #C9A961 0%, #8B7355 100%); color: #0A0A0A; border: none; border-radius: 4px; font-size: 18px; font-weight: 600; cursor: pointer;">
+                            Schedule Demo Call
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
     <script>
@@ -707,22 +922,37 @@
             }
         }
 
-        // Navigation Functions
-        function scrollToTop() {
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
-
-        function scrollToSection(sectionId) {
-            const section = document.getElementById(sectionId);
-            if (section) {
-                section.scrollIntoView({ behavior: 'smooth' });
+        // Tab Switching Function
+        function showSection(sectionName) {
+            // Hide all sections
+            document.querySelectorAll('.page-section').forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            // Show the selected section
+            const sections = {
+                'home': 'homeSection',
+                'receive': 'receiveSection',
+                'bubbles': 'bubblesSection',
+                'data': 'dataSection',
+                'pricing': 'pricingSection',
+                'contact': 'contactSection'
+            };
+            
+            const sectionId = sections[sectionName];
+            if (sectionId) {
+                const section = document.getElementById(sectionId);
+                if (section) {
+                    section.classList.add('active');
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                }
             }
-        }
-
-        function startDemo() {
-            // Demo functionality would go here
-            console.log('Starting demo...');
-            alert('Demo functionality would be implemented here');
+            
+            // Update active nav link
+            document.querySelectorAll('.nav-links a').forEach(link => {
+                link.style.color = 'rgba(255, 255, 255, 0.8)';
+            });
+            event.target.style.color = '#C9A961';
         }
     </script>
 </body>
