@@ -5190,7 +5190,104 @@
             document.getElementById('receiveLanding').style.display = 'none';
             showStep('step1QR');
         }
+function showStep(stepId) {
+    const allSteps = ['step1QR', 'step2Invoice', 'step3Product1', 'step4Product2', 'step5Dutchie', 'resultsScreen'];
+    allSteps.forEach(id => {
+        const el = document.getElementById(id);
+        if (el) {
+            el.style.display = 'none';
+            el.classList.remove('active');
+        }
+    });
+    
+    const step = document.getElementById(stepId);
+    if (step) {
+        step.style.display = 'flex';
+        step.classList.add('active');
+        
+        const clickHandler = () => {
+            step.removeEventListener('click', clickHandler);
+            advanceToNextStep(stepId);
+        };
+        step.addEventListener('click', clickHandler);
+    }
+}
 
+function advanceToNextStep(currentStep) {
+    const stepSequence = {
+        'step1QR': 'step2Invoice',
+        'step2Invoice': 'step3Product1',
+        'step3Product1': 'step4Product2',
+        'step4Product2': 'step5Dutchie',
+        'step5Dutchie': 'autofill',
+        'autofill': 'resultsScreen'
+    };
+    
+    const nextStep = stepSequence[currentStep];
+    
+    if (nextStep === 'autofill') {
+        setTimeout(() => animateDutchieAutofill(), 500);
+    } else if (nextStep) {
+        showStep(nextStep);
+    }
+}
+
+function animateDutchieAutofill() {
+    const fields = document.querySelectorAll('.dutchie-autofill-field');
+    const fieldData = [
+        { selector: 0, name: 'VENDOR', value: 'Green Leaf Supply Co.' },
+        { selector: 1, name: 'INVOICE NUMBER', value: 'INV-2025-1115' },
+        { selector: 2, name: 'ROOM', value: 'Vault' },
+        { selector: 3, name: 'PRODUCT 1', value: 'Revert | Sunset Sherbert | Sativa', detail: 'THC: 22.7% | Qty: 250 | Batch: BC2025AB3 | Exp: 12/2025' },
+        { selector: 4, name: 'PRODUCT 2', value: 'Jaunty | Strawnana | Hybrid', detail: 'THC: 90% | Qty: 500 | Batch: JT2025XY7 | Exp: 12/2026' },
+        { selector: 5, name: 'PRODUCT 3', value: 'Jaunty | Durban Poison | Sativa', detail: 'THC: 90% | Qty: 250 | Batch: JT2025ZK9 | Exp: 12/2025' }
+    ];
+    
+    fieldData.forEach((data, index) => {
+        setTimeout(() => {
+            const field = fields[data.selector];
+            if (field) {
+                field.style.borderLeftColor = '#00FF88';
+                field.style.background = 'rgba(0, 255, 136, 0.1)';
+                
+                const valueDiv = field.querySelectorAll('div')[1];
+                if (valueDiv) {
+                    valueDiv.textContent = data.value;
+                    valueDiv.style.color = '#00FF88';
+                }
+                
+                if (data.detail) {
+                    const detailDiv = field.querySelectorAll('div')[2];
+                    if (detailDiv) {
+                        detailDiv.textContent = data.detail;
+                        detailDiv.style.color = '#00FF88';
+                    }
+                }
+                
+                field.style.transform = 'scale(1.02)';
+                setTimeout(() => {
+                    field.style.transform = 'scale(1)';
+                }, 200);
+            }
+        }, index * 200);
+    });
+    
+    setTimeout(() => {
+        const container = document.querySelector('#step5Dutchie .ai-processing-container');
+        const completeMsg = document.createElement('div');
+        completeMsg.style.cssText = 'margin-top: 40px; text-align: center; font-size: 24px; color: #00FF88; font-weight: 700;';
+        completeMsg.innerHTML = '✓ All fields auto-filled in 2 seconds!<br><span style="font-size: 16px; color: #C9A961; margin-top: 15px; display: block; animation: blink 1.5s ease-in-out infinite;">Click to see results →</span>';
+        container.appendChild(completeMsg);
+        
+        const dutchieStep = document.getElementById('step5Dutchie');
+        const showResultsHandler = () => {
+            dutchieStep.removeEventListener('click', showResultsHandler);
+            processReceiving();
+        };
+        dutchieStep.addEventListener('click', showResultsHandler);
+    }, fieldData.length * 200 + 500);
+}
+        
         function showStep(stepId) {
             // Hide all steps
             const allSteps = ['step1QR', 'step2Invoice', 'step3Product1', 'step4Product2', 'step5Dutchie', 'resultsScreen'];
