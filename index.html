@@ -33,7 +33,6 @@
             position: relative;
         }
 
-        /* BOTANICAL BACKGROUND OVERLAY */
         body::before {
             content: '';
             position: fixed;
@@ -48,7 +47,6 @@
             z-index: 0;
         }
 
-        /* Welcome Screen */
         .welcome-screen {
             position: fixed;
             top: 0;
@@ -201,7 +199,6 @@
             display: block;
         }
 
-        /* Navigation - PERFECT ARCHITECTURE */
         .nav {
             position: fixed;
             top: 0;
@@ -250,7 +247,6 @@
             transition: all 0.3s ease;
         }
 
-        /* PERFECT LOGO SIZING - GOLDEN RATIO */
         .nav-logo-text {
             font-family: 'Bodoni Moda', serif;
             font-size: 42px;
@@ -359,7 +355,6 @@
             }
         }
 
-        /* HERO */
         .vogue-hero {
             min-height: 100vh;
             display: flex;
@@ -455,7 +450,6 @@
             padding: 0 20px;
         }
 
-        /* FEATURES */
         .vogue-features {
             padding: 120px 40px;
             max-width: 1400px;
@@ -538,7 +532,6 @@
             letter-spacing: 0.3px;
         }
 
-        /* STATS */
         .vogue-stats {
             padding: 100px 40px;
             background: #0A0A0A;
@@ -597,7 +590,6 @@
             margin-top: 15px;
         }
 
-        /* DEMO SECTION */
         .vogue-demo-section {
             padding: 120px 40px;
             text-align: center;
@@ -669,7 +661,117 @@
             animation: none;
         }
 
-        /* RECEIVE SECTION */
+        /* BUBBLES */
+        .bubbles-wrapper {
+            padding: 140px 40px 60px;
+            min-height: 100vh;
+            background: linear-gradient(180deg, #0A0A0A 0%, #1A1F1A 100%);
+        }
+
+        .bubbles-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .bubbles-title {
+            font-family: 'Bodoni Moda', serif;
+            font-size: clamp(48px, 7vw, 80px);
+            font-weight: 400;
+            font-style: italic;
+            letter-spacing: -1px;
+            color: #ffffff;
+            margin-bottom: 15px;
+            opacity: 0;
+            animation: fadeUp 1.2s ease forwards;
+        }
+
+        .bubbles-subtitle {
+            font-family: 'Cormorant Garamond', serif;
+            color: #8B7355;
+            font-size: 22px;
+            font-weight: 300;
+            font-style: italic;
+            letter-spacing: 2px;
+            margin-bottom: 50px;
+            opacity: 0;
+            animation: fadeUp 1.4s ease 0.2s forwards;
+        }
+
+        .bubbles-container {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 40px;
+        }
+
+        .bubble {
+            position: relative;
+            width: 100%;
+            height: 350px;
+            cursor: pointer;
+            background: linear-gradient(135deg, #1A1F1A 0%, #0F1410 100%);
+            border: 1px solid rgba(201, 169, 97, 0.2);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            transition: all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+            overflow: hidden;
+            opacity: 0;
+            animation: fadeScale 0.8s ease forwards;
+            animation-delay: calc(var(--delay) * 0.1s);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 120px;
+        }
+
+        .bubble:hover {
+            transform: translateY(-12px);
+            box-shadow: 0 25px 60px rgba(201, 169, 97, 0.25);
+            border-color: rgba(201, 169, 97, 0.5);
+        }
+
+        .bubble video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            position: absolute;
+            top: 0;
+            left: 0;
+            filter: brightness(0.9) contrast(1.1);
+        }
+
+        .bubble::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,0.85) 100%);
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .bubble-label {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 25px 20px;
+            background: linear-gradient(135deg, rgba(201, 169, 97, 0.25), rgba(139, 115, 85, 0.25));
+            backdrop-filter: blur(15px);
+            font-family: 'Bodoni Moda', serif;
+            font-size: 24px;
+            font-weight: 400;
+            color: #C9A961;
+            letter-spacing: 0.5px;
+            z-index: 2;
+            text-align: center;
+            border-top: 1px solid rgba(201, 169, 97, 0.3);
+        }
+
+        /* RECEIVE DEMO */
         .receive-wrapper {
             padding: 140px 40px 60px;
             min-height: 100vh;
@@ -691,6 +793,41 @@
             letter-spacing: 1px;
         }
 
+        /* UNDERSTANDING SCREEN */
+        .understanding-screen {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            text-align: center;
+            padding: 40px;
+        }
+
+        .understanding-screen.active {
+            display: flex;
+        }
+
+        .understanding-title {
+            font-family: 'Bodoni Moda', serif;
+            font-size: 56px;
+            font-weight: 700;
+            color: #C9A961;
+            margin-bottom: 30px;
+            letter-spacing: -1px;
+        }
+
+        .understanding-dots {
+            font-size: 72px;
+            color: #C9A961;
+            animation: blink 1.5s ease-in-out infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
+        }
+
         .receive-landing {
             display: flex;
             flex-direction: column;
@@ -701,7 +838,6 @@
             padding: 40px;
         }
 
-        /* INTRO COMPARISON SCREEN */
         .intro-comparison {
             display: flex;
             flex-direction: column;
@@ -867,6 +1003,32 @@
             box-shadow: 0 15px 50px rgba(201, 169, 97, 0.5);
         }
 
+        .invoice-screen {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            text-align: center;
+        }
+
+        .invoice-screen.active {
+            display: flex;
+        }
+
+        .invoice-video-container {
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .invoice-video-container video {
+            width: 100%;
+            height: auto;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(201, 169, 97, 0.2);
+        }
+
         .qr-screen {
             display: none;
             flex-direction: column;
@@ -891,91 +1053,6 @@
             height: auto;
             border-radius: 20px;
             box-shadow: 0 20px 60px rgba(201, 169, 97, 0.2);
-        }
-
-        .split-screen {
-            display: none;
-            min-height: 100vh;
-            padding-top: 130px;
-        }
-
-        .split-screen.active {
-            display: grid;
-            grid-template-columns: 50% 50%;
-            gap: 0;
-        }
-
-        .split-left, .split-right {
-            padding: 40px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: flex-start;
-        }
-
-        .split-left {
-            border-right: 1px solid rgba(201, 169, 97, 0.2);
-        }
-
-        .section-title {
-            font-family: 'Bodoni Moda', serif;
-            font-size: 32px;
-            font-weight: 600;
-            color: #C9A961;
-            margin-bottom: 30px;
-            text-align: center;
-        }
-
-        .invoice-video-container {
-            width: 100%;
-            max-width: 500px;
-            margin: 0 auto;
-        }
-
-        .invoice-video-container video {
-            width: 100%;
-            height: auto;
-            border-radius: 15px;
-            box-shadow: 0 10px 40px rgba(201, 169, 97, 0.15);
-        }
-
-        .iphone-mockup {
-            width: 300px;
-            height: 600px;
-            background: #1a1a1a;
-            border-radius: 40px;
-            border: 8px solid #2a2a2a;
-            position: relative;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
-            overflow: hidden;
-        }
-
-        .iphone-notch {
-            width: 150px;
-            height: 30px;
-            background: #000;
-            border-radius: 0 0 20px 20px;
-            position: absolute;
-            top: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            z-index: 10;
-        }
-
-        .iphone-screen {
-            width: 100%;
-            height: 100%;
-            background: #000;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
-        }
-
-        .iphone-screen video {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
         }
 
         .processing-screen {
@@ -1007,7 +1084,6 @@
             letter-spacing: 2px;
         }
 
-        /* PLAYSTATION LOADING BAR */
         .playstation-bar-container {
             position: relative;
             width: 500px;
@@ -1082,15 +1158,6 @@
         @keyframes textFade {
             0%, 100% {
                 opacity: 0.7;
-            }
-            50% {
-                opacity: 1;
-            }
-        }
-
-        @keyframes blink {
-            0%, 100% {
-                opacity: 0.4;
             }
             50% {
                 opacity: 1;
@@ -1209,7 +1276,6 @@
             gap: 30px;
         }
 
-        /* PREMIUM PRODUCT CARDS */
         .product-card {
             background: #FFFFFF;
             border: 2px solid rgba(201, 169, 97, 0.3);
@@ -1261,7 +1327,6 @@
             border-radius: 8px;
             margin-bottom: 16px;
             padding: 20px;
-            font-size: 120px;
         }
 
         .product-main-image {
@@ -1787,6 +1852,9 @@
         }
 
         @media (max-width: 1200px) {
+            .bubbles-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
             .nav-links {
                 gap: 25px;
             }
@@ -1799,6 +1867,9 @@
         }
 
         @media (max-width: 768px) {
+            .bubbles-container {
+                grid-template-columns: 1fr;
+            }
             .nav-links {
                 display: none;
             }
@@ -1807,9 +1878,6 @@
             }
             .nav-logo-text {
                 font-size: 32px;
-            }
-            .split-screen.active {
-                grid-template-columns: 1fr;
             }
             .intro-title {
                 font-size: 40px;
@@ -1886,6 +1954,7 @@
                 <div class="nav-links">
                     <a onclick="showSection('home')">Home</a>
                     <a onclick="showSection('receive')">Receive Demo</a>
+                    <a onclick="showSection('bubbles')">Intelligent Inventory</a>
                     <a onclick="showSection('pricing')">Pricing</a>
                     <a onclick="showSection('contact')">Contact</a>
                 </div>
@@ -1970,7 +2039,18 @@
             </section>
         </div>
 
-        <!-- Receive Section - FULL WORKING DEMO -->
+        <!-- Bubbles Section -->
+        <div class="page-section" id="bubblesSection">
+            <div class="bubbles-wrapper">
+                <div class="bubbles-header">
+                    <h1 class="bubbles-title">Intelligent Inventory</h1>
+                    <p class="bubbles-subtitle">AI-curated selections for the modern customer</p>
+                </div>
+                <div class="bubbles-container" id="bubblesContainer"></div>
+            </div>
+        </div>
+
+        <!-- Receive Section -->
         <div class="page-section" id="receiveSection">
             <div class="receive-wrapper">
                 <div class="demo-badge">LIVE DEMO</div>
@@ -2026,39 +2106,35 @@
                     </button>
                 </div>
 
-                <!-- QR Screen -->
-                <div class="qr-screen" id="qrScreen">
-                    <div class="qr-video-container">
-                        <video autoplay loop muted playsinline webkit-playsinline preload="auto">
-                            <source src="camera0.mov" type="video/quicktime">
-                            <source src="camera0.mov" type="video/mp4">
+                <!-- Understanding Invoice Screen -->
+                <div class="understanding-screen" id="understandingInvoice">
+                    <h1 class="understanding-title">Trakie understanding invoice</h1>
+                    <div class="understanding-dots">...</div>
+                </div>
+
+                <!-- Invoice Screen -->
+                <div class="invoice-screen" id="invoiceScreen">
+                    <div class="invoice-video-container">
+                        <video id="invoiceVideo" autoplay loop muted playsinline webkit-playsinline preload="auto">
+                            <source src="invoice1.mov" type="video/quicktime">
+                            <source src="invoice1.mov" type="video/mp4">
                         </video>
                     </div>
                 </div>
 
-                <!-- Split Screen with INVOICE VIDEO -->
-                <div class="split-screen" id="splitScreen">
-                    <div class="split-left">
-                        <h3 class="section-title">📄 Digital Invoice</h3>
-                        <div class="invoice-video-container">
-                            <video autoplay loop muted playsinline webkit-playsinline preload="auto">
-                                <source src="invoice1.mov" type="video/quicktime">
-                                <source src="invoice1.mov" type="video/mp4">
-                            </video>
-                        </div>
-                    </div>
+                <!-- Understanding Products Screen -->
+                <div class="understanding-screen" id="understandingProducts">
+                    <h1 class="understanding-title">Trakie understanding products</h1>
+                    <div class="understanding-dots">...</div>
+                </div>
 
-                    <div class="split-right">
-                        <h3 class="section-title">📸 AI Scanning</h3>
-                        <div class="iphone-mockup">
-                            <div class="iphone-notch"></div>
-                            <div class="iphone-screen">
-                                <video autoplay loop muted playsinline webkit-playsinline>
-                                    <source src="camera.mov" type="video/quicktime">
-                                    <source src="camera.mov" type="video/mp4">
-                                </video>
-                            </div>
-                        </div>
+                <!-- QR Screen -->
+                <div class="qr-screen" id="qrScreen">
+                    <div class="qr-video-container">
+                        <video id="qrVideo" autoplay loop muted playsinline webkit-playsinline preload="auto">
+                            <source src="camera0.mov" type="video/quicktime">
+                            <source src="camera0.mov" type="video/mp4">
+                        </video>
                     </div>
                 </div>
 
@@ -2067,7 +2143,6 @@
                     <div class="ai-processing-container">
                         <div class="ai-processing-title">Trakie.ai thinking...</div>
                         
-                        <!-- PlayStation Loading Bar -->
                         <div class="playstation-bar-container">
                             <div class="playstation-bar-fill" id="playstationBar"></div>
                             <div class="playstation-percentage" id="playstationPercentage">0%</div>
@@ -2191,6 +2266,17 @@
     </div>
 
     <script>
+        const categories = [
+            { name: 'Flower', emoji: '🌿' },
+            { name: 'Vaporizers', emoji: '💨' },
+            { name: 'Pre-Rolls', emoji: '🚬' },
+            { name: 'Edibles', emoji: '🍫' },
+            { name: 'Concentrates', emoji: '💎' },
+            { name: 'Beverages', emoji: '🥤' },
+            { name: 'Tinctures', emoji: '🧴' },
+            { name: 'CBD', emoji: '🟢' }
+        ];
+
         const products = [
             {
                 brand: 'Revert',
@@ -2203,7 +2289,7 @@
                 quantity: 250,
                 unitCost: 15.00,
                 priceAfterTax: 32.70,
-                emoji: '🌿'
+                image: 'https://raw.githubusercontent.com/dmtsteve/trakie-ai/main/product-photos/flower8.avif'
             },
             {
                 brand: 'Jaunty',
@@ -2216,7 +2302,7 @@
                 quantity: 500,
                 unitCost: 30.00,
                 priceAfterTax: 65.40,
-                emoji: '💨'
+                image: 'https://raw.githubusercontent.com/dmtsteve/trakie-ai/main/product-photos/vape3.avif'
             },
             {
                 brand: 'Jaunty',
@@ -2229,7 +2315,7 @@
                 quantity: 250,
                 unitCost: 30.00,
                 priceAfterTax: 65.40,
-                emoji: '⚡'
+                image: 'https://raw.githubusercontent.com/dmtsteve/trakie-ai/main/product-photos/cart2.avif'
             },
             {
                 brand: 'Heavy Hitters',
@@ -2242,7 +2328,7 @@
                 quantity: 55,
                 unitCost: 13.00,
                 priceAfterTax: 27.20,
-                emoji: '🍫'
+                image: 'https://raw.githubusercontent.com/dmtsteve/trakie-ai/main/product-photos/edible4.avif'
             },
             {
                 brand: 'Bricks by Cannabals',
@@ -2255,7 +2341,7 @@
                 quantity: 32,
                 unitCost: 10.00,
                 priceAfterTax: 21.60,
-                emoji: '🍬'
+                image: 'https://raw.githubusercontent.com/dmtsteve/trakie-ai/main/product-photos/edi9.avif'
             }
         ];
 
@@ -2281,6 +2367,27 @@
             }
         }
 
+        function initBubbles() {
+            const container = document.getElementById('bubblesContainer');
+            if (!container) return;
+            
+            container.innerHTML = '';
+            
+            categories.forEach((category, index) => {
+                const bubble = document.createElement('div');
+                bubble.className = 'bubble';
+                bubble.style.setProperty('--delay', index);
+                bubble.textContent = category.emoji;
+                
+                const label = document.createElement('div');
+                label.className = 'bubble-label';
+                label.textContent = category.name;
+                
+                bubble.appendChild(label);
+                container.appendChild(bubble);
+            });
+        }
+
         function startIntroDemo() {
             document.getElementById('introComparison').style.display = 'none';
             document.getElementById('receiveLanding').style.display = 'flex';
@@ -2289,27 +2396,34 @@
         function startReceiving() {
             receiveStartTime = Date.now();
             document.getElementById('receiveLanding').style.display = 'none';
-            document.getElementById('qrScreen').classList.add('active');
             
-            const qrScreen = document.getElementById('qrScreen');
-            const advanceFromQR = () => {
-                qrScreen.classList.remove('active');
-                document.getElementById('splitScreen').classList.add('active');
-                qrScreen.removeEventListener('click', advanceFromQR);
-                simulatePhotoTaking();
-            };
-            qrScreen.addEventListener('click', advanceFromQR);
-        }
-
-        function simulatePhotoTaking() {
-            const splitScreen = document.getElementById('splitScreen');
-            const advanceFromSplit = () => {
-                splitScreen.classList.remove('active');
-                document.getElementById('processingScreen').classList.add('active');
-                splitScreen.removeEventListener('click', advanceFromSplit);
-                startProcessing();
-            };
-            splitScreen.addEventListener('click', advanceFromSplit);
+            // Show "understanding invoice" screen
+            document.getElementById('understandingInvoice').classList.add('active');
+            
+            // After 2 seconds, show invoice video
+            setTimeout(() => {
+                document.getElementById('understandingInvoice').classList.remove('active');
+                document.getElementById('invoiceScreen').classList.add('active');
+                
+                // After 3 seconds, show "understanding products"
+                setTimeout(() => {
+                    document.getElementById('invoiceScreen').classList.remove('active');
+                    document.getElementById('understandingProducts').classList.add('active');
+                    
+                    // After 2 seconds, show QR scanning
+                    setTimeout(() => {
+                        document.getElementById('understandingProducts').classList.remove('active');
+                        document.getElementById('qrScreen').classList.add('active');
+                        
+                        // After 3 seconds, auto-advance to processing
+                        setTimeout(() => {
+                            document.getElementById('qrScreen').classList.remove('active');
+                            document.getElementById('processingScreen').classList.add('active');
+                            startProcessing();
+                        }, 3000);
+                    }, 2000);
+                }, 3000);
+            }, 2000);
         }
 
         function startProcessing() {
@@ -2396,7 +2510,7 @@
                         <div class="product-meta-line">${product.name} | ${product.strain} | ${product.details}</div>
                         
                         <div class="product-image-section">
-                            ${product.emoji}
+                            <img src="${product.image}" alt="${product.name}" class="product-main-image" onerror="this.style.display='none'; this.parentElement.textContent='🌿';">
                         </div>
                         
                         <div class="product-codes">
@@ -2510,9 +2624,6 @@
             selectedProducts.clear();
             document.getElementById('resultsScreen').classList.remove('active');
             document.getElementById('receiveLanding').style.display = 'flex';
-            document.getElementById('qrScreen').classList.remove('active');
-            document.getElementById('splitScreen').classList.remove('active');
-            document.getElementById('processingScreen').classList.remove('active');
             document.getElementById('completeBtn').classList.remove('show');
         }
 
@@ -2521,8 +2632,10 @@
             
             document.getElementById('resultsScreen').classList.remove('active');
             document.getElementById('processingScreen').classList.remove('active');
-            document.getElementById('splitScreen').classList.remove('active');
             document.getElementById('qrScreen').classList.remove('active');
+            document.getElementById('understandingProducts').classList.remove('active');
+            document.getElementById('invoiceScreen').classList.remove('active');
+            document.getElementById('understandingInvoice').classList.remove('active');
             document.getElementById('receiveLanding').style.display = 'none';
             
             document.getElementById('introComparison').style.display = 'flex';
@@ -2548,6 +2661,10 @@
             const section = document.getElementById(sectionName + 'Section');
             if (section) {
                 section.classList.add('active');
+            }
+            
+            if (sectionName === 'bubbles') {
+                setTimeout(() => initBubbles(), 100);
             }
             
             window.scrollTo({ top: 0, behavior: 'smooth' });
