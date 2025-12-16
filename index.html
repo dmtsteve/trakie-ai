@@ -1096,10 +1096,25 @@
             justify-content: center;
             min-height: 100vh;
             text-align: center;
+            cursor: pointer;
+            position: relative;
         }
 
         .invoice-screen.active, .qr-screen.active {
             display: flex;
+        }
+
+        .invoice-screen::after, .qr-screen::after, .qr-screen#productScreen::after {
+            content: '👆 Click anywhere to continue';
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 18px;
+            color: rgba(201, 169, 97, 0.8);
+            font-weight: 600;
+            animation: blink 1.5s ease-in-out infinite;
+            z-index: 10;
         }
 
         .invoice-video-container, .qr-video-container {
@@ -1224,7 +1239,385 @@
             }
         }
 
+        /* DUTCHIE-STYLE FORM */
+        .dutchie-form-screen {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 40px;
+            background: #1a1a1a;
+        }
+
+        .dutchie-form-screen.active {
+            display: flex;
+        }
+
+        .dutchie-container {
+            width: 100%;
+            max-width: 900px;
+            background: #2a2a2a;
+            border: 1px solid #3a3a3a;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .dutchie-header {
+            background: #1a1a1a;
+            padding: 20px 30px;
+            border-bottom: 1px solid #3a3a3a;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .dutchie-title {
+            font-size: 22px;
+            font-weight: 600;
+            color: #fff;
+        }
+
+        .dutchie-status {
+            background: rgba(201, 169, 97, 0.2);
+            color: #C9A961;
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .dutchie-form-fields {
+            padding: 30px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            border-bottom: 1px solid #3a3a3a;
+        }
+
+        .dutchie-field {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .dutchie-field label {
+            font-size: 13px;
+            color: #999;
+            font-weight: 500;
+        }
+
+        .dutchie-field input {
+            background: #1a1a1a;
+            border: 1px solid #3a3a3a;
+            padding: 12px 16px;
+            color: #fff;
+            border-radius: 6px;
+            font-size: 15px;
+        }
+
+        .dutchie-products-list {
+            padding: 30px;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .dutchie-product-item {
+            background: #1a1a1a;
+            border: 1px solid #3a3a3a;
+            border-radius: 8px;
+            padding: 16px 20px;
+            margin-bottom: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            opacity: 0;
+            transform: translateY(10px);
+            animation: dutchieItemSlide 0.3s ease forwards;
+        }
+
+        @keyframes dutchieItemSlide {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .dutchie-product-info {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .dutchie-product-number {
+            background: #C9A961;
+            color: #000;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 14px;
+        }
+
+        .dutchie-product-name {
+            font-size: 16px;
+            font-weight: 600;
+            color: #fff;
+        }
+
+        .dutchie-product-details {
+            font-size: 13px;
+            color: #999;
+        }
+
+        .dutchie-product-qty {
+            font-size: 18px;
+            font-weight: 600;
+            color: #C9A961;
+        }
+
+        /* PRODUCT GRID VIEW */
+        .product-grid-screen {
+            display: none;
+            flex-direction: column;
+            padding-top: 100px;
+            min-height: 100vh;
+            background: linear-gradient(180deg, #0A0A0A 0%, #1A1F1A 100%);
+        }
+
+        .product-grid-screen.active {
+            display: flex;
+        }
+
+        .product-grid-header {
+            padding: 40px;
+            text-align: center;
+        }
+
+        .product-grid-title {
+            font-family: 'Bodoni Moda', serif;
+            font-size: 64px;
+            font-weight: 600;
+            color: #C9A961;
+            margin-bottom: 20px;
+        }
+
+        .product-grid-back {
+            background: rgba(201, 169, 97, 0.1);
+            border: 1px solid rgba(201, 169, 97, 0.3);
+            color: #C9A961;
+            padding: 12px 30px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .product-grid-back:hover {
+            background: #C9A961;
+            color: #000;
+        }
+
+        .product-grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+            padding: 40px;
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+
+        .grid-product-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(201, 169, 97, 0.2);
+            cursor: pointer;
+            transition: all 0.4s;
+            overflow: hidden;
+        }
+
+        .grid-product-card:hover {
+            transform: translateY(-10px);
+            border-color: #C9A961;
+            box-shadow: 0 20px 60px rgba(201, 169, 97, 0.3);
+        }
+
+        .grid-product-image {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            background: #0F0F0F;
+        }
+
+        .grid-product-info {
+            padding: 20px;
+        }
+
+        .grid-product-name {
+            font-family: 'Bodoni Moda', serif;
+            font-size: 24px;
+            font-weight: 600;
+            color: #C9A961;
+            margin-bottom: 10px;
+        }
+
+        .grid-product-details {
+            font-size: 15px;
+            color: #999;
+        }
+
         /* PRODUCT MODAL - BLACK THEME WITH EFFECTS */
+        /* DUTCHIE-STYLE RECEIVING FORM */
+        .receiving-form-screen {
+            display: none;
+            min-height: 100vh;
+            padding: 140px 40px 60px;
+            background: #0A0A0A;
+        }
+
+        .receiving-form-screen.active {
+            display: block;
+        }
+
+        .receiving-form-container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(201, 169, 97, 0.2);
+            padding: 50px;
+        }
+
+        .form-screen-title {
+            font-family: 'Bodoni Moda', serif;
+            font-size: 48px;
+            font-weight: 600;
+            color: #C9A961;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        .form-screen-subtitle {
+            font-size: 18px;
+            color: #A8A093;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .dutchie-form {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+        }
+
+        .form-field {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .form-field.full-width {
+            grid-column: 1 / -1;
+        }
+
+        .form-field label {
+            font-size: 13px;
+            color: #8B7355;
+            text-transform: uppercase;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        .form-field input,
+        .form-field textarea {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(201, 169, 97, 0.2);
+            padding: 14px 18px;
+            color: #fff;
+            font-size: 16px;
+            font-family: 'Outfit', sans-serif;
+            transition: all 0.3s;
+        }
+
+        .form-field input:focus,
+        .form-field textarea:focus {
+            outline: none;
+            border-color: #C9A961;
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .form-field input[readonly] {
+            background: rgba(201, 169, 97, 0.05);
+            color: #C9A961;
+            cursor: not-allowed;
+        }
+
+        .form-field textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .form-summary {
+            background: rgba(201, 169, 97, 0.05);
+            border: 1px solid rgba(201, 169, 97, 0.2);
+            padding: 25px;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-top: 10px;
+        }
+
+        .summary-item {
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .summary-item span {
+            font-size: 12px;
+            color: #8B7355;
+            text-transform: uppercase;
+            font-weight: 700;
+        }
+
+        .summary-item strong {
+            font-size: 28px;
+            color: #C9A961;
+            font-family: 'Bodoni Moda', serif;
+        }
+
+        .summary-item strong.highlight {
+            color: #7fb800;
+        }
+
+        .complete-receiving-btn {
+            width: 100%;
+            padding: 20px;
+            background: linear-gradient(135deg, #C9A961 0%, #8B7355 100%);
+            color: #000;
+            border: none;
+            font-size: 20px;
+            font-weight: 700;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: all 0.3s;
+            font-family: 'Outfit', sans-serif;
+            letter-spacing: 0.5px;
+        }
+
+        .complete-receiving-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(201, 169, 97, 0.5);
+        }
+
         .product-modal {
             display: none;
             position: fixed;
@@ -2166,6 +2559,18 @@
             .vogue-stat-box {
                 min-width: 100%;
             }
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+            .form-summary {
+                grid-template-columns: 1fr;
+            }
+            .receiving-form-container {
+                padding: 30px 20px;
+            }
+            .form-screen-title {
+                font-size: 36px;
+            }
         }
             .intro-title {
                 font-size: 48px;
@@ -2313,8 +2718,8 @@
                                 <div class="vogue-stat-label">Setup Costs</div>
                             </div>
                             <div class="vogue-stat-box">
-                                <div class="vogue-stat-number">$3,847</div>
-                                <div class="vogue-stat-label">Monthly Savings</div>
+                                <div class="vogue-stat-number">$963</div>
+                                <div class="vogue-stat-label">Weekly Savings</div>
                             </div>
                             <div class="vogue-stat-box">
                                 <div class="vogue-stat-number">45s</div>
@@ -2323,7 +2728,6 @@
                         </div>
                     </div>
                     <div class="carousel-controls">
-                        <button class="carousel-arrow" onclick="prevStat()">‹</button>
                         <div class="carousel-dots" id="carouselDots"></div>
                         <button class="carousel-arrow" onclick="nextStat()">›</button>
                     </div>
@@ -2360,7 +2764,7 @@
                     
                     <div class="comparison-grid">
                         <div class="comparison-column">
-                            <h3 class="comparison-header">Manual Receiving</h3>
+                            <h3 class="comparison-header">MANUAL RECEIVING</h3>
                             <div class="comparison-steps">
                                 <div class="comparison-step">1. Open product package</div>
                                 <div class="comparison-step">2. Type brand name</div>
@@ -2376,7 +2780,7 @@
                         </div>
                         
                         <div class="comparison-column highlight">
-                            <h3 class="comparison-header gold">Trakie AI</h3>
+                            <h3 class="comparison-header gold">TRAKIE AI</h3>
                             <div class="comparison-steps">
                                 <div class="comparison-step">1. Scan QR code</div>
                                 <div class="comparison-step gold">(1 second)</div>
@@ -2390,18 +2794,7 @@
                         </div>
                     </div>
                     
-                    <button class="intro-cta" onclick="startIntroDemo()">Click to see it in action ›</button>
-                </div>
-                
-                <!-- Landing Screen -->
-                <div class="receive-landing" id="receiveLanding" style="display: none;">
-                    <h1 class="receive-landing-title">Receive Inventory</h1>
-                    <h2 class="receive-landing-subtitle">From an Hour to 1 Minute</h2>
-                    <div class="early-bird-badge">🔥 21 Foundation Spots • Lock In $369 Forever</div>
-                    <button class="start-receive-btn" onclick="startReceiving()">
-                        <span>⚡</span>
-                        <span>Experience Trakie AI Instant Receiving</span>
-                    </button>
+                    <button class="intro-cta" onclick="startReceiving()">⚡ Experience Trakie AI Instant Receiving</button>
                 </div>
 
                 <!-- QR Screen -->
@@ -2463,6 +2856,62 @@
                     </div>
                 </div>
 
+                <!-- Dutchie-Style Receiving Form -->
+                <div class="receiving-form-screen" id="receivingFormScreen">
+                    <div class="receiving-form-container">
+                        <h2 class="form-screen-title">Complete Receiving</h2>
+                        <p class="form-screen-subtitle">Trakie AI has processed your products. Verify details below.</p>
+                        
+                        <form class="dutchie-form" onsubmit="completeReceiving(event)">
+                            <div class="form-row">
+                                <div class="form-field">
+                                    <label>Supplier Name</label>
+                                    <input type="text" value="Premium Cannabis Distributors" readonly>
+                                </div>
+                                <div class="form-field">
+                                    <label>Invoice Number</label>
+                                    <input type="text" value="INV-2024-1547" readonly>
+                                </div>
+                            </div>
+                            
+                            <div class="form-row">
+                                <div class="form-field">
+                                    <label>Delivery Date</label>
+                                    <input type="date" value="2024-12-15" readonly>
+                                </div>
+                                <div class="form-field">
+                                    <label>Products Received</label>
+                                    <input type="text" value="5 Items" readonly>
+                                </div>
+                            </div>
+                            
+                            <div class="form-field full-width">
+                                <label>Notes (Optional)</label>
+                                <textarea placeholder="Add any notes about this delivery..."></textarea>
+                            </div>
+                            
+                            <div class="form-summary">
+                                <div class="summary-item">
+                                    <span>Total Items:</span>
+                                    <strong>5</strong>
+                                </div>
+                                <div class="summary-item">
+                                    <span>Total Units:</span>
+                                    <strong>1,087</strong>
+                                </div>
+                                <div class="summary-item">
+                                    <span>Processing Time:</span>
+                                    <strong class="highlight">45 seconds</strong>
+                                </div>
+                            </div>
+                            
+                            <button type="submit" class="complete-receiving-btn">
+                                ✓ Complete Receiving
+                            </button>
+                        </form>
+                    </div>
+                </div>
+
                 <!-- Results Screen -->
                 <div class="results-screen" id="resultsScreen">
                     <div class="results-left">
@@ -2500,6 +2949,48 @@
                         <button class="restart-demo-btn" onclick="restartDemo()">📦 Receive Another Delivery</button>
                     </div>
                 </div>
+            </div>
+        </div>
+
+        <!-- Dutchie-Style Form Screen -->
+        <div class="dutchie-form-screen" id="dutchieFormScreen">
+            <div class="dutchie-container">
+                <div class="dutchie-header">
+                    <div class="dutchie-title">Receive Inventory</div>
+                    <div class="dutchie-status">Processing</div>
+                </div>
+                <div class="dutchie-form-fields">
+                    <div class="dutchie-field">
+                        <label>Supplier</label>
+                        <input type="text" value="Green Harvest Supply Co." readonly>
+                    </div>
+                    <div class="dutchie-field">
+                        <label>Invoice #</label>
+                        <input type="text" value="INV-2024-00847" readonly>
+                    </div>
+                    <div class="dutchie-field">
+                        <label>Delivery Date</label>
+                        <input type="text" value="12/15/2024" readonly>
+                    </div>
+                    <div class="dutchie-field">
+                        <label>Received By</label>
+                        <input type="text" value="Store Manager" readonly>
+                    </div>
+                </div>
+                <div class="dutchie-products-list" id="dutchieProductsList">
+                    <!-- Products will be added here dynamically -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Product Grid Screen -->
+        <div class="product-grid-screen" id="productGridScreen">
+            <div class="product-grid-header">
+                <h1 class="product-grid-title" id="gridCategoryTitle"></h1>
+                <button class="product-grid-back" onclick="closeProductGrid()">← Back to Categories</button>
+            </div>
+            <div class="product-grid-container" id="productGridContainer">
+                <!-- Products will be added here dynamically -->
             </div>
         </div>
 
@@ -2620,13 +3111,14 @@
             { name: 'Pre-Rolls', video: 'preroll.mov', emoji: '🚬' },
             { name: 'Edibles', video: 'edible.mov', emoji: '🍫' },
             { name: 'Concentrates', video: 'concentrate.mov', emoji: '💎' },
-            { name: 'Beverages', video: 'beverage.mov', emoji: '🥤' },
+            { name: 'Beverages', video: 'bev.mov', emoji: '🥤' },
             { name: 'Tinctures', video: 'tincture.mov', emoji: '🧴' },
-            { name: 'CBD', video: 'cbd.mov', emoji: '🟢' }
+            { name: 'CBD', video: 'balm.mov', emoji: '🟢' }
         ];
 
         const products = [
             {
+                category: 'Flower',
                 brand: 'Revert',
                 name: 'Sunset Sherbert',
                 strain: 'Sativa',
@@ -2643,6 +3135,7 @@
                 poweredBy: 'Powered by ChatGPT'
             },
             {
+                category: 'Vaporizers',
                 brand: 'Jaunty',
                 name: 'Strawnana',
                 strain: 'Hybrid',
@@ -2659,6 +3152,7 @@
                 poweredBy: 'Powered by ChatGPT'
             },
             {
+                category: 'Vaporizers',
                 brand: 'Jaunty',
                 name: 'Durban Poison',
                 strain: 'Sativa',
@@ -2675,6 +3169,7 @@
                 poweredBy: 'Powered by ChatGPT'
             },
             {
+                category: 'Edibles',
                 brand: 'Heavy Hitters',
                 name: 'Blackberry Lemon',
                 strain: 'Hybrid',
@@ -2691,6 +3186,7 @@
                 poweredBy: 'Powered by ChatGPT'
             },
             {
+                category: 'Edibles',
                 brand: 'Bricks by Cannabals',
                 name: 'Blue Raspberry',
                 strain: 'Indica',
@@ -2867,60 +3363,220 @@
             });
         }
         
-        function showCategoryProducts(categoryName) {
-            // Future: Navigate to category products page
-            // For now, show message
-            const message = `${categoryName} category view - Coming soon!\n\nThis will show all ${categoryName.toLowerCase()} products with filters and sorting.`;
-            alert(message);
-        }
+        // Product catalog by category - ALL images from GitHub
+        const productCatalog = {
+            'Flower': [
+                { name: 'Binske Flower 1', image: 'https://raw.githubusercontent.com/dmtsteve/trakie-ai/main/product-photos/binske-flower-1.png' },
+                { name: 'Binske Flower 2', image: 'https://raw.githubusercontent.com/dmtsteve/trakie-ai/main/product-photos/binske-flower-2.webp' },
+                { name: 'Binske Flower 3', image: 'https://raw.githubusercontent.com/dmtsteve/trakie-ai/main/product-photos/binske-flower-3.webp' },
+                { name: 'Flower 8', image: 'https://raw.githubusercontent.com/dmtsteve/trakie-ai/main/product-photos/flower8.avif' }
+            ],
+            'Vaporizers': [
+                { name: 'Hudson Vaporizer', image: 'https://raw.githubusercontent.com/dmtsteve/trakie-ai/main/product-photos/hudson-vaporizer-1.png' },
+                { name: 'Vape 3', image: 'https://raw.githubusercontent.com/dmtsteve/trakie-ai/main/product-photos/vape3.avif' },
+                { name: 'Vape 4', image: 'https://raw.githubusercontent.com/dmtsteve/trakie-ai/main/product-photos/vape4.avif' },
+                { name: 'Vape 5', image: 'https://raw.githubusercontent.com/dmtsteve/trakie-ai/main/product-photos/vape5.avif' },
+                { name: 'Vape 7', image: 'https://raw.githubusercontent.com/dmtsteve/trakie-ai/main/product-photos/vape7.avif' },
+                { name: 'Vape 8', image: 'https://raw.githubusercontent.com/dmtsteve/trakie-ai/main/product-photos/vape8.avif' },
+                { name: 'Cart 2', image: 'https://raw.githubusercontent.com/dmtsteve/trakie-ai/main/product-photos/cart2.avif' },
+                { name: 'Cart 3', image: 'https://raw.githubusercontent.com/dmtsteve/trakie-ai/main/product-photos/cart3.avif' },
+                { name: 'Cart 4', image: 'https://raw.githubusercontent.com/dmtsteve/trakie-ai/main/product-photos/cart4.avif' }
+            ],
+            'Pre-Rolls': [
+                { name: 'Preroll 3', image: 'https://raw.githubusercontent.com/dmtsteve/trakie-ai/main/product-photos/preroll3.avif' },
+                { name: 'Preroll 4', image: 'https://raw.githubusercontent.com/dmtsteve/trakie-ai/main/product-photos/preroll4.avif' },
+                { name: 'Preroll 5', image: 'https://raw.githubusercontent.com/dmtsteve/trakie-ai/main/product-photos/preroll5.avif' },
+                { name: 'Preroll 6', image: 'https://raw.githubusercontent.com/dmtsteve/trakie-ai/main/product-photos/preroll6.avif' },
+                { name: 'Preroll 7', image: 'https://raw.githubusercontent.com/dmtsteve/trakie-ai/main/product-photos/preroll7.avif' },
+                { name: 'Preroll 8', image: 'https://raw.githubusercontent.com/dmtsteve/trakie-ai/main/product-photos/preroll8.avif' }
+            ],
+            'Edibles': [
+                { name: 'Edible 3', image: 'https://raw.githubusercontent.com/dmtsteve/trakie-ai/main/product-photos/edi3.avif' },
+                { name: 'Edible 4', image: 'https://raw.githubusercontent.com/dmtsteve/trakie-ai/main/product-photos/edible4.avif' },
+                { name: 'Edible 9', image: 'https://raw.githubusercontent.com/dmtsteve/trakie-ai/main/product-photos/edi9.avif' },
+                { name: 'Edible 4', image: 'https://raw.githubusercontent.com/dmtsteve/trakie-ai/main/product-photos/edible4.avif' }
+            ],
+            'Concentrates': [
+                { name: 'Camino', image: 'https://raw.githubusercontent.com/dmtsteve/trakie-ai/main/product-photos/camino.avif' }
+            ],
+            'Beverages': [
+                { name: 'Beverage 3', image: 'https://raw.githubusercontent.com/dmtsteve/trakie-ai/main/product-photos/bev3.avif' },
+                { name: 'Beverage 5', image: 'https://raw.githubusercontent.com/dmtsteve/trakie-ai/main/product-photos/bev5.avif' },
+                { name: 'Beverage 6', image: 'https://raw.githubusercontent.com/dmtsteve/trakie-ai/main/product-photos/bev6.avif' },
+                { name: 'Beverage 7', image: 'https://raw.githubusercontent.com/dmtsteve/trakie-ai/main/product-photos/beverage7.avif' },
+                { name: 'Beverage 8', image: 'https://raw.githubusercontent.com/dmtsteve/trakie-ai/main/product-photos/beverage8.avif' },
+                { name: 'Beverage 9', image: 'https://raw.githubusercontent.com/dmtsteve/trakie-ai/main/product-photos/beverage9.avif' }
+            ],
+            'Tinctures': [
+                { name: 'Carter Fernway', image: 'https://raw.githubusercontent.com/dmtsteve/trakie-ai/main/product-photos/carterfernway.avif' }
+            ],
+            'CBD': [
+                { name: 'Papa Barkley Balm 1', image: 'https://raw.githubusercontent.com/dmtsteve/trakie-ai/main/product-photos/papa-barkley-balm-1.webp' },
+                { name: 'Papa Barkley Balm 2', image: 'https://raw.githubusercontent.com/dmtsteve/trakie-ai/main/product-photos/papa-barkley-balm-2.webp' }
+            ]
+        };
 
-        function startIntroDemo() {
-            document.getElementById('introComparison').style.display = 'none';
-            document.getElementById('receiveLanding').style.display = 'flex';
+        function showCategoryProducts(categoryName) {
+            const productsInCategory = productCatalog[categoryName] || [];
+            if (productsInCategory.length === 0) {
+                alert(`No products found for ${categoryName}`);
+                return;
+            }
+
+            // Create product grid modal
+            const modal = document.createElement('div');
+            modal.style.cssText = `
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0, 0, 0, 0.95);
+                z-index: 10000;
+                overflow-y: auto;
+                padding: 100px 40px 40px;
+            `;
+
+            const closeBtn = document.createElement('button');
+            closeBtn.textContent = '×';
+            closeBtn.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                width: 50px;
+                height: 50px;
+                background: rgba(201, 169, 97, 0.2);
+                color: #C9A961;
+                border: 1px solid #C9A961;
+                border-radius: 50%;
+                font-size: 32px;
+                cursor: pointer;
+                z-index: 10001;
+            `;
+            closeBtn.onclick = () => document.body.removeChild(modal);
+
+            const title = document.createElement('h2');
+            title.textContent = categoryName;
+            title.style.cssText = `
+                font-family: 'Bodoni Moda', serif;
+                font-size: 56px;
+                color: #C9A961;
+                text-align: center;
+                margin-bottom: 50px;
+            `;
+
+            const grid = document.createElement('div');
+            grid.style.cssText = `
+                display: grid;
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+                gap: 30px;
+                max-width: 1400px;
+                margin: 0 auto;
+            `;
+
+            productsInCategory.forEach(product => {
+                const card = document.createElement('div');
+                card.style.cssText = `
+                    background: rgba(255, 255, 255, 0.05);
+                    border: 1px solid rgba(201, 169, 97, 0.2);
+                    padding: 20px;
+                    text-align: center;
+                    cursor: pointer;
+                    transition: all 0.3s;
+                `;
+                card.onmouseover = () => {
+                    card.style.transform = 'translateY(-10px)';
+                    card.style.borderColor = '#C9A961';
+                };
+                card.onmouseout = () => {
+                    card.style.transform = 'translateY(0)';
+                    card.style.borderColor = 'rgba(201, 169, 97, 0.2)';
+                };
+
+                const img = document.createElement('img');
+                img.src = product.image;
+                img.style.cssText = `
+                    width: 100%;
+                    height: 200px;
+                    object-fit: contain;
+                    margin-bottom: 15px;
+                `;
+
+                const name = document.createElement('div');
+                name.textContent = product.name;
+                name.style.cssText = `
+                    font-family: 'Outfit', sans-serif;
+                    font-size: 16px;
+                    color: #C9A961;
+                    font-weight: 600;
+                `;
+
+                card.appendChild(img);
+                card.appendChild(name);
+                grid.appendChild(card);
+            });
+
+            modal.appendChild(closeBtn);
+            modal.appendChild(title);
+            modal.appendChild(grid);
+            document.body.appendChild(modal);
         }
 
         function startReceiving() {
             receiveStartTime = Date.now();
-            document.getElementById('receiveLanding').style.display = 'none';
+            document.getElementById('introComparison').style.display = 'none';
             
-            // 1. Show QR code (camera0.mov) - 3 seconds
-            document.getElementById('qrScreen').classList.add('active');
-            
+            // 1. Show QR code (camera0.mov) - CLICK TO ADVANCE
+            const qrScreen = document.getElementById('qrScreen');
+            qrScreen.classList.add('active');
+            qrScreen.onclick = () => {
+                qrScreen.classList.remove('active');
+                qrScreen.onclick = null;
+                showInvoiceScreen();
+            };
+        }
+
+        function showInvoiceScreen() {
+            const invoiceScreen = document.getElementById('invoiceScreen');
+            invoiceScreen.classList.add('active');
+            invoiceScreen.onclick = () => {
+                invoiceScreen.classList.remove('active');
+                invoiceScreen.onclick = null;
+                showUnderstandingInvoice();
+            };
+        }
+
+        function showUnderstandingInvoice() {
+            const understandingInvoice = document.getElementById('understandingInvoice');
+            understandingInvoice.classList.add('active');
             setTimeout(() => {
-                document.getElementById('qrScreen').classList.remove('active');
-                
-                // 2. Show invoice1.mov
-                document.getElementById('invoiceScreen').classList.add('active');
-                
-                setTimeout(() => {
-                    document.getElementById('invoiceScreen').classList.remove('active');
-                    
-                    // 3. Understanding invoice - 2 seconds
-                    document.getElementById('understandingInvoice').classList.add('active');
-                    
-                    setTimeout(() => {
-                        document.getElementById('understandingInvoice').classList.remove('active');
-                        
-                        // 4. Product camera (camera.mov) - 3 seconds
-                        document.getElementById('productScreen').classList.add('active');
-                        
-                        setTimeout(() => {
-                            document.getElementById('productScreen').classList.remove('active');
-                            
-                            // 5. Understanding products - 2 seconds
-                            document.getElementById('understandingProducts').classList.add('active');
-                            
-                            setTimeout(() => {
-                                document.getElementById('understandingProducts').classList.remove('active');
-                                
-                                // 6. Processing
-                                document.getElementById('processingScreen').classList.add('active');
-                                startProcessing();
-                            }, 2000);
-                        }, 3000);
-                    }, 2000);
-                }, 3000);
-            }, 3000);
+                understandingInvoice.classList.remove('active');
+                showProductScreen();
+            }, 2000);
+        }
+
+        function showProductScreen() {
+            const productScreen = document.getElementById('productScreen');
+            productScreen.classList.add('active');
+            productScreen.onclick = () => {
+                productScreen.classList.remove('active');
+                productScreen.onclick = null;
+                showUnderstandingProducts();
+            };
+        }
+
+        function showUnderstandingProducts() {
+            const understandingProducts = document.getElementById('understandingProducts');
+            understandingProducts.classList.add('active');
+            setTimeout(() => {
+                understandingProducts.classList.remove('active');
+                showProcessingScreen();
+            }, 2000);
+        }
+
+        function showProcessingScreen() {
+            document.getElementById('processingScreen').classList.add('active');
+            startProcessing();
         }
 
         function startProcessing() {
@@ -2966,6 +3622,13 @@
         }
 
         function processReceiving() {
+            document.getElementById('processingScreen').classList.remove('active');
+            document.getElementById('receivingFormScreen').classList.add('active');
+        }
+
+        function completeReceiving(event) {
+            event.preventDefault();
+            document.getElementById('receivingFormScreen').classList.remove('active');
             showResults();
         }
 
@@ -3199,9 +3862,11 @@
             e.target.reset();
         }
 
-        // STATS CAROUSEL
+        // STATS CAROUSEL - ONLY GO RIGHT
         let currentStatIndex = 0;
         let autoplayInterval;
+        let loopCount = 0;
+        const MAX_LOOPS = 8;
 
         function initStatsCarousel() {
             const track = document.getElementById('statsTrack');
@@ -3242,25 +3907,29 @@
             if (!track) return;
             
             const pages = Math.ceil(track.children.length / 3);
-            currentStatIndex = (currentStatIndex + 1) % pages;
+            currentStatIndex++;
+            
+            if (currentStatIndex >= pages) {
+                currentStatIndex = 0;
+                loopCount++;
+                
+                if (loopCount >= MAX_LOOPS) {
+                    clearInterval(autoplayInterval);
+                    return;
+                }
+            }
+            
             updateCarousel();
-            resetAutoplay();
         }
 
         function prevStat() {
-            const track = document.getElementById('statsTrack');
-            if (!track) return;
-            
-            const pages = Math.ceil(track.children.length / 3);
-            currentStatIndex = (currentStatIndex - 1 + pages) % pages;
-            updateCarousel();
-            resetAutoplay();
+            // Disabled - only go right
+            return;
         }
 
         function goToStat(index) {
             currentStatIndex = index;
             updateCarousel();
-            resetAutoplay();
         }
 
         function startAutoplay() {
