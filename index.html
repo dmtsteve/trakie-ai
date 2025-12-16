@@ -822,6 +822,7 @@
             top: 0;
             left: 0;
             filter: brightness(0.9) contrast(1.1);
+            z-index: 0;
         }
 
         .bubble::before {
@@ -3426,9 +3427,34 @@
             }
         }
 
+        // Global video management
+        let allBubbleVideos = [];
+        let videosUnlocked = false;
+        
+        function unlockVideos() {
+            if (videosUnlocked) return;
+            console.log('Unlocking videos...');
+            allBubbleVideos.forEach(video => {
+                if (video.paused) {
+                    video.play().then(() => {
+                        video.pause();
+                        video.currentTime = video.duration / 2;
+                    }).catch(e => console.log('Unlock error:', e));
+                }
+            });
+            videosUnlocked = true;
+        }
+        
+        // Unlock on any user interaction
+        document.addEventListener('click', unlockVideos, { once: true });
+        document.addEventListener('touchstart', unlockVideos, { once: true });
+        
         function initBubbles() {
             const container = document.getElementById('bubblesContainer');
             if (!container) return;
+            
+            // Clear previous videos
+            allBubbleVideos = [];
             
             container.innerHTML = '';
             
@@ -3443,10 +3469,8 @@
                 video.loop = true;
                 video.playsInline = true;
                 video.preload = 'auto';
-                video.style.display = 'none';
-                video.style.width = '100%';
-                video.style.height = '100%';
-                video.style.objectFit = 'cover';
+                video.setAttribute('webkit-playsinline', 'true');
+                video.style.cssText = 'width: 100%; height: 100%; object-fit: cover; display: none;';
                 
                 const source = document.createElement('source');
                 source.src = category.video;
@@ -3465,37 +3489,59 @@
                     if (isFinite(video.duration) && video.duration > 0) {
                         middleTime = video.duration / 2;
                         video.currentTime = middleTime;
-                        videoLoaded = true;
                     }
                 });
                 
-                video.addEventListener('seeked', function() {
-                    if (videoLoaded && video.style.display === 'none') {
+                video.addEventListener('canplay', function() {
+                    if (!videoLoaded && isFinite(video.duration) && video.duration > 0) {
+                        videoLoaded = true;
                         video.style.display = 'block';
                         emoji.style.display = 'none';
                     }
                 });
                 
-                video.addEventListener('error', function() {
+                video.addEventListener('error', function(e) {
+                    console.log('Video error for:', category.name, e);
                     video.style.display = 'none';
                     emoji.style.display = 'flex';
                 });
                 
+                // Force load
+                video.load();
+                
+                // Add to global array for unlocking
+                allBubbleVideos.push(video);
+                
                 const emoji = document.createElement('div');
-                emoji.style.cssText = 'font-size: 120px; display: flex; align-items: center; justify-content: center; width: 100%; height: 100%;';
+                emoji.style.cssText = 'font-size: 120px; display: flex; align-items: center; justify-content: center; width: 100%; height: 100%; position: absolute; top: 0; left: 0; z-index: 0;';
                 emoji.textContent = category.emoji;
                 
+                let isHovering = false;
+                
                 bubble.addEventListener('mouseenter', function() {
+                    isHovering = true;
                     if (videoLoaded) {
-                        video.currentTime = 0; // Start from beginning for smooth loop
-                        video.play().catch(() => {});
+                        console.log('Playing video for:', category.name);
+                        video.currentTime = 0;
+                        const playPromise = video.play();
+                        if (playPromise !== undefined) {
+                            playPromise.catch(e => console.log('Play error:', category.name, e));
+                        }
+                    } else {
+                        console.log('Video not loaded yet for:', category.name);
                     }
                 });
                 
                 bubble.addEventListener('mouseleave', function() {
+                    isHovering = false;
                     if (videoLoaded) {
+                        console.log('Pausing video for:', category.name);
                         video.pause();
-                        video.currentTime = middleTime; // Return to middle frame
+                        setTimeout(() => {
+                            if (!isHovering) {
+                                video.currentTime = middleTime;
+                            }
+                        }, 100);
                     }
                 });
                 
