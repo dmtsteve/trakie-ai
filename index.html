@@ -3440,9 +3440,13 @@
                 
                 const video = document.createElement('video');
                 video.muted = true;
+                video.loop = true;
                 video.playsInline = true;
-                video.preload = 'metadata';
+                video.preload = 'auto';
                 video.style.display = 'none';
+                video.style.width = '100%';
+                video.style.height = '100%';
+                video.style.objectFit = 'cover';
                 
                 const source = document.createElement('source');
                 source.src = category.video;
@@ -3455,13 +3459,19 @@
                 video.appendChild(source2);
                 
                 let videoLoaded = false;
+                let middleTime = 0;
                 
                 video.addEventListener('loadedmetadata', function() {
                     if (isFinite(video.duration) && video.duration > 0) {
-                        const middleTime = video.duration / 2;
+                        middleTime = video.duration / 2;
                         video.currentTime = middleTime;
-                        video.style.display = 'block';
                         videoLoaded = true;
+                    }
+                });
+                
+                video.addEventListener('seeked', function() {
+                    if (videoLoaded && video.style.display === 'none') {
+                        video.style.display = 'block';
                         emoji.style.display = 'none';
                     }
                 });
@@ -3476,15 +3486,16 @@
                 emoji.textContent = category.emoji;
                 
                 bubble.addEventListener('mouseenter', function() {
-                    if (videoLoaded) video.play().catch(() => {});
+                    if (videoLoaded) {
+                        video.currentTime = 0; // Start from beginning for smooth loop
+                        video.play().catch(() => {});
+                    }
                 });
                 
                 bubble.addEventListener('mouseleave', function() {
                     if (videoLoaded) {
                         video.pause();
-                        if (isFinite(video.duration)) {
-                            video.currentTime = video.duration / 2;
-                        }
+                        video.currentTime = middleTime; // Return to middle frame
                     }
                 });
                 
