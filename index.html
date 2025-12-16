@@ -1482,11 +1482,12 @@
         }
 
         .receiving-form-container {
-            max-width: 900px;
+            max-width: 1000px;
             margin: 0 auto;
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(201, 169, 97, 0.2);
+            background: rgba(15, 15, 15, 0.9);
+            border: 1px solid rgba(201, 169, 97, 0.3);
             padding: 50px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
         }
 
         .form-screen-title {
@@ -1499,78 +1500,158 @@
         }
 
         .form-screen-subtitle {
-            font-size: 18px;
-            color: #A8A093;
+            font-size: 16px;
+            color: #8B7355;
             text-align: center;
-            margin-bottom: 40px;
+            margin-bottom: 50px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
         .dutchie-form {
             display: flex;
             flex-direction: column;
-            gap: 25px;
+            gap: 30px;
         }
 
         .form-row {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 25px;
+            gap: 30px;
         }
 
         .form-field {
             display: flex;
             flex-direction: column;
-            gap: 8px;
-        }
-
-        .form-field.full-width {
-            grid-column: 1 / -1;
+            gap: 10px;
         }
 
         .form-field label {
-            font-size: 13px;
+            font-size: 11px;
             color: #8B7355;
             text-transform: uppercase;
             font-weight: 700;
-            letter-spacing: 1px;
+            letter-spacing: 1.5px;
+            font-family: 'Outfit', sans-serif;
         }
 
-        .form-field input,
-        .form-field textarea {
-            background: rgba(255, 255, 255, 0.05);
+        .animated-input {
+            background: rgba(0, 0, 0, 0.4);
             border: 1px solid rgba(201, 169, 97, 0.2);
-            padding: 14px 18px;
-            color: #fff;
+            padding: 16px 20px;
+            color: #C9A961;
             font-size: 16px;
             font-family: 'Outfit', sans-serif;
+            min-height: 52px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: relative;
             transition: all 0.3s;
         }
 
-        .form-field input:focus,
-        .form-field textarea:focus {
-            outline: none;
+        .animated-input.typing {
             border-color: #C9A961;
-            background: rgba(255, 255, 255, 0.08);
-        }
-
-        .form-field input[readonly] {
             background: rgba(201, 169, 97, 0.05);
-            color: #C9A961;
-            cursor: not-allowed;
         }
 
-        .form-field textarea {
-            min-height: 100px;
-            resize: vertical;
+        .animated-input.complete {
+            background: rgba(127, 184, 0, 0.05);
+            border-color: rgba(127, 184, 0, 0.3);
+        }
+
+        .typing-text {
+            color: #C9A961;
+            font-weight: 500;
+        }
+
+        .checkmark-icon {
+            color: #7fb800;
+            font-size: 20px;
+            font-weight: 700;
+            opacity: 0;
+            transform: scale(0);
+            transition: all 0.3s;
+        }
+
+        .animated-input.complete .checkmark-icon {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .products-processing {
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(201, 169, 97, 0.2);
+            padding: 25px;
+            margin: 10px 0;
+        }
+
+        .processing-header {
+            font-size: 11px;
+            color: #8B7355;
+            text-transform: uppercase;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            margin-bottom: 20px;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        .product-list-animated {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .product-item-animated {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 16px;
+            background: rgba(201, 169, 97, 0.03);
+            border: 1px solid rgba(201, 169, 97, 0.1);
+            opacity: 0;
+            transform: translateX(-20px);
+            transition: all 0.3s;
+        }
+
+        .product-item-animated.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .product-item-animated.complete {
+            background: rgba(127, 184, 0, 0.05);
+            border-color: rgba(127, 184, 0, 0.2);
+        }
+
+        .product-text {
+            color: #C9A961;
+            font-size: 15px;
+            font-weight: 500;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        .product-check {
+            color: #7fb800;
+            font-size: 18px;
+            font-weight: 700;
+            opacity: 0;
+            transform: scale(0);
+            transition: all 0.3s;
+        }
+
+        .product-item-animated.complete .product-check {
+            opacity: 1;
+            transform: scale(1);
         }
 
         .form-summary {
             background: rgba(201, 169, 97, 0.05);
             border: 1px solid rgba(201, 169, 97, 0.2);
-            padding: 25px;
+            padding: 30px;
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
+            gap: 25px;
             margin-top: 10px;
         }
 
@@ -1578,44 +1659,57 @@
             text-align: center;
             display: flex;
             flex-direction: column;
-            gap: 8px;
+            gap: 10px;
         }
 
         .summary-item span {
-            font-size: 12px;
+            font-size: 11px;
             color: #8B7355;
             text-transform: uppercase;
             font-weight: 700;
+            letter-spacing: 1.5px;
+            font-family: 'Outfit', sans-serif;
         }
 
         .summary-item strong {
-            font-size: 28px;
+            font-size: 32px;
             color: #C9A961;
             font-family: 'Bodoni Moda', serif;
+            font-weight: 600;
         }
 
         .summary-item strong.highlight {
             color: #7fb800;
         }
 
+        .animated-number {
+            transition: color 0.3s;
+        }
+
         .complete-receiving-btn {
             width: 100%;
-            padding: 20px;
+            padding: 22px;
             background: linear-gradient(135deg, #C9A961 0%, #8B7355 100%);
             color: #000;
             border: none;
-            font-size: 20px;
+            font-size: 18px;
             font-weight: 700;
             cursor: pointer;
-            margin-top: 20px;
-            transition: all 0.3s;
+            margin-top: 25px;
+            transition: all 0.4s;
             font-family: 'Outfit', sans-serif;
-            letter-spacing: 0.5px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
         }
 
-        .complete-receiving-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 30px rgba(201, 169, 97, 0.5);
+        .complete-receiving-btn:not([style*="opacity: 0.3"]):hover {
+            transform: translateY(-4px);
+            box-shadow: 0 15px 40px rgba(201, 169, 97, 0.6);
+        }
+
+        @keyframes typeWriter {
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
 
         .product-modal {
@@ -2564,12 +2658,22 @@
             }
             .form-summary {
                 grid-template-columns: 1fr;
+                gap: 15px;
             }
             .receiving-form-container {
                 padding: 30px 20px;
             }
             .form-screen-title {
                 font-size: 36px;
+            }
+            .products-processing {
+                padding: 20px 15px;
+            }
+            .product-item-animated {
+                padding: 10px 12px;
+            }
+            .product-text {
+                font-size: 13px;
             }
         }
             .intro-title {
@@ -2718,7 +2822,7 @@
                                 <div class="vogue-stat-label">Setup Costs</div>
                             </div>
                             <div class="vogue-stat-box">
-                                <div class="vogue-stat-number">$963</div>
+                                <div class="vogue-stat-number">$3,847</div>
                                 <div class="vogue-stat-label">Weekly Savings</div>
                             </div>
                             <div class="vogue-stat-box">
@@ -2862,53 +2966,86 @@
                         <h2 class="form-screen-title">Complete Receiving</h2>
                         <p class="form-screen-subtitle">Trakie AI has processed your products. Verify details below.</p>
                         
-                        <form class="dutchie-form" onsubmit="completeReceiving(event)">
+                        <div class="dutchie-form">
                             <div class="form-row">
                                 <div class="form-field">
-                                    <label>Supplier Name</label>
-                                    <input type="text" value="Premium Cannabis Distributors" readonly>
+                                    <label>SUPPLIER NAME</label>
+                                    <div class="animated-input" data-final="Premium Cannabis Distributors">
+                                        <span class="typing-text"></span>
+                                        <span class="checkmark-icon">✓</span>
+                                    </div>
                                 </div>
                                 <div class="form-field">
-                                    <label>Invoice Number</label>
-                                    <input type="text" value="INV-2024-1547" readonly>
+                                    <label>INVOICE NUMBER</label>
+                                    <div class="animated-input" data-final="INV-2024-1547">
+                                        <span class="typing-text"></span>
+                                        <span class="checkmark-icon">✓</span>
+                                    </div>
                                 </div>
                             </div>
                             
                             <div class="form-row">
                                 <div class="form-field">
-                                    <label>Delivery Date</label>
-                                    <input type="date" value="2024-12-15" readonly>
+                                    <label>DELIVERY DATE</label>
+                                    <div class="animated-input" data-final="12/15/2024">
+                                        <span class="typing-text"></span>
+                                        <span class="checkmark-icon">✓</span>
+                                    </div>
                                 </div>
                                 <div class="form-field">
-                                    <label>Products Received</label>
-                                    <input type="text" value="5 Items" readonly>
+                                    <label>PRODUCTS RECEIVED</label>
+                                    <div class="animated-input" data-final="5 Items">
+                                        <span class="typing-text"></span>
+                                        <span class="checkmark-icon">✓</span>
+                                    </div>
                                 </div>
                             </div>
                             
-                            <div class="form-field full-width">
-                                <label>Notes (Optional)</label>
-                                <textarea placeholder="Add any notes about this delivery..."></textarea>
+                            <div class="products-processing">
+                                <div class="processing-header">PROCESSING PRODUCTS</div>
+                                <div class="product-list-animated">
+                                    <div class="product-item-animated" data-product="Sunset Sherbert • 250 units">
+                                        <span class="product-text"></span>
+                                        <span class="product-check">✓</span>
+                                    </div>
+                                    <div class="product-item-animated" data-product="Strawnana Vape • 500 units">
+                                        <span class="product-text"></span>
+                                        <span class="product-check">✓</span>
+                                    </div>
+                                    <div class="product-item-animated" data-product="Durban Poison • 250 units">
+                                        <span class="product-text"></span>
+                                        <span class="product-check">✓</span>
+                                    </div>
+                                    <div class="product-item-animated" data-product="Blackberry Lemon • 55 units">
+                                        <span class="product-text"></span>
+                                        <span class="product-check">✓</span>
+                                    </div>
+                                    <div class="product-item-animated" data-product="Blue Raspberry • 32 units">
+                                        <span class="product-text"></span>
+                                        <span class="product-check">✓</span>
+                                    </div>
+                                </div>
                             </div>
                             
                             <div class="form-summary">
                                 <div class="summary-item">
-                                    <span>Total Items:</span>
-                                    <strong>5</strong>
+                                    <span>TOTAL ITEMS:</span>
+                                    <strong class="animated-number" data-final="5">0</strong>
                                 </div>
                                 <div class="summary-item">
-                                    <span>Total Units:</span>
-                                    <strong>1,087</strong>
+                                    <span>TOTAL UNITS:</span>
+                                    <strong class="animated-number" data-final="1087">0</strong>
                                 </div>
                                 <div class="summary-item">
-                                    <span>Processing Time:</span>
+                                    <span>PROCESSING TIME:</span>
                                     <strong class="highlight">45 seconds</strong>
                                 </div>
                             </div>
                             
-                            <button type="submit" class="complete-receiving-btn">
+                            <button type="button" class="complete-receiving-btn" id="completeReceivingBtn" style="opacity: 0.3; pointer-events: none;">
                                 ✓ Complete Receiving
                             </button>
-                        </form>
+                        </div>
                     </div>
                 </div>
 
@@ -3624,6 +3761,88 @@
         function processReceiving() {
             document.getElementById('processingScreen').classList.remove('active');
             document.getElementById('receivingFormScreen').classList.add('active');
+            
+            // Start animated form fill sequence
+            setTimeout(() => animateFormFill(), 300);
+        }
+
+        function animateFormFill() {
+            const inputs = document.querySelectorAll('.animated-input');
+            const products = document.querySelectorAll('.product-item-animated');
+            const numbers = document.querySelectorAll('.animated-number');
+            const completeBtn = document.getElementById('completeReceivingBtn');
+            
+            // Animate form inputs (400ms each)
+            inputs.forEach((input, index) => {
+                setTimeout(() => {
+                    const finalText = input.getAttribute('data-final');
+                    const textElement = input.querySelector('.typing-text');
+                    input.classList.add('typing');
+                    
+                    // Type out text character by character
+                    let charIndex = 0;
+                    const typeInterval = setInterval(() => {
+                        if (charIndex < finalText.length) {
+                            textElement.textContent = finalText.substring(0, charIndex + 1);
+                            charIndex++;
+                        } else {
+                            clearInterval(typeInterval);
+                            input.classList.remove('typing');
+                            input.classList.add('complete');
+                        }
+                    }, 30);
+                }, index * 500);
+            });
+            
+            // Animate product list (starts after inputs, 300ms each)
+            products.forEach((product, index) => {
+                setTimeout(() => {
+                    const productText = product.getAttribute('data-product');
+                    const textElement = product.querySelector('.product-text');
+                    product.classList.add('visible');
+                    
+                    // Type out product name
+                    let charIndex = 0;
+                    const typeInterval = setInterval(() => {
+                        if (charIndex < productText.length) {
+                            textElement.textContent = productText.substring(0, charIndex + 1);
+                            charIndex++;
+                        } else {
+                            clearInterval(typeInterval);
+                            product.classList.add('complete');
+                        }
+                    }, 20);
+                }, 2000 + (index * 400));
+            });
+            
+            // Animate numbers counting up
+            setTimeout(() => {
+                numbers.forEach(num => {
+                    const final = parseInt(num.getAttribute('data-final'));
+                    let current = 0;
+                    const increment = final / 30;
+                    
+                    const countInterval = setInterval(() => {
+                        current += increment;
+                        if (current >= final) {
+                            num.textContent = final.toLocaleString();
+                            clearInterval(countInterval);
+                        } else {
+                            num.textContent = Math.floor(current).toLocaleString();
+                        }
+                    }, 30);
+                });
+            }, 4000);
+            
+            // Enable complete button after all animations
+            setTimeout(() => {
+                completeBtn.style.opacity = '1';
+                completeBtn.style.pointerEvents = 'auto';
+                completeBtn.onclick = () => {
+                    document.getElementById('receivingFormScreen').classList.remove('active');
+                    showResults();
+                };
+            }, 4500);
         }
 
         function completeReceiving(event) {
