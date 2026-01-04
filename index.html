@@ -4,6 +4,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Trakie.ai - Cannabis Retail Intelligence</title>
+    
+    <!-- SECURITY HEADERS -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' https://raw.githubusercontent.com data: blob:; media-src 'self' https://raw.githubusercontent.com blob:; connect-src 'self'; frame-ancestors 'none'; base-uri 'self'; form-action 'none';">
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta http-equiv="X-Frame-Options" content="DENY">
+    <meta name="referrer" content="no-referrer">
+    <meta http-equiv="Permissions-Policy" content="geolocation=(), microphone=(), camera=()">
+    
+    <!-- COPYRIGHT & LICENSE -->
+    <meta name="copyright" content="© 2025 Trakie Inc. All Rights Reserved.">
+    <meta name="author" content="Trakie Inc.">
+    <meta name="robots" content="noindex, nofollow">
+    
+    <!-- ANTI-SCRAPING -->
+    <meta name="format-detection" content="telephone=no">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap');
         @import url('https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&display=swap');
@@ -885,6 +904,7 @@
             min-height: 100vh;
             text-align: center;
             padding: 40px;
+            position: relative;
         }
 
         .understanding-screen.active {
@@ -929,115 +949,64 @@
             min-height: 100vh;
             text-align: center;
             padding: 60px 40px;
-            max-width: 1200px;
+        }
+
+        .start-receiving-container {
+            max-width: 800px;
             margin: 0 auto;
         }
 
-        .intro-title {
+        .start-receiving-title {
             font-family: 'Bodoni Moda', serif;
-            font-size: 72px;
-            font-weight: 700;
-            color: #C9A961;
-            margin-bottom: 25px;
-            letter-spacing: -1px;
-        }
-
-        .intro-subtitle {
-            font-family: 'Outfit', sans-serif;
-            font-size: 26px;
-            color: rgba(255, 255, 255, 0.9);
-            margin-bottom: 60px;
-            max-width: 800px;
-            font-weight: 500;
-            line-height: 1.8;
-        }
-
-        .comparison-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 40px;
-            width: 100%;
-            max-width: 900px;
-            margin-bottom: 60px;
-        }
-
-        .comparison-column {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(201, 169, 97, 0.2);
-            padding: 40px 30px;
-            border-radius: 12px;
-        }
-
-        .comparison-column.highlight {
-            background: rgba(201, 169, 97, 0.08);
-            border: 2px solid rgba(201, 169, 97, 0.4);
-        }
-
-        .comparison-header {
-            font-family: 'Outfit', sans-serif;
-            font-size: 32px;
-            font-weight: 700;
-            color: #fff;
-            margin-bottom: 30px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .comparison-header.gold {
-            color: #C9A961;
-        }
-
-        .comparison-steps {
-            text-align: left;
-            margin-bottom: 30px;
-        }
-
-        .comparison-step {
-            font-family: 'Outfit', sans-serif;
-            font-size: 18px;
-            color: rgba(255, 255, 255, 0.8);
-            padding: 12px 0;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-            font-weight: 500;
-        }
-
-        .comparison-step.gold {
-            color: #C9A961;
-            font-weight: 700;
-            border-bottom-color: rgba(201, 169, 97, 0.2);
-        }
-
-        .comparison-time, .comparison-accuracy {
-            font-family: 'Outfit', sans-serif;
-            font-size: 20px;
-            padding: 12px 0;
-            color: rgba(255, 255, 255, 0.9);
+            font-size: 96px;
             font-weight: 600;
-        }
-
-        .comparison-time.gold, .comparison-accuracy.gold {
             color: #C9A961;
-            font-weight: 700;
+            margin-bottom: 40px;
+            letter-spacing: -3px;
+            line-height: 1;
         }
 
-        .intro-cta {
-            background: linear-gradient(135deg, #C9A961 0%, #8B7355 100%);
-            color: #000;
+        .start-receiving-subtitle {
             font-family: 'Outfit', sans-serif;
             font-size: 22px;
-            font-weight: 700;
-            padding: 22px 55px;
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 80px;
+            line-height: 1.8;
+            font-weight: 400;
+        }
+
+        .start-receiving-btn {
+            padding: 28px 60px;
+            background: linear-gradient(135deg, #C9A961 0%, #8B7355 100%);
+            color: #000;
             border: none;
-            border-radius: 8px;
+            font-family: 'Outfit', sans-serif;
+            font-size: 20px;
+            font-weight: 700;
             cursor: pointer;
-            transition: all 0.3s;
-            text-transform: none;
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+            display: inline-flex;
+            align-items: center;
+            gap: 15px;
             letter-spacing: 0.5px;
         }
 
-        .intro-cta:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 30px rgba(201, 169, 97, 0.4);
+        .start-receiving-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 50px rgba(201, 169, 97, 0.5);
+        }
+
+        .btn-icon {
+            font-size: 24px;
+        }
+
+        .btn-arrow {
+            font-size: 24px;
+            transition: transform 0.3s;
+        }
+
+        .start-receiving-btn:hover .btn-arrow {
+            transform: translateX(5px);
         }
 
         .receive-landing-title {
@@ -1105,6 +1074,58 @@
             display: flex;
         }
 
+        /* STEP INDICATORS */
+        .step-indicator {
+            position: absolute;
+            top: 160px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(201, 169, 97, 0.15);
+            border: 1px solid rgba(201, 169, 97, 0.4);
+            padding: 15px 35px;
+            font-family: 'Outfit', sans-serif;
+            font-size: 14px;
+            font-weight: 700;
+            color: #C9A961;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            backdrop-filter: blur(10px);
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            animation: slideDown 0.5s ease;
+        }
+
+        .step-number {
+            background: linear-gradient(135deg, #C9A961, #8B7355);
+            color: #000;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            font-weight: 800;
+        }
+
+        .step-arrow {
+            color: #C9A961;
+            font-size: 18px;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateX(-50%) translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(-50%) translateY(0);
+            }
+        }
+
         .invoice-screen::after, .qr-screen::after, .qr-screen#productScreen::after {
             content: '👆 Click anywhere to continue';
             position: absolute;
@@ -1140,6 +1161,7 @@
             text-align: center;
             padding: 40px;
             cursor: pointer;
+            position: relative;
         }
 
         .processing-screen.active {
@@ -1238,6 +1260,267 @@
             50% {
                 opacity: 1;
             }
+        }
+
+        /* METRC VAULT SCREEN */
+        .metrc-vault-screen {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            text-align: center;
+            padding: 40px;
+            position: relative;
+        }
+
+        .metrc-vault-screen.active {
+            display: flex;
+        }
+
+        .metrc-vault-container {
+            max-width: 700px;
+            width: 100%;
+        }
+
+        .metrc-vault-title {
+            font-family: 'Bodoni Moda', serif;
+            font-size: 56px;
+            font-weight: 600;
+            color: #C9A961;
+            margin-bottom: 20px;
+            letter-spacing: -1px;
+        }
+
+        .metrc-vault-subtitle {
+            font-family: 'Outfit', sans-serif;
+            font-size: 20px;
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 60px;
+        }
+
+        .metrc-package-list {
+            margin-bottom: 40px;
+            text-align: left;
+        }
+
+        .metrc-package-item {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(201, 169, 97, 0.2);
+            border-radius: 8px;
+            margin-bottom: 15px;
+            transition: all 0.3s;
+        }
+
+        .metrc-package-item.completed {
+            background: rgba(127, 184, 0, 0.1);
+            border-color: rgba(127, 184, 0, 0.4);
+        }
+
+        .metrc-checkbox {
+            font-size: 28px;
+            color: rgba(255, 255, 255, 0.3);
+            font-weight: 300;
+            transition: all 0.3s;
+        }
+
+        .metrc-package-item.completed .metrc-checkbox {
+            color: #7fb800;
+        }
+
+        .metrc-product-name {
+            flex: 1;
+            font-family: 'Outfit', sans-serif;
+            font-size: 20px;
+            font-weight: 600;
+            color: #fff;
+        }
+
+        .metrc-status {
+            font-family: 'Outfit', sans-serif;
+            font-size: 16px;
+            color: rgba(255, 255, 255, 0.5);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .metrc-package-item.completed .metrc-status {
+            opacity: 1;
+            color: #7fb800;
+        }
+
+        .metrc-progress-container {
+            position: relative;
+            margin-bottom: 30px;
+        }
+
+        .metrc-progress-bar {
+            width: 100%;
+            height: 30px;
+            background: rgba(0, 0, 0, 0.4);
+            border: 2px solid rgba(201, 169, 97, 0.3);
+            border-radius: 15px;
+            overflow: hidden;
+        }
+
+        .metrc-progress-fill {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, #7fb800, #5a8500);
+            transition: width 0.5s ease;
+        }
+
+        .metrc-progress-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-family: 'Outfit', sans-serif;
+            font-size: 16px;
+            font-weight: 700;
+            color: #fff;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
+        }
+
+        .metrc-completion-message {
+            font-family: 'Outfit', sans-serif;
+            font-size: 22px;
+            font-weight: 600;
+            color: #7fb800;
+            opacity: 0;
+            transition: opacity 0.5s;
+        }
+
+        .metrc-completion-message.show {
+            opacity: 1;
+        }
+
+        /* DUTCHIE SYNC SCREEN */
+        .dutchie-sync-screen {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            text-align: center;
+            padding: 40px;
+            position: relative;
+        }
+
+        .dutchie-sync-screen.active {
+            display: flex;
+        }
+
+        .dutchie-sync-container {
+            max-width: 700px;
+            width: 100%;
+        }
+
+        .dutchie-sync-title {
+            font-family: 'Bodoni Moda', serif;
+            font-size: 56px;
+            font-weight: 600;
+            color: #C9A961;
+            margin-bottom: 20px;
+            letter-spacing: -1px;
+        }
+
+        .dutchie-sync-subtitle {
+            font-family: 'Outfit', sans-serif;
+            font-size: 20px;
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 60px;
+        }
+
+        .dutchie-sync-list {
+            margin-bottom: 40px;
+            text-align: left;
+        }
+
+        .dutchie-sync-item {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(201, 169, 97, 0.2);
+            border-radius: 8px;
+            margin-bottom: 15px;
+            transition: all 0.3s;
+        }
+
+        .dutchie-sync-item.completed {
+            background: rgba(201, 169, 97, 0.1);
+            border-color: rgba(201, 169, 97, 0.4);
+        }
+
+        .dutchie-checkbox {
+            font-size: 28px;
+            color: rgba(255, 255, 255, 0.3);
+            font-weight: 300;
+            transition: all 0.3s;
+        }
+
+        .dutchie-sync-item.completed .dutchie-checkbox {
+            color: #C9A961;
+        }
+
+        .dutchie-sync-label {
+            flex: 1;
+            font-family: 'Outfit', sans-serif;
+            font-size: 20px;
+            font-weight: 600;
+            color: #fff;
+        }
+
+        .dutchie-progress-container {
+            position: relative;
+            margin-bottom: 30px;
+        }
+
+        .dutchie-progress-bar {
+            width: 100%;
+            height: 30px;
+            background: rgba(0, 0, 0, 0.4);
+            border: 2px solid rgba(201, 169, 97, 0.3);
+            border-radius: 15px;
+            overflow: hidden;
+        }
+
+        .dutchie-progress-fill {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, #C9A961, #8B7355);
+            transition: width 0.5s ease;
+        }
+
+        .dutchie-progress-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-family: 'Outfit', sans-serif;
+            font-size: 16px;
+            font-weight: 700;
+            color: #fff;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
+        }
+
+        .dutchie-completion-message {
+            font-family: 'Outfit', sans-serif;
+            font-size: 22px;
+            font-weight: 600;
+            color: #C9A961;
+            opacity: 0;
+            transition: opacity 0.5s;
+        }
+
+        .dutchie-completion-message.show {
+            opacity: 1;
         }
 
         /* DUTCHIE-STYLE FORM */
@@ -1922,6 +2205,7 @@
             display: none;
             min-height: 100vh;
             padding-top: 130px;
+            position: relative;
         }
 
         .results-screen.active {
@@ -2022,6 +2306,96 @@
             color: #888;
             font-weight: 600;
             letter-spacing: 2px;
+        }
+
+        /* COMPLIANCE DATA SECTION */
+        .compliance-data-section {
+            background: linear-gradient(135deg, rgba(201, 169, 97, 0.08), rgba(139, 115, 85, 0.08));
+            border: 2px solid rgba(201, 169, 97, 0.3);
+            border-radius: 12px;
+            padding: 40px;
+            margin: 50px 0 40px 0;
+        }
+
+        .compliance-section-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: 24px;
+            font-weight: 700;
+            color: #C9A961;
+            margin-bottom: 35px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .compliance-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+            margin-bottom: 20px;
+        }
+
+        .compliance-field {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .compliance-field.full-width {
+            grid-column: 1 / -1;
+        }
+
+        .compliance-label {
+            font-family: 'Outfit', sans-serif;
+            font-size: 13px;
+            font-weight: 600;
+            color: rgba(255, 255, 255, 0.6);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .compliance-value {
+            font-family: 'Outfit', sans-serif;
+            font-size: 16px;
+            font-weight: 500;
+            color: #fff;
+            padding: 12px 15px;
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(201, 169, 97, 0.2);
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .compliance-value.monospace {
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            letter-spacing: 0.5px;
+        }
+
+        .compliance-value.description {
+            line-height: 1.6;
+        }
+
+        .scan-icon {
+            font-size: 18px;
+        }
+
+        .required {
+            color: #ff4444;
+            font-weight: 700;
+        }
+
+        .compliance-footer {
+            font-family: 'Outfit', sans-serif;
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.5);
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(201, 169, 97, 0.2);
         }
 
         .product-cards {
@@ -2702,10 +3076,10 @@
 </head>
 <body>
     <!-- Welcome Screen -->
-    <div class="welcome-screen" id="welcomeScreen">
+    <div class="welcome-screen" id="welcomeScreen" style="display: none;">
         <video id="welcomeVideo" autoplay loop muted playsinline webkit-playsinline preload="auto" style="position: absolute; top: -20%; left: 0; width: 100%; height: 120%; object-fit: cover; opacity: 0.4; filter: blur(2px); z-index: 0;">
-            <source src="welcome0.mov" type="video/quicktime">
-            <source src="welcome0.mov" type="video/mp4">
+            <source src="https://raw.githubusercontent.com/dmtsteve/trakie-ai/main/welcome0.mov" type="video/quicktime">
+            <source src="https://raw.githubusercontent.com/dmtsteve/trakie-ai/main/welcome0.mov" type="video/mp4">
         </video>
         
         <div class="stats-ticker">
@@ -2743,7 +3117,7 @@
     </div>
 
     <!-- Main Site -->
-    <div class="main-site" id="mainSite">
+    <div class="main-site show" id="mainSite">
         <!-- Navigation -->
         <nav class="nav">
             <div class="nav-content">
@@ -2864,88 +3238,143 @@
                 
                 <!-- Intro Comparison Screen -->
                 <div class="intro-comparison" id="introComparison">
-                    <h1 class="intro-title">From an Hour to a Minute</h1>
-                    <p class="intro-subtitle">See how Trakie AI processes 5 products in the time it takes to manually enter 1 product</p>
-                    
-                    <div class="comparison-grid">
-                        <div class="comparison-column">
-                            <h3 class="comparison-header">MANUAL RECEIVING</h3>
-                            <div class="comparison-steps">
-                                <div class="comparison-step">1. Open product package</div>
-                                <div class="comparison-step">2. Type brand name</div>
-                                <div class="comparison-step">3. Type strain name</div>
-                                <div class="comparison-step">4. Type THC percentage</div>
-                                <div class="comparison-step">5. Enter price</div>
-                                <div class="comparison-step">6. Find batch number</div>
-                                <div class="comparison-step">7. Type quantity</div>
-                                <div class="comparison-step">8. Save to system</div>
-                            </div>
-                            <div class="comparison-time">⏱️ 3-5 minutes per product</div>
-                            <div class="comparison-accuracy">❌ Error-prone</div>
-                        </div>
-                        
-                        <div class="comparison-column highlight">
-                            <h3 class="comparison-header gold">TRAKIE AI</h3>
-                            <div class="comparison-steps">
-                                <div class="comparison-step">1. Scan QR code</div>
-                                <div class="comparison-step gold">(1 second)</div>
-                                <div class="comparison-step">2. AI processes everything</div>
-                                <div class="comparison-step gold">(2 seconds)</div>
-                                <div class="comparison-step">3. Done!</div>
-                                <div class="comparison-step gold">(45 seconds total)</div>
-                            </div>
-                            <div class="comparison-time gold">⏱️ 45 seconds per product</div>
-                            <div class="comparison-accuracy gold">✅ 99.8% accurate</div>
-                        </div>
+                    <div class="start-receiving-container">
+                        <h1 class="start-receiving-title">START RECEIVING</h1>
+                        <p class="start-receiving-subtitle">Purpose-built AI for cannabis retail operations.<br>From invoice to inventory in under 60 seconds.</p>
+                        <button class="start-receiving-btn" onclick="startReceiving()">
+                            <span class="btn-icon">📦</span>
+                            <span>Begin Automated Receiving</span>
+                            <span class="btn-arrow">→</span>
+                        </button>
                     </div>
-                    
-                    <button class="intro-cta" onclick="startReceiving()">⚡ Experience Trakie AI Instant Receiving</button>
                 </div>
 
                 <!-- QR Screen -->
                 <div class="qr-screen" id="qrScreen">
+                    <div class="step-indicator">
+                        <div class="step-number">1</div>
+                        <span class="step-arrow">→</span>
+                        <span>SCAN QR CODE</span>
+                    </div>
                     <div class="qr-video-container">
                         <video id="qrVideo" autoplay loop muted playsinline webkit-playsinline preload="auto">
-                            <source src="camera0.mov" type="video/quicktime">
-                            <source src="camera0.mov" type="video/mp4">
+                            <source src="https://raw.githubusercontent.com/dmtsteve/trakie-ai/main/camera0.mov" type="video/quicktime">
+                            <source src="https://raw.githubusercontent.com/dmtsteve/trakie-ai/main/camera0.mov" type="video/mp4">
                         </video>
                     </div>
                 </div>
 
                 <!-- Invoice Screen -->
                 <div class="invoice-screen" id="invoiceScreen">
+                    <div class="step-indicator">
+                        <div class="step-number">2</div>
+                        <span class="step-arrow">→</span>
+                        <span>PROCESS INVOICE</span>
+                    </div>
                     <div class="invoice-video-container">
                         <video id="invoiceVideo" autoplay loop muted playsinline webkit-playsinline preload="auto">
-                            <source src="invoice1.mov" type="video/quicktime">
-                            <source src="invoice1.mov" type="video/mp4">
+                            <source src="https://raw.githubusercontent.com/dmtsteve/trakie-ai/main/invoice1.mov" type="video/quicktime">
+                            <source src="https://raw.githubusercontent.com/dmtsteve/trakie-ai/main/invoice1.mov" type="video/mp4">
                         </video>
                     </div>
                 </div>
 
                 <!-- Understanding Invoice Screen -->
                 <div class="understanding-screen" id="understandingInvoice">
+                    <div class="step-indicator">
+                        <div class="step-number">3</div>
+                        <span class="step-arrow">→</span>
+                        <span>AI READING INVOICE</span>
+                    </div>
                     <h1 class="understanding-title">Trakie understanding invoice</h1>
                     <div class="understanding-dots">...</div>
                 </div>
 
                 <!-- Product Camera Screen -->
                 <div class="qr-screen" id="productScreen">
+                    <div class="step-indicator">
+                        <div class="step-number">4</div>
+                        <span class="step-arrow">→</span>
+                        <span>SCAN PRODUCTS</span>
+                    </div>
                     <div class="qr-video-container">
                         <video id="productVideo" autoplay loop muted playsinline webkit-playsinline preload="auto">
-                            <source src="camera.mov" type="video/quicktime">
-                            <source src="camera.mov" type="video/mp4">
+                            <source src="https://raw.githubusercontent.com/dmtsteve/trakie-ai/main/camera.mov" type="video/quicktime">
+                            <source src="https://raw.githubusercontent.com/dmtsteve/trakie-ai/main/camera.mov" type="video/mp4">
                         </video>
                     </div>
                 </div>
 
                 <!-- Understanding Products Screen -->
                 <div class="understanding-screen" id="understandingProducts">
+                    <div class="step-indicator">
+                        <div class="step-number">5</div>
+                        <span class="step-arrow">→</span>
+                        <span>AI READING LABELS</span>
+                    </div>
                     <h1 class="understanding-title">Trakie understanding products</h1>
                     <div class="understanding-dots">...</div>
                 </div>
 
+                <!-- METRC Vault Screen -->
+                <div class="metrc-vault-screen" id="metrcVaultScreen">
+                    <div class="step-indicator">
+                        <div class="step-number">6</div>
+                        <span class="step-arrow">→</span>
+                        <span>ADDING TO METRC VAULT</span>
+                    </div>
+                    <div class="metrc-vault-container">
+                        <h1 class="metrc-vault-title">Automated METRC Entry</h1>
+                        <p class="metrc-vault-subtitle">Processing 5 packages for state compliance...</p>
+                        
+                        <div class="metrc-package-list">
+                            <div class="metrc-package-item" data-product="Sunset Sherbert (3.5g)">
+                                <div class="metrc-checkbox">☐</div>
+                                <div class="metrc-product-name">Sunset Sherbert (3.5g)</div>
+                                <div class="metrc-status">Vault Entry Complete</div>
+                            </div>
+                            <div class="metrc-package-item" data-product="Strawnana Vape (1g)">
+                                <div class="metrc-checkbox">☐</div>
+                                <div class="metrc-product-name">Strawnana Vape (1g)</div>
+                                <div class="metrc-status">Vault Entry Complete</div>
+                            </div>
+                            <div class="metrc-package-item" data-product="Durban Poison (1g)">
+                                <div class="metrc-checkbox">☐</div>
+                                <div class="metrc-product-name">Durban Poison (1g)</div>
+                                <div class="metrc-status">Vault Entry Complete</div>
+                            </div>
+                            <div class="metrc-package-item" data-product="Blackberry Lemon (100mg)">
+                                <div class="metrc-checkbox">☐</div>
+                                <div class="metrc-product-name">Blackberry Lemon (100mg)</div>
+                                <div class="metrc-status">Vault Entry Complete</div>
+                            </div>
+                            <div class="metrc-package-item" data-product="Blue Raspberry (100mg)">
+                                <div class="metrc-checkbox">☐</div>
+                                <div class="metrc-product-name">Blue Raspberry (100mg)</div>
+                                <div class="metrc-status">Vault Entry Complete</div>
+                            </div>
+                        </div>
+                        
+                        <div class="metrc-progress-container">
+                            <div class="metrc-progress-bar">
+                                <div class="metrc-progress-fill" id="metrcProgressFill"></div>
+                            </div>
+                            <div class="metrc-progress-text" id="metrcProgressText">0%</div>
+                        </div>
+                        
+                        <div class="metrc-completion-message" id="metrcCompletionMessage">
+                            All packages successfully added to METRC vault
+                        </div>
+                    </div>
+                </div>
+
                 <!-- Processing Screen -->
                 <div class="processing-screen" id="processingScreen">
+                    <div class="step-indicator" style="top: 100px;">
+                        <div class="step-number">7</div>
+                        <span class="step-arrow">→</span>
+                        <span>PROCESSING DATA</span>
+                    </div>
                     <div class="ai-processing-container">
                         <div class="ai-processing-title">Trakie.ai thinking...</div>
                         
@@ -2963,6 +3392,11 @@
 
                 <!-- Dutchie-Style Receiving Form -->
                 <div class="receiving-form-screen" id="receivingFormScreen">
+                    <div class="step-indicator" style="top: 100px;">
+                        <div class="step-number">8</div>
+                        <span class="step-arrow">→</span>
+                        <span>VERIFY & COMPLETE</span>
+                    </div>
                     <div class="receiving-form-container">
                         <h2 class="form-screen-title">Complete Receiving</h2>
                         <p class="form-screen-subtitle">Trakie AI has processed your products. Verify details below.</p>
@@ -3050,8 +3484,60 @@
                     </div>
                 </div>
 
+                <!-- Dutchie POS Sync Screen -->
+                <div class="dutchie-sync-screen" id="dutchieSyncScreen">
+                    <div class="step-indicator">
+                        <div class="step-number">9</div>
+                        <span class="step-arrow">→</span>
+                        <span>SYNCING WITH DUTCHIE POS</span>
+                    </div>
+                    <div class="dutchie-sync-container">
+                        <h1 class="dutchie-sync-title">Dutchie POS Integration</h1>
+                        <p class="dutchie-sync-subtitle">Automatically updating your point-of-sale system...</p>
+                        
+                        <div class="dutchie-sync-list">
+                            <div class="dutchie-sync-item">
+                                <div class="dutchie-checkbox">☐</div>
+                                <div class="dutchie-sync-label">Inventory quantities updated</div>
+                            </div>
+                            <div class="dutchie-sync-item">
+                                <div class="dutchie-checkbox">☐</div>
+                                <div class="dutchie-sync-label">Products added to online menu</div>
+                            </div>
+                            <div class="dutchie-sync-item">
+                                <div class="dutchie-checkbox">☐</div>
+                                <div class="dutchie-sync-label">Pricing synchronized</div>
+                            </div>
+                            <div class="dutchie-sync-item">
+                                <div class="dutchie-checkbox">☐</div>
+                                <div class="dutchie-sync-label">Categories assigned</div>
+                            </div>
+                            <div class="dutchie-sync-item">
+                                <div class="dutchie-checkbox">☐</div>
+                                <div class="dutchie-sync-label">Stock levels updated</div>
+                            </div>
+                        </div>
+                        
+                        <div class="dutchie-progress-container">
+                            <div class="dutchie-progress-bar">
+                                <div class="dutchie-progress-fill" id="dutchieProgressFill"></div>
+                            </div>
+                            <div class="dutchie-progress-text" id="dutchieProgressText">0%</div>
+                        </div>
+                        
+                        <div class="dutchie-completion-message" id="dutchieCompletionMessage">
+                            Dutchie POS synchronized successfully
+                        </div>
+                    </div>
+                </div>
+
                 <!-- Results Screen -->
                 <div class="results-screen" id="resultsScreen">
+                    <div class="step-indicator" style="top: 100px;">
+                        <div class="step-number">✓</div>
+                        <span class="step-arrow">→</span>
+                        <span>RECEIVING COMPLETE</span>
+                    </div>
                     <div class="results-left">
                         <div class="results-header">
                             <h2 class="results-title">Receiving Complete!</h2>
@@ -3075,6 +3561,66 @@
                             <div class="timer-display" id="timerDisplay">00:00</div>
                             <div class="timer-label">SECONDS</div>
                         </div>
+                        
+                        <!-- COMPREHENSIVE COMPLIANCE DATA CAPTURED -->
+                        <div class="compliance-data-section">
+                            <h3 class="compliance-section-title">✓ METRC & COMPLIANCE DATA CAPTURED</h3>
+                            
+                            <div class="compliance-grid">
+                                <div class="compliance-field">
+                                    <div class="compliance-label">Product ID / Barcode <span class="required">*</span></div>
+                                    <div class="compliance-value">
+                                        <span class="scan-icon">📷</span>
+                                        <span>1A4060300002199000012345</span>
+                                    </div>
+                                </div>
+                                
+                                <div class="compliance-field">
+                                    <div class="compliance-label">Batch / Lot ID # <span class="required">*</span></div>
+                                    <div class="compliance-value">BT-2024-1547-A</div>
+                                </div>
+                                
+                                <div class="compliance-field full-width">
+                                    <div class="compliance-label">METRC Package UID <span class="required">*</span></div>
+                                    <div class="compliance-value monospace">1A406030000219900001234500000000000000000001</div>
+                                </div>
+                                
+                                <div class="compliance-field">
+                                    <div class="compliance-label">Category</div>
+                                    <div class="compliance-value">Flower - Indoor Premium</div>
+                                </div>
+                                
+                                <div class="compliance-field">
+                                    <div class="compliance-label">Online Menu Name</div>
+                                    <div class="compliance-value">Sunset Sherbert - Premium Indoor 3.5g</div>
+                                </div>
+                                
+                                <div class="compliance-field full-width">
+                                    <div class="compliance-label">Ingredients</div>
+                                    <div class="compliance-value">Cannabis Flower, Natural Terpenes</div>
+                                </div>
+                                
+                                <div class="compliance-field">
+                                    <div class="compliance-label">Allergens</div>
+                                    <div class="compliance-value">None</div>
+                                </div>
+                                
+                                <div class="compliance-field">
+                                    <div class="compliance-label">Product Photo</div>
+                                    <div class="compliance-value">✓ Captured & Uploaded</div>
+                                </div>
+                                
+                                <div class="compliance-field full-width">
+                                    <div class="compliance-label">Description</div>
+                                    <div class="compliance-value description">Premium indoor-grown Sunset Sherbert featuring vibrant purple hues and sweet, fruity aroma. Known for uplifting and euphoric effects with balanced indica-leaning profile.</div>
+                                </div>
+                            </div>
+                            
+                            <div class="compliance-footer">
+                                <span class="required">*</span> Required for state compliance reporting
+                            </div>
+                        </div>
+                        
                         <div class="product-cards" id="productCards"></div>
                     </div>
 
@@ -3244,14 +3790,14 @@
 
     <script>
         const categories = [
-            { name: 'Flower', video: 'flower.mov', emoji: '🌿' },
-            { name: 'Vaporizers', video: 'vape.mov', emoji: '💨' },
-            { name: 'Pre-Rolls', video: 'preroll.mov', emoji: '🚬' },
-            { name: 'Edibles', video: 'edible.mov', emoji: '🍫' },
-            { name: 'Concentrates', video: 'concentrate.mov', emoji: '💎' },
-            { name: 'Beverages', video: 'bev.mov', emoji: '🥤' },
-            { name: 'Tinctures', video: 'tincture.mov', emoji: '🧴' },
-            { name: 'CBD', video: 'balm.mov', emoji: '🟢' }
+            { name: 'Flower', video: 'https://raw.githubusercontent.com/dmtsteve/trakie-ai/main/flower.mov', emoji: '🌿' },
+            { name: 'Vaporizers', video: 'https://raw.githubusercontent.com/dmtsteve/trakie-ai/main/vape.mov', emoji: '💨' },
+            { name: 'Pre-Rolls', video: 'https://raw.githubusercontent.com/dmtsteve/trakie-ai/main/preroll.mov', emoji: '🚬' },
+            { name: 'Edibles', video: 'https://raw.githubusercontent.com/dmtsteve/trakie-ai/main/edible.mov', emoji: '🍫' },
+            { name: 'Concentrates', video: 'https://raw.githubusercontent.com/dmtsteve/trakie-ai/main/concentrate.mov', emoji: '💎' },
+            { name: 'Beverages', video: 'https://raw.githubusercontent.com/dmtsteve/trakie-ai/main/bev.mov', emoji: '🥤' },
+            { name: 'Tinctures', video: 'https://raw.githubusercontent.com/dmtsteve/trakie-ai/main/tincture.mov', emoji: '🧴' },
+            { name: 'CBD', video: 'https://raw.githubusercontent.com/dmtsteve/trakie-ai/main/balm.mov', emoji: '🟢' }
         ];
 
         const products = [
@@ -3764,8 +4310,49 @@
             understandingProducts.classList.add('active');
             setTimeout(() => {
                 understandingProducts.classList.remove('active');
-                showProcessingScreen();
+                showMetrcVaultScreen();
             }, 2000);
+        }
+
+        function showMetrcVaultScreen() {
+            const metrcScreen = document.getElementById('metrcVaultScreen');
+            metrcScreen.classList.add('active');
+            animateMetrcVault();
+        }
+
+        function animateMetrcVault() {
+            const items = document.querySelectorAll('.metrc-package-item');
+            const progressFill = document.getElementById('metrcProgressFill');
+            const progressText = document.getElementById('metrcProgressText');
+            const completionMsg = document.getElementById('metrcCompletionMessage');
+            
+            let currentIndex = 0;
+            const totalItems = items.length;
+            
+            function checkNextItem() {
+                if (currentIndex < totalItems) {
+                    // Mark item as completed
+                    items[currentIndex].classList.add('completed');
+                    items[currentIndex].querySelector('.metrc-checkbox').textContent = '✓';
+                    
+                    // Update progress
+                    const progress = ((currentIndex + 1) / totalItems) * 100;
+                    progressFill.style.width = progress + '%';
+                    progressText.textContent = Math.round(progress) + '%';
+                    
+                    currentIndex++;
+                    setTimeout(checkNextItem, 500); // 0.5 second between each
+                } else {
+                    // All complete
+                    completionMsg.classList.add('show');
+                    setTimeout(() => {
+                        document.getElementById('metrcVaultScreen').classList.remove('active');
+                        showProcessingScreen();
+                    }, 1500);
+                }
+            }
+            
+            checkNextItem();
         }
 
         function showProcessingScreen() {
@@ -3897,7 +4484,7 @@
                 completeBtn.style.pointerEvents = 'auto';
                 completeBtn.onclick = () => {
                     document.getElementById('receivingFormScreen').classList.remove('active');
-                    showResults();
+                    showDutchieSyncScreen();
                 };
             }, 4500);
         }
@@ -3905,7 +4492,48 @@
         function completeReceiving(event) {
             event.preventDefault();
             document.getElementById('receivingFormScreen').classList.remove('active');
-            showResults();
+            showDutchieSyncScreen();
+        }
+
+        function showDutchieSyncScreen() {
+            const dutchieScreen = document.getElementById('dutchieSyncScreen');
+            dutchieScreen.classList.add('active');
+            animateDutchieSync();
+        }
+
+        function animateDutchieSync() {
+            const items = document.querySelectorAll('.dutchie-sync-item');
+            const progressFill = document.getElementById('dutchieProgressFill');
+            const progressText = document.getElementById('dutchieProgressText');
+            const completionMsg = document.getElementById('dutchieCompletionMessage');
+            
+            let currentIndex = 0;
+            const totalItems = items.length;
+            
+            function checkNextItem() {
+                if (currentIndex < totalItems) {
+                    // Mark item as completed
+                    items[currentIndex].classList.add('completed');
+                    items[currentIndex].querySelector('.dutchie-checkbox').textContent = '✓';
+                    
+                    // Update progress
+                    const progress = ((currentIndex + 1) / totalItems) * 100;
+                    progressFill.style.width = progress + '%';
+                    progressText.textContent = Math.round(progress) + '%';
+                    
+                    currentIndex++;
+                    setTimeout(checkNextItem, 500); // 0.5 second between each
+                } else {
+                    // All complete
+                    completionMsg.classList.add('show');
+                    setTimeout(() => {
+                        document.getElementById('dutchieSyncScreen').classList.remove('active');
+                        showResults();
+                    }, 1500);
+                }
+            }
+            
+            checkNextItem();
         }
 
         function showResults() {
@@ -4087,30 +4715,63 @@
         function restartDemo() {
             selectedProducts.clear();
             
+            // Hide all demo screens
             document.getElementById('resultsScreen').classList.remove('active');
+            document.getElementById('dutchieSyncScreen').classList.remove('active');
+            document.getElementById('receivingFormScreen').classList.remove('active');
             document.getElementById('processingScreen').classList.remove('active');
+            document.getElementById('metrcVaultScreen').classList.remove('active');
             document.getElementById('understandingProducts').classList.remove('active');
             document.getElementById('productScreen').classList.remove('active');
             document.getElementById('understandingInvoice').classList.remove('active');
             document.getElementById('invoiceScreen').classList.remove('active');
             document.getElementById('qrScreen').classList.remove('active');
-            document.getElementById('receiveLanding').style.display = 'none';
             
+            // Reset METRC vault checkmarks
+            document.querySelectorAll('.metrc-package-item').forEach(item => {
+                item.classList.remove('completed');
+                item.querySelector('.metrc-checkbox').textContent = '☐';
+            });
+            document.getElementById('metrcProgressFill').style.width = '0%';
+            document.getElementById('metrcProgressText').textContent = '0%';
+            document.getElementById('metrcCompletionMessage').classList.remove('show');
+            
+            // Reset Dutchie sync checkmarks
+            document.querySelectorAll('.dutchie-sync-item').forEach(item => {
+                item.classList.remove('completed');
+                item.querySelector('.dutchie-checkbox').textContent = '☐';
+            });
+            document.getElementById('dutchieProgressFill').style.width = '0%';
+            document.getElementById('dutchieProgressText').textContent = '0%';
+            document.getElementById('dutchieCompletionMessage').classList.remove('show');
+            
+            // Show intro comparison screen
             document.getElementById('introComparison').style.display = 'flex';
             
+            // Reset button
             document.getElementById('completeBtn').classList.remove('show');
             
+            // Reset progress bar
             const barFill = document.getElementById('playstationBar');
             const percentage = document.getElementById('playstationPercentage');
             if (barFill) barFill.style.width = '0%';
             if (percentage) percentage.textContent = '0%';
             
+            // Reset receiving form button
+            const completeReceivingBtn = document.getElementById('completeReceivingBtn');
+            if (completeReceivingBtn) {
+                completeReceivingBtn.style.opacity = '0.3';
+                completeReceivingBtn.style.pointerEvents = 'none';
+            }
+            
+            // Scroll to top
             const receiveSection = document.getElementById('receiveSection');
             if (receiveSection) {
                 receiveSection.scrollTop = 0;
             }
             window.scrollTo(0, 0);
             
+            // Go to receive section
             showSection('receive');
         }
 
@@ -4218,6 +4879,9 @@
         }
 
         document.addEventListener('DOMContentLoaded', function() {
+            // Initialize stats carousel immediately (no password)
+            setTimeout(initStatsCarousel, 100);
+            
             updateLockoutDisplay();
             
             const passwordInput = document.getElementById('passwordInput');
@@ -4264,6 +4928,123 @@
             document.querySelectorAll('.vogue-feature-card, .vogue-stat-box, .vogue-pyramid-row').forEach(el => {
                 observer.observe(el);
             });
+
+            // ============================================
+            // SECURITY LAYER - DO NOT REMOVE
+            // ============================================
+            
+            // 1. ANTI-IFRAME PROTECTION (Clickjacking prevention)
+            if (window.top !== window.self) {
+                window.top.location = window.self.location;
+            }
+            
+            // 2. CONSOLE WARNING (Deter code theft)
+            console.log('%c⚠️ STOP!', 'color: red; font-size: 50px; font-weight: bold;');
+            console.log('%cThis is a browser feature intended for developers.', 'font-size: 18px;');
+            console.log('%cIf someone told you to copy/paste something here, it is a scam.', 'font-size: 16px;');
+            console.log('%c© 2025 Trakie Inc. All Rights Reserved.', 'font-size: 14px; color: #C9A961;');
+            console.log('%cUnauthorized copying, modification, or distribution is prohibited.', 'font-size: 12px;');
+            
+            // 3. WATERMARK OVERLAY (Visual copyright protection)
+            function addWatermark() {
+                const watermark = document.createElement('div');
+                watermark.id = 'security-watermark';
+                watermark.style.cssText = `
+                    position: fixed;
+                    bottom: 20px;
+                    right: 20px;
+                    background: rgba(0, 0, 0, 0.7);
+                    border: 1px solid rgba(201, 169, 97, 0.3);
+                    padding: 8px 16px;
+                    font-family: 'Outfit', sans-serif;
+                    font-size: 11px;
+                    color: rgba(255, 255, 255, 0.6);
+                    z-index: 999999;
+                    pointer-events: none;
+                    user-select: none;
+                    letter-spacing: 0.5px;
+                `;
+                watermark.textContent = '© 2025 Trakie Inc. • Confidential Demo';
+                document.body.appendChild(watermark);
+            }
+            addWatermark();
+            
+            // 4. RIGHT-CLICK PROTECTION (Demo protection)
+            document.addEventListener('contextmenu', function(e) {
+                e.preventDefault();
+                return false;
+            });
+            
+            // 5. KEY COMBINATION PROTECTION (Prevent inspect/save)
+            document.addEventListener('keydown', function(e) {
+                // Prevent Ctrl+S (Save)
+                if (e.ctrlKey && e.key === 's') {
+                    e.preventDefault();
+                    return false;
+                }
+                // Prevent Ctrl+U (View Source)
+                if (e.ctrlKey && e.key === 'u') {
+                    e.preventDefault();
+                    return false;
+                }
+                // Prevent Ctrl+Shift+I (DevTools)
+                if (e.ctrlKey && e.shiftKey && e.key === 'I') {
+                    e.preventDefault();
+                    return false;
+                }
+                // Prevent F12 (DevTools)
+                if (e.key === 'F12') {
+                    e.preventDefault();
+                    return false;
+                }
+            });
+            
+            // 6. DEVTOOLS DETECTION (Basic detection)
+            const devtools = { isOpen: false };
+            const threshold = 160;
+            
+            setInterval(function() {
+                if (window.outerWidth - window.innerWidth > threshold || 
+                    window.outerHeight - window.innerHeight > threshold) {
+                    if (!devtools.isOpen) {
+                        devtools.isOpen = true;
+                        console.clear();
+                        console.log('%c⚠️ Developer tools detected', 'color: red; font-size: 20px;');
+                        console.log('%c© 2025 Trakie Inc. - Unauthorized access prohibited', 'font-size: 14px;');
+                    }
+                } else {
+                    devtools.isOpen = false;
+                }
+            }, 1000);
+            
+            // 7. COPYRIGHT NOTICE IN DOM
+            const copyrightNotice = document.createComment(`
+                ========================================
+                © 2025 Trakie Inc. All Rights Reserved.
+                
+                This software and its contents are proprietary and confidential.
+                Unauthorized copying, modification, distribution, or use is strictly prohibited.
+                
+                For licensing inquiries: contact@trakie.ai
+                ========================================
+            `);
+            document.body.appendChild(copyrightNotice);
+            
+            // 8. SESSION TRACKING (Basic analytics placeholder)
+            const sessionData = {
+                id: 'session_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9),
+                started: new Date().toISOString(),
+                userAgent: navigator.userAgent,
+                referrer: document.referrer || 'direct',
+                url: window.location.href
+            };
+            
+            // Log session start (would send to analytics in production)
+            console.log('Session initiated:', sessionData.id);
+            
+            // ============================================
+            // END SECURITY LAYER
+            // ============================================
         });
     </script>
 </body>
